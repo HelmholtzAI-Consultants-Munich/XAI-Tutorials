@@ -1,4 +1,4 @@
-# Zero2Hero: Introduction-to-XAI
+# Zero2Hero: Introduction to XAI
 
 ## Agenda
 
