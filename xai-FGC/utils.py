@@ -26,3 +26,13 @@ def plot_feature_importance(importance,names,title):
     plt.title(title)
     plt.xlabel('feature importance')
     plt.ylabel('feature names')
+
+
+def plot_correlation_matrix(data):
+
+    f, ax = plt.subplots(figsize=(10, 8))
+    corr = data.corr()
+    mask = np.triu(np.ones_like(corr, dtype=bool))
+    np.fill_diagonal(mask, False)
+    sns.heatmap(corr, mask=mask, cmap=sns.diverging_palette(220, 10, as_cmap=True), 
+    square=True, ax=ax, annot=True)
