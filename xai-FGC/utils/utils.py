@@ -19,7 +19,7 @@ def plot_feature_importance(importance,names,title):
     fi_df.sort_values(by=['feature_importance'], ascending=False,inplace=True)
 
     #Define size of bar plot
-    plt.figure(figsize=(8,6))
+    plt.figure(figsize=(5,4))
     #Plot Searborn bar chart
     sns.barplot(x=fi_df['feature_importance'], y=fi_df['feature_names'], color = 'lightblue')
     #Add chart labels
@@ -30,7 +30,7 @@ def plot_feature_importance(importance,names,title):
 
 def plot_correlation_matrix(data):
 
-    f, ax = plt.subplots(figsize=(10, 8))
+    f, ax = plt.subplots(figsize=(5, 4))
     corr = data.corr()
     mask = np.triu(np.ones_like(corr, dtype=bool))
     np.fill_diagonal(mask, False)
@@ -38,12 +38,13 @@ def plot_correlation_matrix(data):
     square=True, ax=ax, annot=True)
 
 
-def plot_perm_feature_importance(result, data):
+def plot_perm_feature_importance(result, data, title):
 
     perm_sorted_idx = result.importances_mean.argsort()
     perm_indices = np.arange(0, len(result.importances_mean)) + 0.5
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 8))
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+    fig.suptitle(title)
     ax1.barh(perm_indices, result.importances_mean[perm_sorted_idx], height=0.7, color = 'lightblue')
     ax1.set_yticks(perm_indices)
     ax1.set_yticklabels(data.columns[perm_sorted_idx])
