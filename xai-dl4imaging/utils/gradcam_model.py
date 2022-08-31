@@ -1,4 +1,4 @@
-from torchvision.models import resnet50
+from torchvision.models import resnet50, ResNet50_Weights
 import torch.nn as nn
 
 # GradCamModel class with a ResNet pretrained model
@@ -7,7 +7,8 @@ class GradCamModel(nn.Module):
         super(GradCamModel, self).__init__()
         
         # define the resnet50
-        self.resnet = resnet50(pretrained=True)
+        # self.resnet = resnet50(pretrained=True)
+	self.resnet = resnet50(weights=ResNet50_Weights.DEFAULT)
         
         # isolate the feature blocks
         self.features = nn.Sequential(self.resnet.conv1,
