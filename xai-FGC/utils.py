@@ -36,3 +36,22 @@ def plot_correlation_matrix(data):
     np.fill_diagonal(mask, False)
     sns.heatmap(corr, mask=mask, cmap=sns.diverging_palette(220, 10, as_cmap=True), 
     square=True, ax=ax, annot=True)
+
+
+def plot_perm_feature_importance(result, data):
+
+    perm_sorted_idx = result.importances_mean.argsort()
+    perm_indices = np.arange(0, len(result.importances_mean)) + 0.5
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 8))
+    ax1.barh(perm_indices, result.importances_mean[perm_sorted_idx], height=0.7, color = 'lightblue')
+    ax1.set_yticks(perm_indices)
+    ax1.set_yticklabels(data.columns[perm_sorted_idx])
+    ax1.set_ylim((0, len(result.importances_mean)))
+    ax2.boxplot(
+        result.importances[perm_sorted_idx].T,
+        vert=False,
+        labels=data.columns[perm_sorted_idx],
+    )
+    fig.tight_layout()
+    plt.show()
