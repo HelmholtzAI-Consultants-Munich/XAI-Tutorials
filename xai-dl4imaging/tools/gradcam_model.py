@@ -8,8 +8,8 @@ class GradCamModel(nn.Module):
         
         # define the resnet50
         # self.resnet = resnet50(pretrained=True)
-	self.resnet = resnet50(weights=ResNet50_Weights.DEFAULT)
-        
+        self.resnet = resnet50(weights=ResNet50_Weights.DEFAULT)
+
         # isolate the feature blocks
         self.features = nn.Sequential(self.resnet.conv1,
                                       self.resnet.bn1,
@@ -19,13 +19,13 @@ class GradCamModel(nn.Module):
                                       self.resnet.layer2, 
                                       self.resnet.layer3, 
                                       self.resnet.layer4)
-        
+
         # average pooling layer
         self.avgpool = self.resnet.avgpool
-        
+
         # classifier
         self.classifier = self.resnet.fc
-        
+
         # gradient placeholder
         self.gradient = None
     
