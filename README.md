@@ -13,7 +13,7 @@ The course is helded online on September 22nd from 2 pm to 6 pm
 | Time          | Content |
 | ------------- | -------- |
 | 14.00 - 14.20 | Introduction to XAI |
-| 14.20 - 15.50 | Tutorial on XAI model-agnostic methods |
-| 15.50 - 16.00 | Break |
-| 16.00 - 18.00 | Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests with FGC” |
+| 14.20 - 16.50 | Tutorial on XAI model-agnostic methods |
+| 16.50 - 17.00 | Break |
+| 17.00 - 18.00 | Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests with FGC” |
 | 18.00 - 18.05 | Wrap-up and conclusions |
