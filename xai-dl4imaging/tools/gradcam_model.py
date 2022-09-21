@@ -13,8 +13,8 @@ class GradCamModel(nn.Module):
         # isolate the feature blocks
         self.features = nn.Sequential(self.resnet.conv1,
                                       self.resnet.bn1,
-                                      nn.ReLU(),
-                                      nn.MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False),
+                                      self.resnet.relu,
+                                      self.resnet.maxpool, 
                                       self.resnet.layer1, 
                                       self.resnet.layer2, 
                                       self.resnet.layer3, 
