@@ -1,15 +1,56 @@
-# Tutorials for eXplainable Artificial Intelligence (XAI) methods
+# XAI Tutorials @ ml4earth Hackathon
 
-This repository contains a collection of self-explanatory tutorials for different model-agnostic and model-specific XAI methods.
-Each tutorial comes with a video lecture and practical exercises.
+This course is an introduction to eXplainable Artificial Intelligence (XAI).
 
-## List of Tutorials for Model-Agnostic Methods
+In this course the learner will:
 
-- Permutation Feature Importance
-- SHapley Additive exPlanations (SHAP)
-- Local Interpretable Model-Agnostic Explanations
+- understand the importance of interpretability
+- discover the existing methods, in particular perturbation features importance, SHAP and Grad-CAM
+- put your hands on three tutorials to uncover how to interpret the outputs and graphs of those methods
 
-## List of Tutorials for Model-Specific Methods
+Workshop website: http://ml4earth.de/workshop/
 
-- Forest-Guided Clustering
-- Grad-CAM
+## Agenda
+The course is helded online on September 22nd from 2 pm to 6 pm
+
+| Time          | Content |
+| ------------- | -------- |
+| 13.00 - 13.30 | Introduction to XAI |
+| 13.30 - 14.30 | Tutorial on XAI model-agnostic methods |
+| 14.30 - 15.00 | Break |
+| 15.00 - 15.55 | Tutorials on “XAI in deep learning-based image analysis” |
+| 15.55 - 16.00 | Wrap-up and conclusions |
+
+## Slides
+
+### General Introduction
+- [Introduction to XAI](https://docs.google.com/presentation/d/1GOXOHEPFg_K9VVfZDAcfx8wy3UIsjLYNEJjQTe-38Rw/edit?usp=sharing)
+
+
+### Model-Agnostic Methods
+- [Introduction to Permutation Feature Importance](https://docs.google.com/presentation/d/1AbmzTS4RU2MOhSl231rPKDt432_SX4i7YvZY4apNZJU/edit#slide=id.g138313838d0_1_828)
+- [Introduction to SHAP](https://docs.google.com/presentation/d/1JGat4jwQd54jExmQiXmDvLSpgHvOC6fZAmWRwL-Cl18/edit#slide=id.g138313838d0_8_676)
+
+
+### Model-Specific Methods
+
+- [Introduction to Grad-CAM](https://docs.google.com/presentation/d/1vd_HfkBD4FokoAM2el4T1rXWnD7_0FAEvxk4HgiYjXs/edit#slide=id.g13d689e73d4_0_285)
+
+
+## Notebooks with Tutorials
+
+- Introduction to Permutation Feature Importance: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-agnostic/tutorial_permutation_FI.ipynb), [Video](https://vimeo.com/745319412/1e5bd15ff7)
+- Introduction to SHAP: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-agnostic/tutorial_SHAP.ipynb), [Video](https://vimeo.com/745352008/3168320cef)
+
+- Introduction to Grad-CAM: [Notebook Part 1](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-specific/Grad-CAM/part1.ipynb), [Notebook Part 2](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-specific/Grad-CAM/part2.ipynb), [Video1](https://vimeo.com/745320494/0b8be077b3), [Video2](https://vimeo.com/745319946/fcd327fc80)
+
+
+## Additional materials
+
+If you are interested in tutorials on other model-agnostic and model-specific interpretability methods, pelase visit out [XAI-tutorials](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials) github repository.
+
+### Literature
+
+[1] Explainable AI: the basics, The Royal Society, 2019. Link: https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf
+
+[2] Interpretable Machine Learning: A Guide for Making Black Box Models Explainable, Christoph Molnar, 2022. Link: https://christophm.github.io/interpretable-ml-book/neural-networks.html
