@@ -38,11 +38,11 @@ The course is helded online on September 22nd from 2 pm to 6 pm
 
 ## Notebooks with Tutorials
 
-- Introduction to Permutation Feature Importance: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/Zero2Hero---Introduction-to-XAI/blob/master/xai-model-agnostic/tutorial_permutation_FI.ipynb), [Video](https://vimeo.com/745319412/1e5bd15ff7)
-- Introduction to SHAP: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/Zero2Hero---Introduction-to-XAI/blob/master/xai-model-agnostic/tutorial_SHAP.ipynb), [Video](https://vimeo.com/745352008/3168320cef)
-- Introduction to LIME: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/Zero2Hero---Introduction-to-XAI/blob/master/xai-model-agnostic/tutorial_LIME.ipynb), [Video](https://vimeo.com/745319036/a86f126018)
-- Introduction to Grad-CAM: [Notebook Part 1](https://github.com/HelmholtzAI-Consultants-Munich/Zero2Hero---Introduction-to-XAI/blob/master/xai-dl4imaging/part1.ipynb), [Notebook Part 2](https://github.com/HelmholtzAI-Consultants-Munich/Zero2Hero---Introduction-to-XAI/blob/master/xai-dl4imaging/part2.ipynb), [Video1](https://vimeo.com/745320494/0b8be077b3), [Video2](https://vimeo.com/745319946/fcd327fc80)
-- Introduction to FGC: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/Zero2Hero---Introduction-to-XAI/blob/master/xai-FGC/tutorial_FGC.ipynb), [Video](https://vimeo.com/746443233/07ddf2290b)
+- Introduction to Permutation Feature Importance: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Zero2Hero-SummerAcademy/xai-model-agnostic/tutorial_permutation_FI.ipynb), [Video](https://vimeo.com/745319412/1e5bd15ff7)
+- Introduction to SHAP: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Zero2Hero-SummerAcademy/xai-model-agnostic/tutorial_SHAP.ipynb), [Video](https://vimeo.com/745352008/3168320cef)
+- Introduction to LIME: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Zero2Hero-SummerAcademy/xai-model-agnostic/tutorial_LIME.ipynb), [Video](https://vimeo.com/745319036/a86f126018)
+- Introduction to Grad-CAM: [Notebook Part 1](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Zero2Hero-SummerAcademy/xai-dl4imaging/part1.ipynb), [Notebook Part 2](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Zero2Hero-SummerAcademy/xai-dl4imaging/part2.ipynb), [Video1](https://vimeo.com/745320494/0b8be077b3), [Video2](https://vimeo.com/745319946/fcd327fc80)
+- Introduction to FGC: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Zero2Hero-SummerAcademy/xai-FGC/tutorial_FGC.ipynb), [Video](https://vimeo.com/746443233/07ddf2290b)
 
 ## Additional materials
 
