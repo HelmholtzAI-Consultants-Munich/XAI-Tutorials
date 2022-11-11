@@ -1,19 +1,4 @@
-# Zero2Hero: Introduction to interpretable Machine Learning
+# Tutorials for eXplainable Artificial Intelligence (XAI) methods
 
-This course is an introduction to eXplainable Artificial Intelligence (XAI).
-In this course the learner will:
-* understand the importance of interpretability 
-* discover the existing methods, in particular perturbation features importance, LIME, SHAP, FGC and Grad-CAM
-* put your hands on three tutorials to uncover how to interpret the outputs and graphs of those methods
-* learn to chose which method is suitable for your specific task
-
-## Agenda
-The course is helded online on September 22nd from 2 pm to 6 pm
-
-| Time          | Content |
-| ------------- | -------- |
-| 14.00 - 14.20 | Introduction to XAI |
-| 14.20 - 16.50 | Tutorial on XAI model-agnostic methods |
-| 16.50 - 17.00 | Break |
-| 17.00 - 18.00 | Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests with FGC” |
-| 18.00 - 18.05 | Wrap-up and conclusions |
+This repository contains a collection of self-explanatory tutorials for different model-agnostic and model-specific XAI methods.
+Each tutorial comes with a video lecture and practical exercises.
