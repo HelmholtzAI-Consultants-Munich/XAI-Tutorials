@@ -39,10 +39,11 @@ The course is helded online on September 22nd from 2 pm to 6 pm
 
 ## Notebooks with Tutorials
 
-- Introduction to Permutation Feature Importance: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-agnostic/tutorial_permutation_FI.ipynb), [Video](https://vimeo.com/745319412/1e5bd15ff7)
-- Introduction to SHAP: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-agnostic/tutorial_SHAP.ipynb), [Video](https://vimeo.com/745352008/3168320cef)
+- Introduction to Permutation Feature Importance: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-agnostic/tutorial_permutation_FI.ipynb), [Video](https://vimeo.com/745319412/1e5bd15ff7), [Questionnaire](https://www.learningsnacks.de/report/#/register/11766/850f448a-a2cd-48ba-9a0a-2d4040e6868e)
 
-- Introduction to Grad-CAM: [Notebook Part 1](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-specific/Grad-CAM/part1.ipynb), [Notebook Part 2](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-specific/Grad-CAM/part2.ipynb), [Video1](https://vimeo.com/745320494/0b8be077b3), [Video2](https://vimeo.com/745319946/fcd327fc80)
+- Introduction to SHAP: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-agnostic/tutorial_SHAP.ipynb), [Video](https://vimeo.com/745352008/3168320cef), [Questionnaire](https://www.learningsnacks.de/report/#/register/11766/850f448a-a2cd-48ba-9a0a-2d4040e6868e)(https://www.learningsnacks.de/report/#/register/11767/5711c97e-b990-4541-9d71-c5bd8d0f6bbd)
+
+- Introduction to Grad-CAM: [Notebook Part 1](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-specific/Grad-CAM/part1.ipynb), [Notebook Part 2](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-specific/Grad-CAM/part2.ipynb), [Video1](https://vimeo.com/745320494/0b8be077b3), [Video2](https://vimeo.com/745319946/fcd327fc80), [Questionnaire](https://www.learningsnacks.de/report/#/register/11758/2bdd9bcd-76d5-4790-8941-8062a4818592)
 
 
 ## Additional materials
