@@ -10,7 +10,7 @@ In this course the learner will:
 
 Workshop website: http://ml4earth.de/workshop/
 
-Share document for questions: https://notes.desy.de/br0Ko_TWQPm2auZRIr_5Tg?both
+Shared document for questions: https://notes.desy.de/br0Ko_TWQPm2auZRIr_5Tg?both
 
 ## Agenda
 The course is helded online on September 22nd from 1 pm to 4 pm
