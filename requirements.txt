@@ -14,3 +14,4 @@ utils==1.0.1
 torch==1.12.1
 torchvision
 opencv-python==4.6.0.66
+jupyter
