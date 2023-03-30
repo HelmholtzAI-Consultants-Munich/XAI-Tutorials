@@ -14,5 +14,5 @@ opencv-python
 pandas_profiling
 shap
 lime
-fgclustering==0.3
+fgclustering
 palmerpenguins
