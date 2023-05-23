@@ -1,6 +1,9 @@
 Introduction to Permutation Feature Importance
 ===============================================
 
+Permutation Feature Importance is a **model-agnostic** method, which means that it is not restricted to a certain model type, 
+and it is **global** method, which means that it only provides explanations for a full dataset, but not for individual samples.
+
 For a short video introduction to Permutation Feature Importance, click below:
 
 .. vimeo:: 745319412?h=1e5bd15ff7
@@ -22,4 +25,3 @@ Then, we carry out the following steps for each feature (potentially repeated mu
 If both performances are similar, the permuted feature did not lead to a decrease in model performance, indicating that the model did not rely heavily on the feature, hence assigning low importance. 
 On the other hand, if the performance of the data with the permuted feature is much worse than the baseline performance, this shows that the model highly depended on the feature to produce good scores.
 
-**Note:** this method is a **global** method which means that it only provides explanations for a full dataset, but not for individual samples.
