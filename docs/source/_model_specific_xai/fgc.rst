@@ -16,3 +16,4 @@ are not suited in the presence of correlated features. The Forest-Guided Cluster
 because it computes the feature importance based on subgroups of instances that follow similar decision rules within the Random Forest model. 
 Hence, this method is well suited for cases with high correlation among model features.
 
+For additional information you can have a look at the documentation for the FGC: https://forest-guided-clustering.readthedocs.io/en/latest/
