@@ -31,6 +31,7 @@ In addition, we provide useful background information on those methods in this d
    :maxdepth: 1
    :caption: MODEL-AGNOSTIC XAI METHODS
 
+   _model_agnostic_xai/pfi.rst
    _model_agnostic_xai/shap.rst
 
 
