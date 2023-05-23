@@ -17,13 +17,14 @@ The XAI-Tutorials repository provides a collection of self-explanatory tutorials
 Each tutorial comes in a Jupyter Notebook with practical exercises. 
 In addition, we provide useful background information on those methods in this documentation.
 
+[1] R. Roscher, B. Bohn, M. F. Duarte and J. Garcke, "Explainable Machine Learning for Scientific Insights and Discoveries," IEEE Access, Vol. 8, pp. 42200-42216 (2020)
 
 .. toctree::
    :maxdepth: 1
    :caption: MACHINE LEARNING BASICS
 
 
-   _ml_models/random_forest.rst
+   _ml_basics/random_forest.rst
 
 
 .. toctree::
