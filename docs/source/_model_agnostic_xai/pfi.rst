@@ -2,7 +2,7 @@ Introduction to Permutation Feature Importance
 ===============================================
 
 Permutation Feature Importance is a **model-agnostic** method, which means that it is not restricted to a certain model type, 
-and it is **global** method, which means that it only provides explanations for a full dataset, but not for individual samples.
+and it is a **global** method, which means that it only provides explanations for a full dataset, but not for individual samples.
 
 For a short video introduction to Permutation Feature Importance, click below:
 
