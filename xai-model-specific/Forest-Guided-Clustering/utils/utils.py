@@ -1,7 +1,15 @@
+############################################################
+##### Imports
+############################################################
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+############################################################
+##### Utility Fuctions
+############################################################
 
 
 def plot_permutation_feature_importance(result, data, title):
@@ -14,7 +22,7 @@ def plot_permutation_feature_importance(result, data, title):
         perm_indices,
         result.importances_mean[perm_sorted_idx],
         height=0.7,
-        color="#3470a3",
+        color="#3470a3",  # color = 'cornflowerblue'
     )
     ax1.set_yticks(perm_indices)
     ax1.set_yticklabels(data.columns[perm_sorted_idx])
