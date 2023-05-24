@@ -1,7 +1,7 @@
 Why is explainability important?
 =================================
 
-*"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
+ *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
 
 Bias in AI systems
 -------------------

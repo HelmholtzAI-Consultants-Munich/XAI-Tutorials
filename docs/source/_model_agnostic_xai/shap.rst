@@ -21,7 +21,7 @@ SHAP provides KernelSHAP, an alternative, kernel-based estimation approach for S
 References
 -----------
 
- To learn more about Shapley values, the SHAP package, and how these are used to help us interpret our machine learning models, please refer to these resources:
+To learn more about Shapley values, the SHAP package, and how these are used to help us interpret our machine learning models, please refer to these resources:
 
 - `A Unified Approach to Interpreting Model Predictions <https://arxiv.org/abs/1705.07874>`_ -- Scott Lundberg, Su-In Lee
 - `Consistent feature attribution for tree ensembles <https://arxiv.org/abs/1706.06060>`_ -- Scott M. Lundberg, Su-In Lee
