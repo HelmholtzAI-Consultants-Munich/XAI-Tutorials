@@ -96,3 +96,9 @@ References
 
 [1] Explainable AI: the basics, The Royal Society, 2019. Link: [https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf](https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf)  
 [2] Interpretable Machine Learning: A Guide for Making Black Box Models Explainable, Christoph Molnar, 2022. Link: [https://christophm.github.io/interpretable-ml-book/](https://christophm.github.io/interpretable-ml-book/)
+
+
+Additionally, Christoph Molnar's book and Tim Miller's paper can provide further insight into the challenges and promise of machine learning interpretability:
+
+- [Interpretable Machine Learning:  A Guide for Making Black Box Models Explainable.](https://christophm.github.io/interpretable-ml-book/) -- Christoph Molnar, 2019-12-17
+- [Explanation in Artificial Intelligence: Insights from the Social Sciences](https://arxiv.org/abs/1706.07269) -- Tim Miller
