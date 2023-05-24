@@ -94,5 +94,5 @@ authoritative could unduly influence their users. These are important areas for 
 References
 -----------
 
-[1] Explainable AI: the basics, The Royal Society, 2019. Link: [https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf](https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf)
+[1] Explainable AI: the basics, The Royal Society, 2019. Link: [https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf](https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf)  
 [2] Interpretable Machine Learning: A Guide for Making Black Box Models Explainable, Christoph Molnar, 2022. Link: [https://christophm.github.io/interpretable-ml-book/](https://christophm.github.io/interpretable-ml-book/)
