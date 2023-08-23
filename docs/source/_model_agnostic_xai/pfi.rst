@@ -25,3 +25,7 @@ Then, we carry out the following steps for each feature (potentially repeated mu
 If both performances are similar, the permuted feature did not lead to a decrease in model performance, indicating that the model did not rely heavily on the feature, hence assigning low importance. 
 On the other hand, if the performance of the data with the permuted feature is much worse than the baseline performance, this shows that the model highly depended on the feature to produce good scores.
 
+References
+-----------
+
+- Molnar, C. (2020). `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable (8.5 Permutation Feature Importance) <https://christophm.github.io/interpretable-ml-book/>`_. Lulu. com.

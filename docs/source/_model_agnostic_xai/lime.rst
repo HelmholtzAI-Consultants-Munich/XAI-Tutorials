@@ -12,3 +12,8 @@ For a short video introduction to LIME, click below:
 
 To summarize, LIME, an abbreviation for "local interpretable model agnostic explanations" is an approach that tries to deliver explanations for individual samples. 
 It works by constructing an interpretable surrogate model (like a linear regression) to approximate predictions of a more complex model in the neighborhood of a given sample.
+
+References
+-----------
+
+- Molnar, C. (2020). `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable (9.2 Local Surrogate) <https://christophm.github.io/interpretable-ml-book/>`_. Lulu. com.
