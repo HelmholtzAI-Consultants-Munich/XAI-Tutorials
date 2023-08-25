@@ -1,7 +1,7 @@
 Introduction to Forest-Guided Clustering
 =========================================
 
-Forest-Guided Clustering is a **model-specific** method, which means that it is restricted to Randm Forest models, 
+Forest-Guided Clustering is a **model-specific** method, which means that it is restricted to Random Forest models, 
 and it is a **global** method, which means that it only provides explanations for a full dataset, but not for individual samples.
 
 For a short introduction to Forest-Guided Clustering, click below:
