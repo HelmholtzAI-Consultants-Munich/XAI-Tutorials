@@ -21,4 +21,4 @@ SHAP provides KernelSHAP, an alternative, kernel-based estimation approach for S
 References
 -----------
 
-- Molnar, C. (2020). `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable (9.5 Shapley Values and 9.6 SHAP) <https://christophm.github.io/interpretable-ml-book/>`_. Lulu. com.
+Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
