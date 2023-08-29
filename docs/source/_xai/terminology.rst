@@ -6,7 +6,7 @@ Terminology
 There is no standard and generally accepted definition, and sometimes people use these two terms interchangeably.
 Nonetheless, we believe there is a difference between the two.
 
-The Royal Society defines [1]:
+The *Royal Society* defines:
 
 - **Interpretability**: implies some sense of understanding how the technology works
 - **Explainability**: implies that a wider range of users can understand why or how a conclusion was reached
@@ -18,4 +18,4 @@ In this course, we will not focus on intrinsic methods that are interpretable by
 References
 -----------
 
-[1] Explainable AI: The basics, The Royal Society, 2019. `Link <https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf>`_
+The Royal Society. `Explainable AI: The basics. <https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf>`_ Policy Briefing. 2019. 
