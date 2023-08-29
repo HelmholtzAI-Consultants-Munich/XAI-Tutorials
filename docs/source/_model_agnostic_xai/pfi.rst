@@ -28,4 +28,4 @@ On the other hand, if the performance of the data with the permuted feature is m
 References
 -----------
 
-- Molnar, C. (2020). `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable (8.5 Permutation Feature Importance) <https://christophm.github.io/interpretable-ml-book/>`_. Lulu. com.
+Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
