@@ -16,4 +16,4 @@ It works by constructing an interpretable surrogate model (like a linear regress
 References
 -----------
 
-- Molnar, C. (2020). `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable (9.2 Local Surrogate) <https://christophm.github.io/interpretable-ml-book/>`_. Lulu. com.
+Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
