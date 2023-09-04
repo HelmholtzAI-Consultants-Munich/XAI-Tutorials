@@ -22,8 +22,8 @@ In addition, we provide useful background information on those methods in this d
    :maxdepth: 1
    :caption: EXPLAINABLE AI
 
-   _xai/importance.rst
    _xai/terminology.rst
+   _xai/importance.rst
    _xai/taxonomy_methods.rst
 
 
