@@ -41,6 +41,7 @@ In addition, we provide useful background information on those methods in this d
    :caption: MODEL-SPECIFIC XAI METHODS
 
    _model_specific_xai/fgc.rst
+   _model_specific_xai/Grad-CAM.rst
 
 
 .. toctree::
@@ -48,6 +49,8 @@ In addition, we provide useful background information on those methods in this d
    :caption: MACHINE LEARNING BASICS
 
    _ml_basics/random_forest.rst
+   _ml_basics/CNN_feature_visualization.rst
+
 
 
 Contributions
