@@ -18,9 +18,12 @@ For Science
 
 The goal of scientific discovery is to understand. Data collection and analysis is a core element of scientific methods, and scientists have long used statistical techniques to aid their work. As early as the 1900s the development of the t-test gave researchers a new tool to extract insights from data to test the veracity of their hypotheses. Today, machine learning has become a vital tool for researchers across domains to analyze large datasets, detect previously unforeseen patterns, or extract unexpected insights. 
 
-For example, machine learning is used in areas like computational biology to analyze genomic data or to predict the three-dimensional structures of proteins, in computational climate science to understand the effects of climate change on cities and regions (e.g. by combining local observational data to large-scale climate models, researchers hope to acquire more detailed pictures of the local impacts of climate change), in computational physics to find patterns in vast amounts of astronomical data that can be very noisy data.
+For example, machine learning is used in these areas:
+- In computational biology, machine learning is used to analyze genomic data, or to predict the three-dimensional structures of proteins
+- In computational climate science, machine learning is applied to understand the effects of climate change on cities and regions.
+- In computational physics to find patterns in vast amounts of astronomical data that can be very noisy data.
 
-In some contexts, the accuracy of these methods alone is sufficient to make AI useful – filtering telescope observations to identify likely targets for further study, for example. However, researchers want to know not just what the answer is but why! Explainable AI can help researchers to understand the insights that come from research data, by providing accessible explanations of which features have been particularly relevant in the creation of the system’s output. A project that is working on explainable AI for science is, for example, the Automated Statistician project. They have created a system that can generate an explanation of its forecasts or predictions, by breaking complicated datasets into interpretable sections and explaining its findings in accessible language. Together, the machine learning system and the explanations help researchers analyze large amounts of data and to enhance their understanding of the features of that data (*The Royal Society, 2019*).
+In some contexts, the accuracy of these methods alone is sufficient to make AI useful – filtering telescope observations to identify likely targets for further study, for example. However, researchers want to know not just what the answer is but why! Explainable AI can help researchers to understand the insights that come from research data, by providing accessible explanations of which features have been particularly relevant in the creation of the system’s output. A project that is working on explainable AI for science is, for example, the Automated Statistician project. They have created a system that can generate an explanation of its forecasts or predictions, by breaking complicated datasets into interpretable sections and explaining its findings in accessible language. Together, the machine learning system and the explanations help researchers analyze large amounts of data and enhance their understanding of the features of that data. [1]
 
 For technology acceptance 
 ----------------------------
@@ -29,18 +32,41 @@ It is a long way from research to application! Having machine learning tools at 
 
 A recent research project by DeepMind and Moorfield’s Eye Hospital points to new methods that can allow doctors to better understand AI systems in the context of medical imaging. This project looked at over 14,000 retinal scans, creating an AI system that analyzed these images to detect retinal disease. On top of using deep learning techniques that would usually be considered “black box”, researchers built explainability mechanisms, so that human users were able to understand why the model had made a recommendation about the presence or absence of disease. 
 
-This explainability was built into the system, making it decomposable. The system itself consists of two neural networks, each performing different functions. The first analyses a scan, using deep learning to detect features in the image that illustrate the presence (or absence) of disease – hemorrhages in the tissue, for example. This creates a map of the features in the image. The second analyses this map, using the features identified by the first to present clinicians with a diagnosis, while also presenting a percentage to illustrate confidence in the analysis.
+This explainability was built into the system, making it decomposable. The system itself consists of two neural networks, each performing different functions:
+- The first analyses a scan, using deep learning to detect features in the image that illustrate the presence (or absence) of disease – hemorrhages in the tissue, for example. This creates a map of the features in the image.
+- The second analyses this map, using the features identified by the first to present clinicians with a diagnosis, while also presenting a percentage to illustrate confidence in the analysis.
 
 At the interface of these two systems, clinicians can access an intermediate representation that illustrates which areas of an image might suggest the presence of eye disease. This can be integrated into clinical workflows and interrogated by human experts wishing to understand the patterns in a scan and why a recommendation has been made, before confirming which treatment process is suitable. Clinicians, therefore, remain in the loop of making a diagnosis and can work with patients to confirm treatment pathways. [1]
 
-To meet regulation requirements (TBC)
+To meet regulation requirements
 --------------------------------------
+In 2018 the General Data Protection Regulation (GDPR) was enacted. 
+Article 15 constitutes:
+
+§1 	The data subject shall have the right to obtain from the controller confirmation as to whether or not personal data concerning him or her are being processed, and, where that is the case, access to the personal data and the following information: 
+[…]
+(h) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.
+
+The Members of the European Parliament recently adopted this idea in the European AI Act, advocating to “boost citizens’ right to file complaints about AI systems and receive explanations of decisions based on high-risk AI systems that significantly impact their rights” [3].
+
+These legal texts mean that citizens should be encouraged to and have a legal right to ask for – and receive – information about how their data is being processed by ML (among other information, such as how it is being collected, stored, deleted, and so on). Consequently, it is the duty of those who use the data to be able to give such information upon request. XAI methods, thus, can not only help retrieve information about how a black-box algorithm operates but also help fulfill this legal duty.
+
+As a defense strategy
+--------------------------------------
+A growing problem of ML systems, particularly computer vision systems, is adversarial attacks. When someone conducts an adversarial attack, they try tricking the system by providing an input that – to a human – looks very much like a specific class, say a cat, but, because of subtle changes in the data, gets interpreted by the ML system as another class, say a dog. 
+There are various types of adversarial attacks. Terms you might want to remember in this context are “white box attacks” vs. “black box attacks,” a distinction that tells us how well the attacker knows the particularities of their target system (in white box attacks, all relevant characteristics of a model are known to whoever conducts the attack). Also note that differences are considered in how often an attack to a single system is conducted (attack frequency), how many pixels of the original input are changed for the attack (e.g., FGSM vs. One-pixel attack), or if the attack produces false-positives or false-negatives (adversarial falsification).
+XAI – aiming to reproduce which parts of the input have been decisive for the output – can help humans spot images in which the pixels that were focused by the model seem off and, thus, evaluate if an adversarial attack might be happening. In other words: Many XAI tools for computer vision systems present their results visually, as heatmaps, that allow the user to understand which areas of the input image had how much effect on the output creation. If seemingly random areas of an image shine up and correlate with unexpected output classes, users monitoring the local explanations of their model will notice a dissonance they possibly would’ve missed with their naked eye. The sooner they’ve noticed something is off, they can check other parameters that confirm or reject an adversarial attack – and timely issue countermeasures, if necessary.
+XAI methods have also proven helpful as a defense strategy to prevent adversarial attacks. Suppose you want to increase the robustness of your computer vision model. In that case, you can imitate an adversarial attack of a particular type – or multiple types – that you render particularly likely and thereby generate adversarial attack input pictures. You can then use these newly created images to re-train your net. 
+This procedure has proven successful in a study [4], which also gives more detailed input on adversarial attacks on computer vision systems, in case you want to delve further into this topic!
 
 
 References
 -----------
-The Royal Society. `Explainable AI: The basics. <https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf>`_ Policy Briefing. 2019. 
+[1] Explainable AI: The basics, The Royal Society, 2019. Link
+[2] Interpretable Machine Learning: A Guide for Making Black Box Models Explainable, Christoph Molnar, 2022. Link
+[3] AI Act: A step closer to the first rules on Artificial Intelligence, Press release by the European Parliament, 2023: Link
+[4] by Klawikowska et al. (2020). This study
+Additionally, Christoph Molnar’s book and Tim Miller’s paper can provide further insight into the challenges and promise of machine learning explainability:
+•	Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. – Christoph Molnar, 2019-12-17
+•	Explanation in Artificial Intelligence: Insights from the Social Sciences. – Tim Miller
 
-Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
-
-Miller, Tim. `Explanation in artificial intelligence: Insights from the social sciences. <https://arxiv.org/abs/1706.07269>`_ Artificial Intelligence. 2019.
