@@ -7,6 +7,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import cv2 as cv
+
+import torch
+from torchvision import transforms
+
 ############################################################
 ##### Utility Fuctions
 ############################################################
@@ -73,3 +78,73 @@ def plot_correlation_matrix(data):
         ax=ax,
         annot=True,
     )
+
+
+def transform_img(img, mean, std, tensor_flag=True):
+    transform = transforms.Compose([transforms.ToPILImage(),
+                                transforms.Resize((224, 224)), 
+                                transforms.ToTensor(),
+                                transforms.Normalize(mean=mean, std=std)])
+    arr_img = np.array(img)
+    # apply the transforms
+    trans_img = transform(arr_img)
+    # unsqueeze to add a batch dimension
+    trans_img = trans_img.unsqueeze(0)
+    if tensor_flag is False:
+        # returns np.array with original axes
+        trans_img = np.array(trans_img)
+        trans_img = trans_img.swapaxes(-1,1).swapaxes(1, 2)
+
+    return trans_img
+
+
+def normalize_and_adjust_axes(image, mean, std):
+    if image.max() > 1:
+        image /= 255
+    image = (image - mean) / std
+    # in addition, roll the axes so that they suit pytorch
+    return torch.tensor(image.swapaxes(-1, 1).swapaxes(2, 3)).float()
+
+
+def read_img(path_to_img):
+    img = cv.imread(path_to_img) # Insert the path to image.
+    img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+    return img
+
+
+def calculate_localization_map(gcmodel, img, out, c):
+
+    # Step 1 - Gradient output y wrt. to activation map
+    # get the gradient of the output with respect to the parameters of the model
+    out[:,c].backward(retain_graph=True)
+    # pull the gradients out of the model
+    gradients = gcmodel.get_gradient()
+
+    # Step 2 - Global average pooling
+    # pool the gradients across the channels
+    pooled_gradients = torch.mean(gradients, dim=[0, 2, 3]) #to be computed by students
+
+    # Step 3 - Weighted combination of influence and feature maps
+    # get the activations of the last convolutional layer
+    activations = gcmodel.get_activations(img).detach()
+    # weight the channels by corresponding gradients
+    for i in range(activations.size(1)):
+        activations[:, i, :, :] *= pooled_gradients[i]
+    # average the channels of the activations
+    localization_map = torch.sum(activations, dim=1).squeeze()
+    # convert the map to be a numpy array
+    localization_map = localization_map.numpy()
+    # relu on top of the localization map
+    localization_map = np.maximum(localization_map, 0) #to be computed by students
+
+    return localization_map
+
+
+def convert_to_heatmap(localization_map, img):
+    # normalize the localization_map
+    localization_map /= np.max(localization_map)
+    # resize to image size
+    heatmap = cv.resize(localization_map, (img.shape[1], img.shape[0]))
+    # normalize to [0, 255] range and convert to unsigned int
+    heatmap = np.uint8(255 * heatmap)
+    return heatmap
