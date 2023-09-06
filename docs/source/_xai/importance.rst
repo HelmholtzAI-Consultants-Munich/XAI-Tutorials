@@ -18,7 +18,7 @@ For Science
 
 The goal of scientific discovery is to understand. Data collection and analysis is a core element of scientific methods, and scientists have long used statistical techniques to aid their work. As early as the 1900s the development of the t-test gave researchers a new tool to extract insights from data to test the veracity of their hypotheses. Today, machine learning has become a vital tool for researchers across domains to analyze large datasets, detect previously unforeseen patterns, or extract unexpected insights. 
 
-For example, machine learning is used in areas like computational biology to analyze genomic data or to predict the three-dimensional structures of proteins, and in computational climate science to understand the effects of climate change on cities and regions (e.g. by combining local observational data to large-scale climate models, researchers hope to acquire more detailed pictures of the local impacts of climate change), in computational physics to find patterns in vast amounts of astronomical data that can be very noisy data.
+For example, machine learning is used in areas like computational biology to analyze genomic data or to predict the three-dimensional structures of proteins, in computational climate science to understand the effects of climate change on cities and regions (e.g. by combining local observational data to large-scale climate models, researchers hope to acquire more detailed pictures of the local impacts of climate change), or in computational physics to find patterns in vast amounts of astronomical data that can be very noisy data.
 
 In some contexts, the accuracy of these methods alone is sufficient to make AI useful – filtering telescope observations to identify likely targets for further study, for example. However, researchers want to know not just what the answer is but why! Explainable AI can help researchers to understand the insights that come from research data, by providing accessible explanations of which features have been particularly relevant in the creation of the system’s output. A project that is working on explainable AI for science is, for example, the Automated Statistician project. They have created a system that can generate an explanation of its forecasts or predictions, by breaking complicated datasets into interpretable sections and explaining its findings in accessible language. Together, the machine learning system and the explanations help researchers analyze large amounts of data and enhance their understanding of the features of that data (*The Royal Society, 2019*).
 
@@ -43,7 +43,7 @@ Article 15 constitutes:
   | […]
   | (h) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.
 
-The Members of the European Parliament recently adopted this idea in the European AI Act, advocating to “boost citizens’ right to file complaints about AI systems and receive explanations of decisions based on high-risk AI systems that significantly impact their rights” (*AI Act: A step closer to the first rules on Artificial Intelligence*).
+The Members of the European Parliament recently adopted this idea in the European AI Act, advocating to “boost citizens’ right to file complaints about AI systems and receive explanations of decisions based on high-risk AI systems that significantly impact their rights” (*European Parliament, 2023*).
 
 These legal texts mean that citizens should be encouraged to and have a legal right to ask for – and receive – information about how their data is being processed by ML (among other information, such as how it is being collected, stored, deleted, and so on). Consequently, it is the duty of those who use the data to be able to give such information upon request. XAI methods, thus, can not only help retrieve information about how a black-box algorithm operates but also help fulfill this legal duty.
 
@@ -58,12 +58,12 @@ This procedure has proven successful in a study (*Klawikoska et al., 2020*), whi
 
 References
 -----------
-`AI Act: A step closer to the first rules on Artificial Intelligence <https://www.europarl.europa.eu/news/en/press-room/20230505IPR84904/ai-act-a-step-closer-to-the-first-rules-on-artificial-intelligence?xtor=AD-78-%5bSocial_share_buttons%5d-%5bwhatsapp%5d-%5ben%5d-%5bnews%5d-%5bpressroom%5d-%5bai-act-committee-vote%5d&>`_, Press release by the European Parliament, 2023.
+European Parliament. `AI Act: A step closer to the first rules on Artificial Intelligence <https://www.europarl.europa.eu/news/en/press-room/20230505IPR84904/ai-act-a-step-closer-to-the-first-rules-on-artificial-intelligence?xtor=AD-78-%5bSocial_share_buttons%5d-%5bwhatsapp%5d-%5ben%5d-%5bnews%5d-%5bpressroom%5d-%5bai-act-committee-vote%5d&>`_, Press Release. 2023.
 
-Klawikowska, Z., Mikołajczyk, A., Grochowski, M. (2020). `Explainable AI for Inspecting Adversarial Attacks on Deep Neural Networks <https://doi.org/10.1007/978-3-030-61401-0_14>`_. In: Rutkowski, L., Scherer, R., Korytkowski, M., Pedrycz, W., Tadeusiewicz, R., Zurada, J.M. (eds) Artificial Intelligence and Soft Computing. ICAISC 2020. Lecture Notes in Computer Science(), vol 12415. Springer, Cham.
+Klawikowska et al. `Explainable AI for Inspecting Adversarial Attacks on Deep Neural Networks <https://doi.org/10.1007/978-3-030-61401-0_14>`_. Artificial Intelligence and Soft Computing: 19th International Conference. 2020.
 
-Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
+Miller. `Explanation in artificial intelligence: Insights from the social sciences. <https://arxiv.org/abs/1706.07269>`_ Artificial Intelligence. 2019.
 
-Miller, T. `Explanation in artificial intelligence: Insights from the social sciences. <https://arxiv.org/abs/1706.07269>`_ Artificial Intelligence. 2019.
+Molnar. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
 
 The Royal Society. `Explainable AI: The basics. <https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf>`_ Policy Briefing. 2019. 
