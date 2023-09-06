@@ -15,6 +15,6 @@ palmerpenguins==0.1.4
 protobuf==4.21.5
 utils==1.0.1
 torch==1.12.1
-torchvision
+torchvision==0.13.1
 opencv-python==4.6.0.66
-pandas_profiling==3.6.
+pandas_profiling==3.6
