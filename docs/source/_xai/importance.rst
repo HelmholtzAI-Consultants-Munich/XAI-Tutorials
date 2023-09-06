@@ -58,12 +58,12 @@ This procedure has proven successful in a study (*Klawikoska et al., 2020*), whi
 
 References
 -----------
-`AI Act: A step closer to the first rules on Artificial Intelligence <https://www.europarl.europa.eu/news/en/press-room/20230505IPR84904/ai-act-a-step-closer-to-the-first-rules-on-artificial-intelligence?xtor=AD-78-%5bSocial_share_buttons%5d-%5bwhatsapp%5d-%5ben%5d-%5bnews%5d-%5bpressroom%5d-%5bai-act-committee-vote%5d&>`_, Press release by the European Parliament, 2023.
+European Parliament. `AI Act: A step closer to the first rules on Artificial Intelligence <https://www.europarl.europa.eu/news/en/press-room/20230505IPR84904/ai-act-a-step-closer-to-the-first-rules-on-artificial-intelligence?xtor=AD-78-%5bSocial_share_buttons%5d-%5bwhatsapp%5d-%5ben%5d-%5bnews%5d-%5bpressroom%5d-%5bai-act-committee-vote%5d&>`_, Press Release. 2023.
 
-Klawikowska, Z., Mikołajczyk, A., Grochowski, M. (2020). `Explainable AI for Inspecting Adversarial Attacks on Deep Neural Networks <https://doi.org/10.1007/978-3-030-61401-0_14>`_. In: Rutkowski, L., Scherer, R., Korytkowski, M., Pedrycz, W., Tadeusiewicz, R., Zurada, J.M. (eds) Artificial Intelligence and Soft Computing. ICAISC 2020. Lecture Notes in Computer Science(), vol 12415. Springer, Cham.
+Klawikowska et al. `Explainable AI for Inspecting Adversarial Attacks on Deep Neural Networks <https://doi.org/10.1007/978-3-030-61401-0_14>`_. Artificial Intelligence and Soft Computing: 19th International Conference. 2020.
 
-Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
+Miller. `Explanation in artificial intelligence: Insights from the social sciences. <https://arxiv.org/abs/1706.07269>`_ Artificial Intelligence. 2019.
 
-Miller, T. `Explanation in artificial intelligence: Insights from the social sciences. <https://arxiv.org/abs/1706.07269>`_ Artificial Intelligence. 2019.
+Molnar. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
 
 The Royal Society. `Explainable AI: The basics. <https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf>`_ Policy Briefing. 2019. 
