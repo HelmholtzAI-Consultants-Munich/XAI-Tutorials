@@ -1,7 +1,7 @@
 matplotlib==3.5.3
 numpy==1.23.2
 pandas==1.4.4
-scikit_learn==1.1.2
+scikit_learn
 seaborn==0.11.2
 shap==0.42.1
 lime==0.2.0.1
@@ -14,7 +14,7 @@ notebook==7.0.3
 palmerpenguins==0.1.4
 protobuf==4.21.5
 utils==1.0.1
-torch==1.12.1
-torchvision==0.13.1
-opencv-python==4.6.0.66
-pandas_profiling==3.6
+torch
+torchvision
+opencv-python
+pandas_profiling
