@@ -43,7 +43,7 @@ Article 15 constitutes:
   | […]
   | (h) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.
 
-The Members of the European Parliament recently adopted this idea in the European AI Act, advocating to “boost citizens’ right to file complaints about AI systems and receive explanations of decisions based on high-risk AI systems that significantly impact their rights” (*AI Act: A step closer to the first rules on Artificial Intelligence*).
+The Members of the European Parliament recently adopted this idea in the European AI Act, advocating to “boost citizens’ right to file complaints about AI systems and receive explanations of decisions based on high-risk AI systems that significantly impact their rights” (*European Parliament, 2023*).
 
 These legal texts mean that citizens should be encouraged to and have a legal right to ask for – and receive – information about how their data is being processed by ML (among other information, such as how it is being collected, stored, deleted, and so on). Consequently, it is the duty of those who use the data to be able to give such information upon request. XAI methods, thus, can not only help retrieve information about how a black-box algorithm operates but also help fulfill this legal duty.
 
