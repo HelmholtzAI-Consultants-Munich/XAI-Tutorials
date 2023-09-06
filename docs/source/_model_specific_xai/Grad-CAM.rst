@@ -16,5 +16,6 @@ effectively revealing which parts of the image the model 'looks at' when making 
 
 
 References
-===========
+----------
+
 Selvaraju R. R., Cogswell M., Das  A., Vedantam  R. , Parik D. and Batra D. , `"Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization" <https://ieeexplore.ieee.org/document/8237336/references#references>`_,  2017 IEEE International Conference on Computer Vision (ICCV), Venice, Italy, 2017, pp. 618-626, doi: 10.1109/ICCV.2017.74.
