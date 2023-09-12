@@ -6,7 +6,7 @@ shap==0.42.1
 lime==0.2.0.1
 fgclustering
 ipython==8.4.0
-joblib==1.1.0
+joblib==1.2.0
 jupyter==1.0.0
 jupyterlab==4.0.5
 notebook==7.0.3
