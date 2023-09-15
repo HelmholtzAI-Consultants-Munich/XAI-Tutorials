@@ -118,30 +118,6 @@ def plot_correlation_matrix(data):
         ax=ax,
         annot=True,
     )
-
-
-#### Data loader and function for training on MNST###
-
-def train_loader_fun(num_epochs = 5):
-    batch_size = 128
-    #device = torch.device('cpu')
-    return torch.utils.data.DataLoader(
-        datasets.MNIST('mnist_data', train=True, download=True,
-                       transform=transforms.Compose([
-                           transforms.ToTensor()
-                       ])),
-        batch_size=batch_size, shuffle=True)
-    # return train_loader
-    
-def test_loader_fun(num_epochs = 5):
-    batch_size = 128
-    #device = torch.device('cpu')   
-    test_loader = torch.utils.data.DataLoader(
-        datasets.MNIST('mnist_data', train=False, transform=transforms.Compose([
-                           transforms.ToTensor()
-                       ])),
-        batch_size=batch_size, shuffle=True)
-    return test_loader
     
 def train(model, device, train_loader, optimizer, epoch):
     model.train()
