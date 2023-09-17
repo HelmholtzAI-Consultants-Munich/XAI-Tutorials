@@ -12,8 +12,11 @@ import torch, torchvision
 from torchvision import datasets, transforms
 from torch import nn, optim
 
+import sys  
+sys.path.append('../data_and_models/')
+from model_net import Net
 ############################################################
-##### Utility Fuctions
+##### Utility Functions
 ############################################################
 
 
@@ -118,7 +121,7 @@ def plot_correlation_matrix(data):
         ax=ax,
         annot=True,
     )
-    
+
 def train(model, device, train_loader, optimizer, epoch):
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
@@ -129,9 +132,8 @@ def train(model, device, train_loader, optimizer, epoch):
         loss.backward()
         optimizer.step()
         if batch_idx % 100 == 0:
-            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                epoch, batch_idx * len(data), len(train_loader.dataset),
-                100. * batch_idx / len(train_loader), loss.item()))
+            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(epoch, batch_idx * len(data), len(train_loader.dataset), 
+                                                                           100. * batch_idx / len(train_loader), loss.item()))
 
 def test(model, device, test_loader):
     model.eval()
@@ -146,6 +148,27 @@ def test(model, device, test_loader):
             correct += pred.eq(target.view_as(pred)).sum().item()
 
     test_loss /= len(test_loader.dataset)
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
-        test_loss, correct, len(test_loader.dataset),
-    100. * correct / len(test_loader.dataset)))
+    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(test_loss, correct, len(test_loader.dataset), 
+                                                                                 100. * correct / len(test_loader.dataset)))
+
+def get_trained_model(nb_of_epochs=5, seed=2):
+    torch.manual_seed(seed)
+    batch_size = 128
+    device = torch.device('cpu')
+    train_loader = torch.utils.data.DataLoader(datasets.MNIST('mnist_data', train=True, download=True,
+                                                      transform=transforms.Compose([transforms.ToTensor()])),
+                                       batch_size=batch_size, shuffle=True)
+
+    test_loader = torch.utils.data.DataLoader(datasets.MNIST('mnist_data', train=False,
+                                                      transform=transforms.Compose([transforms.ToTensor()])),
+                                       batch_size=batch_size, shuffle=True)
+    
+    # instantiate the model and call the train and test functions 
+    model = Net().to(device)
+    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
+    
+    # start the training and testing process
+    for epoch in range(nb_of_epochs):
+        train(model, device, train_loader, optimizer, epoch + 1)
+        test(model, device, test_loader)
+    return model, test_loader
