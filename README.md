@@ -31,7 +31,7 @@ The course will be fully online:
 | 13.30 - 13.50 | Introduction to XAI |
 | 13.50 - 15.50 | Tutorial on XAI model-agnostic methods 
 | 15.50 - 16.00 | Break |
-| 16.00 - 17.30 | Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests with FGC” |
+| 16.00 - 17.30 | Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forest” |
 | 17.30 - 17.35 | Wrap-up and conclusions |
 
 ## Tutorials:
