@@ -7,9 +7,7 @@
 # Tutorials for eXplainable Artificial Intelligence (XAI) methods
 
 This repository contains a collection of self-explanatory tutorials for different model-agnostic and model-specific XAI methods.
-Each tutorial comes in a Jupyter Notebook wich contains a short video lecture and practical exercises.
-The material has already been used in the context of two courses: the Zero to Hero Summer Academy (fully online) and ml4hearth (hybrid setting).
-The course material can be adjusted according to the availabel time frame and the schedule.
+Each tutorial comes in a Jupyter Notebook which contains a short video lecture and practical exercises.
 The material is self-explanatory and can be also be consumed offline.
 
 The learning objectives are:
@@ -17,22 +15,47 @@ The learning objectives are:
 - understand the importance of interpretability
 - discover the existing model-agnostic and model-specific XAI methods
 - learn how to interpret the outputs and graphs of those methods with hands-on exercises
-- learn to chose which method is suitable for a specific task
+- learn to choose which method is suitable for a specific task
+The event page can be found here: https://events.hifis.net/event/858/timetable/
 
-## List of Tutorials for Model-Agnostic Methods
+## Venue
+The course will be fully online:
+- [GatherTown link](https://app.gather.town/app/nkxyTbuI84smfiQk/HMC-Workshop-Lounge)
+- Password: ISA_Gather
+- Room: 2
 
-- Permutation Feature Importance
-- SHapley Additive exPlanations (SHAP)
-- Local Interpretable Model-Agnostic Explanations (LIME)
+## Schedule at a glance
 
-## List of Tutorials for Model-Specific Methods
+| Time          | Content |
+| ------------- | -------- |
+| 13.30 - 13.50 | Introduction to XAI |
+| 13.50 - 15.50 | Tutorial on XAI model-agnostic methods 
+| 15.50 - 16.00 | Break |
+| 16.00 - 17.30 | Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests with FGC” |
+| 17.30 - 17.35 | Wrap-up and conclusions |
 
-- Forest-Guided Clustering
-- Grad-CAM
+## Tutorials:
+- First session
+  - [Tutorial_PermutationFeatureImportance](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/SummerAcademy-2023/xai-model-agnostic/Tutorial_PermutationFeatureImportance.ipynb)
+  - [Tutorial_SHAP_intro](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/SummerAcademy-2023/xai-model-agnostic/Tutorial_SHAP.ipynb)
+- Second session
+  - XAI for deep learning image analysis:
+    - [Model-CNN-Feature Visualization](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/SummerAcademy-2023/data_and_models/Model-CNN-FeatureVisualization.ipynb)
+    - [Tutorial_GradCAM](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/SummerAcademy-2023/xai-model-specific/Tutorial_Grad-CAM.ipynb)
+    - [Tutorial_SHAP_images](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/SummerAcademy-2023/xai-model-agnostic/Tutorial_SHAP_Images.ipynb)
+    - [Tutorial_XAI_for_ImageAnalysis](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/SummerAcademy-2023/xai-model-specific/Tutorial_XAI_for_ImageAnalysis.ipynb)
+  - XAI for Random Forest:
+    - [Tutorial_FGC](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/SummerAcademy-2023/xai-model-specific/Tutorial_FGC.ipynb)
+    - [Tutorial_XAI_for_RAnfomForest](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/SummerAcademy-2023/xai-model-specific/Tutorial_XAI_for_RandomForests.ipynb)
+
 
 ## Requirements and Setup
 
-It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have acces to a Google account.
+It is possible to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
+
+If you prefer to run the notebooks on your own device, create a virtual environment using the requirements.txt file, and clone this branch of the repo:
+
+`git clone --branch SummerAcademy-2023 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git`
 
 ## Contributions
 
