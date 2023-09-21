@@ -16,3 +16,4 @@ utils==1.0.1
 torch
 torchvision
 opencv-python
+scikit-learn==1.2.2 
