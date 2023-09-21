@@ -51,11 +51,20 @@ The course will be fully online:
 
 ## Requirements and Setup
 
-It is possible to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
+It is possible to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This option doesn't require any further installation, but the user must have access to a Google account.
 
-If you prefer to run the notebooks on your own device, create a virtual environment using the requirements.txt file, and clone this branch of the repo:
+If you prefer to run the notebooks on your own device, create a virtual environment using the requirements.txt file:
+```
+conda create -n XAI-Course-2023 python=3.9
+conda activate XAI-Course-2023
+pip install -r requirements.txt
+```
 
-`git clone --branch SummerAcademy-2023 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git`
+Once your environment is created, clone `SummerAcademy-2023` brach branch of the repo using the following command:
+
+```
+git clone --branch SummerAcademy-2023 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+```
 
 ## Contributions
 
