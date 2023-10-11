@@ -7,6 +7,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import os
+from PIL import Image
+import cv2 as cv
+
 from torch.nn import functional as F
 import torch, torchvision
 from torchvision import datasets, transforms
@@ -172,3 +176,10 @@ def get_trained_model(nb_of_epochs=5, seed=2):
         train(model, device, train_loader, optimizer, epoch + 1)
         test(model, device, test_loader)
     return model, test_loader
+
+
+def get_image(path):
+    with open(os.path.abspath(path), 'rb') as f:
+        with Image.open(f) as img:
+            return img.convert('RGB') 
+    
