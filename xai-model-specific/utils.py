@@ -80,9 +80,9 @@ def plot_correlation_matrix(data):
     )
 
 
-def transform_img(img, mean, std, tensor_flag=True):
+def transform_img(img, mean, std, tensor_flag=True, img_size=(224, 224)):
     transform = transforms.Compose([transforms.ToPILImage(),
-                                transforms.Resize((224, 224)), 
+                                transforms.Resize(img_size), 
                                 transforms.ToTensor(),
                                 transforms.Normalize(mean=mean, std=std)])
     arr_img = np.array(img)
