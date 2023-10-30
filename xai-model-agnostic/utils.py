@@ -178,8 +178,43 @@ def get_trained_model(nb_of_epochs=5, seed=2):
     return model, test_loader
 
 
-def get_image(path):
+def read_image(path):
     with open(os.path.abspath(path), 'rb') as f:
         with Image.open(f) as img:
             return img.convert('RGB') 
+
+def get_pil_transform(): 
+    transf = transforms.Compose([
+        transforms.Resize((256, 256)),
+        transforms.CenterCrop(224)
+    ])    
+
+    return transf
+
+def get_preprocess_transform():
+    normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                    std=[0.229, 0.224, 0.225])     
+    transf = transforms.Compose([
+        transforms.ToTensor(),
+        normalize
+    ])    
+
+    return transf   
+
+def batch_predict(images, model):
+    # Set the model in evaluation mode
+    model.eval()
+    # Prepare a batch of preprocessed images
+    preprocess_transform = get_preprocess_transform()
+    batch = torch.stack(tuple(preprocess_transform(i) for i in images), dim=0)
+    # Move the model and batch to the selected device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+    batch = batch.to(device)
+    # Make predictions using the model
+    logits = model(batch)
+    # Convert logits to class probabilities using softmax
+    probs = F.softmax(logits, dim=1)
+    # Return the predicted probabilities as a NumPy array
+    return probs.detach().cpu().numpy()
     
