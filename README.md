@@ -7,7 +7,7 @@
 # Tutorials for eXplainable Artificial Intelligence (XAI) methods
 
 This repository contains a collection of self-explanatory tutorials for different model-agnostic and model-specific XAI methods.
-Each tutorial comes in a Jupyter Notebook which contains a short video lecture and practical exercises.
+Each tutorial comes in a Jupyter Notebook, which contains a short video lecture and practical exercises.
 The material has already been used in the context of two courses: the Zero to Hero Summer Academy (fully online) and ml4hearth (hybrid setting).
 The course material can be adjusted according to the available time frame and the schedule.
 The material is self-explanatory and can also be consumed offline.
@@ -80,7 +80,7 @@ Homework 1: Comparison notebook - [Tutorial_XAI_for_ImageAnalysis](https://githu
 
 ## Requirements and Setup
 
-It is possible to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This option doesn't require any further installation, but the user must have access to a Google account.
+Executing the notebooks on the browser is possible, by clicking the 'Open in Colab' button. This option doesn't require any further installation, but the user must have access to a Google account.
 
 If you prefer to run the notebooks on your device, create a virtual environment using the requirements.txt file:
 ```
@@ -97,4 +97,4 @@ git clone --branch SummerAcademy-2023 https://github.com/HelmholtzAI-Consultants
 
 ## Contributions
 
-Comments and input are very welcome! Please, if you have a suggestion or you think something should be changed, open an issue or submit a pull request. 
+Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue or submit a pull request. 
