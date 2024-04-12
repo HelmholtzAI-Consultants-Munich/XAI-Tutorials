@@ -8,7 +8,7 @@
 
 This repository contains a collection of self-explanatory tutorials for different model-agnostic and model-specific XAI methods.
 Each tutorial comes in a Jupyter Notebook, containing a short video lecture and practical exercises.
-The material has already been used in the context of two courses: the Zero to Hero Summer Academy (fully online) and ml4hearth (hybrid setting).
+The material has already been used in the context of two courses: the Helmholtz Summer Academy 2022 and 2023 (fully online) and ml4hearth (hybrid setting), MALTAomics Summer School (hybrid setting).
 The course material can be adjusted according to the available time frame and the schedule.
 The material is self-explanatory and can also be consumed offline.
 
@@ -21,16 +21,13 @@ The learning objectives are:
 
 ## Venue
 The course will be fully online:
-[Zoom link](https://fz-juelich-de.zoom.us/j/68186324087?pwd=eUp5dEdyU2xSODhzMXNRVW9vNkh5QT09)
-Password:
-Meeting ID: 681 8632 4087 
-Passcode: 900523
+*Add zoom link*
 
-Link to the share notes: https://notes.desy.de/DzEtxe8eSDGLZYQP0OehWw?both
+Link to the share notes: *Add link*
 
 ## Schedule at a glance
 
-#### Day 1 - XAI for Tabular Data
+#### Day 1 - XAI for Random Forest
 |  Time | Session  | Duration  |
 |---|---|---|
 |9:00 - 9:30 |Introduction |30 min|
@@ -47,7 +44,7 @@ Homework 1: Comparison notebook - [Tutorial_XAI_for_RandomForest](https://github
 Homework 2: SHAP exercise - [Compute Shapley values by hand](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2023/SHAP_exercise.pdf)
 
 
-#### Day 2 - XAI for Image Data
+#### Day 2 - XAI for CNNs
 |  Time | Session  | Duration  |
 |---|---|---|
 |9:00 - 9:15 |Welcome |15 min|
@@ -63,7 +60,7 @@ Homework 2: SHAP exercise - [Compute Shapley values by hand](https://github.com/
 Homework 1: Comparison notebook - [Tutorial_XAI_for_ImageAnalysis](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2023/xai-for-image-data/Tutorial_XAI_for_ImageAnalysis.ipynb)
 
 
-#### Day 3 - 1D Data
+#### Day 3 - XAI for Transformers
 |  Time | Session  | Duration  |
 |---|---|---|
 |9:00 - 9:15 |Welcome |15 min|
@@ -78,21 +75,21 @@ Homework 1: Comparison notebook - [Tutorial_XAI_for_ImageAnalysis](https://githu
 |12:55 - 13:00 | Conclusions |5 min|
 
 
-## Requirements and Setup
+## Requirements and Setup - *Check this section*
 
 It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
 
 If you prefer to run the notebooks on your device, create a virtual environment using the requirements.txt file:
 ```
-conda create -n XAI-Course-2023 python=3.9
-conda activate XAI-Course-2023
+conda create -n XAI-Course-2024 python=3.9
+conda activate XAI-Course-2024
 pip install -r requirements.txt
 ```
 
-Once your environment is created, clone `Juelich-2023` brach branch of the repo using the following command:
+Once your environment is created, clone `Juelich-2024` brach branch of the repo using the following command:
 
 ```
-git clone --branch Juelich-2023 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+git clone --branch Juelich-2024 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
 ```
 
 ## Contributions
