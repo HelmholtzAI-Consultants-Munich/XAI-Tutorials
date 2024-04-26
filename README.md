@@ -39,25 +39,25 @@ Link to the share notes: *Add link*
 |12:15 - 12:55 | FGC |40 min|
 |12:55 - 13:00 | Conclusions |5 min|
 
-Homework 1: Comparison notebook - [Tutorial_XAI_for_RandomForest](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2023/xai-for-tabular-data/Tutorial_XAI_for_RandomForests.ipynb)
+Homework 1: Comparison notebook - [Tutorial_XAI_for_RandomForest](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2024/xai-for-tabular-data/Tutorial_XAI_for_RandomForests.ipynb)
 
-Homework 2: SHAP exercise - [Compute Shapley values by hand](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2023/SHAP_exercise.pdf)
+Homework 2: SHAP exercise - [Compute Shapley values by hand](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2024/SHAP_exercise.pdf)
 
 
 #### Day 2 - XAI for CNNs
 |  Time | Session  | Duration  |
 |---|---|---|
-|9:00 - 9:15 |Welcome |15 min|
+|9:00 - 9:15 | Welcome |15 min|
 |9:15 - 9:30 |	Homework Discussion| 15 min|
 |9:30 - 10:00 | Intro CNNs|	30 min|
 |10:00 - 10:15 | Break | 15 min| 
-|10:15 - 11:45 | Grad-CAM| 1 h 15 min|
+|10:15 - 11:45 | Grad-CAM for Images| 1 h 15 min|
 |11:45 - 12:00 | Break | 15 min| 
-|12:00- 12:30 |	LIME for Images | 45 min|
-|12:30 - 12:55 | SHAP for Images | 30 min|
+|12:00- 12:30 |	 Grad-CAM for Signals | 30 min|
+|12:30 - 12:55 | LIME for Images | 25 min|
 |12:55 - 13:00 | Conclusions |5 min|
 
-Homework 1: Comparison notebook - [Tutorial_XAI_for_ImageAnalysis](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2023/xai-for-image-data/Tutorial_XAI_for_ImageAnalysis.ipynb)
+Homework 1: Comparison notebook - [Tutorial_XAI_for_ImageAnalysis](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2024/xai-for-image-data/Tutorial_XAI_for_ImageAnalysis.ipynb)
 
 
 #### Day 3 - XAI for Transformers
@@ -65,14 +65,13 @@ Homework 1: Comparison notebook - [Tutorial_XAI_for_ImageAnalysis](https://githu
 |---|---|---|
 |9:00 - 9:15 |Welcome |15 min|
 |9:15 - 9:30 |	Homework Discussion| 15 min|
-|9:30 - 10:15 | CAM for signals | 45 min|
+|9:30 - 10:15 | Intro to trasformers | 45 min|
 |10:15 - 10:30 | Break | 15 min| 
-|10:30 - 11:15 | Intro to trasformers | 45 min|
-|11:15 - 11:35 | Attention for text | 20 min |
-|11:35 - 11:50 | Break | 15 min| 
-|11:50 - 12:10 | Intro to Vision Transformers | 20 min |
-|12:10- 12:55 |	Attention map for image transformers | 45 min|
-|12:55 - 13:00 | Conclusions |5 min|
+|10:30 - 11:00 | Attention for text | 45 min|
+|11:00 - 11:30 | Intro to Vision Transformers | 30 min|
+|11:30 - 11:45 | Break | 15 min| 
+|11:45 - 12:45 | Attention map for image transformers | 60 min|
+|12:45 - 13:00 | Conclusions & Survey | 15 min|
 
 
 ## Requirements and Setup - *Check this section*
