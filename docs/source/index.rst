@@ -50,6 +50,7 @@ In addition, we provide useful background information on those methods in this d
 
    _ml_basics/random_forest.rst
    _ml_basics/CNN_feature_visualization.rst
+   _ml_basics/transformer.rst
 
 
 
