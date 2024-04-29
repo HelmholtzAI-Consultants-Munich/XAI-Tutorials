@@ -5,7 +5,7 @@ Grad-CAM (Gradient-weighted Class Activation Mapping) is a **model-specific** me
 
 For a short introduction to Grad-CAM, click below:
 
-.. vimeo:: 745319946?h=fcd327fc80
+.. vimeo:: 940749237?h=4f7120ca0a"
 
     Short video lecture on the principles of Grad-CAM.
 
