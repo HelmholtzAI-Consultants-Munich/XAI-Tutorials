@@ -1,6 +1,7 @@
 Introduction to Transformers
 =========================================
-...
+
+Transformers are a type of neural network architecture that has become a cornerstone in Natural Language Processing (NLP) and beyond. They were introduced in the 2017 paper "Attention is All You Need" by Vaswani et al. Transformers are a milestone because of the **Attention Mechanism**, especially self-attention. 
 
 For a short introduction to Transformers and their Self-Attention machanism, click below:
 
@@ -12,10 +13,7 @@ For a short introduction to Transformers and their Self-Attention machanism, cli
 Encoder-Decoder Structure
 ---------------------------
 
-Transformers are a type of neural network architecture that has become a cornerstone in Natural Language Processing (NLP) and beyond. They were introduced in the 2017 paper "Attention is All You Need" by Vaswani et al. Transformers are a milestone because of the **Attention Mechanism**, especially self-attention. 
-
 The Transformer architecture is divided into two main parts:
-
 
 1. **Encoder:**
 The encoder processes the input data (like a sentence in a translation task) and encodes it into a context-rich representation. It consists of a stack of layers, each containing a self-attention mechanism and a feed-forward neural network.
