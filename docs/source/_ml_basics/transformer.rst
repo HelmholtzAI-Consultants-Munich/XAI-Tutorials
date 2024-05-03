@@ -65,7 +65,7 @@ The output for each element is then a weighted sum of the value vectors, where t
 .. figure:: ../_figures/qkv3.png
 
 
-The overall mechanism can be summarized in the figure below.
+The overall mechanism, i.e. the sacled dot-product attention, can be summarized in the figure below.
 
 .. figure:: ../_figures/self-attention.png
     :align: center
