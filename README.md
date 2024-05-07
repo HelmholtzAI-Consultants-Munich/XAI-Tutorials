@@ -23,7 +23,7 @@ The learning objectives are:
 The course will be fully online:
 *Add zoom link*
 
-Link to the share notes: *Add link*
+Link to the share notes: https://notes.desy.de/HAmuRdemQgK8VW9mqjBBPQ?both
 
 ## Schedule at a glance
 
@@ -51,10 +51,11 @@ Homework 2: SHAP exercise - [Compute Shapley values by hand](https://github.com/
 |9:15 - 9:30 |	Homework Discussion| 15 min|
 |9:30 - 10:00 | Intro CNNs|	30 min|
 |10:00 - 10:15 | Break | 15 min| 
-|10:15 - 11:45 | Grad-CAM for Images| 1 h 15 min|
+|10:15 - 11:05 | Grad-CAM for Images| 50 min|
+|11:05- 11:45 |	 Grad-CAM for Signals | 40 min|
 |11:45 - 12:00 | Break | 15 min| 
-|12:00- 12:30 |	 Grad-CAM for Signals | 30 min|
-|12:30 - 12:55 | LIME for Images | 25 min|
+|12:00 - 12:30 | LIME for Images | 30 min|
+|12:30 - 12:55| SHAP for Images | 25 min |
 |12:55 - 13:00 | Conclusions |5 min|
 
 Homework 1: Comparison notebook - [Tutorial_XAI_for_ImageAnalysis](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/Juelich-2024/xai-for-image-data/Tutorial_XAI_for_ImageAnalysis.ipynb)
