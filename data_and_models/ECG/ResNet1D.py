@@ -48,6 +48,7 @@ class ResNet(nn.Module):
         self.layer4 = self.make_layer(block, 512, layers[3], stride=2)
         self.avg_pool = nn.AdaptiveAvgPool1d((1,))
         self.fc = nn.Linear(512, num_classes)
+        self.gradient = None
 
     def make_layer(self, block, out_channels, blocks, stride=1):
         layers = []
@@ -57,6 +58,16 @@ class ResNet(nn.Module):
             layers.append(block(out_channels, out_channels))
         return nn.Sequential(*layers)
 
+    # hook for the gradients
+    def activations_hook(self, grad):
+        self.gradient = grad
+    
+    def get_gradient(self):
+        return self.gradient
+    
+    def get_activations(self, x):
+        return self.features(x)
+    
     def forward(self, x, label=None, return_cam=False):
         x = self.conv1(x)
         x = self.bn1(x)
@@ -66,7 +77,8 @@ class ResNet(nn.Module):
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
-
+        x.register_hook(self.activations_hook)
+        
         pre_logits = self.avg_pool(x)
         pre_logits = torch.flatten(pre_logits, 1)
         logits = self.fc(pre_logits)
