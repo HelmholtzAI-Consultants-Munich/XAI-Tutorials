@@ -1,8 +1,9 @@
 matplotlib==3.5.3
 numpy==1.23.2
-pandas==1.4.4
+pandas==1.5
 seaborn
-shap==0.42.1
+scikit-learn==1.1.2
+shap==0.45.1
 lime==0.2.0.1
 fgclustering
 ipython==8.4.0
