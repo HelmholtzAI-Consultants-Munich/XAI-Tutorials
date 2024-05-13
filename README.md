@@ -21,7 +21,9 @@ The learning objectives are:
 
 ## Venue
 The course will be fully online:
-*Add zoom link*
+[Zoom link](https://fz-juelich-de.zoom.us/j/63066788688?pwd=bGpLZm9oN3lJSFJlbXRkQjdZMHRRQT09)
+
+Meeting ID: 630 6678 8688, Passcode: 969908
 
 Link to the share notes: https://notes.desy.de/HAmuRdemQgK8VW9mqjBBPQ?both
 
