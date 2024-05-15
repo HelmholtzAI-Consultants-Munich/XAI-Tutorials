@@ -1,7 +1,7 @@
 Introduction to Local Interpretable Model-Agnostic Explanations (LIME)
 ========================================================================
 
-Local Interpretable Model-Agnostic Explanations is a **model-agnostic** method, which means that it is not restricted to a certain model type, and it is a **local** method, which means that it only provides explanations for individual samples. LIME was introduced in 2016 by `Rubiero et. al.<https://doi.org/10.1145/2939672.2939778>`_
+Local Interpretable Model-Agnostic Explanations is a **model-agnostic** method, which means that it is not restricted to a certain model type, and it is a **local** method, which means that it only provides explanations for individual samples. LIME was introduced in 2016 by `Rubiero et. al. <https://doi.org/10.1145/2939672.2939778>`_
 
 For a short video introduction to LIME, click below:
 
