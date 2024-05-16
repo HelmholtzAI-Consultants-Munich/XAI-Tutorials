@@ -52,7 +52,7 @@ Here, $\hat{y}_i$ is the outcome predicted by the surrogate model for the $i$-th
 References
 -----------
 
-- Ribeiro, M. T., Singh, S., & Guestrin, C. `"Why should i trust you?" Explaining the predictions of any classifier. <https://doi.org/10.1145/2939672.2939778>`_ ACM. 2016.
-- Garreau, D., & Mardaoui, D. `What does LIME really see in images? <http://proceedings.mlr.press/v139/garreau21a.html>`_ PMLR. 2021
-- Vedaldi, A., & Soatto, S. `Quick shift and kernel methods for mode seeking. <https://doi.org/10.1007/978-3-540-88693-8_52>`_ ECCV. 2008.
-- Molnar, C. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
+- Original LIME paper: Ribeiro, M. T., Singh, S., & Guestrin, C. `"Why should i trust you?" Explaining the predictions of any classifier. <https://doi.org/10.1145/2939672.2939778>`_ ACM. 2016.
+- LIME for images: Garreau, D., & Mardaoui, D. `What does LIME really see in images? <http://proceedings.mlr.press/v139/garreau21a.html>`_ PMLR. 2021
+- Quickshift segmentation algorithm: Vedaldi, A., & Soatto, S. `Quick shift and kernel methods for mode seeking. <https://doi.org/10.1007/978-3-540-88693-8_52>`_ ECCV. 2008.
+- XAI Book: Molnar, C. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
