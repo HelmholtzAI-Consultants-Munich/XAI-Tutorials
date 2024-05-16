@@ -3,7 +3,7 @@ Introduction to SHapley Additive exPlanations (SHAP)
 
 SHapley Additive exPlanationsis a **model-agnostic** method, which means that it is not restricted to a certain model type, 
 and it is a **local** method which means that it only provides explanations for individual samples. 
-However, the individual explanations can be used to also get **global** interpretations. SHAP was introduced in 2017 by `Lundberg et al.<https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html>`_
+However, the individual explanations can be used to also get **global** interpretations. SHAP was introduced in 2017 by `Lundberg et al. <https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html>`_
 
 For a short video introduction to SHAP, click below:
 
