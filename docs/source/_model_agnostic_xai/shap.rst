@@ -21,7 +21,7 @@ SHAP provides KernelSHAP, an alternative, kernel-based estimation approach for S
 References
 -----------
 
-- Original SHAP paper: Lundberg, S. M., & Lee, S. I. `A unified approach to interpreting model predictions.<https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html>`_ NeurIPS. 2017
+- Original SHAP paper: Lundberg, S. M., & Lee, S. I. `A unified approach to interpreting model predictions. <https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html>`_ NeurIPS. 2017
 - Intro to TreeExplainer: Lundberg, S. M., Erion, G., Chen, H., DeGrave, A., Prutkin, J. M., Nair, B., ... & Lee, S. I. `From local explanations to global understanding with explainable AI for trees. <https://doi.org/10.1038/s42256-019-0138-9>`_ Nature machine intelligence. 2020.
 - Intro to TreeExplainer accelerated with GPUs: Mitchell, R., Frank, E., & Holmes, G. `GPUTreeShap: massively parallel exact calculation of SHAP scores for tree ensembles. <https://doi.org/10.48550/arXiv.2010.13972>`_ arxiv. 2022
 - Visualizing the Impact of Feature Attribution Baselines: `blog post <https://distill.pub/2020/attribution-baselines/>`_
