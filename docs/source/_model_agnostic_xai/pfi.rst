@@ -29,6 +29,6 @@ On the other hand, if the performance of the data with the permuted feature is m
 References
 -----------
 
-- Permutation Feature Importance for Random Forests: Breiman, L. `Random forests. <https://link.springer.com/article/10.1023/a:1010933404324>`_ Machine learning. 2001.
-- Model Agnostic Permutation Feature Importance: Fisher, A., Rudin, C., & Dominici, F. `All models are wrong, but many are useful: Learning a variable's importance by studying an entire class of prediction models simultaneously. <https://www.jmlr.org/papers/v20/18-760.html>`_ Journal of Machine Learning Research. 2018.
-- XAI Book: Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
+- **Permutation Feature Importance for Random Forests:** Breiman, L. `Random forests. <https://link.springer.com/article/10.1023/a:1010933404324>`_ Machine learning. 2001.
+- **Model Agnostic Permutation Feature Importance:** Fisher, A., Rudin, C., & Dominici, F. `All models are wrong, but many are useful: Learning a variable's importance by studying an entire class of prediction models simultaneously. <https://www.jmlr.org/papers/v20/18-760.html>`_ Journal of Machine Learning Research. 2018.
+- **XAI Book:** Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
