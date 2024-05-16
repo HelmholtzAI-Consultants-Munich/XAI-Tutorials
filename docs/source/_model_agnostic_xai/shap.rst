@@ -24,7 +24,7 @@ References
 - Original SHAP paper: Lundberg, S. M., & Lee, S. I. `A unified approach to interpreting model predictions. <https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html>`_ NeurIPS. 2017
 - Intro to TreeExplainer: Lundberg, S. M., Erion, G., Chen, H., DeGrave, A., Prutkin, J. M., Nair, B., ... & Lee, S. I. `From local explanations to global understanding with explainable AI for trees. <https://doi.org/10.1038/s42256-019-0138-9>`_ Nature machine intelligence. 2020.
 - Intro to TreeExplainer accelerated with GPUs: Mitchell, R., Frank, E., & Holmes, G. `GPUTreeShap: massively parallel exact calculation of SHAP scores for tree ensembles. <https://doi.org/10.48550/arXiv.2010.13972>`_ arxiv. 2022
-- Visualizing the Impact of Feature Attribution Baselines: `blog post <https://distill.pub/2020/attribution-baselines/>`_
 - Intro to Integrated Gradients: Sundararajan, M., Taly, A., & Yan, Q. `Axiomatic attribution for deep networks. <https://doi.org/10.48550/arXiv.1703.01365>`_ PMLR. 2017.
+- Visualizing the Impact of Feature Attribution Baselines: `blog post <https://distill.pub/2020/attribution-baselines/>`_
 - XAI Book with focus on SHAP: Molnar, C. `Interpreting Machine Learning Models With SHAP. <https://leanpub.com/shap>`_ 2022
 - XAI Book: Molnar, C. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
