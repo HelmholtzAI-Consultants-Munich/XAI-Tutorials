@@ -22,4 +22,5 @@ References
 -----------
 
 - Lundberg, S. M., & Lee, S. I. `A unified approach to interpreting model predictions.<https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html>`_ NeurIPS. 2017
-- Molnar, Christoph. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
+- Molnar, C. `Interpreting Machine Learning Models With SHAP. <https://leanpub.com/shap>`_ 2022
+- Molnar, C. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
