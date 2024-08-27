@@ -88,4 +88,13 @@ The outputs of all attention heads are concatenated and then linearly transforme
 
 References
 ------------
-Vaswani. `Attention is all you need. <https://doi.org/10.48550/arXiv.1706.03762>`_ Advances in neural information processing systems. 2017.
+- **Original Attention paper:** Vaswani. `Attention is all you need. <https://doi.org/10.48550/arXiv.1706.03762>`_ Advances in neural information processing systems. 2017.
+- **Blogpost on Attention Machanism:** 
+  - `Visualizing A Neural Machine Translation Model (Mechanics of Seq2seq Models With Attention) <https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/>`_
+  - `Understanding and Coding the Self-Attention Mechanism of Large Language Models From Scratch <https://sebastianraschka.com/blog/2023/self-attention-from-scratch.html>`_
+- **Blogpost on Transformers:** 
+  - `The Illustrated Transformer <http://jalammar.github.io/illustrated-transformer/>`_
+  - `Transformer Explainer <https://poloclub.github.io/transformer-explainer/>`_
+- **Tutorials on Building a Transformer with PyTorch:** 
+  - `Building a Transformer with PyTorch <https://www.datacamp.com/tutorial/building-a-transformer-with-py-torch>`_
+  - `The Annotated Transformer <http://nlp.seas.harvard.edu/annotated-transformer/>`_
