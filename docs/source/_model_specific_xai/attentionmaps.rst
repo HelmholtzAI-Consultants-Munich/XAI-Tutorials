@@ -22,7 +22,7 @@ Attention Maps for text
 -------------------------
 
 Text is represented as sequential and discrete data. Each token (word, subword, or character) in the sequence is represented by an embedding, and attention mechanisms focus on the relationships between these tokens.
-Attention maps for Sequence Transformers are usually generated through a self-attention mechanism. The map is a matrix, typically of size $sequence length \times sequence length$, where each element represents the attention weight between two tokens in the sequence. 
+Attention maps for Sequence Transformers are usually generated through a self-attention mechanism. The map is a matrix, typically of size :math:`\text{sequence length} \times \text{sequence length}`, where each element represents the attention weight between two tokens in the sequence. 
 These attention weight indicate how much one token attends to another when making predictions.
 
 The attention weight are calculated within a single sequence to model the interactions between different elements of that sequence. The process involves queries, keys, and values, all of which are derived from the same input data. 
@@ -32,20 +32,14 @@ Here's a step-by-step explanation of how these attention weight are calculated:
 
 2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score $ \text{score}(i, j)$ represents the influence of the $ j$-th element on the $ i$-th element. The formula is:
 
-$
-    \text{score}(Q_i, K_j) = Q_i \cdot K_j^T 
-$
+:math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
 
 3. **Scaling**: The scores are often scaled down by the square root of the dimension of the key vectors ($ \sqrt{d_k}$). This is done to stabilize the gradients during training. So, the scaled score is:
 
-$
-    \text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}} 
-$
+:math:`\text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}}`
 
 4. **Softmax Normalization**: Apply the softmax function to the scaled scores for each query. This step converts the scores to a probability distribution (the attention weights), ensuring that they are all positive and sum up to 1:
 
-$
-    \alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))} 
-$
+:math:`\alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))}`
 
-Here, $ \alpha_{ij}$ represents the attention attention weight from the $ i$-th query to the $ j$-th key.
+Here, :math:`\alpha_{ij}` represents the attention attention weight from the :math:`i`-th query to the :math:`j`-th key.
