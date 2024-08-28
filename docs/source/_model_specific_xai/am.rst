@@ -43,3 +43,20 @@ Here's a step-by-step explanation of how these attention weight are calculated:
 :math:`\alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))}`
 
 Here, :math:`\alpha_{ij}` represents the attention attention weight from the :math:`i`-th query to the :math:`j`-th key.
+
+An alternative approach is to generate attention maps through the cross-attention mechanism. 
+In cross-attention the attention is computed between two different sequences, allowing the model to focus on how elements in one sequence relate to elements in another, e.g. aligning words in one language with words in another language.
+
+Here's how cross-attention weights are typically generated:
+
+1. **Preparation of Queries, Keys, and Values**: In cross-attention, the queries (:math:`Q`) are derived from one sequence, such as the current state of the decoder in a machine translation model. The keys (:math:`K`) and values (:math:`V`) are derived from another sequence, like the encoder's output. These vectors are obtained through learned linear transformations from their respective input data.
+
+2. **Score Calculation**: The model calculates scores between each query and all keys. These scores represent the relevance of each element in the key sequence to the respective query. The calculation commonly uses the dot product: :math:`\text{Score}(Q, K) = QK^T`. This dot product measures the compatibility between queries and keys.
+
+3. **Scaling**: The scores are scaled by the square root of the dimension of the keys (:math:`\sqrt{d_k}`). This scaling is performed to stabilize the gradients during training. The scaled score becomes: :math:`\text{Scaled Score} = \frac{QK^T}{\sqrt{d_k}}`.
+
+4. **Softmax Normalization**: The softmax function is applied to these scaled scores across the keys for each query. This normalization process transforms the scores into a set of attention weights: :math:`A = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)`. These attention weights determine the extent to which each element in the key sequence is considered when constructing the output for each query.
+
+The attention weights matrix :math:`A` obtained from these steps is used to create cross-attention maps. 
+Each matrix element, :math:`A_{ij}`, represents the attention weight from the :math:`i`-th element of the query sequence to the :math:`j`-th element of the key sequence. 
+These maps visually demonstrate how the model attends to different parts of one sequence (represented by keys) in relation to each part of another sequence (represented by queries), thus providing insight into the model's learning and decision-making process.
