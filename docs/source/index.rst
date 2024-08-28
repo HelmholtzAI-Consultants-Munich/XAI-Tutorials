@@ -42,6 +42,7 @@ In addition, we provide useful background information on those methods in this d
 
    _model_specific_xai/fgc.rst
    _model_specific_xai/Grad-CAM.rst
+   _model_specific_xai/am.rst
 
 
 .. toctree::
