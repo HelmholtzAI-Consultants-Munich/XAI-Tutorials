@@ -22,8 +22,11 @@ Attention Maps for text
 -------------------------
 
 Text is represented as sequential and discrete data. Each token (word, subword, or character) in the sequence is represented by an embedding, and attention mechanisms focus on the relationships between these tokens.
-Attention maps for Sequence Transformers are usually generated through a self-attention mechanism. The map is a matrix, typically of size :math:`\text{sequence length} \times \text{sequence length}`, where each element represents the attention weight between two tokens in the sequence. 
-These attention weight indicate how much one token attends to another when making predictions.
+Attention maps for Sequence Transformers are usually generated through a self-attention or cross-attention mechanism. The map is a matrix, typically of size :math:`\text{sequence length} \times \text{sequence length}`, 
+where each element represents the attention weight between two tokens in the one sequence ot in relation to another sequence. 
+
+Attention Maps from Self-Attention
+===================================
 
 The attention weight are calculated within a single sequence to model the interactions between different elements of that sequence. The process involves queries, keys, and values, all of which are derived from the same input data. 
 Here's a step-by-step explanation of how these attention weight are calculated:
@@ -43,6 +46,9 @@ Here's a step-by-step explanation of how these attention weight are calculated:
     :math:`\alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))}`
 
 Here, :math:`\alpha_{ij}` represents the attention attention weight from the :math:`i`-th query to the :math:`j`-th key.
+
+Attention Maps from Cross-Attention
+===================================
 
 An alternative approach is to generate attention maps through the cross-attention mechanism. 
 In cross-attention the attention is computed between two different sequences, allowing the model to focus on how elements in one sequence relate to elements in another, e.g. aligning words in one language with words in another language.
