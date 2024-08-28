@@ -67,10 +67,27 @@ The attention weights matrix :math:`A` obtained from these steps is used to crea
 Each matrix element, :math:`A_{ij}`, represents the attention weight from the :math:`i`-th element of the query sequence to the :math:`j`-th element of the key sequence. 
 These maps visually demonstrate how the model attends to different parts of one sequence (represented by keys) in relation to each part of another sequence (represented by queries), thus providing insight into the model's learning and decision-making process.
 
-Attention Maps for text
+Attention Maps for images
 --------------------------
+Images are represented as spatial and continuous data, typically as a grid of pixels with multiple channels (e.g., RGB for color images).
+Attention mechanisms in images focus on regions within the grid that contribute to the task, such as object detection or classification.
+
+Attention maps in images can be generated in several ways, e.g through self-attention in Vision Transformers (ViTs).
+In ViTs, the attention map is applied to patches of the image rather than individual pixels, representing how much one image patch attends to another.
+
+We can generate our attention maps using `DINO's code <https://github.com/facebookresearch/dino>`_ . 
+
+1. **Image Preprocessing**: We first ensure that the image's width and height are divisible by the patch size, trimming the image if necessary. This ensures that when we divide the image into patches, each patch is of a consistent size, with no leftover pixels.
+
+2. **Feature Map Dimensions Calculation**: Once the image is resized, we compute the width and height of the feature map by dividing the image's dimensions by the patch size. This results in a grid of patches that the ViT will process.
+
+3. **Attention Weights Retrieval**: We then retrieve the attention weights from the model for the given image, which is first sent to the specified device. These weights are part of the model's output and indicate the importance the model assigns to each patch when making a prediction.
+
+4. **Attention Weights Reshaping for Visualization**: The attention tensor is typical of [batch_size, num_heads, num_patches, num_patches], where each entry indicates attention from one patch to another. We focus on how the class token is attending to the various patches of the image, which can be insightful for understanding what parts of the image the model finds most relevant for its task. 
+
+5. **Upscaling Attention Maps**: Finally, the attention weights are upscaled to match the original image dimensions for a more intuitive visualization. This is achieved using nearest-neighbor interpolation, which avoids smoothing and preserves the original attention patterns. The upscaled attention maps are then converted from tensors to numpy arrays, preparing them for display alongside the original image to see where the model focuses its attention.
 
 References
 ------------
 - **ViT paper:** Kolesnikov, A., Dosovitskiy, A., Weissenborn, D., `An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. <https://openreview.net/forum?id=YicbFdNTTy>`_ ICLR. 2021
-- **Attention Maps for Images:** Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., & Joulin, A. `Emerging properties in self-supervised vision transformers. <https://openaccess.thecvf.com/content/ICCV2021/html/Caron_Emerging_Properties_in_Self-Supervised_Vision_Transformers_ICCV_2021_paper>`_ ICCV. 2021
+- **DINO paper:** Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., & Joulin, A. `Emerging properties in self-supervised vision transformers. <https://openaccess.thecvf.com/content/ICCV2021/html/Caron_Emerging_Properties_in_Self-Supervised_Vision_Transformers_ICCV_2021_paper>`_ ICCV. 2021
