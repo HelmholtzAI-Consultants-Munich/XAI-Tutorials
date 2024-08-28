@@ -26,7 +26,7 @@ Attention maps for Sequence Transformers are usually generated through a self-at
 where each element represents the attention weight between two tokens in the one sequence ot in relation to another sequence. 
 
 Attention Maps from Self-Attention
-===================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The attention weight are calculated within a single sequence to model the interactions between different elements of that sequence. The process involves queries, keys, and values, all of which are derived from the same input data. 
 Here's a step-by-step explanation of how these attention weight are calculated:
@@ -48,7 +48,7 @@ Here's a step-by-step explanation of how these attention weight are calculated:
 Here, :math:`\alpha_{ij}` represents the attention attention weight from the :math:`i`-th query to the :math:`j`-th key.
 
 Attention Maps from Cross-Attention
-===================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An alternative approach is to generate attention maps through the cross-attention mechanism. 
 In cross-attention the attention is computed between two different sequences, allowing the model to focus on how elements in one sequence relate to elements in another, e.g. aligning words in one language with words in another language.
@@ -67,6 +67,8 @@ The attention weights matrix :math:`A` obtained from these steps is used to crea
 Each matrix element, :math:`A_{ij}`, represents the attention weight from the :math:`i`-th element of the query sequence to the :math:`j`-th element of the key sequence. 
 These maps visually demonstrate how the model attends to different parts of one sequence (represented by keys) in relation to each part of another sequence (represented by queries), thus providing insight into the model's learning and decision-making process.
 
+Attention Maps for text
+--------------------------
 
 References
 ------------
