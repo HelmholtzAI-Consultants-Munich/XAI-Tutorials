@@ -32,15 +32,15 @@ Here's a step-by-step explanation of how these attention weight are calculated:
 
 2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score $ \text{score}(i, j)$ represents the influence of the $ j$-th element on the $ i$-th element. The formula is:
 
-:math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
+    :math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
 
 3. **Scaling**: The scores are often scaled down by the square root of the dimension of the key vectors ($ \sqrt{d_k}$). This is done to stabilize the gradients during training. So, the scaled score is:
 
-:math:`\text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}}`
+    :math:`\text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}}`
 
 4. **Softmax Normalization**: Apply the softmax function to the scaled scores for each query. This step converts the scores to a probability distribution (the attention weights), ensuring that they are all positive and sum up to 1:
 
-:math:`\alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))}`
+    :math:`\alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))}`
 
 Here, :math:`\alpha_{ij}` represents the attention attention weight from the :math:`i`-th query to the :math:`j`-th key.
 
