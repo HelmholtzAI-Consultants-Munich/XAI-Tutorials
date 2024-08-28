@@ -69,17 +69,7 @@ Attention mechanisms in images focus on regions within the grid that contribute 
 Attention maps in images can be generated in several ways, e.g through self-attention in Vision Transformers (ViTs).
 In ViTs, the attention map is applied to patches of the image rather than individual pixels, representing how much one image patch attends to another.
 
-We can generate our attention maps using `DINO's code <https://github.com/facebookresearch/dino>`_ . 
-
-1. **Image Preprocessing**: We first ensure that the image's width and height are divisible by the patch size, trimming the image if necessary. This ensures that when we divide the image into patches, each patch is of a consistent size, with no leftover pixels.
-
-2. **Feature Map Dimensions Calculation**: Once the image is resized, we compute the width and height of the feature map by dividing the image's dimensions by the patch size. This results in a grid of patches that the ViT will process.
-
-3. **Attention Weights Retrieval**: We then retrieve the attention weights from the model for the given image, which is first sent to the specified device. These weights are part of the model's output and indicate the importance the model assigns to each patch when making a prediction.
-
-4. **Attention Weights Reshaping for Visualization**: The attention tensor is typical of [batch_size, num_heads, num_patches, num_patches], where each entry indicates attention from one patch to another. We focus on how the class token is attending to the various patches of the image, which can be insightful for understanding what parts of the image the model finds most relevant for its task. 
-
-5. **Upscaling Attention Maps**: Finally, the attention weights are upscaled to match the original image dimensions for a more intuitive visualization. This is achieved using nearest-neighbor interpolation, which avoids smoothing and preserves the original attention patterns. The upscaled attention maps are then converted from tensors to numpy arrays, preparing them for display alongside the original image to see where the model focuses its attention.
+.. figure:: ../_figures/am.png
 
 References
 ------------
