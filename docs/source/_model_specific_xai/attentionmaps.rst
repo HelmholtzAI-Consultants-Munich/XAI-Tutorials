@@ -1,0 +1,51 @@
+Introduction to Attention Maps
+=========================================
+
+An **attention map** is a visualization or representation that highlights how much importance or "attention" a model gives to different parts of its input data when making predictions. 
+These maps are visual aids that highlight the importance or relevance of different parts of the input data, such as text tokens or image patches.
+
+An attention map is a matrix or grid where each element represents the attention score, which are calculated as the dot product of queries and keys within the model. 
+These scores define the scope of the attention mechanism and typically range between 0 and 1, indicating how much influence or relevance one part of the input has when processing another part or when making a prediction.
+The idea is to allow the model to selectively focus on different parts of the input, rather than treating all parts equally, thereby improving the model's performance on tasks where some parts of the input are more important than others.
+
+Attention maps can be visualized as heatmaps where different regions are colored to represent the varying levels of attention (or importance) assigned by the model. 
+Areas with higher attention scores are typically shown in brighter or warmer colors, while areas with lower attention scores are shown in darker or cooler colors.
+In this way, attention maps provide an interpretable layer that reveals which parts of the input data are being given more weight by the model during prediction.
+
+Attention maps are used for explainability in Natural Language Processing as well as Computer Vision. 
+For text-related tasks, attention maps show how much focus is placed on each word or token in a sentence relative to others. This helps in understanding relationships between words and interpreting the model's decisions.
+In image-related tasks, attention maps can highlight which parts of an image the model is focusing on. For example, in image classification, an attention map might show which regions of an image are most relevant for classifying an object.
+
+Attention maps for text and images serve similar purposes but differ in how they are generated and interpreted due to the inherent differences between these two types of data.
+
+Attention Maps for text
+-------------------------
+
+Text is represented as sequential and discrete data. Each token (word, subword, or character) in the sequence is represented by an embedding, and attention mechanisms focus on the relationships between these tokens.
+Attention maps for Sequence Transformers are usually generated through a self-attention mechanism. The map is a matrix, typically of size $sequence length \times sequence length$, where each element represents the attention weight between two tokens in the sequence. 
+These attention weight indicate how much one token attends to another when making predictions.
+
+The attention weight are calculated within a single sequence to model the interactions between different elements of that sequence. The process involves queries, keys, and values, all of which are derived from the same input data. 
+Here's a step-by-step explanation of how these attention weight are calculated:
+
+1. **Linear Transformations**: Each element (like a word in a sentence) of the input sequence is transformed into three vectors: a query vector ($ Q$), a key vector ($ K$), and a value vector ($ V$). These transformations are usually done using different learned linear layers (or affine transformations).
+
+2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score $ \text{score}(i, j)$ represents the influence of the $ j$-th element on the $ i$-th element. The formula is:
+
+$
+    \text{score}(Q_i, K_j) = Q_i \cdot K_j^T 
+$
+
+3. **Scaling**: The scores are often scaled down by the square root of the dimension of the key vectors ($ \sqrt{d_k}$). This is done to stabilize the gradients during training. So, the scaled score is:
+
+$
+    \text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}} 
+$
+
+4. **Softmax Normalization**: Apply the softmax function to the scaled scores for each query. This step converts the scores to a probability distribution (the attention weights), ensuring that they are all positive and sum up to 1:
+
+$
+    \alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))} 
+$
+
+Here, $ \alpha_{ij}$ represents the attention attention weight from the $ i$-th query to the $ j$-th key.
