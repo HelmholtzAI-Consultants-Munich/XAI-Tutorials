@@ -66,3 +66,9 @@ Here's how cross-attention weights are typically generated:
 The attention weights matrix :math:`A` obtained from these steps is used to create cross-attention maps. 
 Each matrix element, :math:`A_{ij}`, represents the attention weight from the :math:`i`-th element of the query sequence to the :math:`j`-th element of the key sequence. 
 These maps visually demonstrate how the model attends to different parts of one sequence (represented by keys) in relation to each part of another sequence (represented by queries), thus providing insight into the model's learning and decision-making process.
+
+
+References
+------------
+- **ViT paper:** Kolesnikov, A., Dosovitskiy, A., Weissenborn, D., `An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. <https://openreview.net/forum?id=YicbFdNTTy>`_ ICLR. 2021
+- **Attention Maps for Images:** Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., & Joulin, A. `Emerging properties in self-supervised vision transformers. <https://openaccess.thecvf.com/content/ICCV2021/html/Caron_Emerging_Properties_in_Self-Supervised_Vision_Transformers_ICCV_2021_paper>`_ ICCV. 2021
