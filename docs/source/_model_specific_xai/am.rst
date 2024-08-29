@@ -29,7 +29,7 @@ The map is a matrix, where each element represents the attention weight between 
 Attention Maps from Self-Attention
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The attention weights are calculated within a single sequence to model the interactions between different elements of that sequence. 
+The attention weights can be calculated within a single sequence to model the interactions between different elements of that sequence. 
 The process involves queries, keys, and values, all of which are derived from the same input data. 
 Here's a step-by-step explanation of how these attention weights are calculated:
 
@@ -37,7 +37,7 @@ Here's a step-by-step explanation of how these attention weights are calculated:
 
 2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score :math:`\text{score}(i, j)` represents the influence of the :math:`j`-th element on the :math:`i`-th element. The formula is: :math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
 
-3. **Scaling**: The scores are often scaled down by the square root of the dimension of the key vectors (:math:`\sqrt{d_k}`). This is done to stabilize the gradients during training. So, the scaled score is: :math:`\text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}}`
+3. **Scaling**: The scores are often scaled down by the square root of the dimension of the key vectors (:math:`\sqrt{d_k}`). This is done to stabilize the gradients during training. The scaled score is: :math:`\text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}}`
 
 4. **Softmax Normalization**: Apply the softmax function to the scaled scores for each query. This step converts the scores to a probability distribution (the attention weights), ensuring that they are all positive and sum up to 1: :math:`\alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))}`
 
