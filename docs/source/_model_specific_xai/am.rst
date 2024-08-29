@@ -21,7 +21,7 @@ Attention maps for text and images serve similar purposes but differ in how they
 Attention Maps for text
 -------------------------
 
-Text is represented as sequential and discrete data. Each token (word, subword, or character) in the sequence is represented by an embedding, and attention mechanisms focus on the relationships between these tokens.
+Text is represented as sequential and discrete data and converted into embedded tokens (word, subword, or character). The attention mechanisms focuses on the relationships between these tokens.
 Attention maps for Sequence Transformers are usually generated through a self-attention or cross-attention mechanism. The map is a matrix, typically of size :math:`\text{sequence length} \times \text{sequence length}`, 
 where each element represents the attention weight between two tokens in the one sequence ot in relation to another sequence. 
 
@@ -74,5 +74,5 @@ In ViTs, the attention map is applied to patches of the image rather than indivi
 
 References
 ------------
-- **ViT paper:** Kolesnikov, A., Dosovitskiy, A., Weissenborn, D., `An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. <https://openreview.net/forum?id=YicbFdNTTy>`_ ICLR. 2021
+- **Original ViT paper:** Kolesnikov, A., Dosovitskiy, A., Weissenborn, D., `An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. <https://openreview.net/forum?id=YicbFdNTTy>`_ ICLR. 2021
 - **DINO paper:** Caron, M., Touvron, H., Misra, I., Jégou, H., Mairal, J., Bojanowski, P., & Joulin, A. `Emerging properties in self-supervised vision transformers. <https://openaccess.thecvf.com/content/ICCV2021/html/Caron_Emerging_Properties_in_Self-Supervised_Vision_Transformers_ICCV_2021_paper>`_ ICCV. 2021

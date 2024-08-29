@@ -85,6 +85,18 @@ The outputs of all attention heads are concatenated and then linearly transforme
 .. figure:: ../_figures/qkv4.png
 
 
+Vision Transformers
+----------------------
+
+The Vision Transformer (ViT) adapts the principles of the Transformer architecture, originally designed for natural language processing tasks, to image data. 
+Unlike traditional convolutional neural networks (CNNs) that use convolutional layers to process image pixels, a Vision Transformer splits an image into fixed-size patches, 
+treats each patch as a "token" similar to a word in a sentence, and then processes these patches using the self-attention mechanisms.
+ViT utilizes only the encoder part of the traditional transformer architecture. 
+Unlike the original transformer model, which was designed for sequence-to-sequence tasks like machine translation and thus included both an encoder and a decoder, 
+ViT is adapted for classification tasks and therefore does not require a decoder.
+
+
+.. figure:: ../_figures/vit.png
 
 References
 ------------
@@ -98,3 +110,4 @@ References
 - **Tutorials on Building a Transformer with PyTorch:** 
    - `Building a Transformer with PyTorch <https://www.datacamp.com/tutorial/building-a-transformer-with-py-torch>`_
    - `The Annotated Transformer <http://nlp.seas.harvard.edu/annotated-transformer/>`_
+- **Original ViT paper:** Kolesnikov, A., Dosovitskiy, A., Weissenborn, D., `An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. <https://openreview.net/forum?id=YicbFdNTTy>`_ ICLR. 2021
