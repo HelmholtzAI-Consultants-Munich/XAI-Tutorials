@@ -33,7 +33,7 @@ Here's a step-by-step explanation of how these attention weight are calculated:
 
 1. **Linear Transformations**: Each element (like a word in a sentence) of the input sequence is transformed into three vectors: a query vector ($ Q$), a key vector ($ K$), and a value vector ($ V$). These transformations are usually done using different learned linear layers (or affine transformations).
 
-2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score $ \text{score}(i, j)$ represents the influence of the $ j$-th element on the $ i$-th element. The formula is: :math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
+2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score :math:`\text{score}(i, j)` represents the influence of the $ j$-th element on the $ i$-th element. The formula is: :math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
 
 3. **Scaling**: The scores are often scaled down by the square root of the dimension of the key vectors ($ \sqrt{d_k}$). This is done to stabilize the gradients during training. So, the scaled score is: :math:`\text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}}`
 
@@ -70,6 +70,7 @@ Attention maps in images can be generated in several ways, e.g through self-atte
 In ViTs, the attention map is applied to patches of the image rather than individual pixels, representing how much one image patch attends to another.
 
 .. figure:: ../_figures/am.png
+
 
 References
 ------------
