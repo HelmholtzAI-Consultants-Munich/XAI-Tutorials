@@ -98,6 +98,30 @@ ViT is adapted for classification tasks and therefore does not require a decoder
 
 .. figure:: ../_figures/vit.png
 
+
+**Image as a Sequence:**
+
+Patch Embedding:
+
+    The image is divided into small, non-overlapping patches, typically of size 16×1616×16 pixels.
+    Each patch is flattened into a vector, and then a linear projection is applied to embed these patches into a high-dimensional space.
+
+Position Embedding:
+
+    Since Transformers do not inherently capture positional information (unlike CNNs, which process spatial data directly), positional embeddings are added to the patch embeddings to maintain the spatial structure of the image.
+
+Self-Attention Mechanism:
+
+    The patches are processed using the self-attention mechanism, which allows the model to capture global dependencies between different parts of the image, enabling it to focus on important features regardless of their spatial location.
+
+Transformer Encoder:
+
+    The Vision Transformer typically uses a stack of Transformer encoder layers (without the decoder) to process the patch embeddings and generate contextualized representations of the image.
+
+Classification Head:
+
+    After processing the patches, a classification token (similar to the [CLS] token in BERT) is used, and the final representation of this token is passed through a classification head to make predictions, such as object classification.
+
 References
 ------------
 - **Original Attention paper:** Vaswani. `Attention is all you need. <https://doi.org/10.48550/arXiv.1706.03762>`_ Advances in neural information processing systems. 2017.
