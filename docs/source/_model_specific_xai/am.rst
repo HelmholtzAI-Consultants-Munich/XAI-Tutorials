@@ -33,11 +33,11 @@ The attention weights are calculated within a single sequence to model the inter
 The process involves queries, keys, and values, all of which are derived from the same input data. 
 Here's a step-by-step explanation of how these attention weights are calculated:
 
-1. **Linear Transformations**: Each element (like a word in a sentence) of the input sequence is transformed into three vectors: a query vector (:math:`Q`), a key vector (:math:`K`), and a value vector (:math:`V`). These transformations are usually done using different learned linear layers (or affine transformations).
+1. **Linear Transformations**: Each element (like a word in a sentence) of the input sequence is transformed into three vectors: a query (:math:`Q`), key (:math:`K`), and value (:math:`V`) vector. These transformations are usually done using different learned linear layers (or affine transformations).
 
-2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score :math:`\text{score}(i, j)` represents the influence of the $ j$-th element on the $ i$-th element. The formula is: :math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
+2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score :math:`\text{score}(i, j)` represents the influence of the :math:`j`-th element on the :math:`i`-th element. The formula is: :math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
 
-3. **Scaling**: The scores are often scaled down by the square root of the dimension of the key vectors ($ \sqrt{d_k}$). This is done to stabilize the gradients during training. So, the scaled score is: :math:`\text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}}`
+3. **Scaling**: The scores are often scaled down by the square root of the dimension of the key vectors (:math:`\sqrt{d_k}`). This is done to stabilize the gradients during training. So, the scaled score is: :math:`\text{scaled score}(Q_i, K_j) = \frac{Q_i \cdot K_j^T}{\sqrt{d_k}}`
 
 4. **Softmax Normalization**: Apply the softmax function to the scaled scores for each query. This step converts the scores to a probability distribution (the attention weights), ensuring that they are all positive and sum up to 1: :math:`\alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))}`
 
