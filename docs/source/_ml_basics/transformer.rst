@@ -99,28 +99,31 @@ ViT is adapted for classification tasks and therefore does not require a decoder
 .. figure:: ../_figures/vit.png
 
 
-**Image as a Sequence:**
+**Representation of an Image as a Sequence:**
 
-Patch Embedding:
+To transform the image into a sequence, the image is first *Patch Embedded* by dividing it into small, non-overlapping patches, typically of size 16×1616×16 pixels.
+Each patch is flattened into a vector, and then a linear projection is applied to embed these patches into a high-dimensional space.
+In a second step the *Position Embedding* is added to the Patch Embedding. 
+Since Transformers do not inherently capture positional information (unlike CNNs, which process spatial data directly), 
+positional embeddings are added to the patch embeddings to maintain the spatial structure of the image.
 
-    The image is divided into small, non-overlapping patches, typically of size 16×1616×16 pixels.
-    Each patch is flattened into a vector, and then a linear projection is applied to embed these patches into a high-dimensional space.
+**Transformer Encoder:**
 
-Position Embedding:
+The Vit typically uses a stack of Transformer encoder layers (without the decoder) to process the patch embeddings and generate contextualized representations of the image.
+It lacks a decoder because it is primarily designed for tasks where the goal is to produce a single output or a classification based on the input image, rather than generating a sequence or reconstructing the input.
+The encoder part of the ViT, like the traditional transformers consists of the following key components:
 
-    Since Transformers do not inherently capture positional information (unlike CNNs, which process spatial data directly), positional embeddings are added to the patch embeddings to maintain the spatial structure of the image.
+- Multi-Head Self-Attention (MHA): Enables the model to focus on different parts of the image, capturing both local and global information.
+- Feed-Forward Neural Network (FFN): Processes each patch embedding independently to learn complex representations.
+- Residual Connections and Layer Normalization: Each MHA and FFN sub-layer is followed by residual connections and layer normalization for stable training and effective gradient flow.
 
-Self-Attention Mechanism:
 
-    The patches are processed using the self-attention mechanism, which allows the model to capture global dependencies between different parts of the image, enabling it to focus on important features regardless of their spatial location.
+**Classification Head:**
 
-Transformer Encoder:
-
-    The Vision Transformer typically uses a stack of Transformer encoder layers (without the decoder) to process the patch embeddings and generate contextualized representations of the image.
-
-Classification Head:
-
-    After processing the patches, a classification token (similar to the [CLS] token in BERT) is used, and the final representation of this token is passed through a classification head to make predictions, such as object classification.
+After processing the patches, a classification token (similar to the [CLS] token in BERT) is prepended to the sequence of embedded image patches.
+This token is initialized randomly and is trained along with the rest of the model. The role of the [CLS] token is to represent the entire imagethrough which the ViT
+learns to capture the global context of the image during training, which is crucial for classification tasks.
+The final representation of this token is passed through a classification head to make predictions, such as object classification.
 
 References
 ------------
@@ -134,4 +137,4 @@ References
 - **Tutorials on Building a Transformer with PyTorch:** 
    - `Building a Transformer with PyTorch <https://www.datacamp.com/tutorial/building-a-transformer-with-py-torch>`_
    - `The Annotated Transformer <http://nlp.seas.harvard.edu/annotated-transformer/>`_
-- **Original ViT paper:** Kolesnikov, A., Dosovitskiy, A., Weissenborn, D., `An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. <https://openreview.net/forum?id=YicbFdNTTy>`_ ICLR. 2021
+- **Original ViT paper:** Kolesnikov, A., Dosovitskiy, A., Weissenborn, D. `An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. <https://openreview.net/forum?id=YicbFdNTTy>`_ ICLR. 2021
