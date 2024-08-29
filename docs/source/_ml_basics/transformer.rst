@@ -113,9 +113,9 @@ The Vit typically uses a stack of Transformer encoder layers (without the decode
 It lacks a decoder because it is primarily designed for tasks where the goal is to produce a single output or a classification based on the input image, rather than generating a sequence or reconstructing the input.
 The encoder part of the ViT, like the traditional transformers consists of the following key components:
 
-- Multi-Head Self-Attention (MHA): Enables the model to focus on different parts of the image, capturing both local and global information.
-- Feed-Forward Neural Network (FFN): Processes each patch embedding independently to learn complex representations.
-- Residual Connections and Layer Normalization: Each MHA and FFN sub-layer is followed by residual connections and layer normalization for stable training and effective gradient flow.
+- *Multi-Head Self-Attention*: Enables the model to focus on different parts of the image, capturing both local and global information.
+- *Feed-Forward Neural Network*: Processes each patch embedding independently to learn complex representations.
+- *Residual Connections and Layer Normalization*: Each Multi-Head Self-Attention and Feed-Forward Neural Network sub-layer is followed by residual connections and layer normalization for stable training and effective gradient flow.
 
 
 **Classification Head:**
