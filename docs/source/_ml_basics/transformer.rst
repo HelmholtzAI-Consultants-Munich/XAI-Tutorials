@@ -96,9 +96,6 @@ Unlike the original transformer model, which was designed for sequence-to-sequen
 ViT is adapted for classification tasks and therefore does not require a decoder.
 
 
-.. figure:: ../_figures/vit.png
-
-
 **Representation of an Image as a Sequence:**
 
 To transform the image into a sequence, the image is first *Patch Embedded* by dividing it into small, non-overlapping patches, typically of size 16×1616×16 pixels.
@@ -124,6 +121,8 @@ After processing the patches, a classification token (similar to the [CLS] token
 This token is initialized randomly and is trained along with the rest of the model. The role of the [CLS] token is to represent the entire imagethrough which the ViT
 learns to capture the global context of the image during training, which is crucial for classification tasks.
 The final representation of this token is passed through a classification head to make predictions, such as object classification.
+
+.. figure:: ../_figures/vit.png
 
 References
 ------------
