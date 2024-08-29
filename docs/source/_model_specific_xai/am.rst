@@ -18,20 +18,22 @@ In image-related tasks, attention maps can highlight which parts of an image the
 
 Attention maps for text and images serve similar purposes but differ in how they are generated and interpreted due to the inherent differences between these two types of data.
 
-Attention Maps for text
+Attention Maps for Text
 -------------------------
 
-Text is represented as sequential and discrete data and converted into embedded tokens (word, subword, or character). The attention mechanisms focuses on the relationships between these tokens.
-Attention maps for Sequence Transformers are usually generated through a self-attention or cross-attention mechanism. The map is a matrix, typically of size :math:`\text{sequence length} \times \text{sequence length}`, 
-where each element represents the attention weight between two tokens in the one sequence ot in relation to another sequence. 
+Text is represented as sequential and discrete data and converted into embedded tokens (word, subword, or character). 
+The attention mechanisms focuses on the relationships between these tokens.
+Attention maps for Text Transformers are usually generated through a self-attention or cross-attention mechanism. 
+The map is a matrix, where each element represents the attention weight between two tokens in the one sequence or in relation to another sequence. 
 
 Attention Maps from Self-Attention
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The attention weight are calculated within a single sequence to model the interactions between different elements of that sequence. The process involves queries, keys, and values, all of which are derived from the same input data. 
-Here's a step-by-step explanation of how these attention weight are calculated:
+The attention weights are calculated within a single sequence to model the interactions between different elements of that sequence. 
+The process involves queries, keys, and values, all of which are derived from the same input data. 
+Here's a step-by-step explanation of how these attention weights are calculated:
 
-1. **Linear Transformations**: Each element (like a word in a sentence) of the input sequence is transformed into three vectors: a query vector ($ Q$), a key vector ($ K$), and a value vector ($ V$). These transformations are usually done using different learned linear layers (or affine transformations).
+1. **Linear Transformations**: Each element (like a word in a sentence) of the input sequence is transformed into three vectors: a query vector (:math:`Q`), a key vector (:math:`K`), and a value vector (:math:`V`). These transformations are usually done using different learned linear layers (or affine transformations).
 
 2. **Score Calculation**: For each element of the sequence, scores are calculated by taking the dot product of its query vector with the key vector of every other element in the sequence. The score :math:`\text{score}(i, j)` represents the influence of the $ j$-th element on the $ i$-th element. The formula is: :math:`\text{score}(Q_i, K_j) = Q_i \cdot K_j^T`
 
