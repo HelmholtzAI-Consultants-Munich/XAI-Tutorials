@@ -7,6 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from scipy.cluster import hierarchy
+
 ############################################################
 ##### Utility Functions
 ############################################################
@@ -44,53 +46,62 @@ def plot_distributions(dataset, ncols):
     plt.tight_layout(rect=[0, 0, 1, 0.95])
 
 
-def plot_permutation_feature_importance(result, data, title):
-    perm_sorted_idx = result.importances_mean.argsort()
-    perm_indices = np.arange(0, len(result.importances_mean)) + 0.5
+def plot_permutation_feature_importance(result, data, title, top_n=None, figsize=(7, 5)):
+    # Sort the features by importance mean
+    perm_sorted_idx = result.importances_mean.argsort()[::-1]
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
-    fig.suptitle(title)
-    ax1.barh(
-        perm_indices,
-        result.importances_mean[perm_sorted_idx],
-        height=0.7,
-        color="#3470a3",  # color = 'cornflowerblue'
+    # If top_n is provided, limit the selection to top_n features
+    if top_n:
+        perm_sorted_idx = perm_sorted_idx[:top_n]
+
+    # Prepare the data for Seaborn's boxplot (convert to long format)
+    feature_importances = result.importances[perm_sorted_idx].T
+    df = pd.DataFrame(feature_importances, columns=data.columns[perm_sorted_idx])
+    df_long = df.melt(var_name="Feature", value_name="Importance")
+
+    # Create the figure and plot
+    fig, ax = plt.subplots(figsize=figsize)
+    sns.boxplot(
+        data=df_long, x="Importance", y="Feature", ax=ax, flierprops=dict(marker=".", alpha=0.5, markersize=2)
     )
-    ax1.set_yticks(perm_indices)
-    ax1.set_yticklabels(data.columns[perm_sorted_idx])
-    ax1.set_ylim((0, len(result.importances_mean)))
-    ax2.boxplot(
-        result.importances[perm_sorted_idx].T,
-        vert=False,
-        labels=data.columns[perm_sorted_idx],
-    )
+
+    # Set title and layout
+    ax.set_title(title)
     fig.tight_layout()
     plt.show()
 
 
-def plot_permutation_feature_importance_with_variance(result, data, title, top_n=None, figsize=(10, 4)):
-    perm_sorted_idx = result.importances_mean.argsort()
-    if top_n:
-        perm_sorted_idx[:top_n]
-    perm_indices = np.arange(0, len(result.importances_mean)) + 0.5
+def plot_permutation_feature_importance_train_vs_test(
+    result_train, data_train, result_test, data_test, title, figsize=(10, 4)
+):
+    perm_sorted_idx = result_train.importances_mean.argsort()
+    perm_indices = np.arange(0, len(result_train.importances_mean)) + 0.5
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=figsize)
     fig.suptitle(title)
     ax1.barh(
         perm_indices,
-        result.importances_mean[perm_sorted_idx],
+        result_train.importances_mean[perm_sorted_idx],
         height=0.7,
-        color="cornflowerblue",
+        color="#3470a3",  # color = 'cornflowerblue'
     )
     ax1.set_yticks(perm_indices)
-    ax1.set_yticklabels(data.columns[perm_sorted_idx])
-    ax1.set_ylim((0, len(result.importances_mean)))
-    ax1.axvline(x=0, color=".5")
-    ax2.boxplot(
-        result.importances[perm_sorted_idx].T,
-        vert=False,
-        labels=data.columns[perm_sorted_idx],
+    ax1.set_yticklabels(data_train.columns[perm_sorted_idx])
+    ax1.set_ylim((0, len(result_train.importances_mean)))
+
+    perm_sorted_idx = result_test.importances_mean.argsort()
+    perm_indices = np.arange(0, len(result_test.importances_mean)) + 0.5
+
+    ax2.barh(
+        perm_indices,
+        result_test.importances_mean[perm_sorted_idx],
+        height=0.7,
+        color="#3470a3",  # color = 'cornflowerblue'
     )
+    ax2.set_yticks(perm_indices)
+    ax2.set_yticklabels(data_test.columns[perm_sorted_idx])
+    ax2.set_ylim((0, len(result_test.importances_mean)))
+
     fig.tight_layout()
     plt.show()
 
@@ -132,16 +143,44 @@ def plot_explanation(explanation):
         _ = ax.set_yticklabels(explanation_df["feature"])
 
 
-def plot_correlation_matrix(data):
-    f, ax = plt.subplots(figsize=(5, 5))
+def plot_correlation_matrix(data, figsize=(5, 5), annot=True, labelsize=10):
     corr = data.corr()
     mask = np.triu(np.ones_like(corr, dtype=bool))
     np.fill_diagonal(mask, False)
+
+    f, ax = plt.subplots(figsize=figsize)
+    ax.tick_params(axis="both", which="major", labelsize=labelsize)
     sns.heatmap(
         round(corr, 2),
         mask=mask,
         cmap=sns.diverging_palette(220, 10, as_cmap=True),
         square=True,
         ax=ax,
-        annot=True,
+        annot=annot,
     )
+
+
+def plot_dendrogram(linked, feature_names, figsize=(5, 5), leaf_font_size=10):
+
+    # Create a figure
+    plt.figure(figsize=figsize)
+
+    # Plot the dendrogram
+    dendrogram = hierarchy.dendrogram(
+        linked,
+        orientation="top",  # 'top', 'bottom', 'left', or 'right'
+        distance_sort="descending",  # 'ascending' or 'descending'
+        show_leaf_counts=True,  # Show the number of observations in each cluster
+        leaf_rotation=90,  # Rotation of leaf labels
+        leaf_font_size=leaf_font_size,  # Font size of leaf labels
+        show_contracted=True,  # Show contracted leaves
+        labels=feature_names,
+    )
+
+    # Add title and labels
+    plt.title("Dendrogram")
+    plt.xlabel("Feature")
+    plt.ylabel("Distance")
+
+    # Show the plot
+    plt.show()
