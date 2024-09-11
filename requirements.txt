@@ -1,8 +1,9 @@
 matplotlib==3.5.3
 numpy==1.23.2
-pandas==1.4.4
+pandas
 seaborn
-shap==0.42.1
+scikit-learn==1.1.2
+shap==0.41
 lime==0.2.0.1
 fgclustering
 ipython==8.4.0
@@ -16,3 +17,5 @@ utils==1.0.1
 torch
 torchvision
 opencv-python
+transformers[torch]
+evaluate
