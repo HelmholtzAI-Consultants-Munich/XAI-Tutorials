@@ -1,2 +1,0 @@
-Taxonomy of XAI methods
-========================
