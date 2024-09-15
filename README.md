@@ -1,9 +1,3 @@
-![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
-[![test](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml/badge.svg)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml)
-[![stars](https://img.shields.io/github/stars/HelmholtzAI-Consultants-Munich/XAI-Tutorials?logo=GitHub&color=yellow)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/stargazers)
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials)
-
 # Tutorials for eXplainable Artificial Intelligence (XAI) methods
 
 This repository contains a collection of self-explanatory tutorials for different model-agnostic and model-specific XAI methods.
