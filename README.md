@@ -14,7 +14,7 @@ For the practical sessions we will use a publicly available datasets that comes 
 | 13:30 – 13:40 | Introduction to eXplainable AI (XAI) | 10 min|
 | 13:40 – 14:30 | Interpretation with Model-Agnostic XAI Methods | 50 min|
 | 14:30 – 15:00 | Coffee Break | 30 min|
-| 15:00 – 15:30 | Interpretation with Model-Specific XAI Methods | 30 h| 
+| 15:00 – 15:30 | Interpretation with Model-Specific XAI Methods | 30 min| 
 | 15:30 – 16:15 | XAI Best-Practices for Omics Data | 45 min|
 
 ## Venue
