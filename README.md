@@ -19,8 +19,8 @@ For the practical sessions we will use a publicly available datasets that comes 
 
 ## Venue
 
-Location: Radisson Blu Marina Palace Hotel, city centre, by the river Aurajoki
-Address: Linnankatu 32
+Location: Radisson Blu Marina Palace Hotel, 
+Address: Linnankatu 32, 20100 Turku.
 
 **Note for attendees:** Please bring your own laptop for the tutorial. Basic knowledge of Python and access to google collab is required to actively participate in the hands-on sessions. For participants without access to google collab, we will provide a requirements file at the beginning of the tutorial for installation of required packages.
 
