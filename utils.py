@@ -106,7 +106,7 @@ def plot_permutation_feature_importance_train_vs_test(
     plt.show()
 
 
-def plot_impurity_feature_importance(importance, names, title, top_n=None, figsize=(5, 4), fontsize=8):
+def plot_impurity_feature_importance(importance, names, title, top_n=None, figsize=(5, 4)):
     # Create arrays from feature importance and feature names
     feature_importance = np.array(importance)
     feature_names = np.array(names)
@@ -129,7 +129,6 @@ def plot_impurity_feature_importance(importance, names, title, top_n=None, figsi
     plt.title(title)
     plt.xlabel("Feature Importance (mean decrease in impurity)")
     plt.ylabel("Feature Names")
-    ax.set_yticklabels(ax.get_yticks(), fontsize=fontsize)
 
 
 def plot_explanation(explanation):
