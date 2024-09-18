@@ -39,7 +39,7 @@ It is possible to either create an environment and install all the necessary pac
 
 If you prefer to run the notebooks on your device, create a virtual environment using the requirements.txt file:
 ```
-conda create -n xai python=3.11
+conda create -n xai python=3.10
 conda activate xai
 pip install -r requirements.txt
 ```
