@@ -24,8 +24,8 @@ Address: Linnankatu 32, 20100 Turku.
 
 ## Mentors
 
-- Lisa Barros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
-- Elisabeth Georgii, Helmholtz Munich ([elisabeth.georgii@helmholtz-munich.de](mailto:elisabeth.georgii@helmholtz-munich.de))
+- Dr. Lisa Barros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
+- Dr. Elisabeth Georgii, Helmholtz Munich ([elisabeth.georgii@helmholtz-munich.de](mailto:elisabeth.georgii@helmholtz-munich.de))
 - Till Richter, Helmholtz Munich
 - Fatemeh Hashemi, Helmholtz Munich
 
