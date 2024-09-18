@@ -12,11 +12,13 @@ Room: 2
 
 | Time          | Session |
 | ------------- | -------- |
-| 13.30 - 13.50 | Introduction to XAI |
-| 13.50 - 15.50 | Tutorial on XAI model-agnostic methods 
-| 15.50 - 16.00 | Break |
-| 16.00 - 17.30 | Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forest” |
-| 17.30 - 17.35 | Wrap-up and conclusions |
+|13:30 - 14:00	|Introduction	|30 min|
+|14:00 - 14:40	|Permutation Feature Importance	|40 min|
+|14:40 - 14:50	|Break	|10 min|
+|14:50 - 15:50 	|SHAP 	|60 min |
+|15:50 - 16:00	|Break	|10 min|
+|16:00 - 17:25	|FGC or CNNs	|85 min|
+|17:25 - 17:30	|Conclusions	|5 min|
 
 ## Mentors
 
