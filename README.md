@@ -19,9 +19,9 @@ The course will be hybrid:
 | Time          | Content |
 | ------------- | -------- |
 | 13.00 - 13.30 | Introduction to XAI |
-| 13.30 - 14.30 | Tutorial on XAI model-agnostic methods |
+| 13.30 - 14.30 | Model Agnostic Methods (Feature Importance and SHAP) |
 | 14.30 - 15.00 | Break |
-| 15.00 - 15.55 | Tutorials on “XAI in deep learning-based image analysis” |
+| 15.00 - 15.55 | Model Specific Method (Grad-CAM) |
 | 15.55 - 16.00 | Wrap-up and conclusions |
 
 
