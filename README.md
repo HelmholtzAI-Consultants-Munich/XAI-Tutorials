@@ -19,7 +19,7 @@ For the practical sessions we will use a publicly available datasets that comes 
 
 ## Venue
 
-Location: Radisson Blu Marina Palace Hotel
+Location: Radisson Blu Marina Palace Hotel  
 Address: Linnankatu 32, 20100 Turku.
 
 ## Speaker
