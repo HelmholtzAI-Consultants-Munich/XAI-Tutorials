@@ -90,8 +90,8 @@ It is possible to either create an environment and install all the necessary pac
 
 If you prefer to run the notebooks on your device, create a virtual environment using the requirements.txt file:
 ```
-conda create -n XAI-Course-2023 python=3.9
-conda activate XAI-Course-2023
+conda create -n xai python=3.9
+conda activate xai
 pip install -r requirements.txt
 ```
 
