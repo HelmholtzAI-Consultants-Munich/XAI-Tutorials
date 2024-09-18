@@ -8,12 +8,13 @@ In this course the learner will:
 - discover the existing methods, in particular perturbation features importance, SHAP and Grad-CAM
 - put your hands on three tutorials to uncover how to interpret the outputs and graphs of those methods
 
-Workshop website: http://ml4earth.de/workshop/
+## Venue
 
-Shared document for questions: https://notes.desy.de/br0Ko_TWQPm2auZRIr_5Tg?both
+The course will be hybrid:
+- On-site: Conference Center Kolpinghaus Munich
+- Online: [Zoom](https://tum-conf.zoom-x.de/meeting/register/u5IsfuyvqTIoG9TxOv8-CSH9gCmIMC3Z2hO2) 
 
-## Agenda
-The course is helded online on September 22nd from 1 pm to 4 pm
+## Schedule at a glance
 
 | Time          | Content |
 | ------------- | -------- |
@@ -23,37 +24,47 @@ The course is helded online on September 22nd from 1 pm to 4 pm
 | 15.00 - 15.55 | Tutorials on “XAI in deep learning-based image analysis” |
 | 15.55 - 16.00 | Wrap-up and conclusions |
 
-## Slides
 
-### General Introduction
-- [Introduction to XAI](https://docs.google.com/presentation/d/1GOXOHEPFg_K9VVfZDAcfx8wy3UIsjLYNEJjQTe-38Rw/edit?usp=sharing)
+## Mentors
 
+- Dr. Donatella Cea, Helmholtz Munich ([donatella.cea@helmholtz-munich.de](mailto:donatella.cea@helmholtz-munich.de))
+- Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
+- Dr. Helena Pelin
+- Christina Bukas
 
-### Model-Agnostic Methods
-- [Introduction to Permutation Feature Importance](https://docs.google.com/presentation/d/1AbmzTS4RU2MOhSl231rPKDt432_SX4i7YvZY4apNZJU/edit#slide=id.g138313838d0_1_828)
-- [Introduction to SHAP](https://docs.google.com/presentation/d/1JGat4jwQd54jExmQiXmDvLSpgHvOC6fZAmWRwL-Cl18/edit#slide=id.g138313838d0_8_676)
+## Requirements and Setup
 
+Please bring your own laptop for the tutorial. Basic knowledge of Python and is required to actively participate in the hands-on sessions.
 
-### Model-Specific Methods
+It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
 
-- [Introduction to Grad-CAM](https://docs.google.com/presentation/d/1vd_HfkBD4FokoAM2el4T1rXWnD7_0FAEvxk4HgiYjXs/edit#slide=id.g13d689e73d4_0_285)
+If you prefer to run the notebooks on your device, create a virtual environment using the requirements.txt file:
+```
+conda create -n xai python=3.9
+conda activate xai
+pip install -r requirements.txt
+```
 
+Once your environment is created, clone `ml4earth-Hackathon-2022` brach branch of the repo using the following command:
 
-## Notebooks with Tutorials
+```
+git clone --branch ml4earth-Hackathon-2022 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+```
 
-- Introduction to Permutation Feature Importance: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-agnostic/tutorial_permutation_FI.ipynb), [Video](https://vimeo.com/745319412/1e5bd15ff7), [Questionnaire](https://www.learningsnacks.de/report/#/register/11766/850f448a-a2cd-48ba-9a0a-2d4040e6868e)
+## Code of Conduct
 
-- Introduction to SHAP: [Notebook](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-agnostic/tutorial_SHAP.ipynb), [Video](https://vimeo.com/745352008/3168320cef), [Questionnaire](https://www.learningsnacks.de/report/#/register/11767/5711c97e-b990-4541-9d71-c5bd8d0f6bbd)
+Participants are expected to follow our code of conduct. In order to have a nice and collaborative environment, please follow these rules:
 
-- Introduction to Grad-CAM: [Notebook Part 1](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-specific/Grad-CAM/part1.ipynb), [Notebook Part 2](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/blob/ml4earth-Hackathon/xai-model-specific/Grad-CAM/part2.ipynb), [Video1](https://vimeo.com/745320494/0b8be077b3), [Video2](https://vimeo.com/745319946/fcd327fc80), [Questionnaire](https://www.learningsnacks.de/report/#/register/11758/2bdd9bcd-76d5-4790-8941-8062a4818592)
+- respect the others
+- turn camera on (if possible)
+- mic turned off unless you want to speak/ask questions
+- raise your hand to ask question or type them in the chat.
 
+If you have any issues that you don’t want to share, send a private message to one of the mentors.
 
-## Additional materials
+## Contributions
 
-If you are interested in tutorials on other model-agnostic and model-specific interpretability methods, pelase visit out [XAI-tutorials](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials) github repository.
+Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue or submit a pull request. 
 
-### Literature
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
 
-[1] Explainable AI: the basics, The Royal Society, 2019. Link: https://royalsociety.org/-/media/policy/projects/explainable-ai/AI-and-interpretability-policy-briefing.pdf
-
-[2] Interpretable Machine Learning: A Guide for Making Black Box Models Explainable, Christoph Molnar, 2022. Link: https://christophm.github.io/interpretable-ml-book/neural-networks.html
