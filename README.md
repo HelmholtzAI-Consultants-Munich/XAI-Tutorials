@@ -22,17 +22,17 @@ Address: Linnankatu 32, 20100 Turku.
 | 15:00 – 15:30 | Interpretation with Model-Specific XAI Methods | 30 min| 
 | 15:30 – 16:15 | XAI Best-Practices for Omics Data | 45 min|
 
-## Speaker
+## Mentors
 
-- Lisa Barros de Andrade e Sousa ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
-- Elisabeth Georgii ([elisabeth.georgii@helmholtz-munich.de](mailto:elisabeth.georgii@helmholtz-munich.de))
-- Till Richter 
-- Fatemeh Hashemi 
+- Lisa Barros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
+- Elisabeth Georgii, Helmholtz Munich ([elisabeth.georgii@helmholtz-munich.de](mailto:elisabeth.georgii@helmholtz-munich.de))
+- Till Richter, Helmholtz Munich
+- Fatemeh Hashemi, Helmholtz Munich
 
 
 ## Requirements and Setup
 
-Please bring your own laptop for the tutorial. Basic knowledge of Python and access to google collab is required to actively participate in the hands-on sessions. For participants without access to google collab, we will provide a requirements file at the beginning of the tutorial for installation of required packages.
+Please bring your own laptop for the tutorial. Basic knowledge of Python and is required to actively participate in the hands-on sessions. 
 
 It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
 
@@ -49,6 +49,19 @@ Once your environment is created, clone `ECCB-2024` brach branch of the repo usi
 git clone --branch ECCB-2024 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
 ```
 
+## Code of Conduct
+
+Participants are expected to follow our code of conduct. In order to have a nice and collaborative environment, please follow these rules:
+
+- respect the others
+- turn camera on (if possible)
+- mic turned off unless you want to speak/ask questions
+- raise your hand to ask question or type them in the chat.
+
+If you have any issues that you don’t want to share, send a private message to one of the mentors.
+
 ## Contributions
 
 Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue or submit a pull request. 
+
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
