@@ -6,6 +6,11 @@ In this tutorial, we will use the Google Collaboratory environment and Python pr
 
 For the practical sessions we will use a publicly available datasets that comes along with a reference publication: Warnat-Herresthal, S. et al. (2020). https://doi.org/10.1016/j.isci.2019.100780
 
+## Venue
+
+Location: Radisson Blu Marina Palace Hotel  
+Address: Linnankatu 32, 20100 Turku.
+
 ## Schedule
 
 |  Time | Session  | Duration  |
@@ -16,11 +21,6 @@ For the practical sessions we will use a publicly available datasets that comes 
 | 14:30 – 15:00 | Coffee Break | 30 min|
 | 15:00 – 15:30 | Interpretation with Model-Specific XAI Methods | 30 min| 
 | 15:30 – 16:15 | XAI Best-Practices for Omics Data | 45 min|
-
-## Venue
-
-Location: Radisson Blu Marina Palace Hotel  
-Address: Linnankatu 32, 20100 Turku.
 
 ## Speaker
 
