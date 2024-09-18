@@ -95,7 +95,7 @@ conda activate xai
 pip install -r requirements.txt
 ```
 
-Once your environment is created, clone `ECCB-2024` brach branch of the repo using the following command:
+Once your environment is created, clone `Juelich-2023` brach branch of the repo using the following command:
 
 ```
 git clone --branch Juelich-2023 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
