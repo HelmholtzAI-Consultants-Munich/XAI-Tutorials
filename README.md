@@ -16,9 +16,9 @@ Learning outcome:
 
 ## Venue
 The course will be fully online:
-[Zoom link](https://fz-juelich-de.zoom.us/j/68186324087?pwd=eUp5dEdyU2xSODhzMXNRVW9vNkh5QT09)
-Meeting ID: 681 8632 4087 
-Passcode: 900523
+[Zoom link](https://fz-juelich-de.zoom.us/j/68186324087?pwd=eUp5dEdyU2xSODhzMXNRVW9vNkh5QT09)  
+Meeting ID: 681 8632 4087  
+Passcode: 900523 
 
 ## Schedule at a glance
 
