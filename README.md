@@ -29,7 +29,7 @@ Passcode: 969908
 |9:00 - 9:30 |Introduction |30 min|
 |9:30 - 10:15 |	Permutation Feature Importance|	45 min|
 |10:15 - 10:30 | Break|	15 min|
-| 10:30 - 11:30 | SHAP | 1 h| 
+| 10:30 - 11:30 | SHAP | 60 min| 
 |11:30 - 11:45 | Break|	10 min|
 |11:45- 12:15 |	LIME | 30 min|
 |12:15 - 12:55 | FGC |40 min|
