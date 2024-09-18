@@ -24,14 +24,14 @@ Passcode: Ep0xZA
 - Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
 - Dr. Donatella Cea, Helmholtz Munich ([donatella.cea@helmholtz-munich.de](mailto:donatella.cea@helmholtz-munich.de))
 - Christina Bukas, Helmholtz Munich
-- Helena Pelin, Helmholtz Munich
+- Dr. Helena Pelin, Helmholtz Munich
 - Harsha Subramanian, Helmholtz Munich
 - Mayhar Valizadeh, Helmholtz Munich
-- Elisabeth Georgii, Helmholtz Munich
-- Erinc Merdivan, Helmholtz Munich
+- Dr. Elisabeth Georgii, Helmholtz Munich
+- Dr. Erinc Merdivan, Helmholtz Munich
 - Isra Mekki, Helmholtz Munich
 - Sebastian Starke, HZDR
-- Helene Hoffmann, HZDR
+- Dr. Helene Hoffmann, HZDR
 
 ## Requirements and Setup
 
