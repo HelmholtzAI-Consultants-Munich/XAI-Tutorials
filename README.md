@@ -54,9 +54,7 @@ git clone --branch ECCB-2024 https://github.com/HelmholtzAI-Consultants-Munich/X
 Participants are expected to follow our code of conduct. In order to have a nice and collaborative environment, please follow these rules:
 
 - respect the others
-- turn camera on (if possible)
-- mic turned off unless you want to speak/ask questions
-- raise your hand to ask question or type them in the chat.
+- raise your hand to ask question
 
 If you have any issues that you don’t want to share, send a private message to one of the mentors.
 
