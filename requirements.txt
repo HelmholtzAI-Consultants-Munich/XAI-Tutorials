@@ -1,4 +1,3 @@
-evaluate==0.4.2
 fgclustering==1.1.0
 ipython==8.4.0
 jupyter==1.0.0
