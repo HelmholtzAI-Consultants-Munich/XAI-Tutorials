@@ -26,7 +26,7 @@ Room: 1
 |12:20 - 12:50	|Comparison of XAI methods|30 min|
 |12:50 - 13:00	|Conclusions|10 min|
 
-**Track: XAI for CNNs Track**
+**Track: XAI for CNNs**
 | Time        | Session |
 | ----------- | ------- |
 |09:30 - 10:00	|Introduction to CNNs|30 min|
