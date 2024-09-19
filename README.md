@@ -1,39 +1,83 @@
-![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
-[![test](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml/badge.svg)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml)
-[![stars](https://img.shields.io/github/stars/HelmholtzAI-Consultants-Munich/XAI-Tutorials?logo=GitHub&color=yellow)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/stargazers)
+# Introduction to eXplainable AI 
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials)
+During this course participants will get an introduction to the topic of Explainable AI (XAI). The goal of the course is to help participants understand how XAI methods can help uncover biases in the data or provide interesting insights. After a general introduction to XAI, the course goes deeper into state-of-the-art model agnostic interpretation techniques as well as a practical session covering these techniques. Finally, we will focus on two model specific post-hoc interpretation methods, with hands-on training covering interpretation of random forests and neural networks with imaging data to learn about strengths and weaknesses of these standard methods used in the field.
 
-# Tutorials for eXplainable Artificial Intelligence (XAI) methods
+## Venue
 
-This repository contains a collection of self-explanatory tutorials for different model-agnostic and model-specific XAI methods.
-Each tutorial comes in a Jupyter Notebook containing a short video lecture and practical exercises.
-The material has already been used in the context of two courses: the Zero to Hero Summer Academy (fully online) and ml4hearth (hybrid setting).
-The course material can be adjusted according to the available time frame and the schedule.
-The material is self-explanatory and can also be consumed offline.
+The course will be fully online: [GatherTown link](https://app.gather.town/app/nkxyTbuI84smfiQk/HMC-Workshop-Lounge?spawnToken=u2qffvtMRHqJ9LhU6okM)  
+Password: HMC-2024  
+Room: 1  
 
-The learning objectives are:
+## Schedule
 
-- understand the importance of interpretability
-- discover the existing model-agnostic and model-specific XAI methods
-- learn how to interpret the outputs and graphs of those methods with hands-on exercises
-- learn to choose which method is suitable for a specific task
+| Time        | Session |
+| ----------- | ------- |
+|09:00 - 09:30|Introduction|30 min|
 
-## List of Tutorials for Model-Agnostic Methods
+**Track: XAI for Random Forests**
+| Time        | Session |
+| ----------- | ------- |
+|09:30 - 10:00	|Permutation Feature Importance|30 min|
+|10:00 - 10:30	|LIME|30 min|
+|10:30 - 10:40	|Break|10 min|
+|10:40 - 11:40 	|SHAP|60 min|
+|11:40 - 11:50	|Break|10 min|
+|11:50 - 12:20	|FGC|30 min|
+|12:20 - 12:50	|Comparison of XAI methods|30 min|
+|12:50 - 13:00	|Conclusions|10 min|
 
-- Permutation Feature Importance
-- SHapley Additive exPlanations (SHAP)
-- Local Interpretable Model-Agnostic Explanations (LIME)
+**Track: XAI for CNNs Track**
+| Time        | Session |
+| ----------- | ------- |
+|09:30 - 10:00	|Introduction to CNNs|30 min|
+|10:00 - 10:10	|Break|10 min|
+|10:10 - 11:10 	|Grad-CAM for Images|60 min|
+|11:10 - 11:20	|Break|10 min|
+|11:20 - 11:50	|LIME for Images|30 min|
+|11:50 - 12:20	|SHAP for Images|30 min|
+|12:20 - 12:50	|Comparison of XAI methods|30 min|
+|12:50 - 13:00	|Conclusions|10 min|
 
-## List of Tutorials for Model-Specific Methods
+## Mentors
 
-- Forest-Guided Clustering
-- Grad-CAM
+- Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
+- Dr. Elisabeth Georgii, Helmholtz Munich
+- Isra Mekki, Helmholtz Munich
+- Francesco Campi, Helmholtz Munich
+- Sabrina Benassou, JSC
 
 ## Requirements and Setup
 
+Basic knowledge of Python and is required to actively participate in the hands-on sessions. 
+
 It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
+
+If you prefer to run the notebooks on your device, create a virtual environment using the requirements.txt file:
+```
+conda create -n xai python=3.10
+conda activate xai
+pip install -r requirements.txt
+```
+
+Once your environment is created, clone `HelmholtzSummerSchool-2024` brach branch of the repo using the following command:
+
+```
+git clone --branch HelmholtzSummerSchool-2024 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+```
+
+## Code of Conduct
+
+Participants are expected to follow our code of conduct. In order to have a nice and collaborative environment, please follow these rules:
+
+- respect the others
+- turn camera on (if possible)
+- mic turned off unless you want to speak/ask questions
+- raise your hand to ask question or type them in the chat.
+
+If you have any issues that you don’t want to share, send a private message to one of the mentors.
 
 ## Contributions
 
 Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue or submit a pull request. 
+
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
