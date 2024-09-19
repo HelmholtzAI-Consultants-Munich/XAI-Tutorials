@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     source_lang = "en"
     target_lang = "de"
-    prefix = "translate English to French: "
+    prefix = "translate English to German: "
 
     tokenized_books = books.map(preprocess_function, batched=True)
 
@@ -61,20 +61,20 @@ if __name__ == "__main__":
 
     model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
 
-
     training_args = Seq2SeqTrainingArguments(
-        output_dir="my_awesome_opus_books_model",
+        output_dir="german-english",
         evaluation_strategy="epoch",
         learning_rate=2e-3,
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
+        per_device_train_batch_size=128,
+        per_device_eval_batch_size=128,
         weight_decay=0.01,
         save_total_limit=3,
-        num_train_epochs=10,
+        num_train_epochs=40,
         predict_with_generate=True,
         fp16=True,
         push_to_hub=False,
     )
+
 
     trainer = Seq2SeqTrainer(
         model=model,
