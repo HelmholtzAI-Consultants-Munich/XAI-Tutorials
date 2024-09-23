@@ -1,9 +1,15 @@
-# import torch, torchvision
-# from torchvision import datasets, transforms
-from torch import nn#, optim
+############################################################
+# Imports
+############################################################
+
+from torch import nn
+
+############################################################
+# Model Class
+############################################################
 
 
-# Net class with a 2D CNN 
+# Net class with a 2D CNN
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -18,11 +24,7 @@ class Net(nn.Module):
             nn.ReLU(),
         )
         self.fc_layers = nn.Sequential(
-            nn.Linear(320, 50),
-            nn.ReLU(),
-            nn.Dropout(),
-            nn.Linear(50, 10),
-            nn.Softmax(dim=1)
+            nn.Linear(320, 50), nn.ReLU(), nn.Dropout(), nn.Linear(50, 10), nn.Softmax(dim=1)
         )
 
     def forward(self, x):
