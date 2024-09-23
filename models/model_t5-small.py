@@ -1,7 +1,6 @@
 ############################################################
-##### Imports
+# Imports
 ############################################################
-
 
 import evaluate
 import numpy as np
@@ -15,9 +14,8 @@ from transformers import (
     Seq2SeqTrainer,
 )
 
-
 ############################################################
-##### Fine-Tune T5-small Model
+# Fine-Tune T5-small Model
 ############################################################
 
 
@@ -55,6 +53,10 @@ def compute_metrics(eval_preds):
     return result
 
 
+############################################
+# main
+############################################
+
 if __name__ == "__main__":
 
     checkpoint = "google-t5/t5-small"
@@ -70,14 +72,14 @@ if __name__ == "__main__":
     tokenized_books = books.map(preprocess_function, batched=True)
 
     training_args = Seq2SeqTrainingArguments(
-        output_dir="my_awesome_opus_books_model",
+        output_dir="german-english",
         evaluation_strategy="epoch",
         learning_rate=2e-3,
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
+        per_device_train_batch_size=128,
+        per_device_eval_batch_size=128,
         weight_decay=0.01,
         save_total_limit=3,
-        num_train_epochs=10,
+        num_train_epochs=40,
         predict_with_generate=True,
         fp16=True,
         push_to_hub=False,
