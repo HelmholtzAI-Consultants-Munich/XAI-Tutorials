@@ -14,7 +14,7 @@ In summary, Grad-CAM is an explainability technique that visually highlights the
 Grad-CAM works by computing the gradients of the model's output with respect to the feature maps in the final convolutional layer,
 effectively revealing which parts of the image the model 'looks at' when making a prediction.
 
-Methematical Details
+Mathematical Details
 ----------------------
 
 Let us assume :math:`y^c` is the score for class :math:`c` i.e., the output for class :math:`c` before the softmax.
