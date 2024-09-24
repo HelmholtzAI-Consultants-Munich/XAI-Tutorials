@@ -32,7 +32,7 @@ Address: Linnankatu 32, 20100 Turku.
 
 ## Requirements and Setup
 
-Please bring your own laptop for the tutorial. Basic knowledge of Python and is required to actively participate in the hands-on sessions. 
+Please bring your own laptop for the tutorial. This course assumes you have minimal experience running Python and Machine Learning Frameworks like sklearn. 
 
 It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
 
