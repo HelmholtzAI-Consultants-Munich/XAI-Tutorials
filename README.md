@@ -17,7 +17,7 @@ Room: 2
 |14:40 - 14:50|Break|
 |14:50 - 15:50|SHAP|
 |15:50 - 16:00|Break|
-|16:00 - 17:25|FGC or CNNs|
+|16:00 - 17:25|Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests”|
 |17:25 - 17:30|Conclusions|
 
 ## Mentors
