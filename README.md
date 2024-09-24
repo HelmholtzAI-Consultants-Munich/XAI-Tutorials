@@ -13,14 +13,14 @@ Address: Linnankatu 32, 20100 Turku.
 
 ## Schedule
 
-|  Time | Session  | Duration  |
-|---|---|---|
-| 13:00 – 13:30 | ML Best-Practices for Omics Data | 30 min|
-| 13:30 – 13:40 | Introduction to eXplainable AI (XAI) | 10 min|
-| 13:40 – 14:30 | Interpretation with Model-Agnostic XAI Methods | 50 min|
-| 14:30 – 15:00 | Coffee Break | 30 min|
-| 15:00 – 15:30 | Interpretation with Model-Specific XAI Methods | 30 min| 
-| 15:30 – 16:15 | XAI Best-Practices for Omics Data | 45 min|
+|      Time     |             Session              | 
+|---------------|----------------------------------|
+| 13:00 – 13:30 | ML Best-Practices for Omics Data |
+| 13:30 – 13:40 | Introduction to eXplainable AI (XAI) |
+| 13:40 – 14:30 | Interpretation with Model-Agnostic XAI Methods |
+| 14:30 – 15:00 | Coffee Break |
+| 15:00 – 15:30 | Interpretation with Model-Specific XAI Methods |
+| 15:30 – 16:15 | XAI Best-Practices for Omics Data |
 
 ## Mentors
 
