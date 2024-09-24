@@ -13,9 +13,9 @@ Passcode: Ep0xZA
 |    Time     |      Session      |
 |-------------|-------------------|
 |14:00 - 14:20|Introduction to XAI|
-|14.20 - 16.50|Tutorial on XAI model-agnostic methods (Permutation FI, SHAP, LIME)|
+|14.20 - 16.50|Tutorial on model-agnostic XAI methods (Permutation FI, SHAP, LIME)|
 |16.50 - 17.00|Break|
-|17.00 - 18.00|Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests with FGC”|
+|17.00 - 18.00|Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests”|
 |18.00 - 18.05|Wrap-up and conclusions|
 
 
