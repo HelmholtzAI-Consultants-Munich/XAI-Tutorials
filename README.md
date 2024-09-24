@@ -48,7 +48,7 @@ Room: 1
 
 ## Requirements and Setup
 
-Basic knowledge of Python and is required to actively participate in the hands-on sessions. 
+This course assumes you have minimal experience running Python and Machine Learning Frameworks like PyTorch and sklearn.
 
 It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
 
