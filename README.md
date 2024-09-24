@@ -10,20 +10,20 @@ Room: 2
 
 ## Schedule
 
-| Time          | Session |
-| ------------- | -------- |
-|13:30 - 14:00	|Introduction	|30 min|
-|14:00 - 14:40	|Permutation Feature Importance	|40 min|
-|14:40 - 14:50	|Break	|10 min|
-|14:50 - 15:50 	|SHAP 	|60 min |
-|15:50 - 16:00	|Break	|10 min|
-|16:00 - 17:25	|FGC or CNNs	|85 min|
-|17:25 - 17:30	|Conclusions	|5 min|
+|     Time    |      Session      |
+| ----------- | ----------------- |
+|13:30 - 14:00|Introduction to XAI|
+|14:00 - 14:40|Permutation Feature Importance|
+|14:40 - 14:50|Break|
+|14:50 - 15:50|SHAP|
+|15:50 - 16:00|Break|
+|16:00 - 17:25|FGC or CNNs|
+|17:25 - 17:30|Conclusions|
 
 ## Mentors
 
-- Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
-- Dr. Donatella Cea, Helmholtz Munich ([donatella.cea@helmholtz-munich.de](mailto:donatella.cea@helmholtz-munich.de))
+- [Dr. Lisa Borros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de), Helmholtz Munich
+- [Dr. Donatella Cea](mailto:donatella.cea@helmholtz-munich.de), Helmholtz Munich
 - Dr. Helena Pelin, Helmholtz Munich
 - Dr. Elisabeth Georgii, Helmholtz Munich
 - Harsha Subramanian, Helmholtz Munich
@@ -33,7 +33,7 @@ Room: 2
 
 ## Requirements and Setup
 
-Please bring your own laptop for the tutorial. Basic knowledge of Python and is required to actively participate in the hands-on sessions. 
+This course assumes you have minimal experience running Python and Machine Learning Frameworks like PyTorch and sklearn.
 
 It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
 
@@ -63,6 +63,6 @@ If you have any issues that you don’t want to share, send a private message to
 
 ## Contributions
 
-Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue or submit a pull request. 
+Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue, submit a pull request or send an email to [Lisa Barros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de) or [Donatella Cea](mailto:donatella.cea@helmholtz-munich.de).
 
 All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
