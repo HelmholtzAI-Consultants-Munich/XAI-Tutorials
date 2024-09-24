@@ -16,8 +16,8 @@ The course will be hybrid:
 
 ## Schedule at a glance
 
-| Time          | Content |
-| ------------- | -------- |
+|      Time     |       Content       |
+| ------------- | ------------------- |
 | 13.00 - 13.30 | Introduction to XAI |
 | 13.30 - 14.30 | Model Agnostic Methods (Feature Importance and SHAP) |
 | 14.30 - 15.00 | Break |
@@ -27,14 +27,14 @@ The course will be hybrid:
 
 ## Mentors
 
-- Dr. Donatella Cea, Helmholtz Munich ([donatella.cea@helmholtz-munich.de](mailto:donatella.cea@helmholtz-munich.de))
-- Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
+- [Dr. Donatella Cea](mailto:donatella.cea@helmholtz-munich.de), Helmholtz Munich
+- [Dr. Lisa Borros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de), Helmholtz Munich 
 - Dr. Helena Pelin
 - Christina Bukas
 
 ## Requirements and Setup
 
-Please bring your own laptop for the tutorial. Basic knowledge of Python and is required to actively participate in the hands-on sessions.
+Please bring your own laptop for the tutorial. This course assumes you have minimal experience running Python and Machine Learning Frameworks like PyTorch and sklearn.
 
 It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
 
@@ -64,7 +64,7 @@ If you have any issues that you don’t want to share, send a private message to
 
 ## Contributions
 
-Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue or submit a pull request. 
+Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue, submit a pull request or send an email to [Lisa Barros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de) or [Donatella Cea](mailto:donatella.cea@helmholtz-munich.de).
 
 All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
 
