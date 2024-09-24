@@ -10,19 +10,19 @@ Passcode: Ep0xZA
 
 ## Schedule at a glance
 
-|  Time | Session  | Duration  |
-|---|---|---|
-|14:00 - 14:20|Introduction to XAI|20 min|
-|14.20 - 16.50|Tutorial on XAI model-agnostic methods (Permutation FI, SHAP, LIME)|150 min|
-|16.50 - 17.00|Break|10 min|
-|17.00 - 18.00|Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests with FGC”|60 min| 
-|18.00 - 18.05|Wrap-up and conclusions|5 min|
+|    Time     |      Session      |
+|-------------|-------------------|
+|14:00 - 14:20|Introduction to XAI|
+|14.20 - 16.50|Tutorial on XAI model-agnostic methods (Permutation FI, SHAP, LIME)|
+|16.50 - 17.00|Break|
+|17.00 - 18.00|Tutorials on “XAI in deep learning-based image analysis” and “XAI for Random Forests with FGC”|
+|18.00 - 18.05|Wrap-up and conclusions|
 
 
 ## Mentors
 
-- Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
-- Dr. Donatella Cea, Helmholtz Munich ([donatella.cea@helmholtz-munich.de](mailto:donatella.cea@helmholtz-munich.de))
+- [Dr. Lisa Borros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de), Helmholtz Munich 
+- [Dr. Donatella Cea](mailto:donatella.cea@helmholtz-munich.de), Helmholtz Munich
 - Christina Bukas, Helmholtz Munich
 - Dr. Helena Pelin, Helmholtz Munich
 - Harsha Subramanian, Helmholtz Munich
@@ -65,6 +65,7 @@ If you have any issues that you don’t want to share, send a private message to
 
 ## Contributions
 
-Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue or submit a pull request. 
+Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue, submit a pull request or send an email to [Lisa Barros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de) or [Donatella Cea](mailto:donatella.cea@helmholtz-munich.de).
+
 
 All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
