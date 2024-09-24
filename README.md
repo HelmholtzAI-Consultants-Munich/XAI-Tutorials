@@ -40,7 +40,7 @@ Room: 1
 
 ## Mentors
 
-- Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich ([lisa.barros@helmholtz-munich.de](mailto:lisa.barros@helmholtz-munich.de))
+- [Dr. Lisa Borros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de), Helmholtz Munich
 - Dr. Elisabeth Georgii, Helmholtz Munich
 - Isra Mekki, Helmholtz Munich
 - Francesco Campi, Helmholtz Munich
