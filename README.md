@@ -75,10 +75,7 @@ Homework 1: Comparison notebook - [Tutorial_XAI_for_ImageAnalysis](https://githu
 ## Mentors
 
 - Sabrina Benassou, JSC
-- [Dr. Donatella Cea](mailto:donatella.cea@helmholtz-munich.de), Helmholtz Munich
 - [Dr. Lisa Borros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de), Helmholtz Munich 
-- Dr. Alina Bazarova, JSC
-- Dr. Elisabeth Georgii, Helmholtz Munich
 - Francesco Campi, Helmholtz Munich
 - Isra Mekki, Helmholtz Munich
 
