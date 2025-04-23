@@ -6,6 +6,7 @@ The goal of the course is to help participants understand how XAI methods can he
 
 ## Venue
 The course will be fully online:  
+
 [Zoom Link Day 1](https://zoom.us/j/93041152208?pwd=t2nePps1ib0g5DzGdeCT0X4QBDLPwQ.1)
 Meeting-ID: 930 4115 2208
 Kenncode: 795548
