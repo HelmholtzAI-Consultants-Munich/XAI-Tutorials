@@ -5,7 +5,7 @@ This 2-half-day course provides an introduction to the topic of Explainable AI (
 The goal of the course is to help participants understand how XAI methods can help uncover biases in the data or provide interesting insights. After a general introduction to XAI, the course goes deeper into state-of-the-art model agnostic as well as model-specific interpretation techniques. The practical hands-on sessions will help to learn about strengths and weaknesses of these standard methods used in the field.
 
 ## Venue
-The course will be fully online:
+The course will be fully online:  
 [Zoom Link Day 1](https://zoom.us/j/93041152208?pwd=t2nePps1ib0g5DzGdeCT0X4QBDLPwQ.1)
 Meeting-ID: 930 4115 2208
 Kenncode: 795548
