@@ -14,28 +14,67 @@ In summary, Grad-CAM is an explainability technique that visually highlights the
 Grad-CAM works by computing the gradients of the model's output with respect to the feature maps in the final convolutional layer,
 effectively revealing which parts of the image the model 'looks at' when making a prediction.
 
-Mathematical Details
-----------------------
 
+Grad-CAM for CNNs
+--------------------
+
+We now show you how to compute Grad-CAM localization maps for a trained CNN model. 
+The figure below summarizes all steps:
+
+.. figure:: ../_figures/grad_cam.png
+
+
+**Step 1: Forward Pass**
+
+Pass the input (image/signal) through the CNN to get the feature maps from the last convolutional layer
+and raw outputs (logits) before softmax. We denote these feature maps as :math:`A^k`, 
+where :math:`k` refers to one specific feature map inside a convolutional layer.
+
+*Note: A single convolutional layer produces multiple feature maps (one per filter)*
+
+Grad-CAM uses the feature maps from the last conv layer because it typically has the 
+most high-level, semantically rich features but still retains some spatial information.
+Using earlier layers would provide too much low-level information (edges, textures) and 
+not enough conceptual understanding.
+
+**Step 2: Select the Target Class**
+
+Choose the class :math:`c` you want to explain (usually the predicted class with highest score) and calculate its score.
 Let us assume :math:`y^c` is the score for class :math:`c` i.e., the output for class :math:`c` before the softmax.
 
-**Step 1: Computing Gradient**
+**Step 3: Compute the Gradients**
 
-Compute the gradient of :math:`y^c` with respect to the feature map activation :math:`A^k` of a convolution layer i.e., :math:`\frac {\delta y^c}{\delta A^k}`
+Compute the gradient of the target class score :math:`y^c` with respect to the feature maps :math:`A^k` of 
+the selected convolutional layer, i.e., :math:`\frac{\partial y^c}{\partial A^k}`. 
+These gradients show how important each feature map is for the target class.
 
-**Step 2: Calculate Global Average Pooling (GAP) of the feature map.**
-     
-Global average pool the gradients over the width dimension (indexed by $i$) and the height dimension (indexed by $j$) to obtain weights ${\alpha_k^c}$
 
-.. math::
-    {\alpha_k^c} = \frac {1}{Z} \sum_{i} \sum_{j} \frac {\delta y^c}{\delta A^k_{ij}}
+**Step 4: Compute the Grad-CAM**
 
-**Step 3: Calculate Final Grad-CAM Localization Map**
-     
-Perform a weighted combination of the feature map activations :math:`A^k` where the weights are the :math:`{\alpha_k^c}` we just calculated and keep only positive contributions applying a ReLU function.
+For each filter :math:`k`, global average pool the gradients spatially (over width :math:`i` and height :math:`j`) 
+to get a single scalar weight :math:`\alpha_k^c`:
 
 .. math::
-    L^c_{Grad-CAM} = ReLU (\sum_k {\alpha_k^c} A^k)
+
+   \alpha_k^c = \frac{1}{Z} \sum_{i} \sum_{j} \frac{\partial y^c}{\partial A_{ij}^k}
+
+where :math:`y^c` is the score for class :math:`c` and :math:`A^k` is the feature map for filter :math:`k`.
+
+To calculate the final Grad-CAM localization map multiply each feature map :math:`A^k` by its corresponding 
+importance weight :math:`\alpha_k^c` and then sum up all the weighted feature maps across all filters. 
+Apply a ReLU activation to keep only the parts that positively influence the target class.
+This makes the Grad-CAM map focus only on features that support the class, not those that suppress it.
+
+.. math::
+    L^c_{Grad-CAM} = ReLU (\sum_{k} \alpha_k^c A^k)
+
+**Step 5: Post-processing**
+
+Resize the Grad-CAM map to the same spatial size as the input so it can be overlaid on the input.
+Overlay the Grad-CAM map on top of the original input, typically using a heatmap.
+The Grad-CAM highlights areas in the input that are significant for CNN's prediction of class :math:`c`, 
+providing insights into what the network 'sees' as important for its decision-making.
+
 
 
 References
