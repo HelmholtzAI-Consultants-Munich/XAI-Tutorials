@@ -2,101 +2,40 @@
 ##### Imports
 ############################################################
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 import os
-import seaborn as sns
+import cv2 as cv
+import numpy as np
 
 from PIL import Image
-import cv2 as cv
 
+import torch
 from torch.nn import functional as F
-import torch, torchvision
-from torchvision import datasets, transforms
-from torch import nn, optim
+from torchvision import transforms
 
-import sys
-
-sys.path.append("../models/")
-from model_net import Net
 
 ############################################################
 ##### Utility Fuctions
 ############################################################
 
 
-def train(model, device, train_loader, optimizer, epoch):
-    model.train()
-    for batch_idx, (data, target) in enumerate(train_loader):
-        data, target = data.to(device), target.to(device)
-        optimizer.zero_grad()
-        output = model(data)
-        loss = F.nll_loss(output.log(), target)
-        loss.backward()
-        optimizer.step()
-        if batch_idx % 100 == 0:
-            print(
-                "Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}".format(
-                    epoch,
-                    batch_idx * len(data),
-                    len(train_loader.dataset),
-                    100.0 * batch_idx / len(train_loader),
-                    loss.item(),
-                )
-            )
-
-
-def test(model, device, test_loader):
-    model.eval()
-    test_loss = 0
-    correct = 0
-    with torch.no_grad():
-        for data, target in test_loader:
-            data, target = data.to(device), target.to(device)
-            output = model(data)
-            test_loss += F.nll_loss(output.log(), target).item()  # sum up batch loss
-            pred = output.max(1, keepdim=True)[1]  # get the index of the max log-probability
-            correct += pred.eq(target.view_as(pred)).sum().item()
-
-    test_loss /= len(test_loader.dataset)
-    print(
-        "\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n".format(
-            test_loss, correct, len(test_loader.dataset), 100.0 * correct / len(test_loader.dataset)
-        )
-    )
-
-
-def get_trained_model(nb_of_epochs=5, seed=2):
-    torch.manual_seed(seed)
-    batch_size = 128
-    device = torch.device("cpu")
-    train_loader = torch.utils.data.DataLoader(
-        datasets.MNIST(
-            "mnist_data", train=True, download=True, transform=transforms.Compose([transforms.ToTensor()])
-        ),
-        batch_size=batch_size,
-        shuffle=True,
-    )
-
-    test_loader = torch.utils.data.DataLoader(
-        datasets.MNIST("mnist_data", train=False, transform=transforms.Compose([transforms.ToTensor()])),
-        batch_size=batch_size,
-        shuffle=True,
-    )
-
-    # instantiate the model and call the train and test functions
-    model = Net().to(device)
-    optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.5)
-
-    # start the training and testing process
-    for epoch in range(nb_of_epochs):
-        train(model, device, train_loader, optimizer, epoch + 1)
-        test(model, device, test_loader)
-    return model, test_loader
-
-
 def transform_img(img, mean, std, tensor_flag=True, img_size=(224, 224)):
+    """
+    Applies transformations to an input image including resizing, normalization, and optional tensor conversion.
+
+    :param img: Input image to be transformed.
+    :type img: np.ndarray or PIL.Image
+    :param mean: Mean values for normalization for each channel.
+    :type mean: list or tuple
+    :param std: Standard deviation values for normalization for each channel.
+    :type std: list or tuple
+    :param tensor_flag: Whether to return the output as a PyTorch tensor. If False, returns a NumPy array. Default is True.
+    :type tensor_flag: bool
+    :param img_size: Size to which the image should be resized (height, width). Default is (224, 224).
+    :type img_size: tuple
+
+    :return: Transformed image as a tensor or NumPy array, depending on the `tensor_flag`.
+    :rtype: torch.Tensor or np.ndarray
+    """
     transform = transforms.Compose(
         [
             transforms.ToPILImage(),
@@ -119,6 +58,19 @@ def transform_img(img, mean, std, tensor_flag=True, img_size=(224, 224)):
 
 
 def normalize_and_adjust_axes(image, mean, std):
+    """
+    Normalizes the input image using the specified mean and standard deviation and adjusts its axes to PyTorch format.
+
+    :param image: Input image array.
+    :type image: np.ndarray
+    :param mean: Mean values for normalization for each channel.
+    :type mean: list or tuple
+    :param std: Standard deviation values for normalization for each channel.
+    :type std: list or tuple
+
+    :return: Normalized image tensor with adjusted axes.
+    :rtype: torch.Tensor
+    """
     if image.max() > 1:
         image /= 255
     image = (image - mean) / std
@@ -126,63 +78,54 @@ def normalize_and_adjust_axes(image, mean, std):
     return torch.tensor(image.swapaxes(-1, 1).swapaxes(2, 3)).float()
 
 
-def read_img(path_to_img):
-    img = cv.imread(path_to_img)  # Insert the path to image.
+def read_image_cv(path_to_img):
+    """
+    Reads an image from the specified path using OpenCV and converts it from BGR to RGB format.
+
+    :param path_to_img: Path to the image file.
+    :type path_to_img: str
+
+    :return: Loaded image in RGB format.
+    :rtype: np.ndarray
+    """
+    img = cv.imread(path_to_img)
     img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
     return img
 
 
-def calculate_localization_map(gcmodel, img, out, c):
+def read_image_PIL(path_to_img):
+    """
+    Reads an image from the specified path using PIL and converts it to RGB format.
 
-    # Step 1 - Gradient output y wrt. to activation map
-    # get the gradient of the output with respect to the parameters of the model
-    out[:, c].backward(retain_graph=True)
-    # pull the gradients out of the model
-    gradients = gcmodel.get_gradient()
+    :param path_to_img: Path to the image file.
+    :type path_to_img: str
 
-    # Step 2 - Global average pooling
-    # pool the gradients across the channels
-    pooled_gradients = torch.mean(gradients, dim=[0, 2, 3])  # to be computed by students
-
-    # Step 3 - Weighted combination of influence and feature maps
-    # get the activations of the last convolutional layer
-    activations = gcmodel.get_activations(img).detach()
-    # weight the channels by corresponding gradients
-    for i in range(activations.size(1)):
-        activations[:, i, :, :] *= pooled_gradients[i]
-    # average the channels of the activations
-    localization_map = torch.sum(activations, dim=1).squeeze()
-    # convert the map to be a numpy array
-    localization_map = localization_map.numpy()
-    # relu on top of the localization map
-    localization_map = np.maximum(localization_map, 0)  # to be computed by students
-
-    return localization_map
-
-
-def convert_to_heatmap(localization_map, img):
-    # normalize the localization_map
-    localization_map /= np.max(localization_map)
-    # resize to image size
-    heatmap = cv.resize(localization_map, (img.shape[1], img.shape[0]))
-    # normalize to [0, 255] range and convert to unsigned int
-    heatmap = np.uint8(255 * heatmap)
-    return heatmap
-
-
-def read_image(path):
-    with open(os.path.abspath(path), "rb") as f:
+    :return: Loaded image as a PIL Image object in RGB mode.
+    :rtype: PIL.Image.Image
+    """
+    with open(os.path.abspath(path_to_img), "rb") as f:
         with Image.open(f) as img:
             return img.convert("RGB")
 
 
 def get_pil_transform():
-    transf = transforms.Compose([transforms.Resize((256, 256)), transforms.CenterCrop(224)])
+    """
+    Returns a PIL image transformation pipeline that resizes and center crops the image.
 
-    return transf
+    :return: Transformations to apply on a PIL image.
+    :rtype: torchvision.transforms.Compose
+    """
+    transform = transforms.Compose([transforms.Resize((256, 256)), transforms.CenterCrop(224)])
+    return transform
 
 
 def get_preprocess_transform():
+    """
+    Returns a preprocessing transformation pipeline that converts an image to a tensor and normalizes it.
+
+    :return: Preprocessing transformations for an image.
+    :rtype: torchvision.transforms.Compose
+    """
     normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     transf = transforms.Compose([transforms.ToTensor(), normalize])
 
@@ -190,6 +133,17 @@ def get_preprocess_transform():
 
 
 def batch_predict(images, model):
+    """
+    Predicts class probabilities for a batch of images using the provided model.
+
+    :param images: List of input images to be predicted.
+    :type images: list of PIL.Image or np.ndarray
+    :param model: Trained model used for prediction.
+    :type model: torch.nn.Module
+
+    :return: Predicted class probabilities for the input batch.
+    :rtype: np.ndarray
+    """
     # Set the model in evaluation mode
     model.eval()
     # Prepare a batch of preprocessed images
@@ -205,3 +159,69 @@ def batch_predict(images, model):
     probs = F.softmax(logits, dim=1)
     # Return the predicted probabilities as a NumPy array
     return probs.detach().cpu().numpy()
+
+
+def calculate_localization_map(model, input, c, dim):
+    """
+    Calculates a localization map (e.g., Grad-CAM) for a given class index based on model activations and gradients.
+
+    :param model: Trained model from which activations and gradients are extracted.
+    :type model: torch.nn.Module
+    :param input: Input tensor to the model.
+    :type input: torch.Tensor
+    :param c: Target class index for which the localization map is computed.
+    :type c: int
+    :param dim: Dimensions along which to compute the mean of gradients.
+    :type dim: tuple or list
+
+    :return: Computed localization map as a NumPy array.
+    :rtype: np.ndarray
+    """
+    # forward pass
+    logits = model(input)
+    feat_maps = model.get_activations(input).detach()
+
+    # compute gradients
+    logits[:, c].backward(retain_graph=True)
+    gradients = model.get_gradient()
+
+    # compute localization map
+    pooled_gradients = torch.mean(gradients, dim=dim)
+
+    for i in range(feat_maps.size(1)):
+        if len(dim) == 2:
+            feat_maps[:, i, :] *= pooled_gradients[i]
+        elif len(dim) == 3:
+            feat_maps[:, i, :, :] *= pooled_gradients[i]
+
+    localization_map = torch.sum(feat_maps, dim=1).squeeze()
+    localization_map = localization_map.numpy()
+    localization_map = np.maximum(localization_map, 0)
+
+    return localization_map
+
+
+def convert_localization_map_to_heatmap(localization_map, target_size):
+    """
+    Converts a localization map into a heatmap resized to the given target size.
+
+    :param localization_map: The localization (importance) map, usually output from Grad-CAM.
+    :type localization_map: numpy.ndarray
+    :param target_size: Target size as (width, height) tuple or based on an image or signal shape.
+    :type target_size: tuple(int, int)
+    :return: Heatmap normalized to [0, 255] as uint8.
+    :rtype: numpy.ndarray
+    """
+    # Normalize the localization map
+    localization_map = localization_map / np.max(localization_map)
+
+    # Ensure 2D format if needed
+    if localization_map.ndim == 1:
+        localization_map = np.expand_dims(localization_map, axis=0)
+        heatmap = cv.resize(localization_map, target_size)
+    else:
+        heatmap = cv.resize(localization_map.squeeze(), target_size)
+
+    # Convert to 0-255 heatmap
+    heatmap = np.uint8(255 * heatmap)
+    return heatmap
