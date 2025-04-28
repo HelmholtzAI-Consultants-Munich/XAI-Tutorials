@@ -8,7 +8,6 @@ sacrebleu==2.5.1
 scikit-learn==1.6.1
 seaborn==0.13.2
 shap==0.47.2
-tensorboard==2.19.0
 torch==2.6.0
 torchvision==0.21.0
 transformers[torch]==4.51.3
