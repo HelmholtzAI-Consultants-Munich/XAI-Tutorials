@@ -2,11 +2,8 @@ evaluate==0.4.3
 fgclustering==1.1.1
 lime==0.2.0.1
 matplotlib==3.10.1
-numpy==2.2.5
 opencv-python==4.11.0.86
 palmerpenguins==0.1.4
-pandas==2.2.3
-protobuf==6.30.2
 sacrebleu==2.5.1
 scikit-learn==1.6.1
 seaborn==0.13.2
