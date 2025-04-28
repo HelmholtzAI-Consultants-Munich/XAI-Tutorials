@@ -13,7 +13,7 @@ The learning objectives are:
 - learn how to interpret the outputs and graphs of those methods with hands-on exercises
 - learn to choose which method is suitable for a specific task
 
-For using the content of this repository for an online or offline course, please open a new GitHub branch in this repository with the name of the course and then choose the content you would like to use for your course. The folders `docs`, `test` and `.github` can be removed in the course branch as they are only needed in the main branch.
+For using the content of this repository for an online or offline course, please open a new GitHub branch in this repository with the name of the course and then choose the content you would like to use for your course. The folders `.github`, `docs` aand `test` can be removed in the course branch as they are only needed in the main branch. To adjust the notebooks of the new branch with the new branch information, you can run the script `python update_branch_links.py` where you should modify the `NEW_BRANCH` parameter to the name of the branch you created.
 
 **List of Tutorials for Model-Agnostic Methods:**
 
