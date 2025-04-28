@@ -1,0 +1,8 @@
+evaluate==0.4.3
+jupyter==1.1.1
+matplotlib==3.10.1
+opencv-python==4.11.0.86
+sacrebleu==2.5.1
+torch==2.6.0 
+torchvision==0.21.0 
+transformers[torch]==4.51.3
