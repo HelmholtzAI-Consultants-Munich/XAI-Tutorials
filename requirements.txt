@@ -1,23 +1,21 @@
 evaluate==0.4.3
 fgclustering==1.1.1
-ipython==9.1.0
+ipython==9.1.0 # this should be skipped for google collab installation
 jupyter==1.1.1
-jupyterlab==4.4.0
+jupyterlab==4.4.0 
 lime==0.2.0.1
 matplotlib==3.10.1
-notebook==7.4.0
-numpy==2.2.5
+notebook==6.5.7
+numpy==2.2.5 # 2.0.2
 opencv-python==4.11.0.86
 palmerpenguins==0.1.4
-pandas==2.2.3
-protobuf==6.30.2
+pandas==2.2.2
 sacrebleu==2.5.1
 scikit-learn==1.6.1
 seaborn==0.13.2
 shap==0.47.2
-tensorboard==2.19.0
-torch==2.6.0
-torchvision==0.21.0
+tensorboard==2.18
+torch==2.6.0 
+torchvision==0.21.0 
 transformers[torch]==4.51.3
 ucimlrepo==0.0.7
-utils==1.0.2
