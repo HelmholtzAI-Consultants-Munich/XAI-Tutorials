@@ -38,7 +38,7 @@ where the marginal contributions are the difference between the prediction on a 
 
     \phi_s(x_A) = f(s_{+x_A}) - f(s_{-x_A})
 
-For the weights we need to consider that the larger and smaller set have the highest weight [#weights]_
+For the weights we need to consider that the larger and smaller set have the highest weight. For more detail on how the weights are computed, watch: https://www.youtube.com/watch?v=UJeu29wq7d0
 
 To calculate each of those marginal contributions, we're required to determine the predicted value across all potential feature subsets. This necessitates computing the prediction a total of :math:`2^K` times, considering every possible combination of features. Theoretically, model retraining for each subset is necessary, but SHAP approximates these predictions by leveraging the model trained on the entire set. Indeed, we can use this model to run inference on various coalitions by manipulating feature values—often by shuffling or altering them—and estimate the impact of different feature subsets without the need for full retraining.
 
@@ -50,12 +50,12 @@ Once we compute the Shapley value for each feature *k*, we can use them to under
 
 where :math:`f(j)` is the prediction for the instance (the one considering all the available features) and :math:`\mu(f(J))` is called **baseline**, i.e. the prediction computed when all features are excluded. In a tabular data set it is often computed as the average prediction among all the instances in the data set. In practical situations, because of numerous approximations, the property may not be entirely fulfilled.
 
-To check if we completely understand the Shapley values, let's compute them in the context of a really small data set. Try to solve the following exercise [#exercise]_
+To check if we completely understand the Shapley values, let's compute them in the context of a really small data set. Try to solve the following exercise (adapted from `here <https://www.aidancooper.co.uk/how-shapley-values-work/>`_):
 
 Exercise Description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You are working with a simplified version of the Boston housing data set [#boston]_ that collects information about the percentage of the population that is working class, the number of rooms, and the nitric oxides concentration (parts per million) of a house. For simplicity, we will call the features A, B, and C. Table 1 shows a small example of the dataset.
+You are working with a simplified version of the Boston housing data set (`link <https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html?xgtab=&ref=aidancooper.co.uk>`_) that collects information about the percentage of the population that is working class, the number of rooms, and the nitric oxides concentration (parts per million) of a house. For simplicity, we will call the features A, B, and C. Table 1 shows a small example of the dataset.
 
 .. list-table:: Feature description
    :header-rows: 1
@@ -176,14 +176,6 @@ We can conclude that features *A* and *B* contribute positively (increasing pred
    :alt: SHAP values visualization
 
    SHAP values plotted in red (positive contributions) and blue (negative contributions).
-
-
-Footnotes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. [#weights] For more detail on how the weights are computed, watch: https://www.youtube.com/watch?v=UJeu29wq7d0
-.. [#exercise] Exercise is adapted from: https://www.aidancooper.co.uk/how-shapley-values-work/
-.. [#boston] Data set link: https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html?xgtab=&ref=aidancooper.co.uk
 
 
 
