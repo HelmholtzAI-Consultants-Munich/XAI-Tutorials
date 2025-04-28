@@ -44,10 +44,10 @@ conda activate xai
 pip install -r requirements.txt
 ```
 
-Once your environment is created, clone `SummerAcademy-2023` brach branch of the repo using the following command:
+Once your environment is created, clone `2023-HelmholtzSummerAcademy` brach branch of the repo using the following command:
 
 ```
-git clone --branch SummerAcademy-2023 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+git clone --branch 2023-HelmholtzSummerAcademy https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
 ```
 
 ## Code of Conduct
