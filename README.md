@@ -69,7 +69,6 @@ conda create -n xai python=3.11
 conda activate xai
 pip install -r requirements_xai-for-cnn.txt
 pip install -r requirements_xai-for-random-forest.txt
-pip install -r requirements_xai-for-transformers.txt
 ```
 
 Once your environment is created, clone `2025-HIDA-Spring` brach branch of the repo using the following command:
