@@ -45,10 +45,10 @@ conda activate xai
 pip install -r requirements.txt
 ```
 
-Once your environment is created, clone `ml4earth-Hackathon-2022` brach branch of the repo using the following command:
+Once your environment is created, clone `2022-ml4earth-Hackathon` brach branch of the repo using the following command:
 
 ```
-git clone --branch ml4earth-Hackathon-2022 https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+git clone --branch 2022-ml4earth-Hackathon https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
 ```
 
 ## Code of Conduct
