@@ -1,4 +1,4 @@
-evaluate==0.4.3
+evaluate==0.4.0
 fgclustering==1.1.1
 lime==0.2.0.1
 matplotlib==3.10.1
