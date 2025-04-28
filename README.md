@@ -30,7 +30,7 @@ Kenncode: 967680
 |14:15 - 14:55|	Method Comparison |
 |14:55 - 15:00| Conclusions |
 
-Extra Material: SHAP exercise - [Compute Shapley values by hand]()
+Extra Material: SHAP exercise - [Compute Shapley values by hand](https://xai-tutorials.readthedocs.io/en/latest/_model_agnostic_xai/shap.html#how-to-compute-shapley-values)
 
 #### Day 2 - XAI for CNNs
 
