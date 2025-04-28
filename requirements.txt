@@ -6,7 +6,7 @@ jupyterlab==4.4.0
 lime==0.2.0.1
 matplotlib==3.10.1
 notebook==6.5.7
-numpy==2.2.5 # 2.0.2
+numpy==2.0.2
 opencv-python==4.11.0.86
 palmerpenguins==0.1.4
 pandas==2.2.2
