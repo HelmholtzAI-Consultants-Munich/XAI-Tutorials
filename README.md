@@ -4,6 +4,8 @@ This 2-half-day course provides an introduction to the topic of Explainable AI (
 
 The goal of the course is to help participants understand how XAI methods can help uncover biases in the data or provide interesting insights. After a general introduction to XAI, the course goes deeper into state-of-the-art model agnostic as well as model-specific interpretation techniques. The practical hands-on sessions will help to learn about strengths and weaknesses of these standard methods used in the field.
 
+[Course Page](https://www.helmholtz-hida.de/en/lernen-vernetzen/data-science-course-portfolio/introduction-to-explainable-ai/)
+
 ## Venue
 The course will be fully online:  
 
