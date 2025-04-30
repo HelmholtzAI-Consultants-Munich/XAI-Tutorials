@@ -24,10 +24,11 @@ Kenncode: 967680
 |    Time     |       Session       |
 |-------------|---------------------|
 |10:00 - 10:30| Introduction to XAI |
-|10:30 - 11:00|	Permutation Feature Importance|
-|11:00 - 12:00| SHAP |
+|10:30 - 11:00|	Permutation FI|
+|11:00 - 11:30| LIME |
+|11:30 - 12:00| SHAP |
 |12:00 - 13:00| Lunch Break|
-|13:00 - 13:30| LIME |
+|13:00 - 13:30| SHAP |
 |13:30 - 14:15| FGC|
 |14:15 - 14:55|	Method Comparison |
 |14:55 - 15:00| Conclusions |
