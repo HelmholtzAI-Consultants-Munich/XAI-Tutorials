@@ -45,8 +45,8 @@ Extra Material: SHAP exercise - [Compute Shapley values by hand](https://xai-tut
 |11:45 - 12:00 | Extra: Grad-CAM for Signals |
 |12:00 - 13:00 | Lunch Break |
 |13:00 - 13:30 | LIME for Images |
-|13:30 - 14:00 | SHAP for Images |
-|14:00 - 14:55 | Method Comparison |
+|13:30 - 14:15 | SHAP for Images |
+|14:15 - 14:55 | Method Comparison |
 |14:55 - 15:00 | Conclusions |
 
 
