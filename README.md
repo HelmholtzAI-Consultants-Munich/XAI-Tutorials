@@ -30,8 +30,7 @@ Kenncode: 967680
 |12:00 - 13:00| Lunch Break|
 |13:00 - 13:30| SHAP |
 |13:30 - 14:15| FGC|
-|14:15 - 14:55|	Method Comparison |
-|14:55 - 15:00| Conclusions |
+|14:15 - 15:00|	Method Comparison & Conclusions |
 
 Extra Material: SHAP exercise - [Compute Shapley values by hand](https://xai-tutorials.readthedocs.io/en/latest/_model_agnostic_xai/shap.html#how-to-compute-shapley-values)
 
@@ -45,9 +44,9 @@ Extra Material: SHAP exercise - [Compute Shapley values by hand](https://xai-tut
 |11:45 - 12:00 | Extra: Grad-CAM for Signals |
 |12:00 - 13:00 | Lunch Break |
 |13:00 - 13:30 | LIME for Images |
-|13:30 - 14:15 | SHAP for Images |
-|14:15 - 14:55 | Method Comparison |
-|14:55 - 15:00 | Conclusions |
+|13:30 - 14:10 | SHAP for Images |
+|14:10 - 14:55 | Method Comparison & Conclusions|
+|14:55 - 15:00 | Wrap Up |
 
 
 ## Mentors
