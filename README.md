@@ -10,11 +10,11 @@ The goal of the course is to help participants understand how XAI methods can he
 The course will be fully online:  
 
 [Zoom Link Day 1](https://zoom.us/j/99540714120?pwd=uvtIc07yF9k2muXJOaz8s9kXaE8GWv.1)  
-Meeting-ID: 995 4071 4120
+Meeting-ID: 995 4071 4120  
 Kenncode: 571715
 
 [Zoom Link Day 2](https://zoom.us/j/98569000505?pwd=rMp6ymmRHLBNZgzWuSWa5dQkb3cnCh.1)  
-Meeting-ID: 985 6900 0505
+Meeting-ID: 985 6900 0505  
 Kenncode: 038195 
 
 ## Schedule at a glance (TBD)
