@@ -4,20 +4,20 @@ This 2-half-day course provides an introduction to the topic of Explainable AI (
 
 The goal of the course is to help participants understand how XAI methods can help uncover biases in the data or provide interesting insights. After a general introduction to XAI, the course goes deeper into state-of-the-art model agnostic as well as model-specific interpretation techniques. The practical hands-on sessions will help to learn about strengths and weaknesses of these standard methods used in the field.
 
-[Course Page](https://www.helmholtz-hida.de/en/lernen-vernetzen/data-science-course-portfolio/introduction-to-explainable-ai/)
+[Course Page](...)
 
 ## Venue
 The course will be fully online:  
 
-[Zoom Link Day 1](https://zoom.us/j/93041152208?pwd=t2nePps1ib0g5DzGdeCT0X4QBDLPwQ.1)  
-Meeting-ID: 930 4115 2208  
-Kenncode: 795548  
+[Zoom Link Day 1](...)  
+Meeting-ID: ...  
+Kenncode: ...  
 
-[Zoom Link Day 2](https://zoom.us/j/93607982165?pwd=4yHLKPP2LYZu67vKf01tk87eZ3H9km.1)  
-Meeting-ID: 936 0798 2165  
-Kenncode: 967680  
+[Zoom Link Day 2](...)  
+Meeting-ID: ...  
+Kenncode: ...  
 
-## Schedule at a glance
+## Schedule at a glance (TBD)
 
 #### Day 1 - XAI for Random Forest
 
@@ -51,13 +51,9 @@ Extra Material: SHAP exercise - [Compute Shapley values by hand](https://xai-tut
 
 ## Mentors
 
-
 - [Dr. Lisa Borros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de), Helmholtz Munich
-- Dr. Elisabeth Georgii, Helmholtz Munich
-- Sabrina Benassou, JSC
-- Francesco Campi, Helmholtz Munich
-- Karol Szustakowski, Helmholtz Munich
-- Serena Sritharan, Helmholtz Munich
+- ...
+
 
 ## Requirements and Setup
 
@@ -73,10 +69,10 @@ pip install -r requirements_xai-for-cnn.txt
 pip install -r requirements_xai-for-random-forest.txt
 ```
 
-Once your environment is created, clone `2025-HIDA-Spring` brach branch of the repo using the following command:
+Once your environment is created, clone `2025-HIDA-Autumn` brach branch of the repo using the following command:
 
 ```
-git clone --branch 2025-HIDA-Spring https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+git clone --branch 2025-HIDA-Autumn https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
 ```
 
 ## Code of Conduct
