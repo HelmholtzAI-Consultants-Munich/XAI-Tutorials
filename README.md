@@ -51,13 +51,10 @@ Extra Material: SHAP exercise - [Compute Shapley values by hand](https://xai-tut
 
 ## Mentors
 
-
 - [Dr. Lisa Borros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de), Helmholtz Munich
 - Dr. Elisabeth Georgii, Helmholtz Munich
-- Sabrina Benassou, JSC
+- Dr. Sabrina Benassou, JSC
 - Francesco Campi, Helmholtz Munich
-- Karol Szustakowski, Helmholtz Munich
-- Serena Sritharan, Helmholtz Munich
 
 ## Requirements and Setup
 
