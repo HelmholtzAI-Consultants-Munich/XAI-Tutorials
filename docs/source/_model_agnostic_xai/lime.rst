@@ -46,7 +46,7 @@ In the next step, LIME builds a surrogate model with the interpretable features 
     \hat{y}_i = \beta_0 + \beta_1 z_{i,1} + \beta_2 z_{i,2} + \ldots + \beta_d z_{i,d} + \epsilon_i
 
 
-Here, $\hat{y}_i$ is the outcome predicted by the surrogate model for the $i$-th perturbed instance, :math:`z_{i,j}` is the $j$-th interpretable feature, and :math:`\epsilon_i` is the prediction error with respect to the actual label $y_i$. In the default implementation, LIME obtains this linear model using a (weighted) ridge regression. The final step involves displaying the superpixels associated with the top positive coefficients of $\beta$.
+Here, :math:`\hat{y}_i` is the outcome predicted by the surrogate model for the $i$-th perturbed instance, :math:`z_{i,j}` is the $j$-th interpretable feature, and :math:`\epsilon_i` is the prediction error with respect to the actual label $y_i$. In the default implementation, LIME obtains this linear model using a (weighted) ridge regression. The final step involves displaying the superpixels associated with the top positive coefficients of $\beta$.
 
 
 References
