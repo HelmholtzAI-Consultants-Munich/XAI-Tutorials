@@ -27,6 +27,8 @@ jobs:
         pip install pytest
         pip install pytest-parallel
         pip install py
-        pip install -r requirements.txt
+        pip install -r requirements_xai-for-cnn.txt
+        pip install -r requirements_xai-for-random-forest.txt
+        pip install -r requirements_xai-for-transformer.txt
     - name: Test with pytest
       run: pytest --workers auto
