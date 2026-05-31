@@ -1,14 +1,17 @@
 Introduction to Transformers
 =========================================
 
-Transformers are a type of neural network architecture that has become a cornerstone in Natural Language Processing (NLP) and beyond. They were introduced in the 2017 paper "Attention is All You Need" by Vaswani et al. Transformers are a milestone because of the **Attention Mechanism**, especially self-attention. 
+The Transformer architecture was introduced in the 2017 paper *Attention Is All You Need* by Vaswani et al. It was originally developed for natural language processing tasks, especially machine translation, although the architecture itself is generic and is now widely used in applications such as chatbots and vision systems. 
 
-For a short introduction to Transformers and their Self-Attention machanism, click below:
+The example used in this tutorial is German to English translation, e.g., “Ich habe Hunger” to “I am hungry”.
 
-.. vimeo:: 940749237?h=4f7120ca0a"
-    
-    Short video lecture on the principles of Transfomers and Self-Attention.
+For a short introduction to Transformers, click below:
+<Video overview>
 
+**Background (before transformers)**:
+
+- Sequence models such as RNNs, LSTMs, and GRUs process data sequentially.
+- This sequential processing makes training slow since it cannot be parallelized.
 
 Encoder-Decoder Structure
 ---------------------------
