@@ -77,3 +77,45 @@ For a short introduction to Transformers, click below:
 
 Word embedding
 =========================================
+
+
+.. figure:: ../_figures/word-embedding.png
+
+
+Neural networks, including Transformers, require vector inputs, so words must be converted into vectors. See this video for the introduction to the word embedding.
+
+<Video Word Embedding>
+
+**Motivation:** 
+
+- A simple solution: one hot vectors are a simple solution, where each word is represented by a vector with one element set to one and the rest zero.
+    - However, one hot encoding does not capture semantic similarity, since related and unrelated words have zero similarity.
+- Therefore, we need word representations that encode meaning and relationships between words.
+
+
+.. figure:: ../_figures/word-emb-ex-1.png
+
+
+**Method:**
+
+- Word embedding maps words into vectors that capture semantic similarity.
+- In a good word embedding, related words are closer, and vector operations can reflect relationships between words.
+    - e.g., queen - woman + man = king
+
+
+    .. figure:: ../_figures/word-emb-ex-2.png
+
+
+- In Transformers, text is first split into smaller chunks using byte pair encoding, then mapped to vectors through a learnable linear layer.
+    - Possibly not be the best for some cases, e.g., hun-gry vs hun-ter
+    - But it still improves data efficiency and generalization, e.g., walk, walk-ed, walk-ing.
+
+
+    .. figure:: ../_figures/byte-pair-encoding.png
+
+
+In this course we simplify the explanation by considering the whole words instead of split tokens as the word embedding.
+
+
+Positional encoding
+=========================================
