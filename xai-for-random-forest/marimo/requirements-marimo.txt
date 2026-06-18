@@ -1,0 +1,15 @@
+# Dependencies for the marimo port of Gen-2-Tutorial_LIME.py
+# Python 3.11 recommended (the trained-model pickles need pandas 3.x to load).
+#
+#   python3.11 -m venv .venv
+#   .venv/bin/pip install -r requirements-marimo.txt
+#   .venv/bin/marimo edit Gen-2-Tutorial_LIME.py
+#
+marimo==0.23.9
+altair==6.2.1
+pyarrow            # lets Altair serialize data without a fallback warning
+lime==0.2.0.1
+scikit-learn==1.8.0
+pandas==3.0.3
+numpy==2.4.5
+matplotlib==3.10.9
