@@ -164,21 +164,26 @@ def _(mo):
 
 
 @app.cell
-def _(Path):
+def _(Path, mo):
     def _find_models_dir():
-        # Locate the folder that holds the trained-model pickles (model_rf_*.pickle).
+        # Locate the folder with the trained-model pickles, anchored on this
+        # notebook's own location so it works regardless of where the repo is cloned.
+        here = mo.notebook_dir() or Path.cwd()
         candidates = [
+            here / "models",                  # models bundled next to the notebook
+            here / ".." / ".." / "models",    # <repo>/models (notebook in xai-for-random-forest/marimo/)
+            here / ".." / "models",
+            here / ".." / "XAI-Tutorials" / "models",
+            Path("../../models"),             # fallbacks relative to the launch directory
             Path("../models"),
-            Path("../XAI-Tutorials/models"),
-            Path("XAI-Tutorials/models"),
-            Path.home() / "Documents/ema/helmholtz-work/XAI-Tutorials/models",
+            Path("models"),
         ]
         for c in candidates:
             if (c / "model_rf_housing.pickle").exists():
                 return c.resolve()
         raise FileNotFoundError(
-            "Could not locate the 'models' directory. "
-            "Edit MODELS_DIR to point at the folder containing model_rf_housing.pickle."
+            "Could not find model_rf_housing.pickle. Put a 'models' folder next to "
+            "this notebook, or set MODELS_DIR to its location."
         )
 
 
