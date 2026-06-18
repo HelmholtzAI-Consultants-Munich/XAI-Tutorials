@@ -84,7 +84,8 @@ reproducible, hands-on lesson, I'd recommend it.
 ## How to run
 
 ```
-cd /Users/emasalkic/Documents/ema/helmholtz-work/marimo
+# from the repository root:
+cd xai-for-random-forest/marimo
 .venv/bin/marimo edit Gen-2-Tutorial_LIME.py     # interactive editor — drag the sliders
 .venv/bin/marimo run  Gen-2-Tutorial_LIME.py     # clean app view, no code shown
 ```
