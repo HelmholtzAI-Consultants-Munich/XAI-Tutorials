@@ -7,7 +7,9 @@ The example used in this tutorial is German to English translation, e.g., “Ich
 
 For a short introduction to Transformers, click below:
 
-<Video overview>
+**Transformer Basic – Introduction to Transformers**
+
+.. youtube:: aqIZG521uwE
 
 **Background (before transformers)**:
 
@@ -84,7 +86,9 @@ Word embedding
 
 Neural networks, including Transformers, require vector inputs, so words must be converted into vectors. See this video for the introduction to the word embedding.
 
-<Video Word Embedding>
+**Transformer Basic – Word embedding**
+
+.. youtube:: Z7K2uodMnts
 
 **Motivation:** 
 
@@ -130,7 +134,9 @@ Positional encoding
 
 Positional encoding gives word position information to each word embedding. See this video below for an introduction to positional encoding.
 
-<Video Positional Encoding>
+**Transformer Basic – Positional encoding**
+
+.. youtube:: 1s_XUBB1RsY
 
 **Motivation:**
 
@@ -194,7 +200,9 @@ Self attention mechanism is the core of transformer model. Self-attention is use
 
 Check the video below for introduction for more details:
 
-<Video self attention>
+**Transformer Basic – Self-attention**
+
+.. youtube:: 6njflIo3BHI
 
 **Motivation:**
 
@@ -283,7 +291,9 @@ In the Transformer decoder, there are two types of attention mechanisms: masked 
 
 See this video for the introduction to masked self-attention.
 
-<Video Masked self attention>
+**Transformer Basic – Masked self-attention and cross-attention**
+
+.. youtube:: NONly4i_-3Q
 
 **Masked self-attention motivation:**
 
@@ -336,7 +346,9 @@ Finally, transformer use multi-head mechanism for all of the attention modules (
 
 Refer to the video below for more details.
 
-<Video multi head attention>
+**Transformer Basic – Multi head attention**
+
+.. youtube:: 99100CbBsck
 
 **Motivation:**
 
@@ -366,7 +378,9 @@ Putting them all together
 
 After understanding the individual components, we will put them together. Please watch the video below:
 
-<video put them all together>
+**Transformer Basic – Putting them all together**
+
+.. youtube:: SE6CH0plnW0
 
 Transformer can be seen as a combination of preprocessing, encoder, decoder, and output layers working together.
 
@@ -440,7 +454,9 @@ BERT, which stands for Bidirectional Encoder Representations from Transformers, 
 
 Below is the introduction to BERT.
 
-<Video BERT>
+**Transformer Basic – Bidirectional Encoder Representations from Transformers (BERT)**
+
+.. youtube:: s0OQoRuNPTg
 
 **Key characteristics:**
 
@@ -488,7 +504,9 @@ Vision Transformer, or ViT, was proposed in the 2021 paper *An Image is Worth 16
 
 See the video below for introduction to ViT.
 
-<Video ViT>
+**Transformer Basic – Vision Transformer (ViT)**
+
+.. youtube:: sx1iiDDpbyI
 
 **Key differences from the original Transformer:**
 
