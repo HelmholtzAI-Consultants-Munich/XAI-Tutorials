@@ -1,7 +1,9 @@
 jupyter==1.1.1
 matplotlib==3.10.1
-torch==2.2.2
-transformers[torch]==4.38.2
-datasets==3.5.0
-evaluate==0.4.3
-numpy<2.0
+torch==2.6.0
+transformers[torch]==5.13.0
+datasets==5.0.0
+scikit-learn==1.9.0
+accelerate==1.14.0
+numpy==2.0.2
+requests==2.34.2
