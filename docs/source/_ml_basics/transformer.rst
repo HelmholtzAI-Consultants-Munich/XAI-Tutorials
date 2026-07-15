@@ -162,7 +162,7 @@ Positional encoding gives word position information to each word embedding. See 
 
 **Method:**
 
-- Positional encoding is used to inject positional information to the model.It is a vector added to the word embedding, so it must have the same dimension as the embedding.
+- Positional encoding is used to inject positional information to the model. It is a vector added to the word embedding, so it must have the same dimension as the embedding.
 
 
 .. figure:: ../_figures/pos-enc-method-1.png
@@ -448,7 +448,7 @@ Transformer extension
 Beyond the original transformer used for machine translation, there are methods extending the concept of transformer to other tasks.
 
 Bidirectional Encoder Representations from Transformers (BERT)
------------------------------------------
+--------------------------------------------------------------
 
 BERT, which stands for Bidirectional Encoder Representations from Transformers, was introduced in 2019 by Devlin et al. Unlike the original Transformer that consists of both encoder and decoder for machine translation, BERT uses only the encoder and is designed to produce representations that can be applied to many downstream tasks such as classification. The term bidirectional means that BERT can attend to both past and future words using self attention, allowing it to capture context from both directions. 
 
