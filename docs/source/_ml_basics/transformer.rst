@@ -169,7 +169,7 @@ Positional encoding gives word position information to each word embedding. See 
 
 - A simple approach is binary position encoding, although it limits the maximum input length depending on the number of bits.
 
-    - Max input length = {number of bits}^2. E.g., number of bits = 4 means max input length = 16
+    - Max input length = 2^{number of bits}. E.g., number of bits = 4 means max input length = 16
 
 
     .. figure:: ../_figures/pos-enc-method-2.png
