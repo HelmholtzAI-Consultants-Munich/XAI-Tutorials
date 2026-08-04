@@ -479,7 +479,7 @@ Below is the introduction to BERT.
 - Training consists of two stages: pre training and fine tuning.
 
 
-.. figure:: ../_figures/bidir-enc-training-1.png
+    .. figure:: ../_figures/bidir-enc-training-1.png
 
 
     - First stage: the encoder is trained using self supervised pretext tasks. Examples of pretext task:
