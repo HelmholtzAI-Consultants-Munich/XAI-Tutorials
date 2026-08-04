@@ -1,10 +1,10 @@
 Why is explainability important?
 =================================
 
- *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
-
 .. figure:: ../_figures/xai_importance.png
-    :width: 300
+    :width: 800
+
+ *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
 
 To Mitigate Ethical Issues
 ----------------------------
