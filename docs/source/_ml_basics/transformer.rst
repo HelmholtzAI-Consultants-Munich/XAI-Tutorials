@@ -78,7 +78,7 @@ For a short introduction to Transformers, click below:
 
 
 Word embedding
-=========================================
+-----------------------------------------
 
 
 .. figure:: ../_figures/word-embedding.png
@@ -126,7 +126,7 @@ In this course we simplify the explanation by considering the whole words instea
 
 
 Positional encoding
-=========================================
+-----------------------------------------
 
 
 .. figure:: ../_figures/pos-enc.png
@@ -189,7 +189,7 @@ Positional encoding gives word position information to each word embedding. See 
 
 
 Self-attention
-=========================================
+-----------------------------------------
 
 Self attention mechanism is the core of transformer model. Self-attention is used in the encoder. In this subsection, we will discuss without the multi-head part.
 
@@ -278,7 +278,7 @@ Check the video below for introduction for more details:
 
 
 Masked self-attention and cross-attention
-=========================================
+-----------------------------------------
 
 In the Transformer decoder, there are two types of attention mechanisms: masked self attention and cross attention. 
 
@@ -336,7 +336,7 @@ See this video for the introduction to masked self-attention.
 
 
 Multi head attention
-=========================================
+-----------------------------------------
 
 Finally, transformer use multi-head mechanism for all of the attention modules (self-attention, cross-attention, and masked self-attention). In this subsection, we will discuss multi-head self-attention. The concept of multi-head is transferable to other attention mechanisms.
 
@@ -374,7 +374,7 @@ Refer to the video below for more details.
 
 
 Putting them all together
-=========================================
+-----------------------------------------
 
 After understanding the individual components, we will put them together. Please watch the video below:
 
@@ -443,12 +443,12 @@ Transformer can be seen as a combination of preprocessing, encoder, decoder, and
 - This process is also repeated across multiple decoder blocks.
 
 Transformer extension
-=========================================
+-----------------------------------------
 
 Beyond the original transformer used for machine translation, there are methods extending the concept of transformer to other tasks.
 
 Bidirectional Encoder Representations from Transformers (BERT)
---------------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BERT, which stands for Bidirectional Encoder Representations from Transformers, was introduced in 2019 by Devlin et al. Unlike the original Transformer that consists of both encoder and decoder for machine translation, BERT uses only the encoder and is designed to produce representations that can be applied to many downstream tasks such as classification. The term bidirectional means that BERT can attend to both past and future words using self attention, allowing it to capture context from both directions. 
 
@@ -498,7 +498,7 @@ Below is the introduction to BERT.
     - Second stage: a task specific layer is added for downstream tasks, and either only this layer or the entire model can be fine tuned.
 
 Vision Transformer (ViT)
-=========================================
+-----------------------------------------
 
 Vision Transformer, or ViT, was proposed in the 2021 paper *An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale*. It extends the original Transformer architecture to image inputs, adapting the design to work for image classification tasks.
 
@@ -540,8 +540,8 @@ See the video below for introduction to ViT.
 .. figure:: ../_figures/vis-transformer-3.png
 
 
-References:
-=========================================
+References
+-----------------------------------------
 
 BERT paper: Devlin, J., Chang, M.W., Lee, K. and Toutanova, K., 2019, June. Bert: Pre-training of deep bidirectional transformers for language understanding. In *Proceedings of the 2019 conference of the North American chapter of the association for computational linguistics: human language technologies, volume 1 (long and short papers)* (pp. 4171-4186).
 
