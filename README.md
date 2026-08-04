@@ -3,6 +3,8 @@
 
 # Tutorials for eXplainable Artificial Intelligence (XAI)
 
+<!-- LINK INTRODUCTION START -->
+
 This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests, CNNs, and Transformers. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
 
 The tutorials cover both model-agnostic and model-specific XAI methods, including SHAP, LIME, Permutation Feature Importance, Grad-CAM, Attention Maps, and Forest-Guided Clustering.
@@ -14,6 +16,7 @@ The learning objectives are:
 * interpret explanation outputs and visualizations for different model types
 * gain hands-on experience applying XAI methods to real-world examples
 
+<!-- LINK INTRODUCTION END -->
 
 ## 📚 Included Tutorials
 
@@ -77,11 +80,19 @@ python update_branch_links.py
 
 ## 🤝 Contributions
 
+<!-- LINK CONTRIBUTION START -->
+
 Comments, suggestions, and contributions are very welcome!
 If you have ideas for improvements or want to report an issue, feel free to open an issue or submit a pull request.
 
-## 📄 License
+<!-- LINK CONTRIBUTION END -->
+
+## 🛡️ License
+
+<!-- LINK LICENSE START -->
 
 All content is publicly available under the Creative Commons Attribution 4.0 License:
 
 [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
+
+<!-- LINK LICENSE END -->
