@@ -1,5 +1,5 @@
 Introduction to Convolutional Neural Networks and Feature Visualization
-=====================================
+=========================================================================
 
 Convolutional Neural Networks (CNNs) are a class of deep learning models widely used for image analysis and computer vision tasks.
 The CNNs, considered cutting-edge in computer vision, operate by applying filter slices to an input image, creating feature maps that capture hierarchical patterns and representations essential for image analysis.
