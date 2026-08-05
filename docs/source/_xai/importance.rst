@@ -1,8 +1,6 @@
 Why is explainability important?
 =================================
 
- *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
-
 Machine learning models are typically evaluated using performance metrics such as accuracy, precision, or recall. 
 While these metrics provide a useful summary of predictive performance, they rarely capture all aspects that matter 
 in real-world applications. Explainable AI complements these metrics by helping us understand *why* a model makes 
