@@ -133,7 +133,7 @@ def plot_attention_maps(img, attentions):
 ############################
 
 def evaluate_model(classifier_pipeline, data, label2id):
-    # Run batched inference on the training texts. For each text, the pipeline
+    # Run batched inference on the provided texts. For each text, the pipeline
     # returns the prediction scores for all emotion classes. Batching improves
     # inference speed, while truncation ensures that texts exceeding the model's
     # maximum input length are safely shortened.
