@@ -129,7 +129,7 @@ def plot_attention_maps(img, attentions):
 
 
 ############################
-### SHAP helper fucntions
+### SHAP helper functions
 ############################
 
 def evaluate_model(classifier_pipeline, data, label2id):
