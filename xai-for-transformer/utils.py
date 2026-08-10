@@ -127,10 +127,10 @@ def plot_attention_maps(img, attentions):
     plt.show()
 
 
-
 ############################
 ### SHAP helper functions
 ############################
+
 
 def evaluate_model(classifier_pipeline, data, label2id):
     # Run batched inference on the provided texts. For each text, the pipeline
@@ -150,11 +150,12 @@ def evaluate_model(classifier_pipeline, data, label2id):
     accuracy = balanced_accuracy_score(data["emotion"], predicted_ids)
     return accuracy
 
-def plot_shap_values(shap_values_1, shap_values_2, token_name, max_display=20):
+
+def plot_shap_values(shap_values_1, shap_values_2, output_name, max_display=20):
 
     # Aggregate SHAP values
-    train = shap_values_1[:, :, token_name].mean(0)
-    test = shap_values_2[:, :, token_name].mean(0)
+    train = shap_values_1[:, :, output_name].mean(0)
+    test = shap_values_2[:, :, output_name].mean(0)
 
     # Top 20 tokens based on absolute SHAP values (train)
     idx = np.argsort(np.abs(train.values))[-max_display:]
@@ -167,35 +168,26 @@ def plot_shap_values(shap_values_1, shap_values_2, token_name, max_display=20):
     test_values = np.array([test_dict.get(token, 0) for token in train.feature_names[idx]])
 
     # Colors: red = positive, blue = negative
-    train_colors = [shap.plots.colors.red_rgb if v >= 0 else shap.plots.colors.blue_rgb for v in train.values[idx]]
+    train_colors = [
+        shap.plots.colors.red_rgb if v >= 0 else shap.plots.colors.blue_rgb for v in train.values[idx]
+    ]
     test_colors = [shap.plots.colors.red_rgb if v >= 0 else shap.plots.colors.blue_rgb for v in test_values]
 
     # Create side-by-side plots
     fig, axes = plt.subplots(1, 2, figsize=(12, 8), sharey=True)
 
-    axes[0].barh(
-        train.feature_names[idx],
-        train.values[idx],
-        color=train_colors
-    )
+    axes[0].barh(train.feature_names[idx], train.values[idx], color=train_colors)
     axes[0].set_title("Train")
     axes[0].set_xlabel("Mean SHAP value")
     axes[0].axvline(0, color="black", linewidth=1)
 
-    axes[1].barh(
-        train.feature_names[idx],
-        test_values,
-        color=test_colors
-    )
+    axes[1].barh(train.feature_names[idx], test_values, color=test_colors)
     axes[1].set_title("Test")
     axes[1].set_xlabel("Mean SHAP value")
     axes[1].axvline(0, color="black", linewidth=1)
 
     # Use the same symmetric x-axis for both plots
-    xmax = max(
-        np.max(np.abs(train.values[idx])),
-        np.max(np.abs(test_values))
-    )
+    xmax = max(np.max(np.abs(train.values[idx])), np.max(np.abs(test_values)))
 
     axes[0].set_xlim(-xmax, xmax)
     axes[1].set_xlim(-xmax, xmax)
