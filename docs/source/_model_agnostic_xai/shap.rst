@@ -4,28 +4,40 @@ Introduction to SHapley Additive exPlanations (SHAP)
 What does SHAP explain?
 -----------------------
 
-SHapley Additive exPlanations (**SHAP**) is a **local, model-agnostic XAI
-method** that explains individual model predictions by assigning a
-contribution to each input feature. SHAP is therefore primarily a 
-**local explanation method**. However, global insights about the model can 
-be obtained by aggregating SHAP values across many instances. Although SHAP 
-is commonly introduced as model-agnostic, the SHAP framework also includes 
-**model-specific algorithms** that exploit particular model structures to 
-compute Shapley-based feature contributions more efficiently.
+SHapley Additive exPlanations (**SHAP**) explains an **individual model
+prediction** by assigning a contribution to each input feature. The main idea
+is to quantify how much each feature contributes to the difference between a
+**baseline prediction** and the prediction for the individual instance.
 
-The main idea behind SHAP is to quantify how much each feature contributes to 
-the difference between a **baseline prediction** and the prediction for a
-particular instance.
+SHAP is therefore primarily a **local model-agnostic method**. Global
+insights can later be obtained by aggregating SHAP values across many
+instances.
 
-Unlike methods such as permutation feature importance, SHAP does **not**
-measure how model performance changes when a feature is perturbed. Instead,
-SHAP explains the **model output itself**.
+Importantly, SHAP explains the **model output itself**, not changes in model
+performance. This distinguishes SHAP from methods such as permutation feature
+importance, which measure how predictive performance changes when feature
+information is perturbed.
 
-The quantity being explained depends on the prediction task:
+The quantity explained by SHAP depends on the prediction task:
 
-* **Classification:** typically a predicted probability, log-odds, or model
-  score for a class.
-* **Regression:** the predicted numerical value.
+* **Classification:** the explained model output may be a predicted
+  probability, log-odds, or model score for a particular class.
+* **Regression:** the explained model output is the predicted numerical value.
+
+In both cases, the SHAP values describe how the input features move the model
+output from a **baseline** to the prediction for the individual instance. What
+this baseline represents will be introduced below and depends on how
+``missing`` feature information is defined.
+
+What SHAP Does Not Imply
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+SHAP explains the behavior of the **model**, not necessarily the underlying
+data-generating process.
+
+A large positive or negative SHAP value indicates how a feature contributes
+to the model's prediction relative to the chosen baseline. It does not imply
+that the feature has a causal effect on the predicted outcome.
 
 Video Introduction
 ------------------
@@ -49,22 +61,24 @@ game.
 Cooperative Game Theory
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Shapley values originate from **cooperative game theory** and provide a fair
-way to determine how much each player contributed to a shared outcome.
+Shapley values originate from **cooperative game theory** and provide a
+principled way to determine how much each player contributed to a shared
+outcome.
 
 The most important concepts are:
 
 * A **player** is a participant in the game.
-* A **coalition** is any subset of players working together.
-* The **coalition value** describes what a group of players achieves together.
+* A **coalition** :math:`S` is any subset of players working together.
+* The **coalition value** :math:`v(S)` describes what that group achieves.
 * A player's **marginal contribution** describes how much the coalition value
   increases or decreases when that player joins.
-* The **Shapley value** summarizes the player's marginal contributions to
-  determine the player's overall contribution.
+* The **Shapley value** combines these marginal contributions to determine the
+  player's overall contribution.
 
-The important idea is that a player's contribution may depend on which other
+The important idea is that a player's contribution can depend on which other
 players are already part of the coalition. Shapley values account for this by
-considering the player's contribution in all possible situations.
+considering the player's contribution across all possible situations.
+
 
 Players, Coalitions, and Coalition Values
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -79,8 +93,8 @@ players are:
 Different combinations of these players produce different amounts of value.
 The question is:
 
-    **How should the total value be fairly attributed to Alice, Bob, and
-    Charlie?**
+**How should the total value be fairly attributed to Alice, Bob, and
+Charlie?**
 
 A coalition is any subset of the available players. With three players,
 there are :math:`2^3 = 8` possible coalitions. We assign each coalition a
@@ -126,7 +140,7 @@ For example,
 
 means that Alice and Bob working together produce a value of €150.
 
-The value of the complete coalition is
+The value of the full coalition is
 
 .. math::
 
@@ -139,12 +153,10 @@ individual player.
 Marginal Contributions
 ^^^^^^^^^^^^^^^^^^^^^^
 
-A player's contribution cannot in general be determined by looking only at
-what the player achieves alone. Their contribution may depend on which
-players are already in the coalition.
+To measure a player's contribution to a coalition, we compare the coalition
+value **before and after the player joins**.
 
-To measure the contribution of player :math:`i` to a coalition :math:`S`,
-we compare the coalition value **before and after the player joins**:
+For player :math:`i` joining coalition :math:`S`, the marginal contribution is
 
 .. math::
 
@@ -152,14 +164,13 @@ we compare the coalition value **before and after the player joins**:
 
 Here,
 
-* :math:`i` is the player joining the coalition,
+* :math:`i` is the player of interest,
 * :math:`S` is the coalition before the player joins,
 * :math:`v(S)` is the value of that coalition.
 
 For example, suppose Bob is already working and Alice joins. Before Alice
-joins, the coalition :math:`\{B\}` has value 40. After Alice joins, the
-coalition :math:`\{A,B\}` has value 150. Alice's marginal contribution is
-therefore
+joins, coalition :math:`\{B\}` has value 40. After Alice joins, coalition
+:math:`\{A,B\}` has value 150. Alice's marginal contribution is therefore
 
 .. math::
 
@@ -207,7 +218,7 @@ is already working and Charlie joins:
 
 In this case, Charlie reduces the coalition value by €10.
 
-His marginal contributions are:
+Charlie's marginal contributions are:
 
 .. list-table:: Charlie's marginal contributions
    :header-rows: 1
@@ -234,18 +245,21 @@ His marginal contributions are:
      - :math:`140-150`
      - :math:`-10`
 
-This leads to an important question: **Which of these marginal contributions
-should represent a player's overall contribution?**
+This leads to an important question:
+
+**Which of these marginal contributions represents the player's overall
+contribution?**
 
 
-Computing the Shapley Value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Average Contribution Across Player Orderings
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A player's marginal contribution depends on which players are already in the
-coalition. The Shapley value accounts for this by considering **all possible
-orders in which the players can join**.
+A player's contribution depends on which players are already in the
+coalition. The Shapley value accounts for this by averaging the player's
+marginal contribution over **all possible orders in which the players can
+join**.
 
-For three players, there are
+With three players, there are
 
 .. math::
 
@@ -262,8 +276,9 @@ possible orders:
    C -> A -> B
    C -> B -> A
 
-For each order, we determine the coalition that exists immediately before
-Alice joins and calculate her marginal contribution.
+For each order, we ask:
+
+**What is the marginal contribution of Alice when she joins?**
 
 For example, consider
 
@@ -327,7 +342,8 @@ We can compute the Shapley values for Bob and Charlie in the same way:
 
    \phi_C = -6.67.
 
-The three Shapley values sum to the value of the complete coalition:
+In this example, the value of the empty coalition is zero. The three Shapley
+values therefore sum to the value of the full coalition:
 
 .. math::
 
@@ -335,9 +351,9 @@ The three Shapley values sum to the value of the complete coalition:
    =
    103.33 + 43.33 - 6.67
    =
-   140.
+   140,
 
-This is exactly the value of the complete coalition,
+which is exactly
 
 .. math::
 
@@ -348,17 +364,28 @@ Shapley value because, on average, his presence reduces the value produced by
 the team.
 
 
-General Shapley Formula
-^^^^^^^^^^^^^^^^^^^^^^^
+From Player Orderings to Coalitions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The calculation above can be written compactly using the general Shapley
-value formula:
+Instead of averaging marginal contributions over all possible player
+orderings, the Shapley value can equivalently be computed as a **weighted
+average over all possible coalitions**.
+
+The coalitions represent the different subsets of players that could already
+be present before the player of interest joins.
+
+For example, several different player orderings can lead to the same
+coalition being present before Alice joins. Rather than treating these
+equivalent situations separately, the coalition formulation groups them
+together and assigns the coalition an appropriate weight.
+
+The general Shapley formula is
 
 .. math::
 
    \phi_i =
    \sum_{S \subseteq N \setminus \{i\}}
-   \frac{|S|!(M-|S|-1)!}{M!}
+   \frac{|S|!(|N|-|S|-1)!}{|N|!}
    \left[
       v(S \cup \{i\}) - v(S)
    \right].
@@ -366,10 +393,10 @@ value formula:
 Here,
 
 * :math:`N` is the set of all players,
-* :math:`M = |N|` is the total number of players,
-* :math:`i` is the player whose Shapley value is being calculated,
+* :math:`i` is the player of interest,
 * :math:`S` is a coalition that does not contain player :math:`i`,
-* :math:`|S|` is the number of players in that coalition.
+* :math:`|S|` is the number of players in coalition :math:`S`,
+* :math:`v(S)` is the value achieved by coalition :math:`S`.
 
 The expression
 
@@ -377,45 +404,61 @@ The expression
 
    v(S \cup \{i\}) - v(S)
 
-is the **marginal contribution** of player :math:`i` to coalition :math:`S`.
+is the **marginal contribution**: the change in coalition value when player
+:math:`i` joins coalition :math:`S`.
 
 The expression
 
 .. math::
 
-   \frac{|S|!(M-|S|-1)!}{M!}
+   \frac{|S|!(|N|-|S|-1)!}{|N|!}
 
-is the **coalition weight**. The weights ensure that all possible player
-orderings are considered equally.
+is the **coalition weight**. It accounts for how often coalition :math:`S`
+is already present before player :math:`i` joins across all possible player
+orderings.
 
-The Shapley value can therefore be understood as the **weighted average of a
-player's marginal contributions across all possible coalitions**.
+The Shapley value can therefore be understood in two equivalent ways:
+
+* as the **average marginal contribution across all possible player
+  orderings**, or
+* as the **weighted average of marginal contributions across all possible
+  coalitions**.
+
+Using coalitions avoids treating equivalent player orderings separately by
+grouping situations where the same players are present before player
+:math:`i` joins.
 
 
 Shapley Axioms
 ^^^^^^^^^^^^^^
 
-Why are Shapley values considered a fair way to assign contributions?
-Shapley values are characterized by a set of properties, or **axioms**, that
-describe how a reasonable attribution should behave.
+Why are Shapley values considered a principled way to assign contributions?
+They are characterized by a set of properties, or **axioms**, describing how
+an attribution should behave.
 
 **Efficiency**
 
-The contributions assigned to all players add up to the value created by the
-complete coalition (relative to the value of the empty coalition):
+The contributions assigned to all players explain the difference between the
+value of the full coalition and the value of the empty coalition:
 
 .. math::
 
    \sum_{i \in N} \phi_i = v(N) - v(\emptyset).
 
-In our example, :math:`v(\emptyset)=0`, so
+In our example,
+
+.. math::
+
+   v(\emptyset)=0,
+
+so
 
 .. math::
 
    103.33 + 43.33 - 6.67 = 140.
 
-Thus, the complete outcome is distributed among the players without leaving
-any value unexplained.
+Thus, the complete outcome relative to the empty coalition is distributed
+among the players without leaving any value unexplained.
 
 **Symmetry**
 
@@ -457,9 +500,9 @@ For two games with coalition-value functions :math:`v` and :math:`w`,
 Together, these properties make Shapley values a **principled way to assign
 the outcome of a cooperative game to the individual players**.
 
-In SHAP, this game-theoretic setting is transferred to machine learning:
-**players become input features, the coalition value becomes the model
-output, and each Shapley value becomes a feature contribution.**
+In the next section, we transfer this game-theoretic setting to machine
+learning: players become input features, coalition values become model
+outputs, and Shapley values become feature contributions.
 
 From Shapley Values to SHAP
 ---------------------------
@@ -469,10 +512,8 @@ machine learning. Instead of asking how much each player contributed to a
 shared outcome, we ask how much each input feature contributed to an
 individual model prediction.
 
-SHAP uses the same basic idea as before: a feature's contribution is evaluated
-for different coalitions and these marginal contributions are combined into a
-Shapley value. The resulting **SHAP value** describes the contribution of that
-feature to the prediction.
+SHAP applies the same Shapley value formula introduced above. The formula
+remains unchanged; only the interpretation of its components changes.
 
 
 Mapping Game Theory to Machine Learning
@@ -483,115 +524,125 @@ SHAP:
 
 .. list-table:: From Shapley values to SHAP
    :header-rows: 1
-   :widths: 40 60
+   :widths: 25 35 40
 
-   * - Cooperative game theory
+   * - Symbol
+     - Shapley value
      - SHAP
-   * - Player
-     - Input feature
-   * - Coalition
+   * - :math:`i`
+     - Player of interest
+     - Feature of interest
+   * - :math:`N`
+     - Set of all players
+     - Set of all input features
+   * - :math:`S`
+     - Coalition of players
      - Subset of input features
-   * - Coalition value
-     - Model output for a feature coalition
-   * - Marginal contribution
-     - Change in model output when a feature is added to a coalition
-   * - Shapley value
-     - Feature contribution (SHAP value)
+   * - :math:`v_x(S)`
+     - Value achieved by coalition :math:`S`
+     - Model output when the information in feature coalition :math:`S`
+       is available for instance :math:`x`
+   * - :math:`\phi_i`
+     - Player's Shapley value
+     - Feature's SHAP value
 
-Consider an individual instance :math:`x` with :math:`M` input features. The
-players of the SHAP game are the features
-
-.. math::
-
-   N = \{1, 2, \ldots, M\}.
-
-For a particular feature :math:`i`, SHAP asks how the model output changes
-when that feature is added to different subsets of the remaining features.
-
-Just as in the cooperative game, the contribution of a feature can depend on
-which other features are already present. SHAP therefore considers the
-feature's marginal contribution across different feature coalitions.
-
-
-Feature Coalitions
-^^^^^^^^^^^^^^^^^^
-
-A **feature coalition** :math:`S` is a subset of the input features whose
-information is considered when evaluating the model.
-
-Suppose, for example, that a model uses the features
-
-.. code-block:: text
-
-   Age   BMI   Income   Smoking
-
-A possible feature coalition is
+For an individual instance :math:`x`, the SHAP value of feature :math:`i`
+can therefore be written as
 
 .. math::
 
-   S = \{\text{Age}, \text{BMI}\}.
+   \phi_i(x) =
+   \sum_{S \subseteq N \setminus \{i\}}
+   \frac{|S|!(|N|-|S|-1)!}{|N|!}
+   \left[
+      v_x(S \cup \{i\}) - v_x(S)
+   \right].
 
-To determine the marginal contribution of ``Income``, we compare the model
-output for the coalition without ``Income`` with the model output after
-``Income`` is added:
+The term
 
 .. math::
 
-   \Delta_{\text{Income}}(S)
+   v_x(S \cup \{i\}) - v_x(S)
+
+is the feature's **marginal contribution**. It describes how much the model
+output changes when the information from feature :math:`i` is added to
+coalition :math:`S`.
+
+SHAP therefore uses exactly the same principle as the cooperative-game
+example: a feature's contribution is evaluated in different feature
+coalitions and these marginal contributions are combined into its SHAP value.
+
+There is, however, an important practical question. A machine-learning model
+usually expects a complete input, even when only the information from a
+subset of features is considered available. Features outside the coalition
+must therefore somehow be represented as **"missing"**.
+
+How this missing information is represented depends on the data modality and
+the SHAP explainer. This choice determines how coalition values
+:math:`v_x(S)` are evaluated and will be discussed separately for tabular,
+image, and text data.
+
+
+Additive Decomposition
+^^^^^^^^^^^^^^^^^^^^^^
+
+The Shapley efficiency property states that the Shapley values explain the
+difference between the value of the full coalition and the value of the empty
+coalition:
+
+.. math::
+
+   \sum_{i \in N} \phi_i
    =
-   v(S \cup \{\text{Income}\}) - v(S).
+   v(N) - v(\emptyset).
 
-This is exactly the same marginal-contribution calculation used in the
-cooperative-game example. The difference is that :math:`v(S)` now represents
-a **model output** rather than the value produced by a group of people.
+In SHAP, the **full coalition** corresponds to the complete instance being
+explained. Its coalition value is therefore the model prediction
 
-There is, however, an important practical question: most machine-learning
-models expect values for all input features. What does it therefore mean for
-a feature to be *absent* from a coalition?
+.. math::
 
-In SHAP, features outside the coalition are treated as **unknown**. Their
-effect on the model output is accounted for using a **background or reference
-distribution**. In practice, this is commonly represented by a background
-dataset, such as the training data or a representative subset of it.
+   v_x(N) = f(x).
 
-How the unknown features are handled can differ between SHAP explainers and
-is particularly important when features are dependent or correlated.
+The **empty coalition** represents the situation in which none of the
+feature information from the instance is available. Its value
 
+.. math::
 
-Additive Decomposition of a Prediction
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   v_x(\emptyset)
 
-After computing a Shapley value for every input feature, SHAP expresses an
-individual prediction as an **additive decomposition**:
+defines the **baseline** against which the prediction is explained.
+
+The efficiency property therefore becomes
+
+.. math::
+
+   \sum_{i \in N} \phi_i
+   =
+   f(x) - v_x(\emptyset).
+
+Rearranging gives the additive decomposition of an individual prediction:
 
 .. math::
 
    f(x)
    =
-   \phi_0
+   v_x(\emptyset)
    +
-   \sum_{i=1}^{M} \phi_i,
+   \sum_{i \in N} \phi_i.
 
-where
+Here,
 
-* :math:`f(x)` is the model prediction for the instance :math:`x`,
-* :math:`\phi_0` is the **baseline value**, and
-* :math:`\phi_i` is the **SHAP value** of feature :math:`i`.
+* :math:`f(x)` is the model prediction for the individual instance,
+* :math:`v_x(\emptyset)` is the **baseline**, and
+* :math:`\phi_i` is the contribution of feature :math:`i`.
 
-Equivalently,
+The SHAP values therefore collectively explain the complete difference
+between the baseline and the individual prediction.
 
-.. math::
-
-   f(x) - \phi_0
-   =
-   \sum_{i=1}^{M} \phi_i.
-
-The SHAP values therefore explain the **difference between the baseline and
-the individual prediction**.
-
-A positive SHAP value means that the feature pushes the prediction **above**
-the baseline, while a negative SHAP value means that the feature pushes the
-prediction **below** the baseline.
+A positive SHAP value indicates that a feature contributes toward increasing
+the model output relative to the baseline, while a negative SHAP value
+contributes toward decreasing it. The magnitude of the SHAP value indicates
+the strength of the contribution.
 
 For example, a prediction could be decomposed as
 
@@ -617,56 +668,48 @@ which is exactly the difference between the prediction and the baseline:
 
    0.70 - 0.40 = 0.30.
 
-This property is sometimes referred to as **local accuracy** or
-**efficiency**: the feature contributions account for the complete difference
-between the baseline and the prediction.
 
+Contrastive Explanations
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Baseline Value
-^^^^^^^^^^^^^^
-
-The **baseline value** :math:`\phi_0` represents the model output before any
-information about the individual instance is taken into account. It is
-typically defined as the expected model output over a background distribution:
-
-.. math::
-
-   \phi_0 = \mathbb{E}[f(X)].
-
-In practice, this expectation is commonly approximated using a **background
-dataset**, for example the training data or a representative subset of it.
-
-The SHAP values then explain how the features of an individual instance move
-the model output away from this baseline:
+SHAP is therefore a **contrastive explanation method**. It does not explain
+the prediction :math:`f(x)` in isolation. Instead, it explains how the input
+features move the model output from the baseline to the prediction:
 
 .. math::
 
    \underbrace{f(x)}_{\text{prediction}}
    =
-   \underbrace{\mathbb{E}[f(X)]}_{\text{baseline}}
+   \underbrace{v_x(\emptyset)}_{\text{baseline}}
    +
-   \underbrace{\sum_{i=1}^{M}\phi_i}_{\text{feature contributions}}.
+   \underbrace{\sum_{i \in N}\phi_i}_{\text{feature contributions}}.
 
-The baseline is therefore an important part of the interpretation of a SHAP
-explanation. A SHAP value should not be interpreted as saying that a feature
-is inherently "positive" or "negative". Instead, it describes whether and by
-how much the feature moves the prediction **relative to the chosen
-baseline**.
+The baseline is the value of the **empty feature coalition**. Importantly,
+there is no single universal way to construct this empty coalition for every
+SHAP explanation.
 
-Changing the background data can change the baseline and, consequently, the
-resulting feature attributions.
+What :math:`v_x(\emptyset)` represents depends on how "missing" feature
+information is defined for the particular data modality and explainer.
+Consequently, SHAP values must always be interpreted relative to the
+corresponding baseline.
+
+For example, later sections will show that an empty coalition can be
+represented differently for tabular, image, and text data. These different
+definitions of missingness determine both the coalition values and the
+baseline used by the explanation.
+
 
 Computational Challenge
 -----------------------
 
-The definition of Shapley values requires considering all possible coalitions.
-For :math:`M` features, there are
+The definition of Shapley values requires considering all possible feature
+coalitions. For :math:`M` input features, there are
 
 .. math::
 
    2^M
 
-possible feature coalitions.
+possible coalitions.
 
 The number of coalitions therefore grows **exponentially** with the number of
 features:
@@ -688,16 +731,14 @@ For only 20 features, more than one million feature coalitions are already
 possible. Exhaustively evaluating all coalitions therefore quickly becomes
 infeasible for real-world machine-learning problems.
 
-Practical SHAP algorithms address this computational challenge in different
-ways. **KernelSHAP** provides a model-agnostic approach that can approximate
-Shapley values by evaluating only a sample of feature coalitions. Other SHAP
-algorithms exploit properties of particular model classes. For example,
-**TreeSHAP** uses the structure of decision trees to compute SHAP values much
-more efficiently than a general model-agnostic approach.
+In practice, different SHAP algorithms reduce this computational cost through
+**approximation** or by exploiting properties of the **model and data**.
 
-Thus, SHAP should not be understood as a single algorithm for computing
-Shapley values. It is a framework that includes different algorithms for
-computing or approximating Shapley-based feature contributions.
+SHAP should therefore not be understood as a single algorithm. It is a
+framework for Shapley-based feature attribution that can be implemented using
+different computational strategies. The practical notebooks introduce
+examples of these different explainers.
+
 
 Advantages and Limitations
 --------------------------
@@ -714,56 +755,50 @@ attributing a model prediction to its input features.
 
 **Local explanations**
 
-SHAP provides instance-level explanations by decomposing an individual
-prediction into a baseline value and feature-specific contributions. Each
-SHAP value describes how much a feature pushes the prediction above or below
-the baseline.
+SHAP decomposes an individual prediction into feature-specific contributions
+relative to a defined baseline. Each SHAP value describes how a feature
+contributes to the difference between the baseline and the individual
+prediction.
 
 **Local and global interpretation**
 
 Although SHAP values explain individual predictions, they can be aggregated
 across many instances to obtain global insights into model behavior. The same
-feature contributions therefore form the basis of both local and global
-interpretations.
-
-**Applicable to different models and data modalities**
-
-The general idea of SHAP is not restricted to a particular model class or
-type of input data. Different SHAP explainers adapt the computation to
-different models and data modalities, including tabular, image, and text
-data.
+underlying feature contributions therefore form the basis of both local and
+global interpretations.
 
 
 Limitations
 ^^^^^^^^^^^
 
+**Missingness and feature dependence**
+
+SHAP requires defining how features outside a coalition are represented as
+"missing". This choice determines how coalition values are evaluated and can
+therefore affect the resulting feature attributions.
+
+The problem is particularly important for dependent features. Treating one
+feature as missing while retaining a related feature can break dependencies,
+produce unrealistic inputs, or distribute shared information across multiple
+features.
+
 **Computational complexity**
 
 Exact Shapley computation grows exponentially with the number of features,
-since up to :math:`2^M` feature coalitions must be considered. Approximation
-methods such as KernelSHAP and specialized algorithms such as TreeSHAP are
-therefore used to make the computation practical.
+since up to :math:`2^M` feature coalitions must be considered. Practical SHAP
+algorithms therefore rely on approximation or exploit properties of the model
+and data to reduce this computational cost.
 
-**Feature dependence**
+**Reference dependence**
 
-The treatment of features that are not part of a coalition affects the
-resulting explanation. This becomes particularly important when features are
-dependent or correlated: different ways of accounting for the missing
-features can lead to different feature attributions.
+SHAP values are contrastive: they explain a prediction relative to the
+baseline :math:`v_x(\emptyset)`. How the empty coalition is represented
+therefore matters. Changing the definition of missingness or the reference
+used to construct the empty coalition can change both the baseline and the
+resulting SHAP values.
 
-**Dependence on the background data**
 
-SHAP values explain a prediction relative to a baseline and a background
-distribution. The choice of background data therefore influences both the
-baseline and the resulting feature contributions. SHAP values should always
-be interpreted relative to this reference.
 
-**SHAP explains the model, not necessarily the underlying data-generating
-process**
-
-A large positive or negative SHAP value indicates how a feature contributes
-to the model's prediction. It does not imply that the feature has a causal
-effect on the predicted outcome.
 
 
 References
