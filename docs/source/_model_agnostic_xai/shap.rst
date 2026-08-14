@@ -89,6 +89,16 @@ players are:
 * **Bob (B):** an architect,
 * **Charlie (C):** a cat.
 
+.. figure:: ../_figures/shap_players.png
+   :alt: Alice, Bob, and Charlie representing the three players in the cooperative game example.
+   :align: center
+   :width: 80%
+
+   **Players in the cooperative game.** Alice, Bob, and Charlie are the three
+   players in the table-building example. Different coalitions of these
+   players achieve different values, which are used to determine each
+   player's Shapley value.
+
 Different combinations of these players produce different amounts of value.
 The question is:
 
@@ -1142,6 +1152,15 @@ What Are the Players?
 For image data, the input **pixels** are the players in the Shapley game. A
 coalition :math:`S` is therefore a subset of the pixels of the image.
 
+.. figure:: ../_figures/shap_input_image.png
+   :alt: Pixelated cat used as an example input image for SHAP.
+   :align: center
+   :width: 30%
+
+   **Example input image.** For image data, the individual input pixels are the
+   players in the Shapley game. SHAP assigns a contribution to each pixel for
+   the prediction of the image being explained.
+
 For an image with :math:`M` pixel features, the set of players can be written
 as
 
@@ -1207,6 +1226,16 @@ where
 * :math:`x_j` is the original value of pixel :math:`p_j`,
 * :math:`m_j(x)` is the replacement value produced by the image masker, and
 * :math:`x^{(S)}` is the resulting complete, masked image.
+
+.. figure:: ../_figures/shap_image_pixel_coalition.png
+   :alt: Original image and masked image in which only the light-blue pixels retain their original values.
+   :align: center
+   :width: 65%
+
+   **Example of an image coalition.** The light-blue pixels form the coalition
+   :math:`S` and retain their original values. Pixels outside the coalition are
+   treated as missing and replaced according to the image masker, here using
+   values from a blurred version of the image.
 
 The model can then be evaluated on this masked image. The corresponding
 coalition value is
@@ -1298,6 +1327,17 @@ replaced according to the chosen image masker:
 
    x_j^{(\emptyset)} = m_j(x)
    \qquad \forall j.
+
+.. figure:: ../_figures/shap_image_empty_coalition.png
+   :alt: Original image and fully masked image representing the empty coalition.
+   :align: center
+   :width: 75%
+
+   **Original image and empty coalition.** For the empty coalition
+   :math:`S=\emptyset`, none of the original pixel values are available.
+   Every pixel is therefore replaced according to the image masker. The model
+   output for the fully masked image :math:`x^{(\emptyset)}` defines the
+   baseline :math:`v_x(\emptyset)`.
 
 The fully masked image is denoted by :math:`x^{(\emptyset)}`. Its model
 output defines the baseline:
