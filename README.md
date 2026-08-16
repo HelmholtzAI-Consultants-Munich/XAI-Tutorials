@@ -93,7 +93,10 @@ If you have ideas for improvements or want to report an issue, feel free to open
 
 <!-- LINK LICENSE START -->
 
-All content is publicly available under the Creative Commons Attribution 4.0 License:
+This repository contains both source code and teaching materials, which are licensed separately:
+
+- **Code** (notebooks, scripts, and other software) is licensed under the MIT License. See the `LICENSE` file.
+- **Teaching materials** (slides, figures, and written explanations) are licensed under the Creative Commons Attribution 4.0 License. See the `LICENSE-CONTENT` file.
 
 [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
 
