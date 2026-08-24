@@ -709,7 +709,7 @@ baseline used by the explanation.
 
 
 Computational Challenge
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The definition of Shapley values requires considering all possible feature
 coalitions. For :math:`M` input features, there are
@@ -750,7 +750,7 @@ examples of these different explainers.
 
 
 Advantages and Limitations
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Advantages
 ^^^^^^^^^^
