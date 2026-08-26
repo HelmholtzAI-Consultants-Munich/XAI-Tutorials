@@ -156,7 +156,250 @@ KernelExplainer can therefore approximate SHAP values without explicitly evaluat
 PartitionExplainer
 ------------------
 
-TBD
+**PartitionExplainer** is a model-agnostic method that uses a **hierarchical structure over the input features** to make the attribution problem more efficient. Like KernelExplainer, PartitionExplainer only requires access to the model's inputs and predictions. However, the two methods reduce the complexity of the attribution problem in fundamentally different ways:
+
+* **KernelExplainer** samples coalitions from the unrestricted Shapley game.
+* **PartitionExplainer** uses a hierarchy of related features and restricts the attribution game according to this structure.
+
+Importantly, this means that PartitionExplainer does not simply provide a different approximation algorithm for the same unrestricted Shapley values. When the hierarchy constrains which feature coalitions are considered, the resulting hierarchical feature attributions are **Owen values**.
+
+A Hierarchy of Features
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Suppose we have four features :math:`A`, :math:`B`, :math:`C`, and :math:`D`. Based on their structure or similarity, they might be grouped as
+
+.. code-block:: text
+
+                   {A, B, C, D}
+                   /          \
+               {A, B}          {C, D}
+               /   \            /   \
+              A     B          C     D
+
+Here, :math:`A` and :math:`B` form one group, while :math:`C` and :math:`D` form another.
+
+The hierarchy is part of the definition of the attribution problem. PartitionExplainer uses this structure to evaluate groups of related features and recursively divide their contributions into smaller groups until individual features are reached. As with other SHAP explainers, evaluating a coalition still requires a **complete model input**. Features that are present retain their information, while features outside the coalition are treated as missing according to the chosen **masker**. The completed input is passed to the original model to obtain the coalition value :math:`v_x(S)`.
+
+The hierarchy therefore does not change what a coalition value means. It changes **which combinations of features are considered when assigning the model output to the individual features**.
+
+From Shapley Values to Owen Values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To understand the consequence of introducing a hierarchy, recall how ordinary Shapley values are defined. For the four features
+
+.. math::
+
+   N = \{A,B,C,D\},
+
+an unrestricted Shapley-value calculation treats every feature as an individual player. All possible feature orderings are considered when determining a feature's average marginal contribution. For example, all of the following orderings are allowed:
+
+.. code-block:: text
+
+   A -> B -> C -> D
+   A -> C -> B -> D
+   C -> A -> D -> B
+   D -> B -> A -> C
+   ...
+
+Now suppose we introduce the groups
+
+.. code-block:: text
+
+   Group 1: {A, B}
+   Group 2: {C, D}
+
+The attribution question changes. We now want the feature attributions to **respect this grouping**. An intuitive way to understand this is to consider the ordering at two
+levels:
+
+#. the groups can appear in different orders, and
+#. the features within each group can appear in different orders.
+
+For example,
+
+.. code-block:: text
+
+   {A, B} -> {C, D}
+
+with the within-group orderings
+
+.. code-block:: text
+
+   A -> B
+   C -> D
+
+gives the complete ordering
+
+.. code-block:: text
+
+   A -> B -> C -> D
+
+Another valid ordering is
+
+.. code-block:: text
+
+   D -> C -> B -> A
+
+because the group :math:`\{C,D\}` appears first, followed by :math:`\{A,B\}`, while the order within each group is also allowed to vary.
+
+In contrast,
+
+.. code-block:: text
+
+   A -> C -> B -> D
+
+does **not** respect the grouping because features from the two groups are interleaved.
+
+The feature attributions obtained by averaging marginal contributions while respecting such a predefined grouping are called **Owen values**.
+
+
+Shapley Values and Owen Values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+An Owen value is **not an approximation of a Shapley value**. It is the attribution obtained for a different cooperative game: one in which the players are organized into groups. The basic marginal-contribution calculation does not change. For feature :math:`i` joining a coalition :math:`S`, we still ask how much the coalition value changes:
+
+.. math::
+
+   v_x(S \cup \{i\}) - v_x(S).
+
+What changes is **which situations are included when these marginal contributions are averaged**. For an ordinary Shapley value, the contribution of a feature is averaged over all possible feature orderings. For an Owen value, the contribution is averaged over orderings that respect the predefined grouping structure. The distinction can therefore be summarized as follows:
+
+.. list-table:: Shapley values and Owen values
+   :header-rows: 1
+   :widths: 30 35 35
+
+   * -
+     - Shapley value
+     - Owen value
+   * - Players
+     - Individual features
+     - Individual features organized into groups
+   * - Marginal contribution
+     - :math:`v_x(S \cup \{i\}) - v_x(S)`
+     - :math:`v_x(S \cup \{i\}) - v_x(S)`
+   * - Feature orderings
+     - All possible feature orderings
+     - Orderings that respect the grouping
+   * - Final result
+     - One attribution per feature
+     - One attribution per feature
+   * - Same values?
+     - Unrestricted attribution
+     - Not necessarily equal to the corresponding Shapley values
+   * - Additive decomposition
+     - Yes
+     - Yes
+
+Thus, PartitionExplainer still ultimately assigns a contribution to each **individual feature**. It does not stop after assigning contributions to the groups.
+
+If we denote the Owen value of feature :math:`i` by :math:`\psi_i`, the individual feature contributions still account for the complete difference between the empty and full coalition:
+
+.. math::
+
+   \sum_i \psi_i
+   =
+   v_x(N) - v_x(\emptyset).
+
+In the SHAP setting, this means that the familiar additive decomposition is preserved:
+
+.. math::
+
+   f(x)
+   =
+   v_x(\emptyset)
+   +
+   \sum_i \psi_i.
+
+The hierarchy therefore changes **how the difference between the baseline and the prediction is distributed among the features**, but not the requirement that the feature contributions explain this complete difference.
+
+
+Why Use a Hierarchical Attribution Game?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Restricting the coalition game is useful when the input features have a meaningful structure.
+
+For example:
+
+* neighboring pixels in an **image** can form image regions,
+* neighboring or related tokens in **text** can form groups of tokens,
+* related variables in **tabular data** can be grouped together.
+
+Consider an image containing thousands of pixels. An unrestricted Shapley game allows arbitrary combinations of individual pixels to form coalitions. A hierarchical representation can instead first group nearby pixels into regions and then recursively divide these regions into smaller groups. Similarly, for text, groups of neighboring tokens can be considered together before their contributions are separated further down the hierarchy.
+
+The hierarchy therefore serves two purposes:
+
+* it incorporates a meaningful **structure between the features** into the
+  attribution problem, and
+* it reduces the number of feature combinations that need to be evaluated,
+  making the computation more efficient.
+
+This is why PartitionExplainer is particularly useful for structured and high-dimensional inputs such as images and text.
+
+
+The Hierarchy Is Part of the Explanation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+An important consequence is that the hierarchy is not merely a computational shortcut. It becomes part of the **definition of the attribution game**.
+
+Consider again
+
+.. code-block:: text
+
+   {A, B}       {C, D}
+
+Changing the hierarchy, for example to
+
+.. code-block:: text
+
+   {A, C}       {B, D}
+
+changes which feature orderings and coalitions are allowed. The resulting Owen values can therefore also change. Similarly, an unrestricted Shapley-value explainer and a hierarchical PartitionExplainer do not necessarily produce the same feature attributions, even when they explain the same model and the same instance. A difference between their results should therefore not automatically be interpreted as approximation error. They can be answering **different attribution questions**:
+
+.. code-block:: text
+
+   Shapley values
+       |
+       +-- How should the prediction be attributed when
+           features can form unrestricted coalitions?
+
+   Owen values
+       |
+       +-- How should the prediction be attributed when
+           the predefined feature hierarchy must be respected?
+
+
+How PartitionExplainer Makes the Computation Efficient
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+PartitionExplainer exploits the hierarchy recursively. Instead of evaluating arbitrary coalitions from the complete set of :math:`2^M` possible feature combinations, it evaluates feature groups according to the partition tree. Conceptually, the computation follows the hierarchy from larger groups toward individual features. The exact hierarchy is typically provided through the **masker**. This is important because the masker does more than specify how missing feature information is represented: for hierarchical explanations, it can also define the grouping structure that constrains the cooperative game.
+
+PartitionExplainer can therefore remain **model-agnostic**. It does not need to inspect the internal architecture of the prediction model; it exploits structure in the **input features and masker** instead.
+
+KernelExplainer vs. PartitionExplainer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The central difference between KernelExplainer and PartitionExplainer is therefore both computational and interpretational:
+
+.. list-table:: KernelExplainer and PartitionExplainer
+   :header-rows: 1
+   :widths: 50 50
+
+   * - KernelExplainer
+     - PartitionExplainer
+   * - Model-agnostic
+     - Model-agnostic
+   * - Samples from the unrestricted coalition space
+     - Uses a hierarchical coalition structure
+   * - Uses binary coalition masks and a SHAP-weighted linear model
+     - Recursively evaluates feature groups according to the hierarchy
+   * - Estimates unrestricted Shapley values
+     - Computes hierarchical, Owen-value-based feature attributions
+   * - Exploits neither model nor feature hierarchy
+     - Exploits the hierarchy of the input features
+   * - Primarily reduces computation by sampling coalitions
+     - Reduces computation by restricting and recursively evaluating the
+       coalition structure
+
+PartitionExplainer should therefore not be viewed simply as a faster alternative to KernelExplainer. The hierarchy changes the attribution game, so the two explainers can produce different feature contributions even for the same model prediction.
 
 TreeExplainer
 -------------
