@@ -9,9 +9,7 @@ Importantly, not every explainer necessarily computes the same type of attributi
 
 Which attribution is computed can depend not only on the explainer but also on the **masker** used to define the cooperative game. For example, ``ExactExplainer`` can compute ordinary Shapley values with an unrestricted masker or Owen values when a hierarchical clustering constrains the game. ``PartitionExplainer`` is specifically designed for such hierarchical attribution problems.
 
-
-Available SHAP Explainers
-^^^^^^^^^^^^^^^^^^^^^^^^^
+**Available SHAP Explainers**
 
 As of **August 2026**, the current SHAP API provides the following main explainers. The table focuses on explainers that compute or approximate Shapley- or Owen-based feature attributions; the API additionally contains utility explainers for other attribution methods.
 
