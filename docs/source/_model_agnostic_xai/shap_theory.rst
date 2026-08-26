@@ -1,5 +1,8 @@
+SHAP and Shapley Values
+=======================
+
 What does SHAP explain?
-====================================================
+-------------------------
 
 SHapley Additive exPlanations (**SHAP**) explains an **individual model
 prediction** by assigning a contribution to each input feature. The main idea
@@ -36,7 +39,7 @@ to the model's prediction relative to the chosen baseline. It does not imply
 that the feature has a causal effect on the predicted outcome.
 
 Video Introduction
-====================================================
+-------------------------
 
 The following video provides a short introduction to SHAP and its main
 concepts:
@@ -47,7 +50,7 @@ concepts:
 
 
 Shapley Values
-====================================================
+-------------------------
 
 SHAP is built on **Shapley values** from cooperative game theory. To
 understand how SHAP assigns contributions to individual features, we first
@@ -55,7 +58,7 @@ look at how Shapley values assign contributions to players in a cooperative
 game.
 
 Cooperative Game Theory
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Shapley values originate from **cooperative game theory** and provide a
 principled way to determine how much each player contributed to a shared
@@ -77,7 +80,7 @@ considering the player's contribution across all possible situations.
 
 
 Players, Coalitions, and Coalition Values
-------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To illustrate these concepts, consider a team building a table. The three
 players are:
@@ -157,7 +160,7 @@ individual player.
 
 
 Marginal Contributions
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To measure a player's contribution to a coalition, we compare the coalition
 value **before and after the player joins**.
@@ -258,7 +261,7 @@ contribution?**
 
 
 Average Contribution Across Player Orderings
-----------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A player's contribution depends on which players are already in the
 coalition. The Shapley value accounts for this by averaging the player's
@@ -371,7 +374,7 @@ the team.
 
 
 From Player Orderings to Coalitions
-------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Instead of averaging marginal contributions over all possible player
 orderings, the Shapley value can equivalently be computed as a **weighted
@@ -436,7 +439,7 @@ grouping situations where the same players are present before player
 
 
 Shapley Axioms
----------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Why are Shapley values considered a principled way to assign contributions?
 They are characterized by a set of properties, or **axioms**, describing how
@@ -511,7 +514,7 @@ learning: players become input features, coalition values become model
 outputs, and Shapley values become feature contributions.
 
 From Shapley Values to SHAP
-====================================================
+-----------------------------
 
 We now transfer the idea of Shapley values from cooperative game theory to
 machine learning. Instead of asking how much each player contributed to a
@@ -523,7 +526,7 @@ remains unchanged; only the interpretation of its components changes.
 
 
 Mapping Game Theory to Machine Learning
-----------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The concepts introduced for cooperative games have direct counterparts in
 SHAP:
@@ -590,7 +593,7 @@ image, and text data.
 
 
 Additive Decomposition
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Shapley efficiency property states that the Shapley values explain the
 difference between the value of the full coalition and the value of the empty
@@ -676,7 +679,7 @@ which is exactly the difference between the prediction and the baseline:
 
 
 Contrastive Explanations
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 SHAP is therefore a **contrastive explanation method**. It does not explain
 the prediction :math:`f(x)` in isolation. Instead, it explains how the input
@@ -706,7 +709,7 @@ baseline used by the explanation.
 
 
 Computational Challenge
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The definition of Shapley values requires considering all possible feature
 coalitions. For :math:`M` input features, there are
@@ -747,10 +750,10 @@ examples of these different explainers.
 
 
 Advantages and Limitations
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Advantages
-^^^^^^^^^^
+"""""""""""""
 
 **Principled feature attribution**
 
@@ -775,7 +778,7 @@ global interpretations.
 
 
 Limitations
-^^^^^^^^^^^
+"""""""""""""
 
 **Missingness and feature dependence**
 
