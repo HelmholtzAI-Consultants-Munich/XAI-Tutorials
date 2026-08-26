@@ -625,3 +625,13 @@ evaluating every feature coalition.
    :width: 95%
 
    **Overview of TreeSHAP.** TreeSHAP exploits the structure of tree-based models to efficiently account for features being present or missing and compute their Shapley-based contributions without explicitly evaluating every feature coalition.
+
+GradientExplainer
+-------------------
+
+TBE
+
+Many models, including several neural networks, are gradient-based. Gradient-based explanation methods leverage the ability to compute gradients of the loss function with respect to the model input features to explain model predictions. By analyzing how the model's output changes in response to variations in the input features, these methods provide insights into the factors driving model decisions: if a pixel is relevant, a small change in it has big impact on the output, therefore the gradient is high.
+
+The gradients can be used to approximate the Shapley values and GradientExplainer allows to do this estimetion in a fast and efficient way. There’s a connection between the gradient estimator used in GradientExplainer and an explainability method called **Integrated Gradients** ([Sundararajan et al. 2017](https://doi.org/10.48550/arXiv.1703.01365)). Integrated Gradients is a feature attribution gradient-based method that computes the integral of the gradients on a path which is a straight line from a baseline (e.g. black image) to the input. The difference between Integrated Gradients and SHAP values is that Integrated Gradients use a single reference point, while Shapley values utilize a background data set. We will not go into the details here, but rather focus on interpreting the results. To know more about how the SHAP class shap.GradientExplainer() approximates the Shapley values, we recommend reading the SHAP documentation and the "Interpreting Machine Learning Models With SHAP" book ([Molnar 2022](https://leanpub.com/shap)). 
+
