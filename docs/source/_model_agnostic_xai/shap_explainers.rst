@@ -354,17 +354,8 @@ Changing the hierarchy, for example to
 
 changes which feature orderings and coalitions are allowed. The resulting Owen values can therefore also change. Similarly, an unrestricted Shapley-value explainer and a hierarchical PartitionExplainer do not necessarily produce the same feature attributions, even when they explain the same model and the same instance. A difference between their results should therefore not automatically be interpreted as approximation error. They can be answering **different attribution questions**:
 
-.. code-block:: text
-
-   Shapley values
-       |
-       +-- How should the prediction be attributed when
-           features can form unrestricted coalitions?
-
-   Owen values
-       |
-       +-- How should the prediction be attributed when
-           the predefined feature hierarchy must be respected?
+* Shapley values: How should the prediction be attributed when features can form unrestricted coalitions?
+* Owen values: How should the prediction be attributed when the predefined feature hierarchy must be respected?
 
 
 How PartitionExplainer Makes the Computation Efficient
@@ -400,6 +391,13 @@ The central difference between KernelExplainer and PartitionExplainer is therefo
        coalition structure
 
 PartitionExplainer should therefore not be viewed simply as a faster alternative to KernelExplainer. The hierarchy changes the attribution game, so the two explainers can produce different feature contributions even for the same model prediction.
+
+.. figure:: ../_figures/shap_partitionshap_overview.png
+   :alt: Overview of the PartitionExplainer algorithm.
+   :align: center
+   :width: 95%
+
+   **Overview of PartitionExplainer.** PartitionExplainer uses a hierarchy of related features to constrain the attribution game, recursively distributes contributions from feature groups to individual features, and obtains one Owen-value-based attribution per feature.
 
 TreeExplainer
 -------------
