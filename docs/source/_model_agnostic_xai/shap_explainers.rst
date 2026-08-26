@@ -1,16 +1,79 @@
 Computing SHAP Values
 =====================
 
-SHAP is an attribution framework, not a single algorithm
---------------------------------------------------------
+
+SHAP Is an Attribution Framework, Not a Single Algorithm
+---------------------------------------------------------
 
 So far, we have learned **what SHAP values represent**: feature contributions that explain the difference between a baseline and an individual prediction.
 
-However, SHAP itself is an **attribution framework, not a single algorithm**. Computing SHAP values requires evaluating the underlying Shapley attribution game, which can become computationally expensive because the number of possible feature coalitions grows exponentially with the number of features.
+However, SHAP itself is an **attribution framework, not a single algorithm**. Computing feature attributions requires evaluating an underlying cooperative game, which can become computationally expensive because the number of possible feature coalitions grows exponentially with the number of features. Different **SHAP explainers** use different computational strategies to make this attribution problem feasible. Some explainers are **model-agnostic** and treat the model as a black box, while others are **model-specific** and exploit the internal structure of particular model types.
 
-Different **SHAP explainers** use different strategies to make this computation feasible. Some explainers are **model-agnostic** and treat the model as a black box, while others are **model-specific** and exploit the internal structure of particular model types to compute SHAP values more efficiently. Model-agnostic explainers only require access to the model's inputs and predictions and can therefore be applied to essentially any model.
+Importantly, not every explainer necessarily computes the same type of attribution. Most SHAP explainers target **Shapley values**, where features can form unrestricted coalitions. If the cooperative game is constrained by a hierarchy of feature groups, the corresponding feature attributions are **Owen values** instead. Owen values are not approximations of Shapley values. They solve a different, hierarchically constrained attribution game. Each feature still receives an individual contribution and the contributions still add up to the difference between the baseline and the model output, but the values can differ from ordinary Shapley values because the allowed feature coalitions are different.
+
+Which attribution is computed can depend not only on the explainer but also on the **masker** used to define the cooperative game. For example, ``ExactExplainer`` can compute ordinary Shapley values with an unrestricted masker or Owen values when a hierarchical clustering constrains the game. ``PartitionExplainer`` is specifically designed for such hierarchical attribution problems.
+
+
+Available SHAP Explainers
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As of **August 2026**, the current SHAP API provides the following main explainers. The table focuses on explainers that compute or approximate Shapley- or Owen-based feature attributions; the API additionally contains utility explainers for other attribution methods.
+
+.. list-table:: Main explainers available in the SHAP API
+   :header-rows: 1
+   :widths: 24 22 18 36
+
+   * - Explainer
+     - Attribution
+     - Model-agnostic?
+     - Applicable models
+   * - ``KernelExplainer``
+     - Shapley values (approximate)
+     - Yes
+     - Any model or prediction function
+   * - ``PermutationExplainer``
+     - Shapley values (approximate)
+     - Yes
+     - Any model or prediction function
+   * - ``SamplingExplainer``
+     - Shapley values (approximate)
+     - Yes
+     - Any model or prediction function
+   * - ``ExactExplainer``
+     - Shapley or Owen values (exact)
+     - Yes
+     - Any model or prediction function; practical for relatively small
+       attribution problems
+   * - ``PartitionExplainer``
+     - Owen values
+     - Yes
+     - Any model or prediction function with a hierarchical feature
+       partition
+   * - ``TreeExplainer``
+     - Shapley values
+     - No
+     - Supported tree-based models and tree ensembles
+   * - ``LinearExplainer``
+     - Shapley values
+     - No
+     - Linear models
+   * - ``AdditiveExplainer``
+     - Shapley values
+     - No
+     - Generalized additive models
+   * - ``DeepExplainer``
+     - Approximate Shapley values
+     - No
+     - Supported differentiable deep-learning models
+   * - ``GradientExplainer``
+     - Expected-gradient SHAP approximations
+     - No
+     - Differentiable models
+
+The general ``shap.Explainer`` interface can automatically select an appropriate algorithm based on the supplied **model and masker**. The algorithm therefore determines how the attribution is computed, while the masker can additionally determine how missing features are represented and whether the cooperative game is unrestricted or hierarchically constrained.
 
 For further details, see the `SHAP Explainer API <https://shap.readthedocs.io/en/latest/api.html#explainers>`__ and `Lundberg et al. (2020) <https://doi.org/10.1038/s42256-019-0138-9>`__.
+
 
 KernelExplainer
 ---------------
