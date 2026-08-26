@@ -753,7 +753,7 @@ Advantages and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Advantages
-"""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Principled feature attribution**
 
@@ -778,7 +778,7 @@ global interpretations.
 
 
 Limitations
-"""""""""""""
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Missingness and feature dependence**
 
