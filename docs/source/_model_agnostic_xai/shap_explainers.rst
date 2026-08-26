@@ -1,10 +1,6 @@
 Computing SHAP Values
 =====================
 
-
-SHAP Is an Attribution Framework, Not a Single Algorithm
----------------------------------------------------------
-
 So far, we have learned **what SHAP values represent**: feature contributions that explain the difference between a baseline and an individual prediction.
 
 However, SHAP itself is an **attribution framework, not a single algorithm**. Computing feature attributions requires evaluating an underlying cooperative game, which can become computationally expensive because the number of possible feature coalitions grows exponentially with the number of features. Different **SHAP explainers** use different computational strategies to make this attribution problem feasible. Some explainers are **model-agnostic** and treat the model as a black box, while others are **model-specific** and exploit the internal structure of particular model types.
