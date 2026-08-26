@@ -1,8 +1,5 @@
-Introduction to SHapley Additive exPlanations (SHAP)
-====================================================
-
 What does SHAP explain?
------------------------
+====================================================
 
 SHapley Additive exPlanations (**SHAP**) explains an **individual model
 prediction** by assigning a contribution to each input feature. The main idea
@@ -39,7 +36,7 @@ to the model's prediction relative to the chosen baseline. It does not imply
 that the feature has a causal effect on the predicted outcome.
 
 Video Introduction
-------------------
+====================================================
 
 The following video provides a short introduction to SHAP and its main
 concepts:
@@ -50,7 +47,7 @@ concepts:
 
 
 Shapley Values
---------------
+====================================================
 
 SHAP is built on **Shapley values** from cooperative game theory. To
 understand how SHAP assigns contributions to individual features, we first
@@ -58,7 +55,7 @@ look at how Shapley values assign contributions to players in a cooperative
 game.
 
 Cooperative Game Theory
-^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 
 Shapley values originate from **cooperative game theory** and provide a
 principled way to determine how much each player contributed to a shared
@@ -80,7 +77,7 @@ considering the player's contribution across all possible situations.
 
 
 Players, Coalitions, and Coalition Values
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------
 
 To illustrate these concepts, consider a team building a table. The three
 players are:
@@ -160,7 +157,7 @@ individual player.
 
 
 Marginal Contributions
-^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 To measure a player's contribution to a coalition, we compare the coalition
 value **before and after the player joins**.
@@ -261,7 +258,7 @@ contribution?**
 
 
 Average Contribution Across Player Orderings
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------------
 
 A player's contribution depends on which players are already in the
 coalition. The Shapley value accounts for this by averaging the player's
@@ -374,7 +371,7 @@ the team.
 
 
 From Player Orderings to Coalitions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------
 
 Instead of averaging marginal contributions over all possible player
 orderings, the Shapley value can equivalently be computed as a **weighted
@@ -439,7 +436,7 @@ grouping situations where the same players are present before player
 
 
 Shapley Axioms
-^^^^^^^^^^^^^^
+---------------
 
 Why are Shapley values considered a principled way to assign contributions?
 They are characterized by a set of properties, or **axioms**, describing how
@@ -514,7 +511,7 @@ learning: players become input features, coalition values become model
 outputs, and Shapley values become feature contributions.
 
 From Shapley Values to SHAP
----------------------------
+====================================================
 
 We now transfer the idea of Shapley values from cooperative game theory to
 machine learning. Instead of asking how much each player contributed to a
@@ -526,7 +523,7 @@ remains unchanged; only the interpretation of its components changes.
 
 
 Mapping Game Theory to Machine Learning
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
 The concepts introduced for cooperative games have direct counterparts in
 SHAP:
@@ -593,7 +590,7 @@ image, and text data.
 
 
 Additive Decomposition
-^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 The Shapley efficiency property states that the Shapley values explain the
 difference between the value of the full coalition and the value of the empty
@@ -679,7 +676,7 @@ which is exactly the difference between the prediction and the baseline:
 
 
 Contrastive Explanations
-^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 SHAP is therefore a **contrastive explanation method**. It does not explain
 the prediction :math:`f(x)` in isolation. Instead, it explains how the input
@@ -709,7 +706,7 @@ baseline used by the explanation.
 
 
 Computational Challenge
-^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 The definition of Shapley values requires considering all possible feature
 coalitions. For :math:`M` input features, there are
@@ -750,7 +747,7 @@ examples of these different explainers.
 
 
 Advantages and Limitations
-^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------
 
 Advantages
 ^^^^^^^^^^
@@ -807,850 +804,8 @@ used to construct the empty coalition can change both the baseline and the
 resulting SHAP values.
 
 
-SHAP for Tabular Data
----------------------
-
-We now apply the general SHAP framework to **tabular data**. The Shapley
-formula itself does not change. Instead, we need to define what the players
-are, what it means for a feature to be "missing", and how the corresponding
-coalition values :math:`v_x(S)` are evaluated.
-
-What Are the Players?
-^^^^^^^^^^^^^^^^^^^^^
-
-For tabular data, each **input feature (column)** is a player in the Shapley
-game. A coalition :math:`S` is a subset of these input features.
-
-Suppose, for example, that our model uses the features
-
-.. code-block:: text
-
-   Age    BMI    Income    Smoke
-
-Then the set of players is
-
-.. math::
-
-   N = \{f_1, f_2, \ldots, f_M\},
-
-where each :math:`f_i` represents one input feature.
-
-Consider an individual instance :math:`x`:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 25 25 25 25
-
-   * - Age
-     - BMI
-     - Income
-     - Smoke
-   * - 52
-     - 27.4
-     - 60k
-     - Yes
-
-For this instance, SHAP assigns a contribution :math:`\phi_i(x)` to each
-input feature.
-
-As introduced above, the SHAP value of feature :math:`i` is obtained by
-combining its marginal contributions across different feature coalitions:
-
-.. math::
-
-   \phi_i(x) =
-   \sum_{S \subseteq N \setminus \{i\}}
-   \frac{|S|!(|N|-|S|-1)!}{|N|!}
-   \left[
-      v_x(S \cup \{i\}) - v_x(S)
-   \right].
-
-For a particular coalition :math:`S`, the marginal contribution is
-
-.. math::
-
-   \Delta_{i,x}(S)
-   =
-   v_x(S \cup \{i\}) - v_x(S).
-
-We therefore determine a feature's marginal contribution by comparing the
-coalition value **with and without that feature**.
-
-This raises an important practical question: how can we evaluate
-:math:`v_x(S)` when the model still requires values for all input features?
-
-
-What Does a "Missing" Feature Mean?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Suppose we want to evaluate the coalition
-
-.. math::
-
-   S = \{\text{Age}, \text{BMI}\}
-
-for the instance above.
-
-The values of ``Age`` and ``BMI`` are available from the instance being
-explained, while ``Income`` and ``Smoke`` are outside the coalition:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 25 25 25 25
-
-   * - Age
-     - BMI
-     - Income
-     - Smoke
-   * - 52
-     - 27.4
-     - ?
-     - ?
-
-The features outside the coalition cannot simply be removed because the
-model still expects a complete input. Their unknown values therefore need to
-be represented in some way.
-
-In the **background-based formulation** considered here, missing feature
-values are replaced using values from samples drawn from a background
-distribution.
-
-For example, suppose the background dataset contains:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 10 22 22 23 23
-
-   * -
-     - Age
-     - BMI
-     - Income
-     - Smoke
-   * - :math:`x^{(1)}`
-     - 35
-     - 24.1
-     - 45k
-     - No
-   * - :math:`x^{(2)}`
-     - 67
-     - 29.3
-     - 80k
-     - Yes
-   * - :math:`x^{(3)}`
-     - 43
-     - 26.2
-     - 55k
-     - No
-
-For coalition :math:`S=\{\text{Age},\text{BMI}\}`, the values of the features
-inside the coalition remain fixed at the values of the instance being
-explained:
-
-.. code-block:: text
-
-   Age = 52
-   BMI = 27.4
-
-The missing values for ``Income`` and ``Smoke`` can then be taken from the
-background samples, producing complete model inputs such as
-
-.. code-block:: text
-
-   (52, 27.4, 45k, No)
-   (52, 27.4, 80k, Yes)
-   (52, 27.4, 55k, No)
-
-The model is evaluated for each of these completed inputs and the resulting
-predictions are averaged.
-
-More generally, for :math:`K` background samples,
-
-.. math::
-
-   v_x(S)
-   \approx
-   \frac{1}{K}
-   \sum_{k=1}^{K}
-   f\left(
-      x_S,
-      x_{\bar{S}}^{(k)}
-   \right),
-
-where
-
-* :math:`x_S` contains the feature values of the instance :math:`x` for the
-  features inside coalition :math:`S`,
-* :math:`\bar{S}` denotes the features outside the coalition,
-* :math:`x_{\bar{S}}^{(k)}` contains the corresponding values from background
-  sample :math:`k`.
-
-Thus, **missing features are represented using values from a background
-distribution, and the resulting model predictions are averaged to estimate
-the coalition value** :math:`v_x(S)`.
-
-The background data therefore plays an important role: it defines the
-reference distribution used to represent feature information that is not
-available in a coalition.
-
-
-What Defines the Baseline?
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The general additive decomposition introduced above is
-
-.. math::
-
-   f(x)
-   =
-   v_x(\emptyset)
-   +
-   \sum_{i \in N}\phi_i.
-
-The baseline is therefore the value of the **empty coalition**
-:math:`v_x(\emptyset)`.
-
-What does the empty coalition mean for the background-based tabular
-formulation?
-
-For
-
-.. math::
-
-   S = \emptyset,
-
-none of the feature values from the individual instance :math:`x` are
-available. The model is therefore evaluated using the background samples
-alone.
-
-The empty-coalition value is
-
-.. math::
-
-   v_x(\emptyset)
-   \approx
-   \frac{1}{K}
-   \sum_{k=1}^{K}
-   f\left(x^{(k)}\right).
-
-Thus, for this formulation, the baseline is the **average model prediction
-over the background data**.
-
-The SHAP decomposition becomes
-
-.. math::
-
-   f(x)
-   =
-   \underbrace{
-      \frac{1}{K}\sum_{k=1}^{K}f(x^{(k)})
-   }_{\text{baseline}}
-   +
-   \sum_{i \in N}\phi_i.
-
-The choice of background distribution therefore matters. A different
-background dataset can change the empty-coalition value and hence the
-baseline against which the individual prediction is explained. It can also
-change the coalition values :math:`v_x(S)` and therefore the resulting SHAP
-values.
-
-
-The Challenge of Correlated Features
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Using a background distribution to represent missing features introduces an
-important challenge when input features are **dependent or correlated**.
-
-Consider, for example, the features ``Age`` and ``Experience``:
-
-.. list-table::
-   :header-rows: 1
-   :widths: 35 35 30
-
-   * - Age
-     - Experience
-     - ...
-   * - 25
-     - 3
-     - ...
-
-Suppose ``Age`` is part of the coalition but ``Experience`` is not. The age
-of 25 is therefore retained from the instance being explained, while
-``Experience`` is replaced using values from the background data.
-
-This might produce inputs such as
-
-.. code-block:: text
-
-   Age    Experience
-   25     2
-   25     35
-   25     8
-
-Some combinations may be unlikely or even impossible in the original data.
-For example, an age of 25 combined with 35 years of work experience would
-usually be unrealistic.
-
-This illustrates two related challenges.
-
-
-Feature dependencies can be broken
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Background replacement can combine the observed value of one feature with
-background values of another feature without preserving the relationship
-between them.
-
-Consequently,
-
-* background replacement can create **unrealistic feature combinations**, and
-* the model may be evaluated outside the typical data distribution.
-
-Since SHAP values are computed from differences between coalition values,
-changes in these coalition values can directly affect the resulting
-attributions.
-
-
-Predictive information can be shared
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Correlated features may also contain **overlapping predictive information**.
-
-If two features carry similar information, their contribution to a prediction
-may be distributed across them. An individual feature may therefore receive a
-smaller SHAP value even when the correlated feature group as a whole is
-important to the model.
-
-SHAP values should consequently not be interpreted as independent measures of
-the intrinsic importance of individual features when substantial feature
-dependence is present.
-
-
-How Dependence Is Handled Matters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-There is no single universal way to define missing feature information when
-features are dependent. Different SHAP explainers and maskers can make
-different assumptions about how missing and dependent features should be
-handled.
-
-The interpretation of a SHAP explanation therefore depends not only on the
-model and the instance being explained, but also on the **definition of
-missingness and the reference distribution used to evaluate feature
-coalitions**.
-
-SHAP for Image Data
--------------------
-
-We now apply the same SHAP framework to **image data**. Again, the Shapley
-formula itself does not change. Instead, we need to define what the players
-are, what it means for an image feature to be "missing", and how the
-corresponding coalition values :math:`v_x(S)` are evaluated.
-
-What Are the Players?
-^^^^^^^^^^^^^^^^^^^^^
-
-For image data, the input **pixels** are the players in the Shapley game. A
-coalition :math:`S` is therefore a subset of the pixels of the image.
-
-.. figure:: ../_figures/shap_input_image.png
-   :alt: Pixelated cat used as an example input image for SHAP.
-   :align: center
-   :width: 30%
-
-   **Example input image.** For image data, the individual input pixels are the
-   players in the Shapley game. SHAP assigns a contribution to each pixel for
-   the prediction of the image being explained.
-
-For an image with :math:`M` pixel features, the set of players can be written
-as
-
-.. math::
-
-   N = \{p_1, p_2, \ldots, p_M\}.
-
-For an individual image :math:`x`, SHAP assigns a contribution
-:math:`\phi_i(x)` to each pixel :math:`p_i`.
-
-As introduced above, the SHAP value of pixel :math:`p_i` is obtained by
-combining its marginal contributions across different pixel coalitions:
-
-.. math::
-
-   \phi_i(x) =
-   \sum_{S \subseteq N \setminus \{i\}}
-   \frac{|S|!(|N|-|S|-1)!}{|N|!}
-   \left[
-      v_x(S \cup \{i\}) - v_x(S)
-   \right].
-
-For a particular coalition :math:`S`, the marginal contribution is
-
-.. math::
-
-   \Delta_{i,x}(S)
-   =
-   v_x(S \cup \{i\}) - v_x(S).
-
-We therefore determine a pixel's marginal contribution by comparing the
-coalition value **with and without that pixel**.
-
-This raises the same practical question as for tabular data: how can we
-evaluate :math:`v_x(S)` when pixels outside the coalition cannot simply be
-removed from the image?
-
-
-What Does a "Missing" Pixel Mean?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Image models generally expect a complete image as input. A pixel outside a
-coalition therefore cannot simply be removed. Instead, an **image masker**
-defines how the information contained in a "missing" pixel is replaced.
-
-Suppose, for example, that :math:`S` is a coalition containing a subset of
-the pixels of image :math:`x`.
-
-Pixels inside the coalition retain their original values, while pixels
-outside the coalition are treated as missing:
-
-.. math::
-
-   x_j^{(S)}
-   =
-   \begin{cases}
-      x_j, & p_j \in S,\\
-      m_j(x), & p_j \notin S,
-   \end{cases}
-
-where
-
-* :math:`x_j` is the original value of pixel :math:`p_j`,
-* :math:`m_j(x)` is the replacement value produced by the image masker, and
-* :math:`x^{(S)}` is the resulting complete, masked image.
-
-.. figure:: ../_figures/shap_image_pixel_coalition.png
-   :alt: Original image and masked image in which only the light-blue pixels retain their original values.
-   :align: center
-   :width: 65%
-
-   **Example of an image coalition.** The light-blue pixels form the coalition
-   :math:`S` and retain their original values. Pixels outside the coalition are
-   treated as missing and replaced according to the image masker, here using
-   values from a blurred version of the image.
-
-The model can then be evaluated on this masked image. The corresponding
-coalition value is
-
-.. math::
-
-   v_x(S) = f\left(x^{(S)}\right).
-
-Thus, unlike the background-based tabular formulation, a coalition does not
-need to be completed using multiple background samples. The image masker
-directly constructs a complete image corresponding to the coalition.
-
-
-Image Masking Strategies
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Different masking strategies can be used to represent missing image
-information. Two common approaches are **blurring** and **inpainting**.
-
-**Blurring**
-
-With a blur masker, a missing pixel is replaced with the corresponding value
-from a blurred version of the image.
-
-For example, a masker using a :math:`16 \times 16` blur constructs a blurred
-image in which each replacement pixel is determined from its local
-:math:`16 \times 16` neighborhood. Conceptually,
-
-.. math::
-
-   x_j^{(S)}
-   =
-   \begin{cases}
-      x_j, & p_j \in S,\\
-      x_j^{\mathrm{blur}}, & p_j \notin S.
-   \end{cases}
-
-Pixels in the coalition therefore retain the original image information,
-while pixels outside the coalition contain only the corresponding blurred
-information.
-
-Importantly, the :math:`16 \times 16` window specifies how the blurred
-replacement values are constructed. It does **not** divide the image into
-:math:`16 \times 16` SHAP regions.
-
-**Inpainting**
-
-Inpainting instead reconstructs the missing image information from the
-surrounding visible image. Rather than replacing a missing pixel with a value
-from a precomputed blurred image, the masked area is filled based on the
-image information around it.
-
-Different inpainting algorithms can use different reconstruction strategies,
-but their role within SHAP is the same: they define what the model receives
-when particular pixel information is considered unavailable.
-
-The choice of masker therefore defines what "missing" means in the
-corresponding Shapley game.
-
-
-What Defines the Baseline?
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The general SHAP decomposition is
-
-.. math::
-
-   f(x)
-   =
-   v_x(\emptyset)
-   +
-   \sum_{i \in N}\phi_i.
-
-The baseline is therefore the value of the **empty coalition**
-:math:`v_x(\emptyset)`.
-
-What does the empty coalition mean for masking-based image SHAP?
-
-For
-
-.. math::
-
-   S = \emptyset,
-
-none of the original pixel values are available. Every pixel is therefore
-replaced according to the chosen image masker:
-
-.. math::
-
-   x_j^{(\emptyset)} = m_j(x)
-   \qquad \forall j.
-
-.. figure:: ../_figures/shap_image_empty_coalition.png
-   :alt: Original image and fully masked image representing the empty coalition.
-   :align: center
-   :width: 75%
-
-   **Original image and empty coalition.** For the empty coalition
-   :math:`S=\emptyset`, none of the original pixel values are available.
-   Every pixel is therefore replaced according to the image masker. The model
-   output for the fully masked image :math:`x^{(\emptyset)}` defines the
-   baseline :math:`v_x(\emptyset)`.
-
-The fully masked image is denoted by :math:`x^{(\emptyset)}`. Its model
-output defines the baseline:
-
-.. math::
-
-   v_x(\emptyset)
-   =
-   f\left(x^{(\emptyset)}\right).
-
-For example, when using a blur masker, :math:`x^{(\emptyset)}` is the fully
-blurred version of the image. The baseline is therefore
-
-.. math::
-
-   v_x(\emptyset)
-   =
-   f\left(x^{\mathrm{blur}}\right).
-
-The SHAP decomposition can then be written as
-
-.. math::
-
-   f(x)
-   =
-   \underbrace{
-      f\left(x^{(\emptyset)}\right)
-   }_{\text{baseline}}
-   +
-   \underbrace{
-      \sum_{i \in N}\phi_i
-   }_{\text{pixel contributions}}.
-
-For masking-based image SHAP, the **chosen masker defines the empty coalition
-and therefore the baseline**. Changing how missing pixels are represented can
-change the model output for the empty coalition, the values of intermediate
-coalitions, and consequently the resulting SHAP values.
-
-SHAP explanations for images should therefore always be interpreted relative
-to the masking strategy used to define missing image information.
-
-
-SHAP for Text Data
-------------------
-
-We now apply the same SHAP framework to **text data**. As for tabular and
-image data, the Shapley formula itself does not change. Instead, we need to
-define what the players are, what it means for a text feature to be
-"missing", and how the corresponding coalition values :math:`v_x(S)` are
-evaluated.
-
-
-What Are the Players?
-^^^^^^^^^^^^^^^^^^^^^
-
-For text data, the input **tokens** are the players in the Shapley game. A
-coalition :math:`S` is therefore a subset of the tokens in the input text.
-
-Suppose, for example, that a tokenizer represents a sentence as
-
-.. code-block:: text
-
-   [I] [really] [enjoyed] [this] [wonder] [ful] [movie] [.]
-
-The set of players is then
-
-.. math::
-
-   N = \{t_1, t_2, \ldots, t_M\},
-
-where each :math:`t_i` represents one input token.
-
-Notice that tokens do not necessarily correspond to complete words. Depending
-on the tokenizer, a word may be split into several tokens. In the example
-above, ``wonderful`` is represented by the two tokens ``wonder`` and ``ful``.
-
-For an individual text :math:`x`, SHAP assigns a contribution
-:math:`\phi_i(x)` to each token :math:`t_i`.
-
-As introduced above, the SHAP value of token :math:`t_i` is obtained by
-combining its marginal contributions across different token coalitions:
-
-.. math::
-
-   \phi_i(x) =
-   \sum_{S \subseteq N \setminus \{i\}}
-   \frac{|S|!(|N|-|S|-1)!}{|N|!}
-   \left[
-      v_x(S \cup \{i\}) - v_x(S)
-   \right].
-
-For a particular coalition :math:`S`, the marginal contribution is
-
-.. math::
-
-   \Delta_{i,x}(S)
-   =
-   v_x(S \cup \{i\}) - v_x(S).
-
-We therefore determine a token's marginal contribution by comparing the
-coalition value **with and without that token**.
-
-This again raises a practical question: how can we evaluate :math:`v_x(S)`
-when tokens outside the coalition cannot simply be removed from the text?
-
-
-What Does a "Missing" Token Mean?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Text models generally expect an input that follows the representation defined
-by their tokenizer. Tokens outside a coalition therefore need to be
-represented in a way that keeps the input compatible with the model.
-
-A **text masker** defines how these "missing" tokens are represented.
-
-Consider again the tokenized sentence
-
-.. code-block:: text
-
-   [I] [really] [enjoyed] [this] [wonder] [ful] [movie] [.]
-
-and suppose we want to evaluate a coalition containing the tokens
-
-.. math::
-
-   S = \{\text{really}, \text{enjoyed}, \text{wonder}\}.
-
-Conceptually, only the information from these tokens is retained:
-
-.. code-block:: text
-
-   [?] [really] [enjoyed] [?] [wonder] [?] [?] [?]
-
-The text masker then replaces or hides the tokens outside the coalition
-according to its masking strategy. For a model with an appropriate mask
-token, the resulting input could for example be represented as
-
-.. code-block:: text
-
-   [MASK] [really] [enjoyed] [MASK] [wonder] [MASK] [MASK] [MASK]
-
-More generally, the masked text can be denoted by :math:`x^{(S)}`. Its token
-values are defined as
-
-.. math::
-
-   x_j^{(S)}
-   =
-   \begin{cases}
-      x_j, & t_j \in S,\\
-      m_j(x), & t_j \notin S,
-   \end{cases}
-
-where
-
-* :math:`x_j` is the original token information for :math:`t_j`,
-* :math:`m_j(x)` is the representation produced by the text masker for a
-  missing token, and
-* :math:`x^{(S)}` is the resulting masked text input.
-
-The model can then be evaluated on this masked input. The corresponding
-coalition value is
-
-.. math::
-
-   v_x(S)
-   =
-   f\left(x^{(S)}\right).
-
-Thus, the **text masker defines what it means for token information to be
-missing**. The exact masking strategy depends on the model and tokenizer. For
-models that support a dedicated mask token, this may involve replacing
-missing tokens with that token.
-
-
-What Defines the Baseline?
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The general SHAP decomposition is
-
-.. math::
-
-   f(x)
-   =
-   v_x(\emptyset)
-   +
-   \sum_{i \in N}\phi_i.
-
-The baseline is therefore the value of the **empty coalition**
-:math:`v_x(\emptyset)`.
-
-For text data, what does the empty coalition :math:`S=\emptyset` mean?
-
-For the empty coalition, none of the original tokens are available. The text
-masker therefore represents all input tokens as missing.
-
-For example,
-
-.. code-block:: text
-
-   [I] [really] [enjoyed] [this] [wonder] [ful] [movie] [.]
-
-could conceptually become
-
-.. code-block:: text
-
-   [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK] [MASK]
-
-when a mask-token-based strategy is used.
-
-More generally,
-
-.. math::
-
-   x_j^{(\emptyset)}
-   =
-   m_j(x)
-   \qquad \forall j.
-
-The resulting fully masked text is denoted by
-:math:`x^{(\emptyset)}`. Its model output defines the baseline:
-
-.. math::
-
-   v_x(\emptyset)
-   =
-   f\left(x^{(\emptyset)}\right).
-
-The SHAP decomposition can therefore be written as
-
-.. math::
-
-   f(x)
-   =
-   \underbrace{
-      f\left(x^{(\emptyset)}\right)
-   }_{\text{baseline}}
-   +
-   \underbrace{
-      \sum_{i \in N}\phi_i
-   }_{\text{token contributions}}.
-
-For masking-based text SHAP, the **text masker defines the empty coalition and
-therefore the baseline**. Changing how missing tokens are represented can
-change the model output for the empty coalition, the values of intermediate
-coalitions, and consequently the resulting SHAP values.
-
-SHAP explanations for text should therefore always be interpreted relative
-to the masking strategy used to define missing token information.
-
-
-The Challenge of Dependent Tokens
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Text introduces an additional challenge because tokens are strongly
-**context-dependent**. The meaning and contribution of a token often depend
-on the tokens surrounding it.
-
-Consider, for example,
-
-.. code-block:: text
-
-   [The] [movie] [was] [not] [good] [.]
-
-The tokens ``not`` and ``good`` cannot easily be interpreted independently.
-Together, the phrase ``not good`` expresses a meaning that neither token
-captures on its own.
-
-Masking one of these tokens changes the linguistic context substantially:
-
-.. code-block:: text
-
-   [The] [movie] [was] [MASK] [good] [.]
-
-or
-
-.. code-block:: text
-
-   [The] [movie] [was] [not] [MASK] [.]
-
-
-Tokens Are Context-Dependent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A token's meaning and contribution can depend strongly on the surrounding
-tokens. Information may therefore be **shared across interacting tokens**.
-
-For example, the contribution associated with ``not good`` arises partly
-from the interaction between the two tokens. Assigning this shared
-information to individual tokens is therefore not always straightforward.
-
-As a result, SHAP values should not necessarily be interpreted as independent
-measures of the intrinsic importance of individual tokens. They describe how
-token information contributes within the coalition game defined by the
-chosen masking strategy.
-
-
-Masked Text Can Be Unnatural
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Masking tokens can also produce sequences that are unlikely, grammatically
-incomplete, or different from the natural-language inputs on which the model
-was trained.
-
-The model may therefore be evaluated on inputs that differ from natural
-language. This can affect the coalition values :math:`v_x(S)` and,
-consequently, the resulting SHAP values.
-
-As with the other data modalities, the definition of **missingness** is
-therefore an important part of the interpretation of a text SHAP explanation.
-
 References
-----------
+============
 
 The following resources provide further information on Shapley values and
 SHAP:
