@@ -38,9 +38,6 @@ A large positive or negative SHAP value indicates how a feature contributes
 to the model's prediction relative to the chosen baseline. It does not imply
 that the feature has a causal effect on the predicted outcome.
 
-Video Introduction
--------------------------
-
 The following video provides a short introduction to SHAP and its main
 concepts:
 
