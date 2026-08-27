@@ -41,6 +41,6 @@ SHAP:
   `Interpretable Machine Learning: SHAP
   <https://christophm.github.io/interpretable-ml-book/shap.html>`_.
 
-Molnar, C.
+* Molnar, C.
   `Interpreting Machine Learning Models With SHAP
   <https://leanpub.com/shap>`_.
