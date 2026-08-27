@@ -130,7 +130,7 @@ Here, :math:`z_i` indicates whether feature :math:`i` is present in the coalitio
 
 **Why Are Kernel Weights Needed?**
 
-The SHAP kernel weight :math:`\pi(S)` controls **how strongly the error for coalition :math:`S` influences the fitted coefficients**. A coalition with a larger weight has a stronger influence on the regression solution than a coalition with a smaller weight. For a coalition :math:`S` with :math:`|S|` present features out of :math:`M` total features, the SHAP kernel weight is
+The SHAP kernel weight :math:`\pi(S)` controls **how strongly the error for coalition** :math:`S` **influences the fitted coefficients**. A coalition with a larger weight has a stronger influence on the regression solution than a coalition with a smaller weight. For a coalition :math:`S` with :math:`|S|` present features out of :math:`M` total features, the SHAP kernel weight is
 
 .. math::
 
