@@ -16,7 +16,7 @@ This chapter introduces the theoretical foundation of SHAP, explains how differe
 
 
 References
-============
+-------------
 
 The following resources provide further information on Shapley values and
 SHAP:
