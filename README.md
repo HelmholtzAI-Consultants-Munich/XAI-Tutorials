@@ -90,7 +90,7 @@ python update_branch_links.py
 <!-- LINK CONTRIBUTION START -->
 
 Comments, suggestions, and contributions are very welcome!
-If you have ideas for improvements or want to report an issue, feel free to open an issue or submit a pull request.
+If you have ideas for improvements or want to report an issue, feel free to open an issue or submit a pull request. We will review your contribution as soon as possible.
 
 <!-- LINK CONTRIBUTION END -->
 
