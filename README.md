@@ -1,7 +1,12 @@
+<div align="center">
+<img src="https://raw.githubusercontent.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/main/docs/source/_figures/logo.png" width="200">
+	
+# Tutorials for eXplainable Artificial Intelligence (XAI)
+
 [![test](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml/badge.svg)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml)
 [![stars](https://img.shields.io/github/stars/HelmholtzAI-Consultants-Munich/XAI-Tutorials?logo=GitHub&color=yellow)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/stargazers)
-
-# Tutorials for eXplainable Artificial Intelligence (XAI)
+	
+</div>
 
 <!-- LINK INTRODUCTION START -->
 
