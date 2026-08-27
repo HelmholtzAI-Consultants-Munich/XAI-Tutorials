@@ -21,15 +21,15 @@ References
 The following resources provide further information on Shapley values and
 SHAP:
 
-* Lundberg, S. M. and Lee, S.-I. (2017).
-  `A Unified Approach to Interpreting Model Predictions
-  <https://proceedings.neurips.cc/paper_files/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html>`_.
-  *Advances in Neural Information Processing Systems 30*.
-
 * Shapley, L. S. (1953).
   `A Value for n-Person Games
   <https://doi.org/10.1515/9781400881970-018>`_.
   In *Contributions to the Theory of Games II*, pp. 307--317.
+
+* Lundberg, S. M. and Lee, S.-I. (2017).
+  `A Unified Approach to Interpreting Model Predictions
+  <https://proceedings.neurips.cc/paper_files/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html>`_.
+  *Advances in Neural Information Processing Systems 30*.
 
 * Lundberg, S. M., Erion, G., Chen, H., et al. (2020).
   `From local explanations to global understanding with explainable AI for
@@ -41,4 +41,6 @@ SHAP:
   `Interpretable Machine Learning: SHAP
   <https://christophm.github.io/interpretable-ml-book/shap.html>`_.
 
-* `SHAP Documentation <https://shap.readthedocs.io/>`_.
+Molnar, C.
+  `Interpreting Machine Learning Models With SHAP
+  <https://leanpub.com/shap>`_.
