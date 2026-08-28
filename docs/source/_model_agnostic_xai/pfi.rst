@@ -12,10 +12,6 @@ PFI asks a simple question:
 
 To answer this question, PFI randomly shuffles the values of one feature across the observations. The same feature values remain in the dataset, but they are assigned to different observations. This preserves the feature's overall distribution while breaking its associations with the target and the other features. If the model performs considerably worse after the feature has been shuffled, the model relied on that feature. If its performance changes very little, the feature provided little additional information to the model in the evaluated dataset. PFI is **model-agnostic** because it only requires predictions from an already trained model and a measure of predictive performance. The model is not retrained during the procedure. Standard PFI is a **global** method because it summarizes feature importance across a dataset rather than explaining an individual prediction.
 
-.. important::
-
-   PFI measures how much a particular model relies on a feature. It does not measure the feature's causal effect or its intrinsic importance in the real world.
-
 The following video provides a short introduction to PFI and its main
 concepts:
 
