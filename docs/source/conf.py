@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 
 project = 'XAI Tutorials'
 copyright = 'Helmholtz AI 2026'
-author = 'Donatella Cea, Lisa Barros de Andrade e Sousa, Christina Bukas, Marcella Astrid, Helena Pelin, Elisabeth Georgii, Helene Hoffmann, Sebastian Starke'
+author = 'Lisa Barros de Andrade e Sousa, Donatella Cea, Christina Bukas, Marcella Astrid, Helena Pelin, Elisabeth Georgii, Helene Hoffmann, Sebastian Starke'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -34,6 +34,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
+    "myst_parser",
     "nbsphinx",
     "nbsphinx_link",
     "sphinxcontrib.youtube",
@@ -61,7 +62,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 #
 html_theme = "sphinx_book_theme"
-html_logo = "_figures/logo2.png"
+html_logo = "_figures/logo.png"
 
 html_title = "XAI Tutorials"
 html_theme_options = {
