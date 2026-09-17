@@ -1,0 +1,44 @@
+{
+  "model": "distilbert-base-uncased",
+  "task": "sequence classification (emotion, 6 classes)",
+  "dataset": {
+    "name": "dair-ai/emotion",
+    "config": "split",
+    "n_train": 16000,
+    "n_validation": 2000,
+    "n_test": 2000,
+    "labels": ["sadness", "joy", "love", "anger", "fear", "surprise"]
+  },
+  "hyperparameters": {
+    "epochs": 3,
+    "per_device_train_batch_size": 16,
+    "per_device_eval_batch_size": 32,
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "max_length": 128,
+    "seed": 42,
+    "device": "mps",
+    "precision": "fp32"
+  },
+  "training": {
+    "train_runtime_sec": 1270,
+    "train_runtime_min": 21.2,
+    "final_train_loss": 0.239
+  },
+  "validation_per_epoch": [
+    { "epoch": 1, "loss": 0.1906, "accuracy": 0.9265, "f1_weighted": 0.9265 },
+    { "epoch": 2, "loss": 0.1678, "accuracy": 0.9355, "f1_weighted": 0.9349 },
+    { "epoch": 3, "loss": 0.1552, "accuracy": 0.9390, "f1_weighted": 0.9391 }
+  ],
+  "test": {
+    "loss": 0.1871,
+    "accuracy": 0.9295,
+    "f1_weighted": 0.9290
+  },
+  "artifact": {
+    "file": "model.safetensors",
+    "size_bytes": 267844872,
+    "size_mib": 255,
+    "dtype": "float32"
+  }
+}
