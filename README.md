@@ -1,7 +1,16 @@
+<div align="center">
+<img src="https://raw.githubusercontent.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/main/docs/source/_figures/logo.png" width="200">
+	
+# Tutorials for eXplainable Artificial Intelligence (XAI)
+
 [![test](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml/badge.svg)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml)
 [![stars](https://img.shields.io/github/stars/HelmholtzAI-Consultants-Munich/XAI-Tutorials?logo=GitHub&color=yellow)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/stargazers)
+	
+</div>
 
-# Tutorials for eXplainable Artificial Intelligence (XAI)
+<!-- LINK INTRODUCTION START -->
+
+ *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
 
 This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests, CNNs, and Transformers. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
 
@@ -14,6 +23,7 @@ The learning objectives are:
 * interpret explanation outputs and visualizations for different model types
 * gain hands-on experience applying XAI methods to real-world examples
 
+<!-- LINK INTRODUCTION END -->
 
 ## 📚 Included Tutorials
 
@@ -77,11 +87,22 @@ python update_branch_links.py
 
 ## 🤝 Contributions
 
+<!-- LINK CONTRIBUTION START -->
+
 Comments, suggestions, and contributions are very welcome!
-If you have ideas for improvements or want to report an issue, feel free to open an issue or submit a pull request.
+If you have ideas for improvements or want to report an issue, feel free to open an issue or submit a pull request. We will review your contribution as soon as possible.
 
-## 📄 License
+<!-- LINK CONTRIBUTION END -->
 
-All content is publicly available under the Creative Commons Attribution 4.0 License:
+## 🛡️ License
+
+<!-- LINK LICENSE START -->
+
+This repository contains both source code and teaching materials, which are licensed separately:
+
+- **Code** (notebooks, scripts, and other software) is licensed under the MIT License. See the `LICENSE` file.
+- **Teaching materials** (slides, figures, and written explanations) are licensed under the Creative Commons Attribution 4.0 License. See the `LICENSE-CONTENT` file.
 
 [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
+
+<!-- LINK LICENSE END -->

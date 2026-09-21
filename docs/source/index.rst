@@ -1,22 +1,14 @@
-.. XAI Tutorials documentation master file, created by
-   sphinx-quickstart on Tue May 23 11:37:03 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Tutorials for eXplainable Artificial Intelligence (XAI) methods
 ================================================================
 
-Complex supervised Machine Learning (ML) and Deep Learning (DL) models are usually trained to achieve high accuracy, 
-but are often considered to be "Black Boxes" because of a lack of understanding of the underlying reasons for decisions made by the model. 
-To deploy such models to the real world, i.e. to move from research to application, it is indispensable to not only make accurate predictions, 
-but also to understand the logic behind those predictions, to ensure that the models produce valuable results and are safe to use [1]. 
-The application of interpretability methods allows us to identify potential biases, ensure fairness and prevent genre, social, and race discrimination. 
-Moreover, in many fields, especially in the biomedical domain, explainability can be the key to acceptance and trust.
+.. include:: ../../README.md
+   :parser: myst_parser.sphinx_
+   :start-after: <!-- LINK INTRODUCTION START -->
+   :end-before: <!-- LINK INTRODUCTION END -->
 
-The XAI-Tutorials repository provides a collection of self-explanatory tutorials for different model-agnostic and model-specific XAI methods. 
-Each tutorial comes in a Jupyter Notebook with practical exercises. 
-In addition, we provide useful background information on those methods in this documentation.
 
+📚 Theoretical Background
+---------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -55,12 +47,18 @@ In addition, we provide useful background information on those methods in this d
 
 
 
-Contributions
-==============
-Comments and input are very welcome! Please, if you have a suggestion or you think something should be changed, open an issue or submit a pull request.
+🤝 Contributing
+------------------
 
+.. include:: ../../README.md
+   :parser: myst_parser.sphinx_
+   :start-after: <!-- LINK CONTRIBUTION START -->
+   :end-before: <!-- LINK CONTRIBUTION END -->
 
-References
-===========
+🛡️ License
+-------------
 
-[1] R. Roscher, B. Bohn, M. F. Duarte and J. Garcke, "Explainable Machine Learning for Scientific Insights and Discoveries," IEEE Access, Vol. 8, pp. 42200-42216 (2020)
+.. include:: ../../README.md
+   :parser: myst_parser.sphinx_
+   :start-after: <!-- LINK LICENSE START -->
+   :end-before: <!-- LINK LICENSE END -->

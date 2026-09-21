@@ -1,19 +1,28 @@
 Terminology
 ==============
 
-**Explainability or Interpretability?** 
+**Explainability or Interpretability?**
 
-There is no standard and generally accepted definition, and sometimes people use these two terms interchangeably.
-Nonetheless, we believe there is a difference between the two.
+The distinction between *interpretability* and *explainability* is not universally agreed upon. 
+Different authors, research communities, and software libraries may use these terms differently. 
 
-The *Royal Society* defines:
+**Interpretability**
 
-- **Interpretability**: implies some sense of understanding how the technology works
-- **Explainability**: implies that a wider range of users can understand why or how a conclusion was reached
+Interpretability is the degree to which a human can understand the internal mechanics of a model 
+without external tools. It focuses on the transparency of the model itself. Interpretable models, 
+often referred to as *glass-box models*, allow humans to directly inspect how predictions are generated.
 
-In more general terms, when we speak about interpretability, we aim to understand exactly why and how the model is generating predictions by observing the inner mechanics of the AI/ML method. This usually implies that we are dealing with a *glass-box model*. On the other hand, when we speak about explainability, we focus on the decision-making process of a *black-box model* and try to explain the behaviour in human understandable terms.
+**Explainability**
 
-In this course, we will not focus on intrinsic methods that are interpretable by construction, but we will only focus on explainability, looking at some of the main popular post hoc methods.
+Explainability is the extent to which the behaviour or internal mechanics of a machine learning model 
+can be explained in human-understandable terms, often using *post hoc* methods. It focuses on providing 
+insights into the behaviour of *black-box models*, whose internal decision-making process is not directly accessible.
+
+In practice, explainability methods aim to answer questions such as *Why did the model make this prediction?*, 
+*Which features were most influential?*, or *How would the prediction change if the input were different?* 
+These explanations are generated after the model has been trained and do not require modifying the underlying model.
+
+In this course, we primarily focus on explainability techniques for black-box models, with an emphasis on widely used post hoc methods. While intrinsically interpretable models are an important area of machine learning, they are outside the scope of this course.
 
 References
 -----------
