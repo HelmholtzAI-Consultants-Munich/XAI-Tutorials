@@ -1,12 +1,15 @@
 # Requires Python 3.12 (shap 0.52.0)
+accelerate==1.14.0
 datasets==5.0.1
 evaluate==0.4.3
 jupyter==1.1.1
 matplotlib==3.10.1
+numpy==2.0.2
 opencv-python==4.11.0.86
 pandas==3.0.5
 requests==2.34.2
 sacrebleu==2.5.1
+scikit-learn==1.9.0
 shap==0.52.0
 torch==2.6.0
 torchvision==0.21.0
