@@ -1,0 +1,16 @@
+# Shared environment for the Captum LRP and LXT AttnLRP DistilBERT notebooks.
+# LXT is tested with this PyTorch and Transformers combination.
+torch==2.6.0
+transformers==4.52.4
+lxt==2.1
+
+# Captum LRP notebook
+captum==0.8.0
+
+# LXT AttnLRP notebook and visualizations
+datasets==3.6.0
+matplotlib==3.10.1
+numpy==2.2.6
+
+# Notebook runtime
+jupyter==1.1.1
