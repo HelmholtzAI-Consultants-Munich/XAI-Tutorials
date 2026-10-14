@@ -284,7 +284,7 @@ def training_loop(model, model_weights_path, train_loader, criterion, optimizer,
             inputs, labels = data
             optimizer.zero_grad()
             outputs = model(inputs.to(device))
-            loss = criterion(outputs[0], labels.to(device))
+            loss = criterion(outputs, labels.to(device))
             loss.backward()
             optimizer.step()
             running_loss += loss.item()
@@ -337,7 +337,6 @@ def inference_loop(model, test_loader, criterion):
             targets = targets.to(device)
             inputs = inputs.to(device)
             outputs = model(inputs)
-            outputs = outputs[0]
 
             loss = criterion(outputs, targets)
 
