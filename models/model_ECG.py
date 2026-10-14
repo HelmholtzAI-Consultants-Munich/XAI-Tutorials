@@ -284,10 +284,6 @@ def training_loop(model, model_weights_path, train_loader, criterion, optimizer,
             inputs, labels = data
             optimizer.zero_grad()
             outputs = model(inputs.to(device))
-            # CORRECTION: forward() returns the logits tensor [batch, num_classes], not a
-            # tuple, so outputs[0] took only the FIRST sample's logits (shape mismatch /
-            # wrong loss). Use the full batch of logits.
-            # loss = criterion(outputs[0], labels.to(device))
             loss = criterion(outputs, labels.to(device))
             loss.backward()
             optimizer.step()
@@ -341,9 +337,6 @@ def inference_loop(model, test_loader, criterion):
             targets = targets.to(device)
             inputs = inputs.to(device)
             outputs = model(inputs)
-            # CORRECTION: forward() returns the logits tensor directly; the line below took
-            # only the first sample and produced wrong metrics. Keep the full batch.
-            # outputs = outputs[0]
 
             loss = criterion(outputs, targets)
 
