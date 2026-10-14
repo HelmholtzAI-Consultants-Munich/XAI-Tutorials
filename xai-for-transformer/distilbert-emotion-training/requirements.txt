@@ -1,0 +1,8 @@
+# Exact package versions used to fine-tune the DistilBERT emotion checkpoint.
+# Python 3.11.7.  Install with:  pip install -r requirements.txt
+transformers==5.13.0
+datasets==5.0.0
+torch==2.6.0
+scikit-learn==1.9.0
+numpy==2.0.2
+accelerate==1.14.0

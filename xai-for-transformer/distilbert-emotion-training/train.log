@@ -1,0 +1,82 @@
+>> loading dataset dair-ai/emotion (split)  [SMOKE=False]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+>> labels: ['sadness', 'joy', 'love', 'anger', 'fear', 'surprise']
+[transformers] DistilBertForSequenceClassification LOAD REPORT from: distilbert-base-uncased
+Key                     | Status     | 
+------------------------+------------+-
+vocab_layer_norm.bias   | UNEXPECTED | 
+vocab_transform.bias    | UNEXPECTED | 
+vocab_transform.weight  | UNEXPECTED | 
+vocab_layer_norm.weight | UNEXPECTED | 
+vocab_projector.bias    | UNEXPECTED | 
+classifier.weight       | MISSING    | 
+classifier.bias         | MISSING    | 
+pre_classifier.bias     | MISSING    | 
+pre_classifier.weight   | MISSING    | 
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+>> device=mps  epochs=3  train=16000
+{'loss': '1.327', 'grad_norm': '5.283', 'learning_rate': '1.934e-05', 'epoch': '0.1'}
+{'loss': '0.9739', 'grad_norm': '8.037', 'learning_rate': '1.901e-05', 'epoch': '0.15'}
+{'loss': '0.6998', 'grad_norm': '7.207', 'learning_rate': '1.867e-05', 'epoch': '0.2'}
+{'loss': '0.5744', 'grad_norm': '11.23', 'learning_rate': '1.834e-05', 'epoch': '0.25'}
+{'loss': '0.4387', 'grad_norm': '7.691', 'learning_rate': '1.801e-05', 'epoch': '0.3'}
+{'loss': '0.417', 'grad_norm': '3.789', 'learning_rate': '1.767e-05', 'epoch': '0.35'}
+{'loss': '0.3464', 'grad_norm': '13.34', 'learning_rate': '1.734e-05', 'epoch': '0.4'}
+{'loss': '0.2997', 'grad_norm': '7.362', 'learning_rate': '1.701e-05', 'epoch': '0.45'}
+{'loss': '0.2681', 'grad_norm': '5.126', 'learning_rate': '1.667e-05', 'epoch': '0.5'}
+{'loss': '0.2823', 'grad_norm': '0.8241', 'learning_rate': '1.634e-05', 'epoch': '0.55'}
+{'loss': '0.236', 'grad_norm': '21.51', 'learning_rate': '1.601e-05', 'epoch': '0.6'}
+{'loss': '0.32', 'grad_norm': '8.095', 'learning_rate': '1.567e-05', 'epoch': '0.65'}
+{'loss': '0.2115', 'grad_norm': '14.69', 'learning_rate': '1.534e-05', 'epoch': '0.7'}
+{'loss': '0.2473', 'grad_norm': '21.17', 'learning_rate': '1.501e-05', 'epoch': '0.75'}
+{'loss': '0.2201', 'grad_norm': '4.64', 'learning_rate': '1.467e-05', 'epoch': '0.8'}
+{'loss': '0.2641', 'grad_norm': '4.702', 'learning_rate': '1.434e-05', 'epoch': '0.85'}
+{'loss': '0.1823', 'grad_norm': '11.27', 'learning_rate': '1.401e-05', 'epoch': '0.9'}
+{'loss': '0.2518', 'grad_norm': '17.24', 'learning_rate': '1.367e-05', 'epoch': '0.95'}
+{'loss': '0.2101', 'grad_norm': '14.1', 'learning_rate': '1.334e-05', 'epoch': '1'}
+{'loss': '0.1287', 'grad_norm': '6.177', 'learning_rate': '1.301e-05', 'epoch': '1.05'}
+{'loss': '0.1195', 'grad_norm': '0.2473', 'learning_rate': '1.267e-05', 'epoch': '1.1'}
+{'loss': '0.1695', 'grad_norm': '7.129', 'learning_rate': '1.234e-05', 'epoch': '1.15'}
+{'loss': '0.1836', 'grad_norm': '8.66', 'learning_rate': '1.201e-05', 'epoch': '1.2'}
+{'loss': '0.147', 'grad_norm': '0.3967', 'learning_rate': '1.167e-05', 'epoch': '1.25'}
+{'loss': '0.1576', 'grad_norm': '1.533', 'learning_rate': '1.134e-05', 'epoch': '1.3'}
+{'loss': '0.1256', 'grad_norm': '2.991', 'learning_rate': '1.101e-05', 'epoch': '1.35'}
+{'loss': '0.1694', 'grad_norm': '10.15', 'learning_rate': '1.067e-05', 'epoch': '1.4'}
+{'loss': '0.1321', 'grad_norm': '5.577', 'learning_rate': '1.034e-05', 'epoch': '1.45'}
+{'loss': '0.154', 'grad_norm': '0.3539', 'learning_rate': '1.001e-05', 'epoch': '1.5'}
+{'loss': '0.1324', 'grad_norm': '0.214', 'learning_rate': '9.673e-06', 'epoch': '1.55'}
+{'loss': '0.1248', 'grad_norm': '4.918', 'learning_rate': '9.34e-06', 'epoch': '1.6'}
+{'loss': '0.1455', 'grad_norm': '5.53', 'learning_rate': '9.007e-06', 'epoch': '1.65'}
+{'loss': '0.1594', 'grad_norm': '8.761', 'learning_rate': '8.673e-06', 'epoch': '1.7'}
+{'loss': '0.1696', 'grad_norm': '0.3018', 'learning_rate': '8.34e-06', 'epoch': '1.75'}
+{'loss': '0.1469', 'grad_norm': '4.909', 'learning_rate': '8.007e-06', 'epoch': '1.8'}
+{'loss': '0.1899', 'grad_norm': '6.267', 'learning_rate': '7.673e-06', 'epoch': '1.85'}
+{'loss': '0.1364', 'grad_norm': '3.318', 'learning_rate': '7.34e-06', 'epoch': '1.9'}
+{'loss': '0.1037', 'grad_norm': '3.732', 'learning_rate': '7.007e-06', 'epoch': '1.95'}
+{'loss': '0.1501', 'grad_norm': '10.25', 'learning_rate': '6.673e-06', 'epoch': '2'}
+{'loss': '0.125', 'grad_norm': '0.1553', 'learning_rate': '6.34e-06', 'epoch': '2.05'}
+{'loss': '0.1055', 'grad_norm': '1.817', 'learning_rate': '6.007e-06', 'epoch': '2.1'}
+{'loss': '0.1258', 'grad_norm': '1.64', 'learning_rate': '5.673e-06', 'epoch': '2.15'}
+{'loss': '0.08761', 'grad_norm': '13.07', 'learning_rate': '5.34e-06', 'epoch': '2.2'}
+{'loss': '0.1045', 'grad_norm': '7.169', 'learning_rate': '5.007e-06', 'epoch': '2.25'}
+{'loss': '0.09492', 'grad_norm': '3.695', 'learning_rate': '4.673e-06', 'epoch': '2.3'}
+{'loss': '0.09578', 'grad_norm': '4.868', 'learning_rate': '4.34e-06', 'epoch': '2.35'}
+{'loss': '0.1095', 'grad_norm': '7.066', 'learning_rate': '4.007e-06', 'epoch': '2.4'}
+{'loss': '0.1023', 'grad_norm': '25.55', 'learning_rate': '3.673e-06', 'epoch': '2.45'}
+{'loss': '0.09162', 'grad_norm': '0.2507', 'learning_rate': '3.34e-06', 'epoch': '2.5'}
+{'loss': '0.09091', 'grad_norm': '6.892', 'learning_rate': '3.007e-06', 'epoch': '2.55'}
+{'loss': '0.07146', 'grad_norm': '0.03792', 'learning_rate': '2.673e-06', 'epoch': '2.6'}
+{'loss': '0.07999', 'grad_norm': '8.802', 'learning_rate': '2.34e-06', 'epoch': '2.65'}
+{'loss': '0.1339', 'grad_norm': '7.472', 'learning_rate': '2.007e-06', 'epoch': '2.7'}
+{'loss': '0.07065', 'grad_norm': '3.417', 'learning_rate': '1.673e-06', 'epoch': '2.75'}
+{'loss': '0.07152', 'grad_norm': '4.91', 'learning_rate': '1.34e-06', 'epoch': '2.8'}
+{'loss': '0.124', 'grad_norm': '4.503', 'learning_rate': '1.007e-06', 'epoch': '2.85'}
+{'loss': '0.1249', 'grad_norm': '9.946', 'learning_rate': '6.733e-07', 'epoch': '2.9'}
+{'loss': '0.1012', 'grad_norm': '7.187', 'learning_rate': '3.4e-07', 'epoch': '2.95'}
+{'loss': '0.08326', 'grad_norm': '2.385', 'learning_rate': '6.667e-09', 'epoch': '3'}
+{'eval_loss': '0.1552', 'eval_accuracy': '0.939', 'eval_f1': '0.9391', 'eval_runtime': '12.55', 'eval_samples_per_second': '159.3', 'eval_steps_per_second': '5.019', 'epoch': '3'}
+{'train_runtime': '1270', 'train_samples_per_second': '37.81', 'train_steps_per_second': '2.363', 'train_loss': '0.239', 'epoch': '3'}
+>> TEST metrics: {'eval_loss': 0.18711896240711212, 'eval_accuracy': 0.9295, 'eval_f1': 0.9290011212894149, 'eval_runtime': 13.4132, 'eval_samples_per_second': 149.107, 'eval_steps_per_second': 4.697, 'epoch': 3.0}
+>> saved model to ./distilbert-emotion
