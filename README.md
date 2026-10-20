@@ -17,10 +17,6 @@ Kenncode: 711454
 Meeting-ID: 912 1542 9623
 Kenncode: 711454
 
-[Zoom Link Day 3](https://zoom.us/j/91215429623?pwd=bJhNyma8nvbPs7afZGSU5XGDiZTgvh.1)  
-Meeting-ID: 912 1542 9623
-Kenncode: 711454
-
 ## Schedule at a glance
 
 #### Day 1 - XAI for Random Forest
@@ -67,7 +63,6 @@ conda create -n xai python=3.13
 conda activate xai
 pip install -r requirements_xai-for-cnn.txt
 pip install -r requirements_xai-for-random-forest.txt
-pip install -r requirements_xai-for-transformer.txt
 ```
 
 Once your environment is created, clone `2026-HIDA-Autumn` brach branch of the repo using the following command:
