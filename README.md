@@ -58,7 +58,7 @@ Kenncode: 711454
 |**xx:xx - xx:xx** | Attention Maps, Flow and Rollout |
 |12:00 - 13:00** | Lunch Break |
 |**xx:xx - xx:xx** | SHAP for Text |
-|**xx:xx - xx:xx** | Attention-LRP |
+|**xx:xx - xx:xx** | Layer-wise Relevance Propagation |
 |15:45 - 16:00 | Wrap Up |
 
 ## Mentors
