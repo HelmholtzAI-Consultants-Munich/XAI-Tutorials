@@ -47,8 +47,8 @@ Kenncode: 711454
 
 ## Mentors
 
-- Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich
 - Dr. Donatella Cea, Helmholtz Munich
+- Dr. Lisa Barros de Andrade e Sousa, Helmholtz Munich
 - **TBD**
 
 ## Requirements and Setup
