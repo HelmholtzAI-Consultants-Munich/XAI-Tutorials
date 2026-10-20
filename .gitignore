@@ -1,5 +1,0 @@
-xai-dl4imaging/temp/
-*.DS_Store
-*.ipynb_checkpoints/
-__pycache__/
-test/notebooks/
