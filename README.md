@@ -1,108 +1,106 @@
-<div align="center">
-<img src="https://raw.githubusercontent.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/main/docs/source/_figures/logo.png" width="200">
-	
-# Tutorials for eXplainable Artificial Intelligence (XAI)
+# Introduction to Explainable AI
 
-[![test](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml/badge.svg)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml)
-[![stars](https://img.shields.io/github/stars/HelmholtzAI-Consultants-Munich/XAI-Tutorials?logo=GitHub&color=yellow)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/stargazers)
-	
-</div>
+This 3-half-day course provides an introduction to the topic of Explainable AI (XAI). This fundamental knowledge is to be used as a starting point for self-guided learning during and beyond the course time. All course days cover alternating sequences of theoretical input and hands-on exercises, which are discussed with the instructors during the course.
 
-<!-- LINK INTRODUCTION START -->
+The goal of the course is to help participants understand how XAI methods can help uncover biases in the data or provide interesting insights. After a general introduction to XAI, the course goes deeper into state-of-the-art model agnostic as well as model-specific interpretation techniques. The practical hands-on sessions will help to learn about strengths and weaknesses of these standard methods used in the field.
 
- *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
+[Course Page](https://www.helmholtz-hida.de/en/lernen-vernetzen/data-science-course-portfolio/introduction-to-explainable-ai/)
 
-This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests, CNNs, and Transformers. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
+## Venue
+The course will be fully online:  
 
-The tutorials cover both model-agnostic and model-specific XAI methods, including SHAP, LIME, Permutation Feature Importance, Grad-CAM, Attention Maps, and Forest-Guided Clustering.
+[Zoom Link Day 1](https://zoom.us/j/91215429623?pwd=bJhNyma8nvbPs7afZGSU5XGDiZTgvh.1)  
+Meeting-ID: 912 1542 9623
+Kenncode: 711454
 
-The learning objectives are:
+[Zoom Link Day 2](https://zoom.us/j/91215429623?pwd=bJhNyma8nvbPs7afZGSU5XGDiZTgvh.1)  
+Meeting-ID: 912 1542 9623
+Kenncode: 711454
 
-* understand the importance of interpretability and transparency in AI
-* learn how different XAI methods work and when to use them
-* interpret explanation outputs and visualizations for different model types
-* gain hands-on experience applying XAI methods to real-world examples
+[Zoom Link Day 3](https://zoom.us/j/91215429623?pwd=bJhNyma8nvbPs7afZGSU5XGDiZTgvh.1)  
+Meeting-ID: 912 1542 9623
+Kenncode: 711454
 
-<!-- LINK INTRODUCTION END -->
+## Schedule at a glance
 
-## 📚 Included Tutorials
+#### Day 1 - XAI for Random Forest
 
-The repository includes tutorials for both **model-agnostic** and **model-specific** XAI methods across tabular, image, and transformer-based models.
+|    Time     |       Session       |
+|-------------|---------------------|
+|10:00 - 10:30| Introduction to XAI |
+|10:30 - 11:15|	Permutation FI|
+|11:15 - 12:00| LIME |
+|12:00 - 13:00| Lunch Break|
+|13:00 - 14:15| SHAP |
+|14:15 - 15:00| FGC|
+|15:00 - 16:00|	Method Comparison & Conclusions |
 
-### Model-Agnostic Methods
+#### Day 2 - XAI for CNNs
 
-Methods that can be applied independently of the underlying machine learning model:
+|     Time     | Session |
+|--------------|---------|
+|10:00 - 10:15 | Welcome |
+|**10:15 - 10:45** | Introduction to CNNs |
+|**10:45 - 11:45** | Grad-CAM for Images |
+|**11:45 - 12:00** | **Extra: Grad-CAM for Signals** |
+|**12:00 - 13:00** | Lunch Break |
+|**13:00 - 13:30** | LIME for Images |
+|**13:30 - 14:10** | SHAP for Images |
+|**14:10 - 14:55** | Method Comparison & Conclusions|
+|15:45 - 16:00 | Wrap Up |
 
-* Permutation Feature Importance
-* SHapley Additive exPlanations (SHAP)
-* Local Interpretable Model-Agnostic Explanations (LIME)
+#### Day 3 - XAI for Transformers
 
-### Model-Specific Methods
+|     Time     | Session |
+|--------------|---------|
+|**10:00 - 10:15** | Welcome |
+|**xx:xx - xx:xx** | Introduction to Transformers |
+|**xx:xx - xx:xx** | Attention Maps, Flow and Rollout |
+|12:00 - 13:00** | Lunch Break |
+|**xx:xx - xx:xx** | SHAP for Text |
+|**xx:xx - xx:xx** | Attention-LRP |
+|15:45 - 16:00 | Wrap Up |
 
-Methods designed for interpreting specific model architectures such as Random Forests, CNNs, and Transformers:
+## Mentors
 
-* Forest-Guided Clustering
-* Grad-CAM
-* Attention Maps
+- Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich
+- Dr. Donatella Cea, Helmholtz Munich
+**TBD**
 
-## 🚀 Requirements and Setup
+## Requirements and Setup
 
-The notebooks can either be executed locally or directly in the browser using the **Open in Colab** button. Running the notebooks in Colab does not require any installation, but a Google account is needed.
+This course assumes you have minimal experience running Python and Machine Learning Frameworks like PyTorch and sklearn.
 
-To run the notebooks locally, create a virtual environment and install the required packages:
+It is possible to either create an environment and install all the necessary packages locally (using the requirements.txt file) or to execute the notebooks on the browser, by clicking the 'Open in Colab' button. This second option doesn't require any further installation, but the user must have access to a Google account.
 
-```bash id="m4c6p2"
-conda create -n xai python=3.12
+If you prefer to run the notebooks on your device, create a virtual environment using the requirements.txt files:
+```
+conda create -n xai python=3.13
 conda activate xai
-
 pip install -r requirements_xai-for-cnn.txt
 pip install -r requirements_xai-for-random-forest.txt
 pip install -r requirements_xai-for-transformer.txt
 ```
 
-Clone the repository:
+Once your environment is created, clone `2026-HIDA-Autumn` brach branch of the repo using the following command:
 
-```bash id="k9x2tw"
-git clone https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+```
+git clone --depth 1 --branch 2026-HIDA-Autumn https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
 ```
 
-## 🎓 Using This Repository for Courses
+## Code of Conduct
 
-This repository can easily be adapted for online or in-person teaching.
-For course-specific material, we recommend creating a dedicated GitHub branch:
+Participants are expected to follow our code of conduct. In order to have a nice and collaborative environment, please follow these rules:
 
-```bash id="v8k3pm"
-git checkout -b <course-name>
-```
+- respect the others
+- turn camera on (if possible)
+- mic turned off unless you want to speak/ask questions
+- raise your hand to ask question or type them in the chat.
 
-You can then customize the notebooks and select only the material relevant for your course.
+If you have any issues that you don’t want to share, send a private message to one of the mentors.
 
-The folders `.github` and `docs` are only required for maintaining the main repository and can optionally be removed in course branches.
+## Contributions
 
-To automatically update notebook links and branch references, first set the `NEW_BRANCH` variable inside `update_branch_links.py` to the name of your course branch, then run:
+Comments and input are very welcome! If you have a suggestion or think something should be changed, please open an issue, submit a pull request or send an email to [Lisa Barros de Andrade e Sousa](mailto:lisa.barros@helmholtz-munich.de) or [Donatella Cea](mailto:donatella.cea@helmholtz-munich.de).
 
-```bash id="q1m7dx"
-python update_branch_links.py
-```
-
-## 🤝 Contributions
-
-<!-- LINK CONTRIBUTION START -->
-
-Comments, suggestions, and contributions are very welcome!
-If you have ideas for improvements or want to report an issue, feel free to open an issue or submit a pull request. We will review your contribution as soon as possible.
-
-<!-- LINK CONTRIBUTION END -->
-
-## 🛡️ License
-
-<!-- LINK LICENSE START -->
-
-This repository contains both source code and teaching materials, which are licensed separately:
-
-- **Code** (notebooks, scripts, and other software) is licensed under the MIT License. See the `LICENSE` file.
-- **Teaching materials** (slides, figures, and written explanations) are licensed under the Creative Commons Attribution 4.0 License. See the `LICENSE-CONTENT` file.
-
-[https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
-
-<!-- LINK LICENSE END -->
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
