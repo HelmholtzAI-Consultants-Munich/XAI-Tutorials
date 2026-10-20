@@ -1,6 +1,6 @@
 # Introduction to Explainable AI
 
-This 3-half-day course provides an introduction to the topic of Explainable AI (XAI). This fundamental knowledge is to be used as a starting point for self-guided learning during and beyond the course time. All course days cover alternating sequences of theoretical input and hands-on exercises, which are discussed with the instructors during the course.
+This 2-half-day course provides an introduction to the topic of Explainable AI (XAI). This fundamental knowledge is to be used as a starting point for self-guided learning during and beyond the course time. All course days cover alternating sequences of theoretical input and hands-on exercises, which are discussed with the instructors during the course.
 
 The goal of the course is to help participants understand how XAI methods can help uncover biases in the data or provide interesting insights. After a general introduction to XAI, the course goes deeper into state-of-the-art model agnostic as well as model-specific interpretation techniques. The practical hands-on sessions will help to learn about strengths and weaknesses of these standard methods used in the field.
 
@@ -49,23 +49,11 @@ Kenncode: 711454
 |**14:10 - 14:55** | Method Comparison & Conclusions|
 |15:45 - 16:00 | Wrap Up |
 
-#### Day 3 - XAI for Transformers
-
-|     Time     | Session |
-|--------------|---------|
-|**10:00 - 10:15** | Welcome |
-|**xx:xx - xx:xx** | Introduction to Transformers |
-|**xx:xx - xx:xx** | Attention Maps, Flow and Rollout |
-|12:00 - 13:00** | Lunch Break |
-|**xx:xx - xx:xx** | SHAP for Text |
-|**xx:xx - xx:xx** | Layer-wise Relevance Propagation |
-|15:45 - 16:00 | Wrap Up |
-
 ## Mentors
 
 - Dr. Lisa Borros de Andrade e Sousa, Helmholtz Munich
 - Dr. Donatella Cea, Helmholtz Munich
-**TBD**
+- **TBD**
 
 ## Requirements and Setup
 
