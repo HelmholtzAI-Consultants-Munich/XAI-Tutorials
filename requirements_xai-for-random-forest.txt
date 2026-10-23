@@ -1,12 +1,12 @@
-# Requires Python 3.12
+# Python 3.12 and 3.13
 fgclustering==3.0.0
 jupyter==1.1.1
 lime==0.2.0.1
-matplotlib==3.10.9
-numpy==2.4.5
+matplotlib==3.11.2
+numpy==2.5.4
 palmerpenguins==0.1.6
-pandas==3.0.3
-scikit-learn==1.8.0
+pandas==3.1.0
+scikit-learn==1.9.1
 seaborn==0.13.2
-shap==0.51.0
-umap-learn==0.5.11
+shap==0.54.1
+umap-learn==0.5.12

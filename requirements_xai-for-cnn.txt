@@ -1,13 +1,13 @@
-# Requires Python 3.12
+# Python 3.12 and 3.13
 jupyter==1.1.1
 lime==0.2.0.1
-matplotlib==3.10.1
-numpy==2.0.2
-opencv-python==4.11.0.86
-pandas==2.2.2
+matplotlib==3.11.2
+numpy==2.5.4
+opencv-python==5.0.0.93
+pandas==3.1.0
 requests==2.34.2
 scikit-image==0.26.0
-shap==0.47.2
-tensorboard==2.18
-torch==2.6.0 
-torchvision==0.21.0 
+shap==0.54.1
+tensorboard==2.21.0
+torch==2.14.1
+torchvision==0.29.1
