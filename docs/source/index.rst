@@ -39,6 +39,13 @@ Tutorials for eXplainable Artificial Intelligence (XAI) methods
 
 .. toctree::
    :maxdepth: 1
+   :caption: LIMITATIONS OF XAI METHODS
+
+   _xai_limitations/attention_not_explanation.rst
+
+
+.. toctree::
+   :maxdepth: 1
    :caption: MACHINE LEARNING BASICS
 
    _ml_basics/random_forest.rst
