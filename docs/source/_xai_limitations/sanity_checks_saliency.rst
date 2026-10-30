@@ -43,38 +43,11 @@ The paper evaluates the following saliency methods:
      \hat{E}(\mathbf{x}) = \frac{1}{N} \sum_{i=1}^{N} E(\mathbf{x} + g_i), \quad g_i \sim \mathcal{N}(0, \sigma^2)
 
 
-Model Parameter Randomization Test
------------------------------------
-
-The explanation maps of a trained model are compared with those of the same architecture with randomly initialized weights.
-If a method depends on what the model has learned, the maps should differ substantially.
-The authors randomize the weights in two ways:
-
-- **Cascading randomization:** the weights are randomized successively from the top layer (the logits) down to the bottom layer,
-  so that an increasing part of the network is destroyed.
-- **Independent randomization:** the weights of one layer at a time are randomized, while all other layers keep their trained weights.
-
-Gradient and Grad-CAM change considerably as the layers are randomized and therefore pass the test.
-Guided Backpropagation and Guided Grad-CAM, instead, produce almost the same maps even after the top layers have been randomized,
-showing that they are largely insensitive to the parameters of the higher layers.
-
-
-Data Randomization Test
-------------------------
-
-The explanation maps of a model trained on the original data are compared with those of a model trained on a copy of the data with randomly permuted labels.
-The second model can only reach a high training accuracy by memorizing the training examples,
-since the relationship between inputs and labels has been destroyed.
-If a method depends on the relationship between inputs and labels, the explanations of the two models should differ.
-
-Gradient and Grad-CAM produce clearly different maps for the model trained on random labels,
-while methods such as Integrated Gradients and Gradient :math:`\odot` Input still highlight the structure of the input image.
-
-
 Similarity Metrics
 --------------------
 
-The original explanation :math:`E` and the randomized explanation :math:`\tilde{E}` are compared both visually and quantitatively.
+In both tests, the explanation :math:`E` of the original model is compared with the explanation :math:`\tilde{E}` of the randomized model,
+both visually and quantitatively.
 
 **Visual Comparison**
 
@@ -99,11 +72,6 @@ where :math:`n` is the number of features and :math:`d_i` is the difference betw
 The correlation is computed both on the absolute values of the maps, which considers only the magnitude of the relevance,
 and on the signed values, which also takes into account whether a feature contributes positively or negatively.
 
-The sign makes a difference: for Gradient :math:`\odot` Input and Integrated Gradients, the maps of the randomized model look similar to the original ones
-and the rank correlation with absolute values remains high, but the randomization changes the sign of the attributions
-and the rank correlation without absolute values drops close to zero.
-Looking only at the magnitude of the relevance can therefore hide the effect of the randomization.
-
 **Structural Similarity Index (SSIM)**
 
 The SSIM compares two images in terms of luminance, contrast and structure:
@@ -118,6 +86,63 @@ The SSIM is 1 for identical maps and decreases as the maps become less similar.
 It is computed on the signed maps.
 
 High values of these metrics after randomization indicate that the explanation does not depend on the model parameters or on the training labels.
+
+
+Model Parameter Randomization Test
+-----------------------------------
+
+The explanation maps of a trained model are compared with those of the same architecture with randomly initialized weights.
+If a method depends on what the model has learned, the maps should differ substantially.
+The authors randomize the weights in two ways:
+
+- **Cascading randomization:** the weights are randomized successively from the top layer (the logits) down to the bottom layer,
+  so that an increasing part of the network is destroyed.
+- **Independent randomization:** the weights of one layer at a time are randomized, while all other layers keep their trained weights.
+
+Results and Interpretation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Gradient changes considerably as the layers are randomized, and so does Grad-CAM once the layers after the last convolutional layer are randomized:
+both methods pass the test.
+Guided Backpropagation and Guided Grad-CAM, instead, produce almost the same maps even after the top layers have been randomized,
+showing that they are insensitive to the parameters of the higher layers.
+Their maps change only when the layers closest to the input are randomized, and even then they remain dominated by the structure of the input image.
+
+For Gradient :math:`\odot` Input and Integrated Gradients the sign makes a difference.
+The maps of the randomized model look similar to the original ones, and both the SSIM and the rank correlation with absolute values remain high.
+However, the randomization changes the sign of the attributions,
+and the rank correlation without absolute values drops close to zero as soon as the top layers are randomized.
+Looking only at the magnitude of the relevance can therefore hide the effect of the randomization.
+
+
+Data Randomization Test
+------------------------
+
+The explanation maps of a model trained on the original data are compared with those of a model trained on a copy of the data with randomly permuted labels.
+The second model can only reach a high training accuracy by memorizing the training examples,
+since the relationship between inputs and labels has been destroyed.
+If a method depends on the relationship between inputs and labels, the explanations of the two models should differ.
+
+Results and Interpretation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Gradient and its SmoothGrad variant change substantially for the model trained on random labels, and the Grad-CAM maps break into disconnected patches.
+The maps of Guided Backpropagation, Integrated Gradients and Gradient :math:`\odot` Input also change, but they still clearly show the structure of the input image.
+On visual inspection alone, these maps could be mistaken for meaningful explanations,
+although the model has learned nothing about the relationship between inputs and labels.
+
+
+Conclusion
+----------
+
+Adebayo et al. (2018) showed that a saliency map that looks convincing is not necessarily a faithful explanation of the model.
+Gradient and Grad-CAM pass the randomization tests, while Guided Backpropagation and Guided Grad-CAM are insensitive to the parameters of the higher layers and therefore fail.
+Methods such as Integrated Gradients and Gradient :math:`\odot` Input produce maps dominated by the input image, which can look plausible even for a randomized model.
+
+Like an edge detector, which depends neither on a model nor on training data, a method that fails these tests
+cannot support tasks that depend on the model or on the data, such as debugging the model.
+Visual inspection alone is therefore not enough to assess a saliency method:
+the randomization tests are simple to run and should be applied as sanity checks before a method is used.
 
 
 References

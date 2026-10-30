@@ -15,6 +15,8 @@ They tested both properties on text classification, question answering and natur
 
 The input :math:`\mathbf{x}` is a sequence of :math:`T` tokens, each one-hot encoded over a vocabulary :math:`V`.
 The encoder maps the input to a sequence of hidden states :math:`\mathbf{h} = \text{Enc}(\mathbf{x}) = \{h_1, \dots, h_T\}`.
+The authors mainly use a bidirectional LSTM (BiLSTM) encoder, in which each hidden state :math:`h_t` depends on the whole input sequence.
+For comparison, they also consider a simple average encoder, in which :math:`h_t` is computed from the embedding of token :math:`t` alone.
 The attention weights are computed as
 
 .. math::
@@ -70,7 +72,14 @@ Summarize the effect of the permutations with the median output difference:
    \Delta\hat{y}^{med} \leftarrow \text{Median}_p(\Delta\hat{y}^p)
 
 A small :math:`\Delta\hat{y}^{med}` means that the prediction barely depends on which tokens receive the high attention weights.
+
+Results and Interpretation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 For many datasets the authors observed only small changes in the output, even when the original attention was concentrated on a few tokens.
+In these cases the prediction does not depend on which tokens receive the highest weights, although the attention map suggests otherwise.
+An exception are tasks in which a few tokens are strong indicators of a class, such as recognizing diabetes from clinical notes:
+here, permuting the attention weights changes the prediction considerably for the positive class.
 
 
 Adversarial Attention
@@ -98,7 +107,11 @@ The JSD compares each distribution with their average :math:`\frac{\alpha_1 + \a
 Unlike the KL divergence, it is symmetric and always finite: it is 0 when the two distributions are identical
 and reaches its maximum value :math:`\log 2 \approx 0.69` when they do not overlap.
 
-In many cases the authors found adversarial attention distributions with a JSD close to the maximum that produce the same prediction.
+Results and Interpretation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In many cases the authors found adversarial attention distributions with a JSD close to the maximum that produce essentially the same prediction,
+even when the original attention was concentrated on a single token.
 Very different attention maps can therefore be equally compatible with the model's output,
 so a single attention map cannot be taken as *the* explanation of the prediction.
 
@@ -144,6 +157,26 @@ A pair is concordant if both rankings order the two tokens in the same way and d
 
 where :math:`n_c` and :math:`n_d` are the numbers of concordant and discordant pairs.
 :math:`\tau` ranges from -1 (opposite rankings) to 1 (identical rankings), and values close to 0 indicate no agreement.
+
+Results and Interpretation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With the BiLSTM encoder, the agreement between attention and both feature importance measures was weak:
+depending on the dataset, the average Kendall :math:`\tau` ranged from about 0.1 to 0.5.
+The gradient-based and leave-one-out measures, instead, agreed considerably better with each other than with attention.
+With the average encoder, where each hidden state depends on a single token, the correlation with attention was much higher.
+The tokens with the highest attention are therefore not necessarily the ones that most influence the prediction.
+
+
+Conclusion
+----------
+
+Jain and Wallace (2019) found that, with a BiLSTM encoder, substantially different attention distributions could produce nearly unchanged predictions.
+Attention weights also often showed weak agreement with gradient-based and leave-one-out measures of token importance,
+while attention over the simple average encoder agreed more closely with these measures.
+
+Together, these findings challenge the interpretation of high attention weights as evidence that particular tokens caused a model's prediction.
+Attention maps may be useful to inspect, but they should not be treated on their own as faithful explanations of model behaviour.
 
 
 References
