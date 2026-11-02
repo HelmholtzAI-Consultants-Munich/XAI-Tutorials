@@ -12,9 +12,9 @@
 
  *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
 
-This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests, CNNs, and Transformers. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
+This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests and CNNs. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
 
-The tutorials cover both model-agnostic and model-specific XAI methods, including SHAP, LIME, Permutation Feature Importance, Grad-CAM, Attention Maps, and Forest-Guided Clustering.
+The tutorials cover both model-agnostic and model-specific XAI methods, including SHAP, LIME, Permutation Feature Importance, Grad-CAM, and Forest-Guided Clustering.
 
 The learning objectives are:
 
@@ -57,7 +57,6 @@ conda activate xai
 
 pip install -r requirements_xai-for-cnn.txt
 pip install -r requirements_xai-for-random-forest.txt
-pip install -r requirements_xai-for-transformer.txt
 ```
 
 Clone the repository:
