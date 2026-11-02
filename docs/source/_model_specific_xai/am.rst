@@ -22,7 +22,7 @@ Attention Maps for Text
 -------------------------
 
 Text is represented as sequential and discrete data and converted into embedded tokens (word, subword, or character). 
-The attention mechanisms focuses on the relationships between these tokens.
+The attention mechanism focuses on the relationships between these tokens.
 Attention maps for Text Transformers are usually generated through a self-attention or cross-attention mechanism. 
 The map is a matrix, where each element represents the attention weight between two tokens in the one sequence or in relation to another sequence. 
 
@@ -41,7 +41,7 @@ Here's a step-by-step explanation of how these attention weights are calculated:
 
 4. **Softmax Normalization**: Apply the softmax function to the scaled scores for each query. This step converts the scores to a probability distribution (the attention weights), ensuring that they are all positive and sum up to 1: :math:`\alpha_{ij} = \text{softmax}(\text{scaled score}(Q_i, K_j)) = \frac{\exp(\text{scaled score}(Q_i, K_j))}{\sum_{k=1}^{n} \exp(\text{scaled score}(Q_i, K_k))}`
 
-Here, :math:`\alpha_{ij}` represents the attention attention weight from the :math:`i`-th query to the :math:`j`-th key.
+Here, :math:`\alpha_{ij}` represents the attention weight from the :math:`i`-th query to the :math:`j`-th key.
 
 Attention Maps from Cross-Attention
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
