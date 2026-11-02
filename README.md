@@ -52,7 +52,7 @@ The notebooks can either be executed locally or directly in the browser using th
 To run the notebooks locally, create a virtual environment and install the required packages:
 
 ```bash id="m4c6p2"
-conda create -n xai python=3.12
+conda create -n xai python=3.13
 conda activate xai
 
 pip install -r requirements_xai-for-cnn.txt
