@@ -43,7 +43,6 @@ Methods designed for interpreting specific model architectures such as Random Fo
 
 * Forest-Guided Clustering
 * Grad-CAM
-* Attention Maps
 
 ## 🚀 Requirements and Setup
 
