@@ -1,4 +1,6 @@
-# Python 3.12 and 3.13
+# Requires Python 3.13
+# Installed into the same environment as requirements_xai-for-random-forest.txt,
+# so the packages both files list are pinned to the same versions.
 jupyter==1.1.1
 lime==0.2.0.1
 matplotlib==3.11.2
