@@ -1,4 +1,4 @@
-Tutorials for eXplainable Artificial Intelligence (XAI) methods
+Tutorials for eXplainable Artificial Intelligence (XAI) Methods
 ================================================================
 
 .. include:: ../../README.md

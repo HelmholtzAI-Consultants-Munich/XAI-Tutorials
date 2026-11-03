@@ -5,7 +5,7 @@ Explainability methods can be categorized along two complementary dimensions:
 
 1. **Model-specific vs. model-agnostic** – whether a method is tied to a
    particular model class or can be applied to any machine learning model.
-2. **Global vs. local** – whether a method explains the overall behaviour
+2. **Global vs. local** – whether a method explains the overall behavior
    of a model or a single prediction.
 
 Together, these dimensions form four categories.

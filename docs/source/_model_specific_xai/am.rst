@@ -68,7 +68,7 @@ Attention Maps for images
 Images are represented as spatial and continuous data, typically as a grid of pixels with multiple channels (e.g., RGB for color images).
 Attention mechanisms in images focus on regions within the grid that contribute to the task, such as object detection or classification.
 
-Attention maps in images can be generated in several ways, e.g through self-attention in Vision Transformers (ViTs).
+Attention maps in images can be generated in several ways, e.g., through self-attention in Vision Transformers (ViTs).
 In ViTs, the attention map is applied to patches of the image rather than individual pixels, representing how much one image patch attends to another.
 
 .. figure:: ../_figures/am.png

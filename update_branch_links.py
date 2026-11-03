@@ -16,7 +16,7 @@ GIT_CLONE_REGEX = re.compile(
     re.IGNORECASE,
 )
 
-def update_collab_links_in_cell(cell_source):
+def update_colab_links_in_cell(cell_source):
     def replacer(match):
         base_url, blob, branch, filepath = match.groups()
         if branch == OLD_BRANCH:
@@ -55,7 +55,7 @@ def update_notebook(filepath):
     if "cells" in notebook:
         for cell in notebook["cells"]:
             if "source" in cell:
-                cell["source"] = update_collab_links_in_cell(cell["source"])
+                cell["source"] = update_colab_links_in_cell(cell["source"])
                 cell["source"] = update_git_clone_in_cell(cell["source"])
 
     with open(filepath, "w", encoding="utf-8") as f:

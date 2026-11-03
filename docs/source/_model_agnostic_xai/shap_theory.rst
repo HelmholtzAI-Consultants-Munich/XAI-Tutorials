@@ -1,7 +1,7 @@
 SHAP and Shapley Values
 =======================
 
-What does SHAP explain?
+What Does SHAP Explain?
 -------------------------
 
 SHapley Additive exPlanations (**SHAP**) explains an **individual model
@@ -578,7 +578,7 @@ SHAP therefore uses exactly the same principle as the cooperative-game
 example: a feature's contribution is evaluated in different feature
 coalitions and these marginal contributions are combined into its SHAP value.
 
-There is, however, an important practical question. A machine-learning model
+There is, however, an important practical question. A machine learning model
 usually expects a complete input, even when only the information from a
 subset of features is considered available. Features outside the coalition
 must therefore somehow be represented as **"missing"**.
