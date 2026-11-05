@@ -78,7 +78,7 @@ Results and Interpretation
 
 For many datasets the authors observed only small changes in the output, even when the original attention was concentrated on a few tokens.
 In these cases the prediction does not depend on which tokens receive the highest weights, although the attention map suggests otherwise.
-Exceptions are tasks in which a few tokens are strong indicators of a class, such as recognizing diabetes from clinical notes:
+An exception are tasks in which a few tokens are strong indicators of a class, such as recognizing diabetes from clinical notes:
 here, permuting the attention weights changes the prediction considerably for the positive class.
 
 

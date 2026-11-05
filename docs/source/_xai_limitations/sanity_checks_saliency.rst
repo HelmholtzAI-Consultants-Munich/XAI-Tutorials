@@ -6,7 +6,7 @@ Their quality is often assessed by visual inspection only: a saliency map that l
 
 Adebayo et al. (2018) showed that visual inspection can be misleading. Some saliency methods produce maps that look convincing
 but are largely independent of the model and of the data it was trained on, behaving similarly to an edge detector applied to the input image.
-To detect this behavior, the authors propose two randomization tests:
+To detect this behaviour, the authors propose two randomization tests:
 
 1. **Model parameter randomization test:** the explanation should change when the model parameters are randomized.
 2. **Data randomization test:** the explanation should change when the model is trained on data with randomly permuted labels.
