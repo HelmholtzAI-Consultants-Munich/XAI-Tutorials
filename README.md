@@ -12,9 +12,9 @@
 
  *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
 
-This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests, CNNs, and Transformers. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
+This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests and CNNs. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
 
-The tutorials cover both model-agnostic and model-specific XAI methods, including SHAP, LIME, Permutation Feature Importance, Grad-CAM, Attention Maps, and Forest-Guided Clustering.
+The tutorials cover both model-agnostic and model-specific XAI methods, including SHAP, LIME, Permutation Feature Importance, Grad-CAM, and Forest-Guided Clustering.
 
 The learning objectives are:
 
@@ -25,9 +25,9 @@ The learning objectives are:
 
 <!-- LINK INTRODUCTION END -->
 
-## 📚 Included Tutorials
+## Included Tutorials
 
-The repository includes tutorials for both **model-agnostic** and **model-specific** XAI methods across tabular, image, and transformer-based models.
+The repository includes tutorials for both **model-agnostic** and **model-specific** XAI methods across tabular and image data.
 
 ### Model-Agnostic Methods
 
@@ -39,34 +39,33 @@ Methods that can be applied independently of the underlying machine learning mod
 
 ### Model-Specific Methods
 
-Methods designed for interpreting specific model architectures such as Random Forests, CNNs, and Transformers:
+Methods designed for interpreting specific model architectures such as Random Forests and CNNs:
 
 * Forest-Guided Clustering
 * Grad-CAM
-* Attention Maps
 
-## 🚀 Requirements and Setup
+## Requirements and Setup
 
 The notebooks can either be executed locally or directly in the browser using the **Open in Colab** button. Running the notebooks in Colab does not require any installation, but a Google account is needed.
 
-To run the notebooks locally, create a virtual environment and install the required packages:
+To run the notebooks locally, you need **Python 3.13** (the same version as Google Colab). First clone the repository:
 
-```bash id="m4c6p2"
-conda create -n xai python=3.12
+```bash
+git clone https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+cd XAI-Tutorials
+```
+
+Then create an environment and install the requirements for the Random Forest and CNN tutorials:
+
+```bash
+conda create -n xai python=3.13
 conda activate xai
 
-pip install -r requirements_xai-for-cnn.txt
 pip install -r requirements_xai-for-random-forest.txt
-pip install -r requirements_xai-for-transformer.txt
+pip install -r requirements_xai-for-cnn.txt
 ```
 
-Clone the repository:
-
-```bash id="k9x2tw"
-git clone https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
-```
-
-## 🎓 Using This Repository for Courses
+## Using This Repository for Courses
 
 This repository can easily be adapted for online or in-person teaching.
 For course-specific material, we recommend creating a dedicated GitHub branch:
@@ -85,7 +84,7 @@ To automatically update notebook links and branch references, first set the `NEW
 python update_branch_links.py
 ```
 
-## 🤝 Contributions
+## Contributions
 
 <!-- LINK CONTRIBUTION START -->
 
@@ -94,7 +93,7 @@ If you have ideas for improvements or want to report an issue, feel free to open
 
 <!-- LINK CONTRIBUTION END -->
 
-## 🛡️ License
+## License
 
 <!-- LINK LICENSE START -->
 
