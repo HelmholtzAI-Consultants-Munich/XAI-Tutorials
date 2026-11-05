@@ -71,7 +71,7 @@ similar structure (the strong predictor is used as first split in many trees) an
 To reduce the correlation between decision trees, RF performs random feature selection at each node prior to the selection of the optimal split. 
 Hence, the reduction in node impurity is only computed on a random subset of predictor variables, which reduces the chance that strong predictors are always used as first splits.
 
-In short, RF creates an ensemble of decision trees by each decision tree to a different bootstrap sample, while selecting at each split a random subset of input features 
+In short, RF creates an ensemble of decision trees by fitting each decision tree to a different bootstrap sample, while selecting at each split a random subset of input features 
 as candidates for splitting. The class of a new unseen observation x is then predicted asthe majority class across predictions for x made with all trees in the ensemble. 
 By averaging the predictions over a large ensemble of high variance but low correlation and low bias decision trees, RF is able to improve the variance reduction of Bagging 
 and efficiently reduce both components - bias and variance - of the generalization error. 
