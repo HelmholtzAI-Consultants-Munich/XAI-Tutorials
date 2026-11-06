@@ -1,11 +1,20 @@
-[![test](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml/badge.svg)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml)
-[![stars](https://img.shields.io/github/stars/HelmholtzAI-Consultants-Munich/XAI-Tutorials?logo=GitHub&color=yellow)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/stargazers)
-
+<div align="center">
+<img src="https://raw.githubusercontent.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/main/docs/source/_figures/logo.png" width="200">
+	
 # Tutorials for eXplainable Artificial Intelligence (XAI)
 
-This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests, CNNs, and Transformers. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
+[![test](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml/badge.svg)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/actions/workflows/test_notebooks.yml)
+[![stars](https://img.shields.io/github/stars/HelmholtzAI-Consultants-Munich/XAI-Tutorials?logo=GitHub&color=yellow)](https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials/stargazers)
+	
+</div>
 
-The tutorials cover both model-agnostic and model-specific XAI methods, including SHAP, LIME, Permutation Feature Importance, Grad-CAM, Attention Maps, and Forest-Guided Clustering.
+<!-- LINK INTRODUCTION START -->
+
+ *"The problem is that a single metric, such as classification accuracy, is an incomplete description of most real-world tasks." — (Doshi-Velez et al., 2017)*
+
+This repository contains a collection of interactive tutorials for understanding and applying modern eXplainable Artificial Intelligence (XAI) methods to machine learning and deep learning models, including Random Forests and CNNs. Each tutorial is provided as a Jupyter Notebook combining short video lectures with practical hands-on exercises.
+
+The tutorials cover both model-agnostic and model-specific XAI methods, including SHAP, LIME, Permutation Feature Importance, Grad-CAM, and Forest-Guided Clustering.
 
 The learning objectives are:
 
@@ -14,10 +23,11 @@ The learning objectives are:
 * interpret explanation outputs and visualizations for different model types
 * gain hands-on experience applying XAI methods to real-world examples
 
+<!-- LINK INTRODUCTION END -->
 
-## 📚 Included Tutorials
+## Included Tutorials
 
-The repository includes tutorials for both **model-agnostic** and **model-specific** XAI methods across tabular, image, and transformer-based models.
+The repository includes tutorials for both **model-agnostic** and **model-specific** XAI methods across tabular and image data.
 
 ### Model-Agnostic Methods
 
@@ -29,34 +39,33 @@ Methods that can be applied independently of the underlying machine learning mod
 
 ### Model-Specific Methods
 
-Methods designed for interpreting specific model architectures such as Random Forests, CNNs, and Transformers:
+Methods designed for interpreting specific model architectures such as Random Forests and CNNs:
 
 * Forest-Guided Clustering
 * Grad-CAM
-* Attention Maps
 
-## 🚀 Requirements and Setup
+## Requirements and Setup
 
 The notebooks can either be executed locally or directly in the browser using the **Open in Colab** button. Running the notebooks in Colab does not require any installation, but a Google account is needed.
 
-To run the notebooks locally, create a virtual environment and install the required packages:
+To run the notebooks locally, you need **Python 3.13** (the same version as Google Colab). First clone the repository:
 
-```bash id="m4c6p2"
-conda create -n xai python=3.12
+```bash
+git clone https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
+cd XAI-Tutorials
+```
+
+Then create an environment and install the requirements for the Random Forest and CNN tutorials:
+
+```bash
+conda create -n xai python=3.13
 conda activate xai
 
-pip install -r requirements_xai-for-cnn.txt
 pip install -r requirements_xai-for-random-forest.txt
-pip install -r requirements_xai-for-transformer.txt
+pip install -r requirements_xai-for-cnn.txt
 ```
 
-Clone the repository:
-
-```bash id="k9x2tw"
-git clone https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
-```
-
-## 🎓 Using This Repository for Courses
+## Using This Repository for Courses
 
 This repository can easily be adapted for online or in-person teaching.
 For course-specific material, we recommend creating a dedicated GitHub branch:
@@ -75,13 +84,24 @@ To automatically update notebook links and branch references, first set the `NEW
 python update_branch_links.py
 ```
 
-## 🤝 Contributions
+## Contributions
+
+<!-- LINK CONTRIBUTION START -->
 
 Comments, suggestions, and contributions are very welcome!
-If you have ideas for improvements or want to report an issue, feel free to open an issue or submit a pull request.
+If you have ideas for improvements or want to report an issue, feel free to open an issue or submit a pull request. We will review your contribution as soon as possible.
 
-## 📄 License
+<!-- LINK CONTRIBUTION END -->
 
-All content is publicly available under the Creative Commons Attribution 4.0 License:
+## License
+
+<!-- LINK LICENSE START -->
+
+This repository contains both source code and teaching materials, which are licensed separately:
+
+- **Code** (notebooks, scripts, and other software) is licensed under the MIT License. See the `LICENSE` file.
+- **Teaching materials** (slides, figures, and written explanations) are licensed under the Creative Commons Attribution 4.0 License. See the `LICENSE-CONTENT` file.
 
 [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
+
+<!-- LINK LICENSE END -->
