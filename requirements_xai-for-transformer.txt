@@ -1,12 +1,11 @@
-# Requires Python 3.12 (shap 0.52.0)
-# TODOO Chabge to Python 3.13
+# Tested with Python 3.13
 accelerate==1.14.0
 datasets==5.0.1
 evaluate==0.4.3
 jupyter==1.1.1
 matplotlib==3.10.1
 networkx==3.7
-numpy==2.0.2
+numpy==2.5.4
 opencv-python==4.11.0.86
 pandas==3.0.5
 requests==2.34.2
