@@ -10,6 +10,8 @@ The following video provides a short introduction to SHAP for image data:
 
 .. youtube:: 8K9cKzVOowQ
 
+`Watch this video on YouTube <https://www.youtube.com/watch?v=8K9cKzVOowQ&list=PLI5XvYMIRh6Q&index=8>`__
+
 What Are the Players?
 -----------------------
 

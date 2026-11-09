@@ -8,6 +8,8 @@ The following video provides a short introduction to CNNs and their main concept
 
 .. youtube:: gDNLHOLGsCg
 
+`Watch this video on YouTube <https://www.youtube.com/watch?v=gDNLHOLGsCg&list=PLI5XvYMIRh6Q&index=4>`__
+
 
 In summary, CNNs work by employing a series of convolutional and pooling layers to extract hierarchical features from input images.
 In the early layers, they capture simple patterns like edges and textures, while deeper layers learn complex features such as shapes, objects, and context.

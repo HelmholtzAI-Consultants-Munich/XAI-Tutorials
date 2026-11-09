@@ -18,6 +18,8 @@ The following video provides a short introduction to the paper and its main conc
 
 .. youtube:: p4hNkGdwFvM
 
+`Watch this video on YouTube <https://www.youtube.com/watch?v=p4hNkGdwFvM&list=PLI5XvYMIRh6Q&index=6>`__
+
 **Notation**
 
 Let :math:`\mathbf{x} \in \mathbb{R}^d` be the input image and :math:`S_c(\mathbf{x})` the score (logit) of class :math:`c`.

@@ -7,6 +7,8 @@ The following video provides a short introduction to Grad-CAM and its main conce
 
 .. youtube:: aMRQlEkiqc0
 
+`Watch this video on YouTube <https://www.youtube.com/watch?v=aMRQlEkiqc0&list=PLI5XvYMIRh6Q&index=9>`__
+
 
 In summary, Grad-CAM is an explainability technique that visually highlights the regions in an image that are most important for a deep neural network's classification decision.
 Grad-CAM works by computing the gradients of the model's output with respect to the feature maps in the final convolutional layer,

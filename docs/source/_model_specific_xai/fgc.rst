@@ -12,6 +12,8 @@ The following video provides a short introduction to FGC and its main concepts:
 
 .. youtube:: Ir-1mG83Bpc
 
+`Watch this video on YouTube <https://www.youtube.com/watch?v=Ir-1mG83Bpc&list=PLI5XvYMIRh6Q&index=7>`__
+
 
 Overview of the FGC algorithm
 -----------------------------

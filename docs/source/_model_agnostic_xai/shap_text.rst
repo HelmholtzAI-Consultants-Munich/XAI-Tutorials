@@ -11,6 +11,8 @@ The following video provides a short introduction to SHAP for text data:
 
 .. youtube:: C4AkWNpYqOc
 
+`Watch this video on YouTube <https://www.youtube.com/watch?v=C4AkWNpYqOc&list=PLI5XvYMIRh6Q&index=3>`__
+
 
 What Are the Players?
 ----------------------

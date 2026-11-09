@@ -10,6 +10,8 @@ The following video provides a short introduction to SHAP for tabular data:
 
 .. youtube:: wFc-nHUvifU
 
+`Watch this video on YouTube <https://www.youtube.com/watch?v=wFc-nHUvifU&list=PLI5XvYMIRh6Q&index=2>`__
+
 What Are the Players?
 ---------------------
 

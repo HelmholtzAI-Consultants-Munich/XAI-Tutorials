@@ -17,6 +17,8 @@ concepts:
 
 .. youtube:: oPOGYesFWyE
 
+`Watch this video on YouTube <https://www.youtube.com/watch?v=oPOGYesFWyE&list=PLI5XvYMIRh6Q&index=1>`__
+
 
 How does PFI work?
 ------------------
