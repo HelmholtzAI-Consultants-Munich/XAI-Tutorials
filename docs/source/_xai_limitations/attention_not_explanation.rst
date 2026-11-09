@@ -11,6 +11,10 @@ Jain and Wallace (2019) questioned this interpretation. If attention weights pro
 
 They tested both properties on text classification, question answering and natural language inference tasks.
 
+The following video provides a short introduction to the paper and its main concepts:
+
+.. youtube:: P1cH0ds6I0c
+
 **Notation**
 
 The input :math:`\mathbf{x}` is a sequence of :math:`T` tokens, each one-hot encoded over a vocabulary :math:`V`.

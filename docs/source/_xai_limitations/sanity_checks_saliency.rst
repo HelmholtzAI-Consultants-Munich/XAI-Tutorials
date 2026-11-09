@@ -14,6 +14,10 @@ To detect this behaviour, the authors propose two randomization tests:
 A method that fails these tests is insensitive to properties that an explanation is expected to depend on,
 and therefore cannot be helpful for tasks such as debugging the model.
 
+The following video provides a short introduction to the paper and its main concepts:
+
+.. youtube:: p4hNkGdwFvM
+
 **Notation**
 
 Let :math:`\mathbf{x} \in \mathbb{R}^d` be the input image and :math:`S_c(\mathbf{x})` the score (logit) of class :math:`c`.
