@@ -6,6 +6,10 @@ formula itself does not change. Instead, we need to define what the players
 are, what it means for a feature to be "missing", and how the corresponding
 coalition values :math:`v_x(S)` are evaluated.
 
+The following video provides a short introduction to SHAP for tabular data:
+
+.. youtube:: wFc-nHUvifU
+
 What Are the Players?
 ---------------------
 
