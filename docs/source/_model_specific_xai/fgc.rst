@@ -10,9 +10,7 @@ FGC is a **global and subgroup-level method**. It describes structure across a d
 
 The following video provides a short introduction to FGC and its main concepts:
 
-.. vimeo:: 746443233?h=07ddf2290b
-
-    Short video lecture on the principles of Forest-Guided Clustering.
+.. youtube:: Ir-1mG83Bpc
 
 
 Overview of the FGC algorithm
