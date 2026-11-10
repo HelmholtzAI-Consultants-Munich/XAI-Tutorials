@@ -41,9 +41,9 @@ that the feature has a causal effect on the predicted outcome.
 The following video provides a short introduction to SHAP and its main
 concepts:
 
-.. vimeo:: 745352008?h=3168320cef
+.. youtube:: DJDLilfIiyo
 
-    Short video introduction to SHAP.
+`Watch this video on YouTube <https://www.youtube.com/watch?v=DJDLilfIiyo&list=PLI5XvYMIRh6Q&index=11>`__
 
 
 Shapley Values
