@@ -15,9 +15,9 @@ To answer this question, PFI randomly shuffles the values of one feature across 
 The following video provides a short introduction to PFI and its main
 concepts:
 
-.. vimeo:: 745319412?h=1e5bd15ff7
+.. youtube:: oPOGYesFWyE
 
-    Short video lecture on the principles of Permutation Feature Importance.
+`Watch this video on YouTube <https://www.youtube.com/watch?v=oPOGYesFWyE&list=PLI5XvYMIRh6Q&index=1>`__
 
 
 How does PFI work?

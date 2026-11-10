@@ -6,6 +6,12 @@ formula itself does not change. Instead, we need to define what the players
 are, what it means for an image feature to be "missing", and how the
 corresponding coalition values :math:`v_x(S)` are evaluated.
 
+The following video provides a short introduction to SHAP for image data:
+
+.. youtube:: 8K9cKzVOowQ
+
+`Watch this video on YouTube <https://www.youtube.com/watch?v=8K9cKzVOowQ&list=PLI5XvYMIRh6Q&index=8>`__
+
 What Are the Players?
 -----------------------
 
