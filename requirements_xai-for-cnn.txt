@@ -1,0 +1,13 @@
+# Requires Python 3.13
+jupyter==1.1.1
+lime==0.2.0.1
+matplotlib==3.11.2
+numpy==2.5.4
+opencv-python==5.0.0.93
+pandas==3.1.0
+requests==2.34.2
+scikit-image==0.26.0
+shap==0.54.1
+tensorboard==2.21.0
+torch==2.14.1
+torchvision==0.29.1
