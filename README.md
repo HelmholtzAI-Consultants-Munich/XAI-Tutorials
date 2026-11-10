@@ -37,8 +37,7 @@ Kenncode: 711454
 |--------------|---------|
 |10:00 - 10:15 | Welcome |
 |**10:15 - 10:45** | Introduction to CNNs |
-|**10:45 - 11:45** | Grad-CAM for Images |
-|**11:45 - 12:00** | **Extra: Grad-CAM for Signals** |
+|**10:45 - 12:00** | Grad-CAM for Images |
 |**12:00 - 13:00** | Lunch Break |
 |**13:00 - 13:30** | LIME for Images |
 |**13:30 - 14:10** | SHAP for Images |
