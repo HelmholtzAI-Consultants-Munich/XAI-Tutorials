@@ -104,30 +104,17 @@ about how their data is being processed by ML (among other information, such as 
 and so on). Consequently, it is the duty of those who use the data to be able to give such information upon request. 
 XAI methods, thus, can not only help retrieve information about how a black-box algorithm operates but also help fulfill this legal duty.
 
-As a Defense Strategy
+To Support Robustness Analysis
 --------------------------------------
-A growing problem of ML systems, particularly computer vision systems, is adversarial attacks. When someone conducts an 
-adversarial attack, they try to trick the system by providing an input that – to a human – looks very much like a specific 
-class, say a cat, but, because of subtle changes in the data, gets interpreted by the ML system as another class, say a dog. 
-There are various types of adversarial attacks. Terms you might want to remember in this context are “white box attacks” 
-vs. “black box attacks,” a distinction that tells us how well the attacker knows the particularities of their target system 
-(in white box attacks, all relevant characteristics of a model are known to whoever conducts the attack). Also note that 
-differences are considered in how often an attack on a single system is conducted (attack frequency), how many pixels of 
-the original input are changed for the attack (e.g., FGSM vs. One-pixel attack), or if the attack produces false positives 
-or false-negatives (adversarial falsification).
-XAI – aiming to reproduce which parts of the input have been decisive for the output – can help humans spot images in which 
-the pixels that were focused by the model seem off and, thus, evaluate if an adversarial attack might be happening. In other 
-words: Many XAI tools for computer vision systems present their results visually, as heatmaps, that allow the user to 
-understand which areas of the input image had how much effect on the output creation. If seemingly random areas of an 
-image shine up and correlate with unexpected output classes, users monitoring the local explanations of their model will 
-notice a dissonance they possibly would’ve missed with their naked eye. The sooner they’ve noticed something is off, they 
-can check other parameters that confirm or reject an adversarial attack – and timely issue countermeasures, if necessary.
-XAI methods have also proven helpful as a defense strategy to prevent adversarial attacks. Suppose you want to increase 
-the robustness of your computer vision model. In that case, you can imitate an adversarial attack of a particular 
-type – or multiple types – that you render particularly likely and thereby generate adversarial attack input pictures. 
-You can then use these newly created images to retrain your net. 
-This procedure has proven successful in a study (*Klawikowska et al., 2020*), which also gives more detailed input on 
-adversarial attacks on computer vision systems, in case you want to delve further into this topic!
+Adversarial attacks deliberately modify inputs to mislead a machine learning model. For example, an image may still look like a cat to a human, while subtle changes cause the model to classify it as a dog. Attacks differ in the information available to the attacker, the modifications permitted, and their objective. In white-box settings, attackers have access to the model’s parameters and architecture; in black-box settings, their access is more limited.
+
+XAI methods can support the investigation of these attacks. For image classifiers, explanation maps aim to highlight regions that contribute to a prediction. Comparing maps before and after an attack may reveal changes that warrant further investigation. Klawikowska et al. (2020), for example, use XAI methods to inspect the effects of adversarial attacks and defense strategies.
+
+However, an unusual heatmap does not establish that an attack occurred, and a plausible heatmap does not establish that a prediction is trustworthy. Some explanation methods produce convincing maps that are insensitive to what the model has learned, as discussed in `Sanity Checks for Saliency Maps`<https://xai-tutorials.readthedocs.io/en/latest/_xai_limitations/sanity_checks_saliency.html>`_ . Explanations can also be targeted by adversarial manipulation, so passing these sanity checks does not establish resistance to attacks.
+
+One approach to improving model robustness is **adversarial training**: generating adversarial examples and including them during training. This is a separate intervention from XAI. Explanation methods can help inspect its effects, but producing explanations does not itself protect the model.
+
+XAI therefore serves as a complementary diagnostic tool for investigating vulnerabilities and evaluating countermeasures. Any detection or defense system that uses explanations must be evaluated against attacks designed to evade it.
 
 
 References
