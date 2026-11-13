@@ -1,0 +1,23 @@
+# Environment for the Captum LRP and LXT AttnLRP DistilBERT notebooks. Tested with Python 3.13.
+# The first block matches requirements_xai-for-transformer.txt, which the shared
+# xai-for-transformer/utils.py needs as well; the second block adds the LRP libraries.
+accelerate==1.14.0
+datasets==5.0.1
+evaluate==0.4.3
+jupyter==1.1.1
+matplotlib==3.10.1
+networkx==3.7
+numpy==2.5.4
+opencv-python==4.11.0.86
+pandas==3.0.5
+requests==2.34.2
+sacrebleu==2.5.1
+scikit-learn==1.9.0
+shap==0.52.0
+torch==2.6.0
+torchvision==0.21.0
+transformers[torch]==5.13.0
+
+# Layer-wise relevance propagation (captum 0.8.0 requires numpy<2.0)
+captum==0.9.0
+lxt==2.1

@@ -3,11 +3,18 @@
 ############################################################
 
 
+import sys
+import types
+from functools import partial
+
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
+import torch
+from torch import nn
+from transformers.models.distilbert import modeling_distilbert
 from torchvision import transforms
 
 from sklearn.metrics import balanced_accuracy_score
@@ -44,6 +51,112 @@ def showAttention(input_sentence, output_words, attentions):
     ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
 
     plt.show()
+
+
+############################################################
+##### Utility Functions Layer-wise Relevance Propagation
+############################################################
+
+
+def skip_lxt_bundled_models():
+    """
+    Allow LXT to be imported together with transformers 5.
+
+    Importing lxt.efficient (lxt 2.1) also imports LXT's bundled copies of the BERT, Llama, GPT-2, ... model files.
+    Those copies use helpers that transformers 5 removed, so the import fails. The DistilBERT patch passes its own
+    patch map and never uses the bundled models, so an empty stand-in is registered for them before LXT is imported.
+    """
+    if "lxt.efficient.models" in sys.modules:
+        return
+
+    def get_default_map(module):
+        raise ValueError("LXT's bundled model patches are disabled; pass a patch_map.")
+
+    stand_in = types.ModuleType("lxt.efficient.models")
+    stand_in.get_default_map = get_default_map
+    sys.modules["lxt.efficient.models"] = stand_in
+
+
+def attnlrp_attention_forward(self, hidden_states, attention_mask=None, **kwargs):
+    """
+    DistilBERT self-attention with the AttnLRP rules. Replaces DistilBertSelfAttention.forward.
+
+    The forward pass computes the same eager attention as transformers 5.13.0. In the backward pass, relevance is
+    split equally between the two factors of each matrix multiplication (uniform rule).
+
+    :param hidden_states: Token representations entering the attention layer.
+    :type hidden_states: torch.Tensor
+    :param attention_mask: Additive (eager) or boolean (SDPA) attention mask, or None if no token is padded.
+    :type attention_mask: torch.Tensor
+    """
+    # LXT is only installed for the LRP tutorials, so it is imported here and not at the top of this file
+    from lxt.efficient.rules import divide_gradient
+
+    input_shape = hidden_states.shape[:-1]
+    hidden_shape = (*input_shape, -1, self.attention_head_size)
+
+    # Project the tokens to queries, keys and values and split them into heads
+    query_states = self.q_lin(hidden_states).view(hidden_shape).transpose(1, 2)
+    key_states = self.k_lin(hidden_states).view(hidden_shape).transpose(1, 2)
+    value_states = self.v_lin(hidden_states).view(hidden_shape).transpose(1, 2)
+
+    # Attention scores, with the uniform rule for the query-key product
+    scores = torch.matmul(query_states, key_states.transpose(2, 3)) * self.scaling
+    scores = divide_gradient(scores, 2)
+    if attention_mask is not None:
+        if attention_mask.dtype == torch.bool:
+            # SDPA-style mask: True marks positions that may be attended to
+            scores = scores.masked_fill(~attention_mask, torch.finfo(scores.dtype).min)
+        else:
+            # Eager-style additive mask: 0 for kept positions, a large negative value otherwise
+            scores = scores + attention_mask
+
+    weights = nn.functional.softmax(scores, dim=-1)
+    weights = self.dropout(weights)
+
+    # Weighted sum of the values, with the uniform rule for the weights-values product
+    context = torch.matmul(weights, value_states)
+    context = divide_gradient(context, 2)
+    context = context.transpose(1, 2).reshape(*input_shape, -1)
+    return self.out_lin(context), weights
+
+
+def attnlrp_ff_chunk(self, inputs):
+    """
+    DistilBERT feed-forward block with the AttnLRP identity rule for the activation. Replaces FFN.ff_chunk.
+
+    :param inputs: Token representations entering the feed-forward block.
+    :type inputs: torch.Tensor
+    """
+    # LXT is only installed for the LRP tutorials, so it is imported here and not at the top of this file
+    from lxt.efficient.rules import identity_rule_implicit
+
+    hidden = self.lin1(inputs)
+    hidden = identity_rule_implicit(self.activation, hidden)
+    return self.dropout(self.lin2(hidden))
+
+
+def patch_distilbert_for_attnlrp(verbose=False):
+    """
+    Patch DistilBERT's attention, feed-forward, LayerNorm and dropout layers for LXT AttnLRP.
+
+    The patch only changes the backward pass, so the model's predictions stay the same.
+
+    :param verbose: Whether to print the name of every patched class.
+    :type verbose: bool
+    """
+    # LXT is only installed for the LRP tutorials, so it is imported here and not at the top of this file
+    skip_lxt_bundled_models()
+    from lxt.efficient import monkey_patch
+    from lxt.efficient.patches import dropout_forward, layer_norm_forward, patch_method
+
+    patch_map = {
+        nn.LayerNorm: partial(patch_method, layer_norm_forward),
+        nn.Dropout: partial(patch_method, dropout_forward),
+        modeling_distilbert.DistilBertSelfAttention: partial(patch_method, attnlrp_attention_forward),
+        modeling_distilbert.FFN: partial(patch_method, attnlrp_ff_chunk, method_name="ff_chunk"),
+    }
+    monkey_patch(modeling_distilbert, patch_map=patch_map, verbose=verbose)
 
 
 ############################################################
