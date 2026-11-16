@@ -72,8 +72,8 @@ if __name__ == "__main__":
     tokenized_books = books.map(preprocess_function, batched=True)
 
     training_args = Seq2SeqTrainingArguments(
-        output_dir="german-english",
-        evaluation_strategy="epoch",
+        output_dir="t5-english-to-german",
+        eval_strategy="epoch",
         learning_rate=2e-3,
         per_device_train_batch_size=128,
         per_device_eval_batch_size=128,
@@ -87,17 +87,20 @@ if __name__ == "__main__":
 
     metric = evaluate.load("sacrebleu")
 
-    data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=checkpoint)
     model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint)
+    data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
 
     trainer = Seq2SeqTrainer(
         model=model,
         args=training_args,
         train_dataset=tokenized_books["train"],
         eval_dataset=tokenized_books["test"],
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         data_collator=data_collator,
         compute_metrics=compute_metrics,
     )
 
     trainer.train()
+
+    trainer.save_model("./t5-small-english-german")
+    tokenizer.save_pretrained("./t5-small-english-german")

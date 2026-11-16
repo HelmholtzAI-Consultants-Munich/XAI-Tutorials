@@ -179,7 +179,7 @@ def plot_impurity_feature_importance(importance, names, title, top_n=None, figsi
     data = {"feature_names": feature_names, "feature_importance": feature_importance}
     fi_df = pd.DataFrame(data)
 
-    # Sort the DataFrame in order decreasing feature importance
+    # Sort the DataFrame in order of decreasing feature importance
     fi_df.sort_values(by=["feature_importance"], ascending=False, inplace=True)
 
     if top_n:
@@ -187,7 +187,7 @@ def plot_impurity_feature_importance(importance, names, title, top_n=None, figsi
 
     # Define size of bar plot
     fig, ax = plt.subplots(figsize=figsize)
-    # Plot Searborn bar chart
+    # Plot Seaborn bar chart
     sns.barplot(x=fi_df["feature_importance"], y=fi_df["feature_names"], color="#3470a3")
     # Add chart labels
     plt.title(title)
@@ -386,7 +386,7 @@ def plot_pca(dataset, columns_to_plot=["Condition", "Tissue", "GSE", "Disease"],
         axes[0, i].set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.1f}%)")
         axes[0, i].set_title(f"PCA colored by {col}")
         axes[0, i].get_legend().remove()
-        # ax.legend(markerscale=1.5, fontsize="x-mall", loc="best", frameon=True)
+        # ax.legend(markerscale=1.5, fontsize="x-small", loc="best", frameon=True)
 
     plt.tight_layout()
     # plt.savefig(os.path.join(dir_output, f"{name}_pca.pdf"), format="pdf", bbox_inches="tight")

@@ -3,11 +3,11 @@ Introduction to Grad-CAM
 
 Grad-CAM (Gradient-weighted Class Activation Mapping) is a **model-specific** method, which provides local explanations for Deep Neural Networks.
 
-For a short introduction to Grad-CAM, click below:
+The following video provides a short introduction to Grad-CAM and its main concepts:
 
-.. vimeo:: 745319946?h=fcd327fc80
+.. youtube:: aMRQlEkiqc0
 
-    Short video lecture on the principles of Grad-CAM.
+`Watch this video on YouTube <https://www.youtube.com/watch?v=aMRQlEkiqc0&list=PLI5XvYMIRh6Q&index=9>`__
 
 
 In summary, Grad-CAM is an explainability technique that visually highlights the regions in an image that are most important for a deep neural network's classification decision.
@@ -39,8 +39,8 @@ not enough conceptual understanding.
 
 **Step 2: Select the Target Class**
 
-Choose the class :math:`c` you want to explain (usually the predicted class with highest score) and calculate its score.
-Let us assume :math:`y^c` is the score for class :math:`c` i.e., the output for class :math:`c` before the softmax.
+Choose the class :math:`c` you want to explain (usually the predicted class with the highest score) and calculate its score.
+Let us assume :math:`y^c` is the score for class :math:`c`, i.e., the output for class :math:`c` before the softmax.
 
 **Step 3: Compute the Gradients**
 
@@ -60,7 +60,7 @@ to get a single scalar weight :math:`\alpha_k^c`:
 
 where :math:`y^c` is the score for class :math:`c` and :math:`A^k` is the feature map for filter :math:`k`.
 
-To calculate the final Grad-CAM localization map multiply each feature map :math:`A^k` by its corresponding 
+To calculate the final Grad-CAM localization map, multiply each feature map :math:`A^k` by its corresponding 
 importance weight :math:`\alpha_k^c` and then sum up all the weighted feature maps across all filters. 
 Apply a ReLU activation to keep only the parts that positively influence the target class.
 This makes the Grad-CAM map focus only on features that support the class, not those that suppress it.

@@ -4,22 +4,21 @@ Introduction to Local Interpretable Model-Agnostic Explanations (LIME)
 Theoretical Background
 ------------------------
 
-Local Interpretable Model-Agnostic Explanations is a **model-agnostic** method, which means that it is not restricted to a certain model type, and it is a **local** method, which means that it only provides explanations for individual samples. LIME was introduced in 2016 by `Rubiero et. al. <https://doi.org/10.1145/2939672.2939778>`_
-
+Local Interpretable Model-Agnostic Explanations is a **model-agnostic** method, which means that it is not restricted to a certain model type, and it is a **local** method, which means that it only provides explanations for individual samples. LIME was introduced in 2016 by `Ribeiro et al. <https://doi.org/10.1145/2939672.2939778>`_
 For a short video introduction to LIME, click below:
 
 .. vimeo:: 745319036?h=a86f126018
 
     Short video lecture on the principles of LIME.
 
-To summarize, LIME, an abbreviation for "local interpretable model agnostic explanations" is an approach that tries to deliver explanations for individual samples. It works by constructing an interpretable surrogate model (like a linear regression model) to approximate predictions of a more complex model in the neighborhood of a given sample.
+To summarize, LIME, an abbreviation for "Local Interpretable Model-Agnostic Explanations", is an approach that tries to deliver explanations for individual samples. It works by constructing an interpretable surrogate model (like a linear regression model) to approximate predictions of a more complex model in the neighborhood of a given sample.
 
 LIME for Image Classification
 -------------------------------
 
 The paper `Garreau et. al. <http://proceedings.mlr.press/v139/garreau21a.html>`_ provides a detailed explanation of LIME for images, but let's summarize the main concepts.
 
-On images, LIME creates perturbations by altering regions of the image, constructs a dataset with **interpretable features** for a surrogate model using these perturbed images, and measures model prediction changes using a glassbox model (here a linear model) to highlight the most influential regions.
+On images, LIME creates perturbations by altering regions of the image, constructs a dataset with **interpretable features** for a surrogate model using these perturbed images, and measures model prediction changes using a glass-box model (here a linear model) to highlight the most influential regions.
 
 How do we create the image perturbation?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -39,7 +38,7 @@ LIME creates a dataset of $n$ perturbed images by randomly deactivating superpix
 
 .. figure:: ../_figures/LIME_dataset_creation.png
 
-This information is encoded in a vector $z_i ∈ \{0, 1\}^d$, where each coordinate of $z_i$ corresponds to the activation :math:`z_\mathrm{i,j} = 1` or inactivation :math:`z_{i,j} = 0` of superpixel $j$. We call the $z_i$ the **interpretable features**. 
+This information is encoded in a vector $z_i ∈ \{0, 1\}^d$, where each coordinate of $z_i$ corresponds to the activation :math:`z_\mathrm{i,j} = 1` or deactivation :math:`z_{i,j} = 0` of superpixel $j$. We call the $z_i$ the **interpretable features**. 
 These perturbations are just simple binary representations of the image indicating the “presence” or “absence” of each superpixel region. Since we care about the perturbations closest to the original image, those examples with the most superpixels present are weighted more than examples with more superpixels absent. This proximity can be measured using any distance metric for images.
 
 How do we measure the change in the model prediction?
@@ -57,7 +56,7 @@ Here, :math:`\hat{y}_i` is the outcome predicted by the surrogate model for the 
 References
 -----------
 
-- **Original LIME paper:** Ribeiro, M. T., Singh, S., & Guestrin, C. `"Why should i trust you?" Explaining the predictions of any classifier. <https://doi.org/10.1145/2939672.2939778>`_ ACM. 2016.
+- **Original LIME paper:** Ribeiro, M. T., Singh, S., & Guestrin, C. `"Why Should I Trust You?" Explaining the predictions of any classifier. <https://doi.org/10.1145/2939672.2939778>`_ ACM. 2016.
 - **LIME for images:** Garreau, D., & Mardaoui, D. `What does LIME really see in images? <http://proceedings.mlr.press/v139/garreau21a.html>`_ PMLR. 2021
 - **Quickshift segmentation algorithm:** Vedaldi, A., & Soatto, S. `Quick shift and kernel methods for mode seeking. <https://doi.org/10.1007/978-3-540-88693-8_52>`_ ECCV. 2008.
 - **XAI Book:** Molnar, C. `Interpretable Machine Learning: A Guide for Making Black Box Models Explainable. <https://christophm.github.io/interpretable-ml-book/>`_ Lulu.com. 2022.
