@@ -17,5 +17,6 @@ sacrebleu==2.5.1
 scikit-learn==1.9.0
 shap==0.52.0
 torch==2.6.0
+torchaudio==2.6.0
 torchvision==0.21.0
 transformers[torch]==5.13.0
