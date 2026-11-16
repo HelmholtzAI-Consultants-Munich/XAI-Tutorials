@@ -77,7 +77,7 @@ considering the player's contribution across all possible situations.
 
 
 Players, Coalitions, and Coalition Values
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To illustrate these concepts, consider a team building a table. The three
 players are:
@@ -258,7 +258,7 @@ contribution?**
 
 
 Average Contribution Across Player Orderings
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A player's contribution depends on which players are already in the
 coalition. The Shapley value accounts for this by averaging the player's
@@ -371,7 +371,7 @@ the team.
 
 
 From Player Orderings to Coalitions
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Instead of averaging marginal contributions over all possible player
 orderings, the Shapley value can equivalently be computed as a **weighted
@@ -747,7 +747,7 @@ examples of these different explainers.
 
 
 Advantages and Limitations
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Advantages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
