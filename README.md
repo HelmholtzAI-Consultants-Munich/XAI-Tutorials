@@ -94,7 +94,10 @@ Finally, start Jupyter from the activated environment and open the notebooks:
 jupyter lab
 ```
 
-If you use VS Code or another editor instead, select `.venv` in the repository folder as the Python interpreter or notebook kernel. To make the environment available as a kernel in a Jupyter installation outside this environment, run `python -m ipykernel install --user --name xai --display-name "Python (xai)"` once with the environment activated, and then choose **Python (xai)** as the kernel.
+If you use VS Code or another editor instead, select `.venv` in the repository folder as the Python interpreter or notebook kernel.
+To make the environment available as a kernel in a Jupyter installation outside this environment,
+run `python -m ipykernel install --user --name xai --display-name "Python (xai)"` once with the environment activated,
+and then choose **Python (xai)** as the kernel.
 
 ## Using This Repository for Courses
 
