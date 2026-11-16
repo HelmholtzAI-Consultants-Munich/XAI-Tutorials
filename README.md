@@ -65,6 +65,18 @@ pip install -r requirements_xai-for-random-forest.txt
 pip install -r requirements_xai-for-cnn.txt
 ```
 
+The Transformer tutorials pin different PyTorch versions than the CNN tutorials, so they need a separate environment. Its requirements also include Captum and LXT for the layer-wise relevance propagation tutorials (4a and 4b):
+
+```bash
+conda create -n xai-transformer python=3.13
+conda activate xai-transformer
+
+pip install -r requirements_xai-for-transformer.txt
+python -m ipykernel install --user --name xai-transformer --display-name "Python (xai-transformer)"
+```
+
+When you open a Transformer notebook, select the **Python (xai-transformer)** kernel. If you created this environment before Captum and LXT were added, run the `pip install` command above again and restart the notebook kernel afterwards.
+
 ## Using This Repository for Courses
 
 This repository can easily be adapted for online or in-person teaching.
