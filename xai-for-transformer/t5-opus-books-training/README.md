@@ -18,7 +18,7 @@ Previously published weights are available as a GitHub Release asset:
 ## The model
 
 - **Base:** [`google-t5/t5-small`](https://huggingface.co/google-t5/t5-small)
-- **Dataset:** [`opus_books`](https://huggingface.co/datasets/opus_books), configuration `de-en`
+- **Dataset:** [`opus_books`](https://huggingface.co/datasets/Helsinki-NLP/opus_books), configuration `de-en`
 - **Translation direction:** English → German
 - **Task prefix:** `"Translate English to German: "`
 - **Evaluation metric:** SacreBLEU
