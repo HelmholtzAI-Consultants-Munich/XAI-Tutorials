@@ -3,3 +3,4 @@ xai-dl4imaging/temp/
 *.ipynb_checkpoints/
 __pycache__/
 test/notebooks/
+.venv/

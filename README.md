@@ -48,34 +48,56 @@ Methods designed for interpreting specific model architectures such as Random Fo
 
 The notebooks can either be executed locally or directly in the browser using the **Open in Colab** button. Running the notebooks in Colab does not require any installation, but a Google account is needed.
 
-To run the notebooks locally, you need **Python 3.13** (the same version as Google Colab). First clone the repository:
+To run the notebooks locally, we use [uv](https://docs.astral.sh/uv/) to set up Python and install the packages. If you don't have uv yet, install it (see the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/) for other options):
+
+```bash
+# macOS / Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Then clone the repository:
 
 ```bash
 git clone https://github.com/HelmholtzAI-Consultants-Munich/XAI-Tutorials.git
 cd XAI-Tutorials
 ```
 
-Then create an environment and install the requirements for the Random Forest and CNN tutorials:
+Create a virtual environment with **Python 3.13** (the same version as Google Colab). If Python 3.13 is not installed on your computer, uv downloads it for you:
 
 ```bash
-conda create -n xai python=3.13
-conda activate xai
-
-pip install -r requirements_xai-for-random-forest.txt
-pip install -r requirements_xai-for-cnn.txt
+uv venv --python 3.13
 ```
 
-The Transformer tutorials pin different PyTorch versions than the CNN tutorials, so they need a separate environment. Its requirements also include Captum and LXT for the layer-wise relevance propagation tutorials (4a and 4b):
+Activate the environment:
 
 ```bash
-conda create -n xai-transformer python=3.13
-conda activate xai-transformer
+# macOS / Linux
+source .venv/bin/activate
 
-pip install -r requirements_xai-for-transformer.txt
-python -m ipykernel install --user --name xai-transformer --display-name "Python (xai-transformer)"
+# Windows
+.venv\Scripts\activate
 ```
 
-When you open a Transformer notebook, select the **Python (xai-transformer)** kernel. If you created this environment before Captum and LXT were added, run the `pip install` command above again and restart the notebook kernel afterwards.
+Install the requirements for the Random Forest and CNN tutorials:
+
+```bash
+uv pip install -r requirements_xai-for-random-forest.txt
+uv pip install -r requirements_xai-for-cnn.txt
+```
+
+Finally, start Jupyter from the activated environment and open the notebooks:
+
+```bash
+jupyter lab
+```
+
+If you use VS Code or another editor instead, select `.venv` in the repository folder as the Python interpreter or notebook kernel.
+To make the environment available as a kernel in a Jupyter installation outside this environment,
+run `python -m ipykernel install --user --name xai --display-name "Python (xai)"` once with the environment activated,
+and then choose **Python (xai)** as the kernel.
 
 ## Using This Repository for Courses
 
