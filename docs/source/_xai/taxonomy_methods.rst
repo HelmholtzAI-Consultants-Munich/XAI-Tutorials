@@ -18,10 +18,10 @@ Together, these dimensions form four categories.
      - **Global**
      - **Local**
    * - **Model-agnostic**
-     - Explain the overall behaviour of any model.
+     - Explain the overall behavior of any model.
      - Explain an individual prediction of any model.
    * - **Model-specific**
-     - Explain the overall behaviour of a particular model family.
+     - Explain the overall behavior of a particular model family.
      - Explain an individual prediction of a particular model family.
 
 
@@ -31,7 +31,7 @@ Model-agnostic methods treat the machine learning model as a black box.
 They only require access to the model inputs and outputs, making them
 applicable to virtually any predictive model. Their flexibility comes at
 the cost of potentially higher computational effort, and the resulting
-explanations are approximations of the model behaviour.
+explanations are approximations of the model behavior.
 
 **Model-specific methods**
 
@@ -42,7 +42,7 @@ but they cannot easily be transferred to other model architectures.
 
 **Global explanations**
 
-Global explanations describe the behaviour of a model over an entire
+Global explanations describe the behavior of a model over an entire
 dataset. They help answer questions such as:
 
 - Which features are generally most influential?
