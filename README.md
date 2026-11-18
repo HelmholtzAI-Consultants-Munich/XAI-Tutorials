@@ -29,6 +29,8 @@ The learning objectives are:
 
 The repository includes tutorials for both **model-agnostic** and **model-specific** XAI methods across tabular and image data.
 
+The tutorials on transformers and how to explain them (attention maps, SHAP and LRP for text, Vision Transformers) are now in their own repository: [Transformer-Tutorials](https://github.com/HelmholtzAI-Consultants-Munich/Transformer-Tutorials).
+
 ### Model-Agnostic Methods
 
 Methods that can be applied independently of the underlying machine learning model:

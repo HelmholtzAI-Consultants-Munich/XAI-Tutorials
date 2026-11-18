@@ -34,14 +34,12 @@ Tutorials for eXplainable Artificial Intelligence (XAI) Methods
 
    _model_specific_xai/fgc.rst
    _model_specific_xai/Grad-CAM.rst
-   _model_specific_xai/am.rst
 
 
 .. toctree::
    :maxdepth: 1
    :caption: LIMITATIONS OF XAI METHODS
 
-   _xai_limitations/attention_not_explanation.rst
    _xai_limitations/sanity_checks_saliency.rst
 
 
@@ -51,7 +49,6 @@ Tutorials for eXplainable Artificial Intelligence (XAI) Methods
 
    _ml_basics/random_forest.rst
    _ml_basics/CNN_feature_visualization.rst
-   _ml_basics/transformer.rst
 
 
 
