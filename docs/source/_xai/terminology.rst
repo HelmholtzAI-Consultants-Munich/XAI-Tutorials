@@ -14,9 +14,9 @@ often referred to as *glass-box models*, allow humans to directly inspect how pr
 
 **Explainability**
 
-Explainability is the extent to which the behaviour or internal mechanics of a machine learning model 
+Explainability is the extent to which the behavior or internal mechanics of a machine learning model 
 can be explained in human-understandable terms, often using *post hoc* methods. It focuses on providing 
-insights into the behaviour of *black-box models*, whose internal decision-making process is not directly accessible.
+insights into the behavior of *black-box models*, whose internal decision-making process is not directly accessible.
 
 In practice, explainability methods aim to answer questions such as *Why did the model make this prediction?*, 
 *Which features were most influential?*, or *How would the prediction change if the input were different?* 
