@@ -32,12 +32,12 @@ Kenncode: 711454
 |     Time     | Session |
 |--------------|---------|
 |10:00 - 10:15 | Welcome |
-|**10:15 - 10:45** | Introduction to CNNs |
-|**10:45 - 12:00** | Grad-CAM for Images |
-|**12:00 - 13:00** | Lunch Break |
-|**13:00 - 13:30** | LIME for Images |
-|**13:30 - 14:10** | SHAP for Images |
-|**14:10 - 14:55** | Method Comparison & Conclusions|
+|10:15 - 10:45 | Introduction to CNNs |
+|10:45 - 12:00 | Grad-CAM for Images |
+|12:00 - 13:00 | Lunch Break |
+|13:00 - 13:45 | LIME for Images |
+|13:45 - 14:30 | SHAP for Images |
+|14:30 - 15:45 | Method Comparison, Limitations & Conclusions|
 |15:45 - 16:00 | Wrap Up |
 
 ## Mentors
