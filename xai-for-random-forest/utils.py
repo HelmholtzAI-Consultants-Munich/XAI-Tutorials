@@ -1,16 +1,9 @@
-"""Plotting helpers for the XAI notebooks.
-
-All existing function names and positional arguments are retained.
-Figures are returned only with return_fig=True. Use show=False to suppress display.
-K-medoids still returns its labeled DataFrame by default.
-Plot defaults are set once on import; edit set_plot_style() to change the look.
-Default canvases stay within 1000 x 650 pixels for notebook screen sharing.
-For very large feature sets, use top_n or select a subset to keep labels readable.
-"""
+############################################################
+##### Imports
+############################################################
 
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
-from matplotlib.patches import Patch
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -18,12 +11,22 @@ from scipy.cluster import hierarchy
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
+############################################################
+##### Setups
+############################################################
+
 BLUE, ORANGE = "#0072B2", "#E69F00"
 PALETTE = [BLUE, ORANGE, "#009E73", "#CC79A7", "#56B4E9", "#D55E00", "#666666"]
 CMAP = LinearSegmentedColormap.from_list("blue_orange", [BLUE, "#F7F7F7", "#D55E00"])
 METADATA = ["sample_id", "Dataset", "GSE", "Condition", "Disease", "Tissue", "Set", "cluster"]
 DEFAULT_COLUMNS = ["Condition", "Tissue", "GSE", "Disease"]
-palette_dict = {column: PALETTE for column in DEFAULT_COLUMNS + ["Set"]}
+palette_dict = {
+    "Condition": ["lightgrey", "grey"],
+    "Tissue": ["darkseagreen", "darkgreen"],
+    "GSE": sns.color_palette("tab20") + sns.color_palette("tab10"),
+    "Disease": sns.color_palette("tab20b") + sns.color_palette("tab20c"),
+    "Set": ["cornflowerblue", "darkblue"],
+}
 dir_output = "results"  # Retained for existing notebooks; no automatic file saving.
 
 
@@ -32,13 +35,17 @@ def set_plot_style():
     sns.set_theme(
         style="whitegrid",
         palette=PALETTE,
-        font="DejaVu Sans",
+        font="sans-serif",
         rc={
+            "font.sans-serif": ["Arial", "Liberation Sans", "DejaVu Sans"],
+            "font.weight": "normal",
+            "axes.labelweight": "normal",
             "font.size": 11,
             "axes.labelsize": 11,
             "axes.titlesize": 13,
-            "axes.titleweight": "semibold",
+            "axes.titleweight": "normal",
             "figure.titlesize": 15,
+            "figure.titleweight": "normal",
             "xtick.labelsize": 10,
             "ytick.labelsize": 10,
             "legend.fontsize": 10,
@@ -56,6 +63,10 @@ def set_plot_style():
 
 set_plot_style()
 
+############################################################
+##### Helper Functions
+############################################################
+
 
 def _finish(fig, axes, show, return_fig):
     if show:
@@ -64,11 +75,13 @@ def _finish(fig, axes, show, return_fig):
         return fig, axes
 
 
-def _categories(series):
+def _categories(series, column=None):
     labels = series.astype("string").fillna("(missing)")
     categories = sorted(labels.unique())
-    colors = {label: PALETTE[i % len(PALETTE)] for i, label in enumerate(categories)}
-    return labels, colors
+    palette = palette_dict.get(column, PALETTE)
+    if len(categories) > len(palette):
+        palette = sns.color_palette("husl", len(categories))
+    return labels, dict(zip(categories, palette))
 
 
 def _expression(dataset, extra_metadata=()):
@@ -90,27 +103,37 @@ def _subplot_grid(count, ncols, figsize):
     return fig, axes
 
 
-def plot_distributions(dataset, ncols, *, show=True, return_fig=False, figsize=None):
-    """Plot numeric distributions and categorical counts."""
-    fig, axes = _subplot_grid(dataset.shape[1], min(ncols, 3), figsize)
+############################################################
+##### Utility Functions
+############################################################
+
+
+def plot_distributions(dataset, ncols=7, *, show=True, return_fig=False, figsize=None):
+    ncols = min(ncols, dataset.shape[1])
+    nrows = int(np.ceil(dataset.shape[1] / ncols))
+    fig, axes = plt.subplots(
+        nrows, ncols, figsize=figsize or (3 * ncols, 2.7 * nrows), squeeze=False, layout="constrained"
+    )
     fig.suptitle("Distribution of features")
     for ax, feature in zip(axes.flat, dataset.columns):
         values = dataset[feature]
         if not pd.api.types.is_numeric_dtype(values) or values.nunique() < 5:
             labels, _ = _categories(values)
-            labels.value_counts().sort_index().plot.barh(ax=ax, color=BLUE)
-            ax.set(xlabel="Count", ylabel="")
-            ax.invert_yaxis()
+            counts = labels.value_counts(sort=False)
+            ax.bar(counts.index, counts, color=BLUE, alpha=0.8)
         else:
             ax.hist(
                 values.replace([np.inf, -np.inf], np.nan).dropna(),
                 bins=30,
                 color=BLUE,
+                alpha=0.8,
                 edgecolor="white",
                 linewidth=0.4,
             )
-            ax.set(xlabel=str(feature), ylabel="Count")
-        ax.set_title(str(feature))
+        ax.set(xlabel=str(feature), ylabel="Count")
+        ax.grid(axis="x", visible=False)
+    for ax in axes.flat[dataset.shape[1] :]:
+        ax.set_visible(False)
     return _finish(fig, axes, show, return_fig)
 
 
@@ -125,7 +148,6 @@ def plot_permutation_feature_importance(
     show=True,
     return_fig=False,
 ):
-    """Boxplots of permutation repetitions, ranked by mean importance."""
     values = np.asarray(result["importances"])
     order = np.argsort(-values.mean(axis=1), kind="stable")[:top_n]
     fig, ax = plt.subplots(
@@ -152,11 +174,6 @@ def plot_permutation_feature_importance_train_vs_test(
     show=True,
     return_fig=False,
 ):
-    """Compare means ± shuffle SD, with matching feature order and scales.
-
-    Both results must use the same scoring metric. Error bars are not
-    confidence intervals.
-    """
     train = pd.DataFrame(result_train["importances"], index=data_train.columns)
     test = pd.DataFrame(result_test["importances"], index=data_test.columns)
     if set(train.index) != set(test.index):
@@ -192,7 +209,6 @@ def plot_permutation_feature_importance_train_vs_test(
 def plot_impurity_feature_importance(
     importance, names, title, top_n=None, figsize=None, *, show=True, return_fig=False
 ):
-    """Plot impurity-based importance, highest first."""
     values = pd.Series(importance, index=names).sort_values(ascending=False, kind="stable").iloc[:top_n]
     fig, ax = plt.subplots(
         figsize=figsize or (8, min(6.5, max(4, len(values) * 0.3 + 1.5))), layout="constrained"
@@ -205,41 +221,7 @@ def plot_impurity_feature_importance(
     return _finish(fig, ax, show, return_fig)
 
 
-def plot_lime_coefficients(coef_df, *, figsize=None, show=True, return_fig=False):
-    """Plot signed local-model coefficients from a LIME explanation.
-
-    ``coef_df`` may be a Series or a one-column DataFrame indexed by feature.
-    Features are ordered by absolute coefficient size, largest first.
-    """
-    if isinstance(coef_df, pd.DataFrame):
-        if coef_df.shape[1] != 1:
-            raise ValueError("coef_df must be a Series or a one-column DataFrame.")
-        coefficients = coef_df.iloc[:, 0]
-    elif isinstance(coef_df, pd.Series):
-        coefficients = coef_df
-    else:
-        raise ValueError("coef_df must be a Series or a one-column DataFrame.")
-    if not pd.api.types.is_numeric_dtype(coefficients):
-        raise TypeError("LIME coefficients must be numeric.")
-    coefficients = coefficients.sort_values(key=lambda values: values.abs(), ascending=False, kind="stable")
-
-    fig, ax = plt.subplots(
-        figsize=figsize or (8, min(6.5, max(2.6, len(coefficients) * 0.28 + 1.3))),
-        layout="constrained",
-    )
-    y = np.arange(len(coefficients))
-    colors = [BLUE if value >= 0 else ORANGE for value in coefficients]
-    ax.barh(y, coefficients.to_numpy(), color=colors, height=0.82, zorder=3)
-    ax.set_yticks(y, labels=coefficients.index)
-    ax.invert_yaxis()
-    ax.axvline(0, color="0.4", ls="--", lw=1)
-    ax.set(title="LIME: local model coefficients", xlabel="Model coefficient", ylabel="")
-    ax.grid(axis="y", visible=False)
-    return _finish(fig, ax, show, return_fig)
-
-
 def plot_explanation(explanation, *, figsize=(8, 5), show=True, return_fig=False):
-    """Plot permutation means with shuffle SD as error bars."""
     means = np.asarray(explanation["importances_mean"])
     std = np.asarray(explanation.get("importances_std", np.zeros_like(means)))
     names = np.asarray(explanation.get("feature", [f"Feature {i}" for i in range(len(means))]))
@@ -264,7 +246,6 @@ def plot_explanation(explanation, *, figsize=(8, 5), show=True, return_fig=False
 def plot_correlation_matrix(
     data, figsize=None, annot=True, labelsize=10, shrink=0.75, *, show=True, return_fig=False
 ):
-    """Pearson correlations on a fixed -1 to +1 scale."""
     corr = data.select_dtypes(include="number").corr()
     size = min(9.5, max(7, 0.4 * len(corr) + 4))
     labels = [str(col).replace("_", " ") for col in corr.columns]
@@ -301,9 +282,9 @@ def plot_correlation_matrix(
 
 
 def plot_dendrogram(
-    linked, feature_names, figsize=(8, 4.5), leaf_font_size=10, *, show=True, return_fig=False
+    linked, feature_names, figsize=(8, 4.5), leaf_font_size=10, *, show=True, return_fig=False, cutoff=None
 ):
-    """Plot a feature linkage matrix."""
+
     fig, ax = plt.subplots(figsize=figsize, layout="constrained")
     hierarchy.dendrogram(
         linked,
@@ -311,68 +292,88 @@ def plot_dendrogram(
         distance_sort="descending",
         leaf_rotation=90,
         leaf_font_size=leaf_font_size,
-        link_color_func=lambda _: BLUE,
+        color_threshold=cutoff,
         ax=ax,
     )
-    ax.set(title="Feature clustering", xlabel="Feature", ylabel="Linkage distance")
+    ax.set(title="Dendrogram", xlabel="Feature", ylabel="Distance")
+    if cutoff is not None:
+        ax.axhline(cutoff, color=ORANGE, ls="--", lw=1.5, label=f"Cutoff = {cutoff:g}")
+        ax.legend(loc="upper right", frameon=True)
     ax.grid(axis="x", visible=False)
     return _finish(fig, ax, show, return_fig)
 
 
 def plot_pie_charts(dataset, columns_to_plot=None, name="", *, show=True, return_fig=False, figsize=None):
-    """Plot category proportions with counts in the legends."""
     columns = DEFAULT_COLUMNS if columns_to_plot is None else list(columns_to_plot)
-    fig, axes = _subplot_grid(len(columns), 2, figsize)
+    legend_rows = max(
+        int(
+            np.ceil(
+                dataset[col].nunique(dropna=False) / (2 if dataset[col].nunique(dropna=False) > 10 else 1)
+            )
+        )
+        for col in columns
+    )
+    legend_height = 0.23 * legend_rows + 1.2
+    fig, axes = plt.subplots(
+        1, len(columns), figsize=figsize or (8 * len(columns), 5.5 + legend_height), squeeze=False
+    )
+    fig.subplots_adjust(
+        left=0.02, right=0.98, top=0.94, bottom=legend_height / fig.get_figheight(), wspace=0.2
+    )
     for ax, col in zip(axes.flat, columns):
-        labels, colors = _categories(dataset[col])
+        labels, colors = _categories(dataset[col], col)
         counts = labels.value_counts().reindex(colors)
         wedges, *_ = ax.pie(
             counts,
             colors=list(colors.values()),
-            startangle=90,
-            autopct="%1.0f%%" if len(counts) <= 6 else None,
-            wedgeprops={"edgecolor": "white", "linewidth": 1.5},
+            startangle=140,
+            autopct="%1.1f%%" if len(counts) <= 10 else None,
+            wedgeprops={"edgecolor": "white", "linewidth": 1},
         )
         ax.set_title(f"Distribution of {col}")
         ax.legend(
             wedges,
-            [f"{label} (n={count})" for label, count in counts.items()],
+            list(colors),
+            title=col,
             loc="upper center",
-            bbox_to_anchor=(0.5, -0.02),
-            ncol=2 if len(counts) > 6 else 1,
-            frameon=False,
+            bbox_to_anchor=(0.5, -0.10),
+            ncol=2 if len(counts) > 10 else 1,
+            frameon=True,
         )
     return _finish(fig, axes, show, return_fig)
 
 
 def _plot_embedding(embedding, dataset, columns, method, labels, name, show, return_fig, figsize):
-    fig, axes = _subplot_grid(len(columns), 2, figsize)
-    markers = ["o", "s", "^", "D", "v", "P", "X"]
+    fig, axes = plt.subplots(
+        1,
+        len(columns),
+        figsize=figsize or (7 * len(columns), 6),
+        squeeze=False,
+        sharex=True,
+        sharey=True,
+        layout="constrained",
+    )
     for ax, col in zip(axes.flat, columns):
-        categories, colors = _categories(dataset[col])
-        for i, (label, color) in enumerate(colors.items()):
+        categories, colors = _categories(dataset[col], col)
+        for label, color in colors.items():
             selected = categories.eq(label).to_numpy(dtype=bool)
             ax.scatter(
                 embedding[selected, 0],
                 embedding[selected, 1],
-                label=label,
                 color=color,
-                marker=markers[i % len(markers)],
-                s=25,
-                alpha=0.75,
-                edgecolors="white",
-                linewidths=0.2,
+                s=20,
+                alpha=0.7,
+                edgecolors="none",
                 rasterized=True,
             )
-        ax.set(title=f"{method} by {col}", xlabel=labels[0], ylabel=labels[1])
-        ax.legend(title=col, loc="upper left", bbox_to_anchor=(1.02, 1), frameon=False)
-    if name:
-        fig.suptitle(name)
+        ax.set(title=f"{method} colored by {col}", xlabel=labels[0], ylabel=labels[1])
+        ax.tick_params(labelleft=True)
+        ax.grid(False)
+    # As in the original overview, colors are explained by the pie-chart legends.
     return _finish(fig, axes, show, return_fig)
 
 
 def plot_pca(dataset, columns_to_plot=None, name="", *, show=True, return_fig=False, figsize=None):
-    """Standardize expression features and plot the first two principal components."""
     columns = DEFAULT_COLUMNS if columns_to_plot is None else list(columns_to_plot)
     scaled = StandardScaler().fit_transform(_expression(dataset, columns))
     pca = PCA(n_components=2)
@@ -384,7 +385,6 @@ def plot_pca(dataset, columns_to_plot=None, name="", *, show=True, return_fig=Fa
 def plot_umap(
     dataset, columns_to_plot=None, name="", *, show=True, return_fig=False, random_state=42, figsize=None
 ):
-    """Plot a UMAP embedding; requires umap-learn."""
     import umap
 
     columns = DEFAULT_COLUMNS if columns_to_plot is None else list(columns_to_plot)
@@ -397,48 +397,33 @@ def plot_umap(
     )
 
 
-def _expression_heatmap(values, dataset, title, row_cluster=False, col_cluster=False, figsize=(10, 6.5)):
-    row_colors, handles = {}, []
+def _expression_heatmap(values, dataset, title, row_cluster=False, col_cluster=False, figsize=(16, 10)):
+    row_colors = {}
     for col in ["Condition", "Disease", "GSE"]:
         if col in dataset:
-            labels, colors = _categories(dataset[col])
+            labels, colors = _categories(dataset[col], col)
             row_colors[col] = labels.map(colors)
-            handles.extend(Patch(color=color, label=f"{col}: {label}") for label, color in colors.items())
     g = sns.clustermap(
         values,
         row_colors=pd.DataFrame(row_colors) if row_colors else None,
         row_cluster=row_cluster,
         col_cluster=col_cluster,
         method="average",
-        cmap=CMAP,
-        center=0,
-        vmin=-3,
-        vmax=3,
+        cmap="coolwarm",
         figsize=figsize,
         xticklabels=False,
         yticklabels=False,
-        dendrogram_ratio=(0.16 if row_cluster else 0.02, 0.16 if col_cluster else 0.02),
-        cbar_kws={"label": "Expression (z-score)", "orientation": "horizontal", "extend": "both"},
+        cbar_kws={"label": "Standardized expression"},
     )
+    # Preserve the original data-driven color limits: no clipping at +/-3.
     g.fig.suptitle(title, y=0.99)
-    g.fig.subplots_adjust(right=0.70, top=0.93)
-    g.cax.set_position([0.76, 0.86, 0.16, 0.018])
-    g.ax_heatmap.set(xlabel="Expression feature", ylabel="Sample")
-    if handles:
-        g.fig.legend(
-            handles=handles,
-            loc="upper left",
-            bbox_to_anchor=(0.74, 0.70),
-            frameon=False,
-            ncol=max(1, int(np.ceil(len(handles) / 22))),
-        )
+    g.ax_heatmap.set(xlabel="", ylabel="")
     return g
 
 
 def hierarchical_clustering_heatmap(
-    dataset, name="", *, row_cluster=False, col_cluster=False, show=True, return_fig=False, figsize=(10, 6.5)
+    dataset, name="", *, row_cluster=False, col_cluster=False, show=True, return_fig=False, figsize=(16, 10)
 ):
-    """Expression heatmap; return its ClusterGrid only when return_fig=True."""
     expression = _expression(dataset)
     values = pd.DataFrame(
         StandardScaler().fit_transform(expression), index=dataset.index, columns=expression.columns
@@ -453,8 +438,7 @@ def hierarchical_clustering_heatmap(
         return g
 
 
-def kmedoids_clustering_heatmap(dataset, k=2, name="", *, show=True, return_fig=False, figsize=(10, 6.5)):
-    """Return labeled data; with return_fig=True return (data, ClusterGrid)."""
+def kmedoids_clustering_heatmap(dataset, k=2, name="", *, show=True, return_fig=False, figsize=(16, 10)):
     import kmedoids
 
     expression = _expression(dataset)
@@ -479,29 +463,46 @@ def kmedoids_clustering_heatmap(dataset, k=2, name="", *, show=True, return_fig=
 def plot_stacked_bar_chart(
     feature_importance, columns_to_plot=None, name="", *, show=True, return_fig=False, figsize=None
 ):
-    """Plot metadata proportions within clusters, with category legends."""
+    """One-row cluster-composition overview with category legends underneath."""
     dataset = (
         feature_importance
         if isinstance(feature_importance, pd.DataFrame)
         else feature_importance.data_clustering
     )
     columns = ["Tissue", "GSE", "Disease"] if columns_to_plot is None else list(columns_to_plot)
-    fig, axes = _subplot_grid(len(columns), 2, figsize)
+    legend_rows = max(
+        int(
+            np.ceil(
+                dataset[col].nunique(dropna=False) / (2 if dataset[col].nunique(dropna=False) > 10 else 1)
+            )
+        )
+        for col in columns
+    )
+    legend_height = 0.23 * legend_rows + 1.2
+    fig, axes = plt.subplots(
+        1, len(columns), figsize=figsize or (8 * len(columns), 5 + legend_height), squeeze=False
+    )
+    fig.subplots_adjust(
+        left=0.05, right=0.95, top=0.92, bottom=legend_height / fig.get_figheight(), wspace=0.3
+    )
     for ax, col in zip(axes.flat, columns):
-        labels, colors = _categories(dataset[col])
+        labels, colors = _categories(dataset[col], col)
         counts = pd.crosstab(dataset["cluster"], labels).reindex(columns=colors, fill_value=0)
         percentages = counts.div(counts.sum(axis=1), axis=0) * 100
-        percentages.plot.bar(stacked=True, color=list(colors.values()), width=0.65, ax=ax)
+        percentages.plot.bar(stacked=True, color=list(colors.values()), width=0.65, ax=ax, legend=False)
         ax.set(title=f"Cluster composition by {col}", xlabel="Cluster", ylabel="Samples (%)", ylim=(0, 100))
         ax.tick_params(axis="x", rotation=0)
-        ax.legend(title=col, loc="upper left", bbox_to_anchor=(1.02, 1), frameon=False)
-    if name:
-        fig.suptitle(name)
+        ax.legend(
+            title=col,
+            loc="upper center",
+            bbox_to_anchor=(0.5, -0.15),
+            ncol=2 if len(colors) > 10 else 1,
+            frameon=True,
+        )
     return _finish(fig, axes, show, return_fig)
 
 
 def plot_correlation_distribution(data, name="", *, show=True, return_fig=False, figsize=(7, 4)):
-    """Plot unique feature-pair correlations, excluding the diagonal."""
     corr = _expression(data).corr().to_numpy()
     values = corr[np.triu_indices_from(corr, k=1)]
     fig, ax = plt.subplots(figsize=figsize, layout="constrained")
@@ -518,8 +519,11 @@ def plot_correlation_distribution(data, name="", *, show=True, return_fig=False,
     return _finish(fig, ax, show, return_fig)
 
 
-def plot_shap_dependence(explanation, num_cols=3, *, show=True, return_fig=False, figsize=None):
-    """Plot feature values against SHAP values; select one output for multiclass."""
+def plot_shap_dependence(
+    explanation, num_cols=5, *, show=True, return_fig=False, figsize=None, interaction_index="auto"
+):
+    import shap
+
     values, features = np.asarray(explanation.values), np.asarray(explanation.data)
     if values.ndim != 2 or values.shape != features.shape:
         raise ValueError("Select one output: SHAP values and feature data must be matching 2D arrays.")
@@ -527,17 +531,55 @@ def plot_shap_dependence(explanation, num_cols=3, *, show=True, return_fig=False
     if names is None:
         names = [f"Feature {i}" for i in range(values.shape[1])]
     order = np.argsort(-np.abs(values).mean(axis=0), kind="stable")
-    fig, axes = _subplot_grid(len(order), min(num_cols, 3), figsize)
+    columns = min(num_cols, len(order))
+    rows = int(np.ceil(len(order) / columns))
+    fig, axes = plt.subplots(
+        rows, columns, figsize=figsize or (6 * columns, 4 * rows), squeeze=False, layout="constrained"
+    )
     for ax, i in zip(axes.flat, order):
-        x = pd.Series(features[:, i])
-        try:
-            x = pd.to_numeric(x, errors="raise")
-        except (ValueError, TypeError):
-            labels, colors = _categories(x)
-            x = pd.Categorical(labels, categories=list(colors)).codes
-            ax.set_xticks(range(len(colors)), labels=list(colors), rotation=45, ha="right")
-        ax.scatter(x, values[:, i], color=BLUE, s=18, alpha=0.6, edgecolors="none", rasterized=True)
-        ax.axhline(0, color="0.4", ls="--", lw=1)
-        ax.set(title=str(names[i]), xlabel=str(names[i]), ylabel="SHAP value")
-    fig.suptitle("SHAP dependence (ranked by mean absolute SHAP value)")
+        shap.dependence_plot(
+            int(i),
+            values,
+            features,
+            feature_names=list(names),
+            interaction_index=interaction_index,
+            ax=ax,
+            show=False,
+        )
+        ax.set_title(f"Dependence: {names[i]}", fontsize=13, fontweight="normal")
+        ax.xaxis.label.set_size(11)
+        ax.yaxis.label.set_size(11)
+        ax.tick_params(labelsize=10)
+        ax.grid(False)
+    for ax in axes.flat[len(order) :]:
+        ax.set_visible(False)
     return _finish(fig, axes, show, return_fig)
+
+
+def plot_lime_coefficients(coef_df, *, figsize=None, show=True, return_fig=False):
+
+    if isinstance(coef_df, pd.DataFrame):
+        if coef_df.shape[1] != 1:
+            raise ValueError("coef_df must be a Series or a one-column DataFrame.")
+        coefficients = coef_df.iloc[:, 0]
+    elif isinstance(coef_df, pd.Series):
+        coefficients = coef_df
+    else:
+        raise ValueError("coef_df must be a Series or a one-column DataFrame.")
+    if not pd.api.types.is_numeric_dtype(coefficients):
+        raise TypeError("LIME coefficients must be numeric.")
+    coefficients = coefficients.sort_values(key=lambda values: values.abs(), ascending=False, kind="stable")
+
+    fig, ax = plt.subplots(
+        figsize=figsize or (8, min(6.5, max(2.6, len(coefficients) * 0.28 + 1.3))),
+        layout="constrained",
+    )
+    y = np.arange(len(coefficients))
+    colors = [BLUE if value >= 0 else ORANGE for value in coefficients]
+    ax.barh(y, coefficients.to_numpy(), color=colors, height=0.82, zorder=3)
+    ax.set_yticks(y, labels=coefficients.index)
+    ax.invert_yaxis()
+    ax.axvline(0, color="0.4", ls="--", lw=1)
+    ax.set(title="LIME: local model coefficients", xlabel="Model coefficient", ylabel="")
+    ax.grid(axis="y", visible=False)
+    return _finish(fig, ax, show, return_fig)
