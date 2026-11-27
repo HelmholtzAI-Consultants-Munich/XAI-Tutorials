@@ -2,293 +2,24 @@
 ##### Imports
 ############################################################
 
-import os
-import math
-import shap
-import umap
-import kmedoids
-import pandas as pd
-import numpy as np
-
-import seaborn as sns
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-from matplotlib.patches import Patch
-
+from matplotlib.colors import LinearSegmentedColormap
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from scipy.cluster import hierarchy
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
-from scipy.cluster import hierarchy
 
 ############################################################
-##### Utility Functions
+##### Setups
 ############################################################
 
-
-def plot_distributions(dataset, ncols):
-    """
-    Plots the distributions of all features in a dataset as histograms or countplots.
-
-    If a feature is categorical or has fewer than 5 unique values, a countplot is used.
-    Otherwise, a histogram is used. Subplots are arranged according to the number of columns specified.
-
-    :param dataset: The dataset containing the features to plot.
-    :type dataset: pandas.DataFrame
-    :param ncols: Number of columns in the subplot grid layout.
-    :type ncols: int
-    """
-    nrows = int(np.ceil(len(dataset.columns) / ncols))
-
-    plt.figure(figsize=(ncols * 4.5, nrows * 4.5))
-    plt.subplots_adjust(top=0.95, hspace=0.8, wspace=0.8)
-    plt.suptitle("Distribution of features")
-
-    for n, feature in enumerate(dataset.columns):
-        # add a new subplot iteratively
-        ax = plt.subplot(nrows, ncols, n + 1)
-        if dataset[feature].nunique() < 5 or isinstance(dataset[feature].dtype, pd.CategoricalDtype):
-            sns.countplot(
-                data=dataset,
-                x=feature,
-                hue=feature,
-                palette="Blues_r",
-                ax=ax,
-            )
-            # ax.legend(bbox_to_anchor=(1, 1), loc=2)
-        else:
-            sns.histplot(
-                data=dataset,
-                x=feature,
-                bins=30,
-                ax=ax,
-                color="#3470a3",
-            )
-
-    plt.tight_layout(rect=[0, 0, 1, 0.95])
-
-
-def plot_permutation_feature_importance(result, data, title, top_n=None, figsize=(7, 5)):
-    """
-    Plot permutation feature importances as a boxplot.
-
-    :param result: Result of permutation importance containing importances.
-    :type result: sklearn.inspection._permutation_importance.PermutationImportanceResult
-    :param data: Dataset used for feature names.
-    :type data: pandas.DataFrame
-    :param title: Title of the plot.
-    :type title: str
-    :param top_n: Number of top features to display (optional).
-    :type top_n: int
-    :param figsize: Size of the figure.
-    :type figsize: tuple
-    """
-    # Sort the features by importance mean
-    perm_sorted_idx = result.importances_mean.argsort()[::-1]
-
-    # If top_n is provided, limit the selection to top_n features
-    if top_n:
-        perm_sorted_idx = perm_sorted_idx[:top_n]
-
-    # Prepare the data for Seaborn's boxplot (convert to long format)
-    feature_importances = result.importances[perm_sorted_idx].T
-    df = pd.DataFrame(feature_importances, columns=data.columns[perm_sorted_idx])
-    df_long = df.melt(var_name="Feature", value_name="Importance")
-
-    # Create the figure and plot
-    fig, ax = plt.subplots(figsize=figsize)
-    sns.boxplot(
-        data=df_long, x="Importance", y="Feature", ax=ax, flierprops=dict(marker=".", alpha=0.5, markersize=2)
-    )
-
-    # Set title and layout
-    ax.set_title(title)
-    fig.tight_layout()
-    plt.show()
-
-
-def plot_permutation_feature_importance_train_vs_test(
-    result_train, data_train, result_test, data_test, title, figsize=(10, 4)
-):
-    """
-    Compare permutation feature importances between train and test datasets.
-
-    :param result_train: Permutation importance result for the training data.
-    :type result_train: sklearn.inspection._permutation_importance.PermutationImportanceResult
-    :param data_train: Training dataset.
-    :type data_train: pandas.DataFrame
-    :param result_test: Permutation importance result for the test data.
-    :type result_test: sklearn.inspection._permutation_importance.PermutationImportanceResult
-    :param data_test: Test dataset.
-    :type data_test: pandas.DataFrame
-    :param title: Title of the plot.
-    :type title: str
-    :param figsize: Size of the figure.
-    :type figsize: tuple
-    """
-    perm_sorted_idx = result_train.importances_mean.argsort()
-    perm_indices = np.arange(0, len(result_train.importances_mean)) + 0.5
-
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=figsize)
-    fig.suptitle(title)
-    ax1.barh(
-        perm_indices,
-        result_train.importances_mean[perm_sorted_idx],
-        height=0.7,
-        color="#3470a3",  # color = 'cornflowerblue'
-    )
-    ax1.set_yticks(perm_indices)
-    ax1.set_yticklabels(data_train.columns[perm_sorted_idx])
-    ax1.set_ylim((0, len(result_train.importances_mean)))
-
-    perm_sorted_idx = result_test.importances_mean.argsort()
-    perm_indices = np.arange(0, len(result_test.importances_mean)) + 0.5
-
-    ax2.barh(
-        perm_indices,
-        result_test.importances_mean[perm_sorted_idx],
-        height=0.7,
-        color="#3470a3",  # color = 'cornflowerblue'
-    )
-    ax2.set_yticks(perm_indices)
-    ax2.set_yticklabels(data_test.columns[perm_sorted_idx])
-    ax2.set_ylim((0, len(result_test.importances_mean)))
-
-    fig.tight_layout()
-    plt.show()
-
-
-def plot_impurity_feature_importance(importance, names, title, top_n=None, figsize=(5, 4)):
-    """
-    Plot feature importance based on impurity decrease.
-
-    :param importance: List of feature importances.
-    :type importance: list
-    :param names: List of feature names.
-    :type names: list
-    :param title: Title of the plot.
-    :type title: str
-    :param top_n: Number of top features to display (optional).
-    :type top_n: int
-    :param figsize: Size of the figure.
-    :type figsize: tuple
-    """
-    # Create arrays from feature importance and feature names
-    feature_importance = np.array(importance)
-    feature_names = np.array(names)
-
-    # Create a DataFrame using a Dictionary
-    data = {"feature_names": feature_names, "feature_importance": feature_importance}
-    fi_df = pd.DataFrame(data)
-
-    # Sort the DataFrame in order of decreasing feature importance
-    fi_df.sort_values(by=["feature_importance"], ascending=False, inplace=True)
-
-    if top_n:
-        fi_df = fi_df.iloc[:top_n]
-
-    # Define size of bar plot
-    fig, ax = plt.subplots(figsize=figsize)
-    # Plot Seaborn bar chart
-    sns.barplot(x=fi_df["feature_importance"], y=fi_df["feature_names"], color="#3470a3")
-    # Add chart labels
-    plt.title(title)
-    plt.xlabel("Feature Importance (mean decrease in impurity)")
-    plt.ylabel("Feature Names")
-
-
-def plot_explanation(explanation):
-    """
-    Plot permutation explanation as a barplot.
-
-    :param explanation: Dictionary containing explanation results.
-    :type explanation: dict
-    """
-    explanation_df = pd.DataFrame({k: v for k, v in explanation.items() if k != "importances"}).sort_values(
-        by="importances_mean", ascending=True
-    )
-
-    f, ax = plt.subplots(1, 1, figsize=(9, 7))
-    explanation_df.plot(kind="barh", ax=ax)
-    plt.title("Permutation importances")
-    plt.axvline(x=0, color=".5")
-    plt.subplots_adjust(left=0.3)
-
-    if "feature" in explanation_df:
-        _ = ax.set_yticklabels(explanation_df["feature"])
-
-
-def plot_correlation_matrix(data, figsize=(5, 5), annot=True, labelsize=10, shrink=1):
-    """
-    Plot the correlation matrix of the dataset.
-
-    :param data: Dataset to calculate the correlation matrix.
-    :type data: pandas.DataFrame
-    :param figsize: Size of the figure.
-    :type figsize: tuple
-    :param annot: Whether to annotate the heatmap.
-    :type annot: bool
-    :param labelsize: Font size of labels.
-    :type labelsize: int
-    :param shrink: Shrink factor for the colorbar.
-    :type shrink: float
-    """
-    corr = data.corr()
-    mask = np.triu(np.ones_like(corr, dtype=bool))
-    np.fill_diagonal(mask, False)
-
-    f, ax = plt.subplots(figsize=figsize)
-    ax.tick_params(axis="both", which="major", labelsize=labelsize)
-    sns.heatmap(
-        round(corr, 2),
-        mask=mask,
-        cmap=sns.diverging_palette(220, 10, as_cmap=True),
-        cbar_kws={"shrink": shrink},
-        square=True,
-        ax=ax,
-        annot=annot,
-    )
-
-
-def plot_dendrogram(linked, feature_names, figsize=(5, 5), leaf_font_size=10):
-    """
-    Plot a dendrogram based on hierarchical clustering.
-
-    :param linked: The linkage matrix.
-    :type linked: numpy.ndarray
-    :param feature_names: List of feature names corresponding to leaves.
-    :type feature_names: list
-    :param figsize: Size of the figure.
-    :type figsize: tuple
-    :param leaf_font_size: Font size for the leaf labels.
-    :type leaf_font_size: int
-    """
-    # Create a figure
-    plt.figure(figsize=figsize)
-
-    # Plot the dendrogram
-    dendrogram = hierarchy.dendrogram(
-        linked,
-        orientation="top",  # 'top', 'bottom', 'left', or 'right'
-        distance_sort="descending",  # 'ascending' or 'descending'
-        show_leaf_counts=True,  # Show the number of observations in each cluster
-        leaf_rotation=90,  # Rotation of leaf labels
-        leaf_font_size=leaf_font_size,  # Font size of leaf labels
-        show_contracted=True,  # Show contracted leaves
-        labels=feature_names,
-    )
-
-    # Add title and labels
-    plt.title("Dendrogram")
-    plt.xlabel("Feature")
-    plt.ylabel("Distance")
-
-    # Show the plot
-    plt.show()
-
-
-###############################################################
-##### Utility functions for AML Case Study
-###############################################################
-
+BLUE, ORANGE = "#0072B2", "#E69F00"
+PALETTE = [BLUE, ORANGE, "#009E73", "#CC79A7", "#56B4E9", "#D55E00", "#666666"]
+CMAP = LinearSegmentedColormap.from_list("blue_orange", [BLUE, "#F7F7F7", "#D55E00"])
+METADATA = ["sample_id", "Dataset", "GSE", "Condition", "Disease", "Tissue", "Set", "cluster"]
+DEFAULT_COLUMNS = ["Condition", "Tissue", "GSE", "Disease"]
 palette_dict = {
     "Condition": ["lightgrey", "grey"],
     "Tissue": ["darkseagreen", "darkgreen"],
@@ -296,374 +27,559 @@ palette_dict = {
     "Disease": sns.color_palette("tab20b") + sns.color_palette("tab20c"),
     "Set": ["cornflowerblue", "darkblue"],
 }
-
-plt.rcParams.update({"font.size": 12})
-
-dir_output = "results"
+dir_output = "results"  # Retained for existing notebooks; no automatic file saving.
 
 
-def plot_pie_charts(dataset, columns_to_plot=["Condition", "Tissue", "GSE", "Disease"], name=""):
+def set_plot_style():
+    """Set consistent notebook-wide fonts, colors, and export quality."""
+    sns.set_theme(
+        style="whitegrid",
+        palette=PALETTE,
+        font="sans-serif",
+        rc={
+            "font.sans-serif": ["Arial", "Liberation Sans", "DejaVu Sans"],
+            "font.weight": "normal",
+            "axes.labelweight": "normal",
+            "font.size": 11,
+            "axes.labelsize": 11,
+            "axes.titlesize": 13,
+            "axes.titleweight": "normal",
+            "figure.titlesize": 15,
+            "figure.titleweight": "normal",
+            "xtick.labelsize": 10,
+            "ytick.labelsize": 10,
+            "legend.fontsize": 10,
+            "legend.title_fontsize": 11,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "grid.alpha": 0.35,
+            "axes.axisbelow": True,
+            "figure.dpi": 100,
+            "savefig.dpi": 300,
+            "savefig.bbox": "tight",
+        },
+    )
 
-    n_cols = len(columns_to_plot)
-    fig, axes = plt.subplots(1, n_cols, figsize=(7 * n_cols, 6))
 
-    for i, col in enumerate(columns_to_plot):
-        sorted_labels = sorted(dataset[col].dropna().unique())  # sort for consistency
-        counts = {label: (dataset[col] == label).sum() for label in sorted_labels}
-        values = list(counts.values())
-        labels = list(counts.keys())
+set_plot_style()
 
-        color_list = palette_dict[col][: len(labels)]
+############################################################
+##### Helper Functions
+############################################################
 
-        if len(labels) <= 10:
-            wedges, texts, autotext = axes[i].pie(
-                values,
-                labels=[None] * len(labels),
-                autopct="%1.1f%%",
-                startangle=140,
-                wedgeprops=dict(edgecolor="white"),
-                colors=color_list,
-            )
+
+def _finish(fig, axes, show, return_fig):
+    if show:
+        plt.show()
+    if return_fig:
+        return fig, axes
+
+
+def _categories(series, column=None):
+    labels = series.astype("string").fillna("(missing)")
+    categories = sorted(labels.unique())
+    palette = palette_dict.get(column, PALETTE)
+    if len(categories) > len(palette):
+        palette = sns.color_palette("husl", len(categories))
+    return labels, dict(zip(categories, palette))
+
+
+def _expression(dataset, extra_metadata=()):
+    return dataset.drop(columns=METADATA + list(extra_metadata), errors="ignore")
+
+
+def _subplot_grid(count, ncols, figsize):
+    ncols = min(ncols, count)
+    nrows = int(np.ceil(count / ncols))
+    fig, axes = plt.subplots(
+        nrows,
+        ncols,
+        figsize=figsize or (min(10, 4.5 * ncols), min(6.5, max(4, 3 * nrows))),
+        squeeze=False,
+        layout="constrained",
+    )
+    for ax in axes.flat[count:]:
+        ax.set_visible(False)
+    return fig, axes
+
+
+############################################################
+##### Utility Functions
+############################################################
+
+
+def plot_distributions(dataset, ncols=7, *, show=True, return_fig=False, figsize=None):
+    ncols = min(ncols, dataset.shape[1])
+    nrows = int(np.ceil(dataset.shape[1] / ncols))
+    fig, axes = plt.subplots(
+        nrows, ncols, figsize=figsize or (3 * ncols, 2.7 * nrows), squeeze=False, layout="constrained"
+    )
+    fig.suptitle("Distribution of features")
+    for ax, feature in zip(axes.flat, dataset.columns):
+        values = dataset[feature]
+        if not pd.api.types.is_numeric_dtype(values) or values.nunique() < 5:
+            labels, _ = _categories(values)
+            counts = labels.value_counts(sort=False)
+            ax.bar(counts.index, counts, color=BLUE, alpha=0.8)
         else:
-            wedges, texts = axes[i].pie(
-                values,
-                labels=[None] * len(labels),
-                autopct=None,
-                startangle=140,
-                wedgeprops=dict(edgecolor="white"),
-                colors=color_list,
+            ax.hist(
+                values.replace([np.inf, -np.inf], np.nan).dropna(),
+                bins=30,
+                color=BLUE,
+                alpha=0.8,
+                edgecolor="white",
+                linewidth=0.4,
             )
+        ax.set(xlabel=str(feature), ylabel="Count")
+        ax.grid(axis="x", visible=False)
+    for ax in axes.flat[dataset.shape[1] :]:
+        ax.set_visible(False)
+    return _finish(fig, axes, show, return_fig)
 
-        axes[i].set_title(f"Distribution of {col}")
-        axes[i].axis("equal")
-        axes[i].legend(
-            handles=wedges,
-            labels=labels,
+
+def plot_permutation_feature_importance(
+    result,
+    data,
+    title,
+    top_n=None,
+    figsize=None,
+    *,
+    xlabel="Permutation importance (decrease in score)",
+    show=True,
+    return_fig=False,
+):
+    values = np.asarray(result["importances"])
+    order = np.argsort(-values.mean(axis=1), kind="stable")[:top_n]
+    fig, ax = plt.subplots(
+        figsize=figsize or (8, min(6.5, max(4, len(order) * 0.3 + 1.5))), layout="constrained"
+    )
+    frame = pd.DataFrame(values[order].T, columns=data.columns[order])
+    sns.boxplot(data=frame, orient="h", color=BLUE, width=0.6, fliersize=2, ax=ax)
+    ax.axvline(0, color="0.4", ls="--", lw=1)
+    ax.set(title=title, xlabel=xlabel, ylabel="")
+    ax.grid(axis="y", visible=False)
+    return _finish(fig, ax, show, return_fig)
+
+
+def plot_permutation_feature_importance_train_vs_test(
+    result_train,
+    data_train,
+    result_test,
+    data_test,
+    title,
+    figsize=None,
+    *,
+    top_n=None,
+    xlabel="Permutation importance (decrease in score)",
+    show=True,
+    return_fig=False,
+):
+    train = pd.DataFrame(result_train["importances"], index=data_train.columns)
+    test = pd.DataFrame(result_test["importances"], index=data_test.columns)
+    if set(train.index) != set(test.index):
+        raise ValueError("Train and test results must contain the same features.")
+    names = train.mean(axis=1).sort_values(ascending=False, kind="stable").index[:top_n]
+    fig, axes = plt.subplots(
+        1,
+        2,
+        sharex=True,
+        sharey=True,
+        layout="constrained",
+        figsize=figsize or (10, min(6.5, max(4, len(names) * 0.3 + 1.5))),
+    )
+    fig.suptitle(title)
+    for ax, frame, label, color in zip(axes, [train, test], ["Training data", "Test data"], [BLUE, ORANGE]):
+        values = frame.loc[names].to_numpy()
+        ax.barh(
+            np.arange(len(names)),
+            values.mean(axis=1),
+            xerr=values.std(axis=1),
+            color=color,
+            height=0.65,
+            error_kw={"ecolor": "0.25", "capsize": 2},
+        )
+        ax.set_yticks(np.arange(len(names)), labels=names)
+        ax.axvline(0, color="0.4", ls="--", lw=1)
+        ax.set(title=label, xlabel=xlabel)
+        ax.grid(axis="y", visible=False)
+    axes[0].invert_yaxis()
+    return _finish(fig, axes, show, return_fig)
+
+
+def plot_impurity_feature_importance(
+    importance, names, title, top_n=None, figsize=None, *, show=True, return_fig=False
+):
+    values = pd.Series(importance, index=names).sort_values(ascending=False, kind="stable").iloc[:top_n]
+    fig, ax = plt.subplots(
+        figsize=figsize or (8, min(6.5, max(4, len(values) * 0.3 + 1.5))), layout="constrained"
+    )
+    ax.barh(np.arange(len(values)), values, color=BLUE, height=0.65)
+    ax.set_yticks(np.arange(len(values)), labels=values.index)
+    ax.invert_yaxis()
+    ax.set(title=title, xlabel="Mean decrease in impurity", ylabel="")
+    ax.grid(axis="y", visible=False)
+    return _finish(fig, ax, show, return_fig)
+
+
+def plot_explanation(explanation, *, figsize=(8, 5), show=True, return_fig=False):
+    means = np.asarray(explanation["importances_mean"])
+    std = np.asarray(explanation.get("importances_std", np.zeros_like(means)))
+    names = np.asarray(explanation.get("feature", [f"Feature {i}" for i in range(len(means))]))
+    order = np.argsort(-means, kind="stable")
+    fig, ax = plt.subplots(figsize=figsize, layout="constrained")
+    ax.barh(
+        np.arange(len(order)),
+        means[order],
+        xerr=std[order],
+        color=BLUE,
+        height=0.65,
+        error_kw={"ecolor": "0.25", "capsize": 2},
+    )
+    ax.set_yticks(np.arange(len(order)), labels=names[order])
+    ax.invert_yaxis()
+    ax.axvline(0, color="0.4", ls="--", lw=1)
+    ax.set(title="Permutation importances", xlabel="Permutation importance (decrease in score)")
+    ax.grid(axis="y", visible=False)
+    return _finish(fig, ax, show, return_fig)
+
+
+def plot_correlation_matrix(
+    data, figsize=None, annot=True, labelsize=10, shrink=0.75, *, show=True, return_fig=False
+):
+    corr = data.select_dtypes(include="number").corr()
+    size = min(9.5, max(7, 0.4 * len(corr) + 4))
+    labels = [str(col).replace("_", " ") for col in corr.columns]
+    fig, ax = plt.subplots(figsize=figsize or (size, min(6.5, size - 1)), layout="constrained")
+    ax.grid(False)
+    sns.heatmap(
+        corr,
+        mask=np.triu(np.ones_like(corr, dtype=bool), k=1),
+        cmap=CMAP,
+        vmin=-1,
+        vmax=1,
+        center=0,
+        square=True,
+        annot=annot,
+        fmt=".2f",
+        annot_kws={"fontsize": 9},
+        xticklabels=labels,
+        yticklabels=labels,
+        linewidths=0.4,
+        cbar_kws={
+            "shrink": shrink,
+            "aspect": 25,
+            "pad": 0.03,
+            "ticks": [-1, -0.5, 0, 0.5, 1],
+            "label": "Pearson correlation",
+        },
+        ax=ax,
+    )
+    ax.tick_params(labelsize=labelsize, length=0)
+    plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
+    plt.setp(ax.get_yticklabels(), rotation=0)
+    ax.set_title("Feature correlations", pad=16)
+    return _finish(fig, ax, show, return_fig)
+
+
+def plot_dendrogram(
+    linked, feature_names, figsize=(8, 4.5), leaf_font_size=10, *, show=True, return_fig=False, cutoff=None
+):
+
+    fig, ax = plt.subplots(figsize=figsize, layout="constrained")
+    hierarchy.dendrogram(
+        linked,
+        labels=list(feature_names),
+        distance_sort="descending",
+        leaf_rotation=90,
+        leaf_font_size=leaf_font_size,
+        color_threshold=cutoff,
+        ax=ax,
+    )
+    ax.set(title="Dendrogram", xlabel="Feature", ylabel="Distance")
+    if cutoff is not None:
+        ax.axhline(cutoff, color=ORANGE, ls="--", lw=1.5, label=f"Cutoff = {cutoff:g}")
+        ax.legend(loc="upper right", frameon=True)
+    ax.grid(axis="x", visible=False)
+    return _finish(fig, ax, show, return_fig)
+
+
+def plot_pie_charts(dataset, columns_to_plot=None, name="", *, show=True, return_fig=False, figsize=None):
+    columns = DEFAULT_COLUMNS if columns_to_plot is None else list(columns_to_plot)
+    legend_rows = max(
+        int(
+            np.ceil(
+                dataset[col].nunique(dropna=False) / (2 if dataset[col].nunique(dropna=False) > 10 else 1)
+            )
+        )
+        for col in columns
+    )
+    legend_height = 0.23 * legend_rows + 1.2
+    fig, axes = plt.subplots(
+        1, len(columns), figsize=figsize or (8 * len(columns), 5.5 + legend_height), squeeze=False
+    )
+    fig.subplots_adjust(
+        left=0.02, right=0.98, top=0.94, bottom=legend_height / fig.get_figheight(), wspace=0.2
+    )
+    for ax, col in zip(axes.flat, columns):
+        labels, colors = _categories(dataset[col], col)
+        counts = labels.value_counts().reindex(colors)
+        wedges, *_ = ax.pie(
+            counts,
+            colors=list(colors.values()),
+            startangle=140,
+            autopct="%1.1f%%" if len(counts) <= 10 else None,
+            wedgeprops={"edgecolor": "white", "linewidth": 1},
+        )
+        ax.set_title(f"Distribution of {col}")
+        ax.legend(
+            wedges,
+            list(colors),
+            title=col,
+            loc="upper center",
+            bbox_to_anchor=(0.5, -0.10),
+            ncol=2 if len(counts) > 10 else 1,
+            frameon=True,
+        )
+    return _finish(fig, axes, show, return_fig)
+
+
+def _plot_embedding(embedding, dataset, columns, method, labels, name, show, return_fig, figsize):
+    fig, axes = plt.subplots(
+        1,
+        len(columns),
+        figsize=figsize or (7 * len(columns), 6),
+        squeeze=False,
+        sharex=True,
+        sharey=True,
+        layout="constrained",
+    )
+    for ax, col in zip(axes.flat, columns):
+        categories, colors = _categories(dataset[col], col)
+        for label, color in colors.items():
+            selected = categories.eq(label).to_numpy(dtype=bool)
+            ax.scatter(
+                embedding[selected, 0],
+                embedding[selected, 1],
+                color=color,
+                s=20,
+                alpha=0.7,
+                edgecolors="none",
+                rasterized=True,
+            )
+        ax.set(title=f"{method} colored by {col}", xlabel=labels[0], ylabel=labels[1])
+        ax.tick_params(labelleft=True)
+        ax.grid(False)
+    # As in the original overview, colors are explained by the pie-chart legends.
+    return _finish(fig, axes, show, return_fig)
+
+
+def plot_pca(dataset, columns_to_plot=None, name="", *, show=True, return_fig=False, figsize=None):
+    columns = DEFAULT_COLUMNS if columns_to_plot is None else list(columns_to_plot)
+    scaled = StandardScaler().fit_transform(_expression(dataset, columns))
+    pca = PCA(n_components=2)
+    embedding = pca.fit_transform(scaled)
+    labels = [f"PC{i + 1} ({ratio:.1%})" for i, ratio in enumerate(pca.explained_variance_ratio_)]
+    return _plot_embedding(embedding, dataset, columns, "PCA", labels, name, show, return_fig, figsize)
+
+
+def plot_umap(
+    dataset, columns_to_plot=None, name="", *, show=True, return_fig=False, random_state=42, figsize=None
+):
+    import umap
+
+    columns = DEFAULT_COLUMNS if columns_to_plot is None else list(columns_to_plot)
+    scaled = StandardScaler().fit_transform(_expression(dataset, columns))
+    embedding = umap.UMAP(
+        n_neighbors=min(15, len(dataset) - 1), min_dist=0.1, metric="euclidean", random_state=random_state
+    ).fit_transform(scaled)
+    return _plot_embedding(
+        embedding, dataset, columns, "UMAP", ["UMAP 1", "UMAP 2"], name, show, return_fig, figsize
+    )
+
+
+def _expression_heatmap(values, dataset, title, row_cluster=False, col_cluster=False, figsize=(16, 10)):
+    row_colors = {}
+    for col in ["Condition", "Disease", "GSE"]:
+        if col in dataset:
+            labels, colors = _categories(dataset[col], col)
+            row_colors[col] = labels.map(colors)
+    g = sns.clustermap(
+        values,
+        row_colors=pd.DataFrame(row_colors) if row_colors else None,
+        row_cluster=row_cluster,
+        col_cluster=col_cluster,
+        method="average",
+        cmap="coolwarm",
+        figsize=figsize,
+        xticklabels=False,
+        yticklabels=False,
+        cbar_kws={"label": "Standardized expression"},
+    )
+    # Preserve the original data-driven color limits: no clipping at +/-3.
+    g.fig.suptitle(title, y=0.99)
+    g.ax_heatmap.set(xlabel="", ylabel="")
+    return g
+
+
+def hierarchical_clustering_heatmap(
+    dataset, name="", *, row_cluster=False, col_cluster=False, show=True, return_fig=False, figsize=(16, 10)
+):
+    expression = _expression(dataset)
+    values = pd.DataFrame(
+        StandardScaler().fit_transform(expression), index=dataset.index, columns=expression.columns
+    )
+    title = "Hierarchically clustered expression" if row_cluster or col_cluster else "Standardized expression"
+    g = _expression_heatmap(
+        values, dataset, f"{title}: {name}" if name else title, row_cluster, col_cluster, figsize
+    )
+    if show:
+        plt.show()
+    if return_fig:
+        return g
+
+
+def kmedoids_clustering_heatmap(dataset, k=2, name="", *, show=True, return_fig=False, figsize=(16, 10)):
+    import kmedoids
+
+    expression = _expression(dataset)
+    scaled = StandardScaler().fit_transform(expression)
+    model = kmedoids.KMedoids(n_clusters=k, random_state=42, method="pam", metric="euclidean")
+    result = dataset.copy()
+    result["cluster"] = model.fit_predict(scaled)
+    order = np.argsort(result["cluster"].to_numpy(), kind="stable")
+    ordered = result.iloc[order].reset_index(drop=True)
+    values = pd.DataFrame(scaled[order], columns=expression.columns)
+    title = f"K-medoids clustering (k={k})"
+    g = _expression_heatmap(values, ordered, f"{title}: {name}" if name else title, figsize=figsize)
+    for boundary in np.flatnonzero(np.diff(ordered["cluster"])) + 1:
+        g.ax_heatmap.axhline(boundary, color="white", lw=2)
+        if g.ax_row_colors is not None:
+            g.ax_row_colors.axhline(boundary, color="white", lw=2)
+    if show:
+        plt.show()
+    return (result, g) if return_fig else result
+
+
+def plot_stacked_bar_chart(
+    feature_importance, columns_to_plot=None, name="", *, show=True, return_fig=False, figsize=None
+):
+    """One-row cluster-composition overview with category legends underneath."""
+    dataset = (
+        feature_importance
+        if isinstance(feature_importance, pd.DataFrame)
+        else feature_importance.data_clustering
+    )
+    columns = ["Tissue", "GSE", "Disease"] if columns_to_plot is None else list(columns_to_plot)
+    legend_rows = max(
+        int(
+            np.ceil(
+                dataset[col].nunique(dropna=False) / (2 if dataset[col].nunique(dropna=False) > 10 else 1)
+            )
+        )
+        for col in columns
+    )
+    legend_height = 0.23 * legend_rows + 1.2
+    fig, axes = plt.subplots(
+        1, len(columns), figsize=figsize or (8 * len(columns), 5 + legend_height), squeeze=False
+    )
+    fig.subplots_adjust(
+        left=0.05, right=0.95, top=0.92, bottom=legend_height / fig.get_figheight(), wspace=0.3
+    )
+    for ax, col in zip(axes.flat, columns):
+        labels, colors = _categories(dataset[col], col)
+        counts = pd.crosstab(dataset["cluster"], labels).reindex(columns=colors, fill_value=0)
+        percentages = counts.div(counts.sum(axis=1), axis=0) * 100
+        percentages.plot.bar(stacked=True, color=list(colors.values()), width=0.65, ax=ax, legend=False)
+        ax.set(title=f"Cluster composition by {col}", xlabel="Cluster", ylabel="Samples (%)", ylim=(0, 100))
+        ax.tick_params(axis="x", rotation=0)
+        ax.legend(
             title=col,
             loc="upper center",
             bbox_to_anchor=(0.5, -0.15),
-            ncol=2 if len(labels) > 10 else 1,
-            fontsize="small",
+            ncol=2 if len(colors) > 10 else 1,
+            frameon=True,
         )
-
-    # plt.tight_layout()
-    # plt.savefig(os.path.join(dir_output, f"{name}_pie_chart.pdf"), format="pdf", bbox_inches="tight")
-    plt.show()
+    return _finish(fig, axes, show, return_fig)
 
 
-def plot_pca(dataset, columns_to_plot=["Condition", "Tissue", "GSE", "Disease"], name=""):
-    metadata_cols = ["sample_id", "Dataset", "GSE", "Condition", "Disease", "Tissue"]
-    expression = dataset.drop(columns=metadata_cols, errors="ignore")
-    metadata = dataset[columns_to_plot]
-
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(expression)
-
-    pca = PCA(n_components=2)
-    X_pca = pca.fit_transform(X_scaled)
-
-    pca_df = pd.DataFrame(X_pca, columns=["PC1", "PC2"])
-    pca_df = pd.concat([pca_df, metadata.reset_index(drop=True)], axis=1)
-
-    n_cols = len(columns_to_plot)
-    fig, axes = plt.subplots(1, n_cols, figsize=(7 * n_cols, 6), squeeze=False)
-
-    for i, col in enumerate(columns_to_plot):
-        unique_classes = sorted(dataset[col].unique())  # sort for consistency
-        palette = {cls: palette_dict[col][j] for j, cls in enumerate(unique_classes)}
-
-        sns.scatterplot(
-            data=pca_df,
-            x="PC1",
-            y="PC2",
-            hue=col,
-            alpha=0.7,
-            edgecolor=None,
-            palette=palette,
-            ax=axes[0, i],
-        )
-        axes[0, i].set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0]*100:.1f}%)")
-        axes[0, i].set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1]*100:.1f}%)")
-        axes[0, i].set_title(f"PCA colored by {col}")
-        axes[0, i].get_legend().remove()
-        # ax.legend(markerscale=1.5, fontsize="x-small", loc="best", frameon=True)
-
-    plt.tight_layout()
-    # plt.savefig(os.path.join(dir_output, f"{name}_pca.pdf"), format="pdf", bbox_inches="tight")
-    plt.show()
-
-
-def plot_umap(dataset, columns_to_plot=["Condition", "Tissue", "GSE", "Disease"], name=""):
-    metadata_cols = ["sample_id", "Dataset", "GSE", "Condition", "Disease", "Tissue"]
-    gene_expression = dataset.drop(columns=metadata_cols)
-
-    # Normalize the gene expression data
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(gene_expression)
-
-    # Run UMAP dimensionality reduction
-    reducer = umap.UMAP(n_neighbors=15, min_dist=0.1, metric="euclidean", random_state=42)
-    embedding = reducer.fit_transform(X_scaled)
-
-    n_cols = len(columns_to_plot)
-    fig, axes = plt.subplots(1, n_cols, figsize=(7 * n_cols, 6))
-
-    for i, col in enumerate(columns_to_plot):
-        unique_classes = sorted(dataset[col].unique())  # sort for consistency
-        palette = {cls: palette_dict[col][j] for j, cls in enumerate(unique_classes)}
-
-        for cls in unique_classes:
-            indices = dataset[col] == cls
-            axes[i].scatter(
-                embedding[indices, 0],
-                embedding[indices, 1],
-                label=str(cls),
-                color=palette[cls],
-                alpha=0.7,
-                s=20,
-            )
-
-        axes[i].set_title(f"UMAP colored by {col}")
-        axes[i].set_xlabel("UMAP-1")
-        axes[i].set_ylabel("UMAP-2")
-        # axes[i].legend(markerscale=1.5, fontsize="x-small", loc="best", frameon=True)
-
-    plt.tight_layout()
-    # plt.savefig(os.path.join(dir_output, f"{name}_umap.pdf"), format="pdf", bbox_inches="tight")
-    plt.show()
-
-
-def hierarchical_clustering_heatmap(dataset, name=""):
-    metadata_cols = ["sample_id", "Dataset", "GSE", "Condition", "Disease", "Tissue"]
-    gene_expression = dataset.drop(columns=metadata_cols)
-
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(gene_expression)
-    X_scaled_df = pd.DataFrame(X_scaled, index=dataset.index, columns=gene_expression.columns)
-
-    condition_values = dataset["Condition"].astype(str)
-    disease_values = dataset["Disease"].astype(str)
-    study_values = dataset["GSE"].astype(str)
-
-    sorted_condition = sorted(condition_values.unique())
-    sorted_disease = sorted(disease_values.unique())
-    sorted_study = sorted(study_values.unique())
-
-    condition_palette = palette_dict["Condition"][: len(sorted_condition)]
-    disease_palette = palette_dict["Disease"][: len(sorted_disease)]
-    study_palette = palette_dict["GSE"][: len(sorted_study)]
-
-    condition_lut = dict(zip(sorted_condition, condition_palette))
-    disease_lut = dict(zip(sorted_disease, disease_palette))
-    study_lut = dict(zip(sorted_study, study_palette))
-
-    row_colors = pd.DataFrame(
-        {
-            "Condition": condition_values.map(condition_lut),
-            "Disease": disease_values.map(disease_lut),
-            "GSE": study_values.map(study_lut),
-        },
-        index=dataset.index,
+def plot_correlation_distribution(data, name="", *, show=True, return_fig=False, figsize=(7, 4)):
+    corr = _expression(data).corr().to_numpy()
+    values = corr[np.triu_indices_from(corr, k=1)]
+    fig, ax = plt.subplots(figsize=figsize, layout="constrained")
+    ax.hist(
+        values[np.isfinite(values)], bins=np.linspace(-1, 1, 51), color=BLUE, edgecolor="white", linewidth=0.4
     )
-
-    g = sns.clustermap(
-        X_scaled_df,
-        method="average",
-        metric="euclidean",
-        row_colors=row_colors,
-        figsize=(16, 10),
-        row_cluster=False,
-        col_cluster=False,
-        cmap="coolwarm",
-        xticklabels=False,
-        yticklabels=False,
+    ax.axvline(0, color="0.4", ls="--", lw=1)
+    ax.set(
+        title=f"Feature-pair correlations: {name}" if name else "Feature-pair correlations",
+        xlabel="Pearson correlation",
+        ylabel="Number of feature pairs",
+        xlim=(-1, 1),
     )
-
-    # condition_patches = [Patch(color=condition_lut[c], label=c) for c in sorted_condition]
-    # disease_patches = [Patch(color=disease_lut[d], label=d) for d in sorted_disease]
-
-    # g.ax_heatmap.legend(
-    #    handles=condition_patches + disease_patches,
-    #    bbox_to_anchor=(1.05, 1),
-    #    loc="upper left",
-    #    fontsize="small",
-    #    title="Annotations",
-    # )
-
-    plt.title("Hierarchical clustering on full dataset", y=1.05)
-    # plt.savefig(
-    #     os.path.join(dir_output, f"{name}_hierarchical_clustering.png"),
-    #     format="png",
-    #     bbox_inches="tight",
-    #     dpi=800,
-    # )
-    plt.show()
+    return _finish(fig, ax, show, return_fig)
 
 
-def kmedoids_clustering_heatmap(dataset, k=2, name=""):
-    metadata_cols = ["sample_id", "Dataset", "GSE", "Condition", "Disease", "Tissue"]
-    gene_expression = dataset.drop(columns=metadata_cols)
+def plot_shap_dependence(
+    explanation, num_cols=5, *, show=True, return_fig=False, figsize=None, interaction_index="auto"
+):
+    import shap
 
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(gene_expression)
-    X_scaled_df = pd.DataFrame(X_scaled, index=dataset.index, columns=gene_expression.columns)
-
-    clustering = kmedoids.KMedoids(n_clusters=k, random_state=42, method="pam", metric="euclidean")
-    cluster_labels = clustering.fit_predict(X_scaled_df.to_numpy())
-    dataset["cluster"] = cluster_labels
-
-    sorted_idx = dataset.sort_values("cluster").index
-    X_sorted = X_scaled_df.loc[sorted_idx]
-
-    condition_values = dataset.loc[sorted_idx, "Condition"].astype(str)
-    disease_values = dataset.loc[sorted_idx, "Disease"].astype(str)
-    study_values = dataset.loc[sorted_idx, "GSE"].astype(str)
-
-    sorted_condition = sorted(condition_values.unique())
-    sorted_disease = sorted(disease_values.unique())
-    sorted_study = sorted(study_values.unique())
-
-    condition_palette = palette_dict["Condition"][: len(sorted_condition)]
-    disease_palette = palette_dict["Disease"][: len(sorted_disease)]
-    study_palette = palette_dict["GSE"][: len(sorted_study)]
-
-    condition_lut = dict(zip(sorted_condition, condition_palette))
-    disease_lut = dict(zip(sorted_disease, disease_palette))
-    study_lut = dict(zip(sorted_study, study_palette))
-
-    row_colors = pd.DataFrame(
-        {
-            "Condition": condition_values.map(condition_lut),
-            "Disease": disease_values.map(disease_lut),
-            "GSE": study_values.map(study_lut),
-        },
-        index=sorted_idx,
+    values, features = np.asarray(explanation.values), np.asarray(explanation.data)
+    if values.ndim != 2 or values.shape != features.shape:
+        raise ValueError("Select one output: SHAP values and feature data must be matching 2D arrays.")
+    names = explanation.feature_names
+    if names is None:
+        names = [f"Feature {i}" for i in range(values.shape[1])]
+    order = np.argsort(-np.abs(values).mean(axis=0), kind="stable")
+    columns = min(num_cols, len(order))
+    rows = int(np.ceil(len(order) / columns))
+    fig, axes = plt.subplots(
+        rows, columns, figsize=figsize or (6 * columns, 4 * rows), squeeze=False, layout="constrained"
     )
-
-    g = sns.clustermap(
-        X_sorted,
-        row_colors=row_colors,
-        col_cluster=False,
-        row_cluster=False,
-        cmap="coolwarm",
-        figsize=(16, 10),
-        xticklabels=False,
-        yticklabels=False,
-    )
-
-    condition_patches = [Patch(color=condition_lut[c], label=c) for c in sorted_condition]
-    disease_patches = [Patch(color=disease_lut[d], label=d) for d in sorted_disease]
-    g.ax_heatmap.legend(
-        handles=condition_patches + disease_patches,
-        bbox_to_anchor=(1.05, 1),
-        loc="upper left",
-        fontsize="small",
-        title="Annotations",
-    )
-
-    cluster_sorted = dataset.loc[sorted_idx, "cluster"].values
-    cluster_change_indices = [
-        i for i in range(1, len(cluster_sorted)) if cluster_sorted[i] != cluster_sorted[i - 1]
-    ]
-
-    row_color_axes = g.ax_row_colors
-    if not isinstance(row_color_axes, (list, np.ndarray)):
-        row_color_axes = [row_color_axes]
-
-    for i in cluster_change_indices:
-        g.ax_heatmap.axhline(i, color="white", linewidth=2)
-        for ax in row_color_axes:
-            ax.axhline(i, color="white", linewidth=2)
-
-    plt.title(f"K-Medoids clustering (k={k}) on full dataset", y=1.05)
-    # plt.savefig(
-    #     os.path.join(dir_output, f"{name}_kmedoids_clustering.png"),
-    #     format="png",
-    #     bbox_inches="tight",
-    #     dpi=800,
-    # )
-    plt.show()
-
-    return dataset
-
-
-def plot_stacked_bar_chart(feature_importance, columns_to_plot=["Tissue", "GSE", "Disease"], name=""):
-
-    data_clustering = feature_importance.data_clustering.copy()
-
-    fig, axes = plt.subplots(1, len(columns_to_plot), figsize=(28, 6))
-    for i, feature in enumerate(columns_to_plot):
-        sorted_categories = sorted(data_clustering[feature].dropna().unique())
-        data_clustering[feature] = pd.Categorical(
-            data_clustering[feature], categories=sorted_categories, ordered=True
-        )
-
-        counts = data_clustering.groupby(["cluster", feature], observed=True).size().unstack(fill_value=0)
-        counts = counts[sorted_categories]  # Ensure consistent order
-        percentages = counts.div(counts.sum(axis=1), axis=0) * 100
-
-        num_categories = len(sorted_categories)
-        colors = palette_dict[feature][:num_categories]
-        cmap = ListedColormap(colors)
-
-        percentages.plot(kind="bar", stacked=True, ax=axes[i], width=0.6, colormap=cmap)
-
-        axes[i].set_ylabel("Percentage")
-        axes[i].set_title(f"Stacked Bar Chart by Cluster for {feature}")
-        axes[i].get_legend().remove()
-        axes[i].legend(title="Category", bbox_to_anchor=(1.05, 1), loc="upper left")
-
-    plt.tight_layout()
-    # plt.savefig(os.path.join(dir_output, f"{name}_stacked_bar_chart.pdf"), format="pdf", bbox_inches="tight")
-    plt.show()
-
-
-def plot_correlation_distribution(data, name=""):
-    metadata_cols = ["sample_id", "Dataset", "GSE", "Condition", "Disease", "Tissue"]
-    gene_expression = data.drop(columns=metadata_cols)
-
-    corr_matrix = gene_expression.corr().values
-
-    upper = corr_matrix[np.triu_indices_from(corr_matrix, k=1)]
-
-    plt.figure(figsize=(6, 4))
-    plt.hist(upper, bins=50)
-    plt.title("Distribution of Gene-Gene Correlations")
-    plt.xlabel("Correlation")
-    plt.ylabel("Frequency")
-    plt.show()
-
-
-def plot_shap_dependence(explanation, num_cols=6):
-    # 1. Compute mean absolute SHAP values
-    mean_shap = np.abs(explanation.values).mean(axis=0)
-
-    # 2. Sort features by descending mean SHAP
-    sorted_indices = np.argsort(-mean_shap)
-    sorted_features = [explanation.feature_names[i] for i in sorted_indices]
-
-    # 3. Set up grid layout
-    n_features = len(sorted_features)
-    rows = math.ceil(n_features / num_cols)
-
-    fig, axes = plt.subplots(rows, num_cols, figsize=(num_cols * 6, rows * 4))
-    axes = axes.flatten()
-
-    # 4. Generate SHAP dependence plots in the grid
-    for i, feature in enumerate(sorted_features):
+    for ax, i in zip(axes.flat, order):
         shap.dependence_plot(
-            ind=feature,
-            shap_values=explanation.values,
-            features=explanation.data,
-            feature_names=explanation.feature_names,
-            ax=axes[i],
+            int(i),
+            values,
+            features,
+            feature_names=list(names),
+            interaction_index=interaction_index,
+            ax=ax,
             show=False,
         )
-        axes[i].set_title(f"Dependence: {feature}", fontsize=10)
+        ax.set_title(f"Dependence: {names[i]}", fontsize=13, fontweight="normal")
+        ax.xaxis.label.set_size(11)
+        ax.yaxis.label.set_size(11)
+        ax.tick_params(labelsize=10)
+        ax.grid(False)
+    for ax in axes.flat[len(order) :]:
+        ax.set_visible(False)
+    return _finish(fig, axes, show, return_fig)
 
-    # 5. Remove any unused subplots
-    for j in range(i + 1, len(axes)):
-        fig.delaxes(axes[j])
 
-    plt.tight_layout()
-    plt.show()
+def plot_lime_coefficients(coef_df, *, figsize=None, show=True, return_fig=False):
+
+    if isinstance(coef_df, pd.DataFrame):
+        if coef_df.shape[1] != 1:
+            raise ValueError("coef_df must be a Series or a one-column DataFrame.")
+        coefficients = coef_df.iloc[:, 0]
+    elif isinstance(coef_df, pd.Series):
+        coefficients = coef_df
+    else:
+        raise ValueError("coef_df must be a Series or a one-column DataFrame.")
+    if not pd.api.types.is_numeric_dtype(coefficients):
+        raise TypeError("LIME coefficients must be numeric.")
+    coefficients = coefficients.sort_values(key=lambda values: values.abs(), ascending=False, kind="stable")
+
+    fig, ax = plt.subplots(
+        figsize=figsize or (8, min(6.5, max(2.6, len(coefficients) * 0.28 + 1.3))),
+        layout="constrained",
+    )
+    y = np.arange(len(coefficients))
+    colors = [BLUE if value >= 0 else ORANGE for value in coefficients]
+    ax.barh(y, coefficients.to_numpy(), color=colors, height=0.82, zorder=3)
+    ax.set_yticks(y, labels=coefficients.index)
+    ax.invert_yaxis()
+    ax.axvline(0, color="0.4", ls="--", lw=1)
+    ax.set(title="LIME: local model coefficients", xlabel="Model coefficient", ylabel="")
+    ax.grid(axis="y", visible=False)
+    return _finish(fig, ax, show, return_fig)
